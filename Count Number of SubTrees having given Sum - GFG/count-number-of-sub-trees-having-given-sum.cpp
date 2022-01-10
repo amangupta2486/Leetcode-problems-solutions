@@ -123,29 +123,29 @@ struct Node
 */
 //Function to count number of subtrees having sum equal to given sum.
 
+int c,target;
 
-int cnt, target;
-
-int findSum(Node* root)
+int solve(Node* root)
 {
-    if(!root)
-    return 0;
+    if(root==NULL)
+    {
+        return 0;
+    }
     
-    int Sum = root->data + findSum(root->left) + findSum(root->right);
+    int sum=root->data + solve(root->left) + solve(root->right);
+   
+    if(sum==target)
+    {
+        c++;
+    }
     
-    if(Sum == target)
-    cnt++;
-    
-    return Sum;
+    return sum;
 }
 
-int countSubtreesWithSumX(Node* root, int X)
+int countSubtreesWithSumX(Node* root, int x)
 {
-	// Code here
-	cnt = 0;
-	target = X;
-	
-	findSum(root);
-	
-	return cnt;
+    c=0;
+    target=x;
+	solve(root);
+	return c;
 }
