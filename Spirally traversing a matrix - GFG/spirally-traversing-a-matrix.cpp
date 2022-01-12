@@ -39,7 +39,7 @@ class Solution
             
             if(m2!=m1)
             {
-                for(int i=n2-1;i>=n1+1;i--)
+                for(int i=n2-1;i>n1;i--)
                 {
                     v.push_back(g[i][m1]);
                 }
