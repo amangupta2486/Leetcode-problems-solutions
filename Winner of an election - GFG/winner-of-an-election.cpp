@@ -19,7 +19,7 @@ class Solution{
         // Return the string containing the name and an integer
         // representing the number of votes the winning candidate got
         
-        string b="zzzzzzzzzzzzzzzzzzzzzzz";
+        string b="zzzzzzzz";
         int c=0;
         
         int ans=0;
