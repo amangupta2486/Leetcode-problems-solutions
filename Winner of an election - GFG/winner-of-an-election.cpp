@@ -19,7 +19,7 @@ class Solution{
         // Return the string containing the name and an integer
         // representing the number of votes the winning candidate got
         
-        string b="zzzzzzzzzzzz";
+        string b="zzzzzzzzzzzzzzzzzzzzzzz";
         int c=0;
         
         int ans=0;
@@ -50,7 +50,10 @@ class Solution{
             {
                 c=i.second;
                 
-                p.push_back(i.first);
+                if(i.first<b)
+                b=i.first;
+                
+                //p.push_back(i.first);
             }
         }
         
@@ -60,7 +63,7 @@ class Solution{
         vector<string> v;
         string d=to_string(c);
         
-        v.push_back(p[0]);
+        v.push_back(b);
         v.push_back(d);
         
         return v;
