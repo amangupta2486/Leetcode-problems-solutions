@@ -4,22 +4,52 @@ public:
         
         map<string,int> m1;
         map<char,int> m2;
+        
+        set<char> q;
+        set<string> w;
+        
+        unordered_map<char,string> m;
+        
         istringstream in(s);
         
         int n=p.size();
         
-        int i=0;
+        // int i=0;
+        vector<string> words;
+        string word;
         
-        for(string word;in>>word;i++)
+        for(int i=0;i<n;i++)
         {
-            if(i==n || m2[p[i]]!=m1[word])
-            {
-                return false;
-            }
-            
-            m1[word]=m2[p[i]]=i+1;
+            q.insert(p[i]);    
         }
         
-        return i==n;
+        while(in>>word)
+        {
+            w.insert(word);
+            words.push_back(word);
+        }
+        
+        if(words.size()!=p.size() || q.size()!=w.size())
+        {
+            return false;
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(m.count(p[i])>0)
+            {    
+                if(m[p[i]] != words[i])
+                {
+                    return false;
+                }
+            }
+           
+            else
+            {
+                m[p[i]]=words[i];
+            }
+        }
+        
+        return 1;
     }
 };
