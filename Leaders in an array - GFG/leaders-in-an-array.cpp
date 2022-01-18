@@ -12,10 +12,7 @@ class Solution{
     //Function to find the leaders in the array.
     public:
     vector<int> leaders(int a[], int n){
-        // Code here
-        
-        set<int> s;
-        unordered_map<int,int> m;
+
         vector<int> v;
           
         for(int i=n-2;i>=0;i--)
@@ -28,43 +25,16 @@ class Solution{
             {
                 v.push_back(a[i]);
             }
-            //a[i]=max(a[i],a[i+1]);
+        
         }
          
         reverse(v.begin(),v.end());
         
-        for(int i=0;i<n;i++)
-        {
-            // cout<<a[i]<<" ";
-            // s.insert(a[i]);
-            
-            // if(m[a[i]]==0)
-            // {
-            //     m[a[i]]++;
-            //     v.push_back(a[i]);
-            // }
-            // if(a[i]!=a[i+1])
-            // {
-            //     v.push_back(a[i]);
-            // }
-            //cout<<a[i]<<" ";
-        } 
-        
+
         if(n>2)
         {
             v.push_back(a[n-1]);
         }
-        // for(auto i:s)
-        // {
-        //     v.push_back(i);
-        // }
-        
-        // sort(v.rbegin(),v.rend());
-        
-        // if(v.size()==0)
-        // {
-        //     v.push_back(a[n-1]);
-        // }
         
         return v;
         
