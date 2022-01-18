@@ -23,6 +23,7 @@ class Solution{
             f=1;
             i=1;
         }
+        
         for(i;i<n;i++)
         {
             if(s[i]>=48 && s[i]<=57)
@@ -32,7 +33,6 @@ class Solution{
             
             else
             {
-                // if(s[i]!='0')
                 return -1;
             }
             
