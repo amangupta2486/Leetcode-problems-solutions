@@ -11,8 +11,7 @@ public:
     ListNode *detectCycle(ListNode *head) {
          ListNode* slow = head;
         ListNode* fast = head;
-        int f=0;
-        
+
         while(fast && fast->next)
         {
             slow=slow->next;
@@ -20,29 +19,26 @@ public:
             
             if(slow==fast)
             {
-                f=1;
                 break;
             }
             
         }
         
-        if(head==NULL || head->next==NULL)
+        if(fast==NULL || fast->next==NULL)
         {
             return NULL;
         }
         
         slow=head;
         
-        while(fast!=slow && f==1)
+        while(fast!=slow )
         {
             slow=slow->next;
             fast=fast->next;
             
         }
-        
-        if(f==1)
+
         return slow;
-        
-        return NULL;
+
     }
 };
