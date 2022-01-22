@@ -28,7 +28,7 @@ public:
         if(p==w)
         {
             f=1;
-            //return;
+            return;
         }
         //cout<<p<<" ";
         for(int k=0;k<4;k++)
@@ -36,7 +36,7 @@ public:
             int x=i+dx[k];
             int y=j+dy[k];
             //cout<<x<<" "<<y<<" ";
-            if(x>=0 && y>=0 && x<n && y<m && !vis[x][y] && w[r]==b[x][y])
+            if(x>=0 && y>=0 && x<n && y<m && !vis[x][y] && w[r]==b[x][y] && f==0)
             {
                 vis[x][y]=1;
                 solve(x,y,r+1,p+w[r],vis,b,n,m,w,l);
