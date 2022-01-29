@@ -8,21 +8,21 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            q.push(a[i]);
+            q.push(-1*a[i]);
             
-            // if(q.size()>k)
-            // {
-            //     q.pop_back();
-            // }
+            if(q.size()>k)
+            {
+                q.pop();
+            }
         }
         
-        while(k>1)
-        {
-            q.pop();
-            k--;
-        }
+//         while(k>1)
+//         {
+//             q.pop();
+//             k--;
+//         }
         
-        return q.top();
+        return -1*q.top();
 
     }
 };
