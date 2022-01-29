@@ -6,30 +6,23 @@ public:
         
         int n=a.size();
         
-//         for(int i=0;i<n;i++)
-//         {
-//             q.push(a[i]);
+        for(int i=0;i<n;i++)
+        {
+            q.push(a[i]);
             
-//             if(q.size()>k)
-//             {
-//                 q.pop_back();
-//             }
-//         }
+            // if(q.size()>k)
+            // {
+            //     q.pop_back();
+            // }
+        }
         
-//         // for(auto i:q)
-//         // {
-//         //     cout<<i<<" ";
-//         // }
-//         while(q.size()>1)
-//         {
-//              cout<<q.top()<<" ";
-//             q.pop();
-//         }
+        while(k>1)
+        {
+            q.pop();
+            k--;
+        }
         
-//         return q.top();
-        
-         sort(a.rbegin(),a.rend());
-        
-        return a[k-1];
+        return q.top();
+
     }
 };
