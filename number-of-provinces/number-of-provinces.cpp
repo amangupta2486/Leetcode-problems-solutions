@@ -7,12 +7,13 @@ public:
     
     int find(int x)
     {
-        while(x!=v[x])
-        {
-            x=v[x];
-        }
+//         while(x!=v[x])
+//         {
+//             x=v[x];
+//         }
         
-        return x;
+//         return x;
+        return v[x];
     }
     
     void Union(int x,int y)
@@ -20,9 +21,20 @@ public:
         int a=find(x);
         int b=find(y);
         
+        // if(a!=b)
+        // {
+        //     v[b]=a;
+        // }
+        
         if(a!=b)
         {
-            v[b]=a;
+            for(int i=0;i<v.size();i++)
+            {
+                if(v[i]==b)
+                {
+                    v[i]=a;
+                }
+            }
         }
     }
     int findCircleNum(vector<vector<int>>& a) {
