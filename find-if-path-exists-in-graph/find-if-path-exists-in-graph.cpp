@@ -9,10 +9,6 @@ public:
     {
         vis[n]=1;
         
-        //  if(n==d)
-        // {
-        //     return true;
-        // }
         for(auto i:g[n])
         {
            
@@ -22,7 +18,6 @@ public:
             }
         }
         
-        //return false;
     }
 
     bool validPath(int n, vector<vector<int>>& p, int s, int d) {
