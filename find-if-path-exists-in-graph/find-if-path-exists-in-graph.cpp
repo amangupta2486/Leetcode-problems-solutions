@@ -1,24 +1,8 @@
 class Solution {
 public:
     
-    vector<int> g[200005];
-    bool vis[200005]={0};
-    
-    
-    void dfs(int n)
-    {
-        vis[n]=1;
-        
-        for(auto i:g[n])
-        {
-           
-            if(!vis[i])
-            {
-                dfs(i);
-            }
-        }
-        
-    }
+
+  
 
     bool validPath(int n, vector<vector<int>>& p, int s, int d) {
         
@@ -27,19 +11,43 @@ public:
             return true;
         }
         
+        vector<int> g[200005];
+        bool vis[200005]={0};
+    
+    
         for(auto i:p)
         {
             g[i[0]].push_back(i[1]);
             g[i[1]].push_back(i[0]);
         }
         
-       dfs(s);
+        queue<int> q;
+        q.push(s);
         
-    if(vis[s] && vis[d])
-    {
-        return true;
-    }
-        
+        while(!q.empty())
+        {
+            int k=q.size();
+            
+            while(k--)
+            {
+                int r = q.front();
+                q.pop();
+                
+                vis[r]=1;
+                
+                if(r==d)
+                {
+                    return true;
+                }
+                
+                for(auto i: g[r])
+                {
+                    if(!vis[i])
+                    q.push(i);
+                }
+            }
+        }
+       
     return false;
     }
 };
