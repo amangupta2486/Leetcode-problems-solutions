@@ -4,9 +4,8 @@ public:
         
         int n=a.size();
         
-        int c=0;
-        
-        map<vector<int>,int> m;
+        //unorder_map<vector<int>,int> m;
+       set<vector<int>> m;
         
         for(int i=0;i<n-1;i++)
         {
@@ -21,8 +20,8 @@ public:
                     {
                         swap(v[0],v[1]);
                     }
-                    m[v]++;
-                    c++;
+                    m.insert(v);
+                    
                 }
             }
         }
