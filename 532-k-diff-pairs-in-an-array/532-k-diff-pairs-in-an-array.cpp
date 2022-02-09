@@ -4,28 +4,23 @@ public:
         
         int n=a.size();
         
-        //unorder_map<vector<int>,int> m;
-       set<vector<int>> m;
+        unordered_map<int,int> m;
         
-        for(int i=0;i<n-1;i++)
+        for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<n;j++)
-            {
-                if(abs(a[i]-a[j])==k)
-                {
-                    vector<int> v;
-                    v.push_back(a[i]);
-                    v.push_back(a[j]);
-                    if(v[0]>v[1])
-                    {
-                        swap(v[0],v[1]);
-                    }
-                    m.insert(v);
-                    
-                }
-            }
+           m[a[i]]++;
         }
         
-        return m.size();
+        int c=0;
+        
+        for(auto i:m)
+        {
+           if((m.count(i.first+k) && k>0) || (k==0 and i.second>1))
+           {
+               c++;
+           }
+        }
+        
+        return c;
     }
 };
