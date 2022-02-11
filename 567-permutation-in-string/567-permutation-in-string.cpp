@@ -10,22 +10,21 @@ public:
             return false;
         }
         
-        sort(s1.begin(),s1.end());
-        unordered_map<char,int> m1;
+        vector<int> m1(26,0);
         
         for(auto i:s1)
         {
-            m1[i]++;
+            m1[i-'a']++;
         }
         
         for(int i=0;i<n-k+1;i++)
         {
             string b=s2.substr(i,k);
-            unordered_map<char,int> m2;
+            vector<int> m2(26,0);
             
             for(auto j:b)
             {
-                m2[j]++;
+                m2[j-'a']++;
             }
             
             if(m1==m2)
