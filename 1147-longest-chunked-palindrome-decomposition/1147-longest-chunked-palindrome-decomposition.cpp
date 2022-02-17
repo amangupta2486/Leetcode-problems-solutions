@@ -1,26 +1,20 @@
 class Solution {
 public:
-    int longestDecomposition(string s) {
+    int longestDecomposition(string s,int ans=0) {
         
         int n=s.size();
         
-        int ans=0;
-        string l="",r="";
-        
-        for(int i=0;i<n;i++)
+        for(int l=1;l<=n/2;l++)
         {
-            l+=s[i];
-            r=s[n-i-1]+r;
-            
-            if(l==r)
+            if(s[0]==s[n-l] && s[l-1]==s[n-1])
             {
-                ans++;
-                l="";
-                r="";
+                if(s.substr(0,l) == s.substr(n-l))
+                {
+                   return longestDecomposition(s.substr(l,n-l-l) ,ans+2);
+                }
             }
-            
         }
         
-        return ans;
+        return n==0 ? ans : ans+1;
     }
 };
