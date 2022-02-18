@@ -21,26 +21,12 @@ public:
             i++;
         }
         
-        string ans="";
-        
-//         while(!st.empty())
-//         {
-//             ans+=s[st.top()];
-//             st.pop();
-//         }
-        
-//         reverse(ans.begin(),ans.end());
-        
         while(st.size()>0 && k>0)
         {
             st.pop_back();
             k--;
         }
-        // for(i;i<n;i++)
-        // {
-        //     ans+=s[i];
-        // }
-        
+
         int j=0;
         
         while(j<st.size() && st.size()>0)
