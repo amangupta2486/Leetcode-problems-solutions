@@ -3,45 +3,50 @@ public:
     int minFallingPathSum(vector<vector<int>>& g) {
         
         int n=g.size();
-        int m=g[0].size();
-        
-        int dp[n][m];
 
-       memset(dp,0,sizeof(dp));
+        int dp[n+1][n+1];
+        memset(dp,0,sizeof(dp));
         
-    
-        for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
         {
-            dp[n-1][i]=g[n-1][i];
+            dp[n-1][j]=g[n-1][j];
         }
         
         for(int i=n-2;i>=0;i--)
         {
-            for(int j=0;j<m;j++)
+            for(int j=0;j<n;j++)
             {
-                dp[i][j]=g[i][j];
+                int mi=dp[i+1][j];
                 
-                int mn=dp[i+1][j];
                 if(j-1>=0)
                 {
-                    mn=min(mn,dp[i+1][j-1]);
+                    mi=min(mi,dp[i+1][j-1]);
                 }
-                if(j+1<m)
+                if(j+1<n)
                 {
-                    mn=min(mn,dp[i+1][j+1]);
+                    mi=min(mi,dp[i+1][j+1]);
                 }
-                
-                dp[i][j]+=mn;
+                //cout<<g[i][j]<<" ";
+                dp[i][j]=g[i][j]+mi;
             }
         }
         
         int ans=INT_MAX;
         
-        for(int i=0;i<m;i++)
+        // for(int i=0;i<n;i++)
+        // {
+        //     for(int j=0;j<n;j++)
+        //     {
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        
+        for(int j=0;j<n;j++)
         {
-            ans=min(ans,dp[0][i]);
+            ans=min(dp[0][j],ans);
         }
-
+        
         return ans;
     }
 };
