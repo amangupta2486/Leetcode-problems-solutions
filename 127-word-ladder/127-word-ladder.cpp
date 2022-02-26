@@ -1,69 +1,53 @@
 class Solution {
 public:
-    int ladderLength(string a, string b, vector<string>& w) {
+    int ladderLength(string b, string e, vector<string>& w) {
+        
+       // map<string,int> m;
+        
+        set<string> m;
         
         int n=w.size();
         
-        map<string,int> m;
-        
-        for(auto i:w)
+        for(int i=0;i<n;i++)
         {
-            m[i]++;
-        }
-        
-        if(m[b]==0)
-        {
-            return 0;
+            //m[w[i]]++;
+            
+            m.insert(w[i]);
+            
         }
         
         queue<pair<string,int>> q;
         
-        q.push({a,0});
+        q.push({b,1});
         
-//         vector<vectorstring>> ans;
-        
-//         vector<string> v;
-        
-        int ans=INT_MAX;
         while(!q.empty())
         {
-            auto r=q.front();
+            auto p = q.front();
             q.pop();
             
-            // v.push_back(p);
-            int c=r.second;
-            string p=r.first;
+            string a=p.first;
+            int c=p.second;
             
-            c++;
-            
-            if(p==b)
+            if(a==e)
             {
-                ans=min(ans,c);        
+                return c;
             }
             
-            for(int i=0;i<p.size();i++)
+            for(int i=0;i<a.size();i++)
             {
-                string s=p;
+                string d = a;
                 
-               for(int j=0;j<26;j++)
-               {
-                   s[i]='a'+j;
-                   
-                   //cout<<s<<" ";
-                   if(m[s])
-                   {
-                       m[s]=0;
-                       q.push({s,c});
-                   }
-               }
-               
-               
-             }
-        }
-        
-        if(ans!=INT_MAX)
-        {
-            return ans;
+                for(int j=0;j<26;j++)
+                {
+                    d[i] = 'a'+j;
+                    
+                    if(m.find(d)!=m.end())
+                    {
+                        m.erase(d);
+                        q.push({d,c+1});
+                    }
+                }
+            }
         }
         
         return 0;
