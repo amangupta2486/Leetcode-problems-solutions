@@ -26,30 +26,26 @@ public:
         {
             return 0;
         }
-        queue<pair<Node*,int>> q;
         
-        q.push({root,0});
+        queue<Node*> q;
+        
+        q.push(root);
         
         int ans=0;
         
         while(!q.empty())
         {
             int k=q.size();
+            ans++;
             
             while(k--)
             {
-                auto p = q.front();
+                auto p=q.front();
                 q.pop();
                 
-                auto v= p.first;
-                int c= p.second;
-                c++;
-                
-                ans=max(ans,c);
-                
-                for(auto i: v->children)
+                for(auto i:p->children)
                 {
-                    q.push({i,c});
+                    q.push(i);
                 }
             }
         }
