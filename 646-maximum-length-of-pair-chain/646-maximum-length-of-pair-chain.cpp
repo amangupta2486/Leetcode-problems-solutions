@@ -6,23 +6,19 @@ public:
         
         sort(p.begin(),p.end());
         
-        int prev=p[0][1];
-        
-        int c=0;
+        vector<int> dp(n,1);
         
         for(int i=1;i<n;i++)
         {
-            if(p[i][0]>prev)
+            for(int j=0;j<i;j++)
             {
-                prev=p[i][1];
-            }
-            else
-            {
-                prev=min(p[i][1],prev);
-                c++;
+                if(p[j][1]<p[i][0])
+                {
+                    dp[i]=max(dp[i],1+dp[j]);
+                }
             }
         }
         
-        return n-c;
+        return *max_element(dp.begin(),dp.end());
     }
 };
