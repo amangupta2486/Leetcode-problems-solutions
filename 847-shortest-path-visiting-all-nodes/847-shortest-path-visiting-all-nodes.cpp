@@ -4,49 +4,62 @@ public:
         
         int n=g.size();
         
-        if(n==0)
-            return 0;
+        queue<vector<int>> q;
         
         set<pair<int,int>> s;
-        
-        queue<vector<int>> q;
         
         for(int i=0;i<n;i++)
         {
             vector<int> v(3,0);
             
-            int mask=(1<<i);
-            
             v[0]=0;
             v[1]=i;
+            
+            int mask =1<<i;
+            
             v[2]=mask;
+            s.insert({i,mask});
             
             q.push(v);
-            s.insert({i,mask});
         }
         
-        int ans=0;
+        int f=1,ans=0;
         
         while(!q.empty())
         {
-            auto p=q.front();
-            q.pop();
+            int k=q.size();
             
-            if(p[2]==(1<<n)-1)
+            while(k--)
             {
-                ans=p[0];
-                break;
+                auto p=q.front();
+                q.pop();
+                
+                int c=p[0];
+                int i=p[1];
+                int mask=p[2];
+                //cout<<c<<" ";
+                if(mask == (pow(2,n))-1)
+                {
+                    ans=c;
+                    f=0;
+                    break;
+                }
+                
+                for(auto j:g[i])
+                {
+                    int next = mask | 1<<j;
+                    
+                    if(s.find({j,next})==s.end())
+                    {
+                        s.insert({j,next});
+                        q.push({c+1,j,next});
+                    }
+                }
             }
             
-            for(auto j : g[p[1]])
+            if(f==0)
             {
-                int next = p[2] | (1<<j);
-                
-                if(s.find({j,next})==s.end())
-                {
-                    s.insert({j,next});
-                    q.push({p[0]+1,j,next});
-                }
+                break;
             }
         }
         
