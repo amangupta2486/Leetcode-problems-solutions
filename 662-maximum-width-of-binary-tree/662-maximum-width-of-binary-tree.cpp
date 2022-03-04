@@ -11,64 +11,53 @@
  */
 class Solution {
 public:
-
     int widthOfBinaryTree(TreeNode* root) {
         
-        if(root==NULL)
-        {
-            return 0;
-        }
-        
-        queue<pair<TreeNode*,int>> q;
+        queue<pair<TreeNode*,long long>> q;
         
         q.push({root,0});
         
-        vector<long> v;
-        
-        long first=0,last=0,ans=0;
+        long long ans=0;
         
         while(!q.empty())
         {
-            long long k=q.size();
- 
-            long long mi=q.front().second;
+            int k=q.size();
             
-            for(long long j=0;j<k;j++)
+            auto mi= q.front().second;
+            
+            long long l=0,r=0;
+            
+            for(int j=0;j<k;j++)
             {
-                auto r=q.front();
+                auto p=q.front();
                 q.pop();
                 
-                auto p=r.first;
-                long i=r.second -mi;
-                
-                //cout<<i<<" ";
+                auto s=p.first;
+                long long i=p.second-mi;
                 
                 if(j==0)
                 {
-                    first=i;
+                    l=i;
                 }
                 
                 if(j==k-1)
                 {
-                    last=i;
+                    r=i;
                 }
                 
-                if(p->left!=NULL)
+                if(s->left!=NULL)
                 {
-                    q.push({p->left,(2*i)+1});
+                    q.push({s->left,(2*i)+1});
                 }
-                
-                if(p->right!=NULL)
+                if(s->right!=NULL)
                 {
-                    q.push({p->right,(2*i)+2});
+                    q.push({s->right,(2*i)+2});
                 }
-                
             }
             
-           ans=max(ans,(last-first+1));
+            ans=max(ans,r-l+1);
         }
         
-       
         return ans;
     }
 };
