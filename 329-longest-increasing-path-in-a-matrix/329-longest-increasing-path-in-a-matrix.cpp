@@ -1,55 +1,63 @@
 class Solution {
 public:
+    
     int dp[205][205];
     
-    int bfs(int i,int j,vector<vector<int>>& g,int c)
+    int solve(vector<vector<int>>& g,int i,int j,int n,int m)
     {
-         
         if(dp[i][j]!=-1)
         {
             return dp[i][j];
         }
-        int n=g.size();
-        int m=g[0].size();
         
-     
-         int dx[4]={1,-1,0,0};
-         int dy[4]={0,0,1,-1};
+        int dx[4]={0,0,1,-1};
+        int dy[4]={1,-1,0,0};
         
-        int res=1;
-        
+        int ans=0;
+
         for(int k=0;k<4;k++)
         {
             int x=i+dx[k];
             int y=j+dy[k];
 
-            if(x>=0 && x<n && y>=0 && y<m && g[x][y]>g[i][j] )
+            if(x>=0 && x<n && y>=0 && y<m && g[x][y]>g[i][j])
             {
-                res=max(res,1+bfs(x,y,g,c+1));
+              ans=max(ans,1+solve(g,x,y,n,m));
             }
         }
-        return dp[i][j]=res;
+            
+        return dp[i][j]=ans;
     }
-    
     int longestIncreasingPath(vector<vector<int>>& g) {
-
+        
         int n=g.size();
         int m=g[0].size();
         
-        if(n==0 && m==0)
-        {
-            return 0;
-        }
-        int mi=INT_MAX,mx=1;
+        //queue<vector<int>> q;
+        
         memset(dp,-1,sizeof(dp));
+        
+        int ans=0;
+        
          for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                mx=max(mx,bfs(i,j,g,1));
+               ans=max(ans,solve(g,i,j,n,m));
             }
          }
         
-        return mx;
+        return ans+1;
     }
 };
+
+
+// [[0,1,2,3,4,5,6,7,8,9],[19,18,17,16,15,14,13,12,11,10],[20,21,22,23,24,25,26,27,28,29],[39,38,37,36,35,34,33,32,31,30],[40,41,42,43,44,45,46,47,48,49],[59,58,57,56,55,54,53,52,51,50],[60,61,62,63,64,65,66,67,68,69],[79,78,77,76,75,74,73,72,71,70],[80,81,82,83,84,85,86,87,88,89],[99,98,97,96,95,94,93,92,91,90],[100,101,102,103,104,105,106,107,108,109],[119,118,117,116,115,114,113,112,111,110],[120,121,122,123,124,125,126,127,128,129],[139,138,137,136,135,134,133,132,131,130],[0,0,0,0,0,0,0,0,0,0]]
+
+
+// Input
+// [[7,6,1,1],[2,7,6,0],[1,3,5,1],[6,6,3,2]]
+// Output
+// 5
+// Expected
+// 7
