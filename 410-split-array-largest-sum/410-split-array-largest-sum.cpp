@@ -1,59 +1,49 @@
 class Solution {
 public:
-    
-    int check(vector<int>& a, int m,int n)
-    {
-        int c=1;
-        int s=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            s+=a[i];
-            if(s>m)
-            {
-                s=a[i];
-                c++;
-            }
-        }
-        
-        return c;
-    }
-    
     int splitArray(vector<int>& a, int k) {
         
         int n=a.size();
         
-        int l=INT_MIN,r=0;
+        int l=*max_element(a.begin(),a.end());
+        int h=0;
         
         for(int i=0;i<n;i++)
         {
-            r+=a[i];
-            l=max(l,a[i]);
-           
+            h+=a[i];
         }
-         int ans=0;
+        
+        int mi=0;
+        
+        while(l<=h)
+        {
+            int m = (l+h)/2;
             
-            while(l<=r)
+            int s=0,mx=0,c=1;
+            
+            for(int i=0;i<n;i++)
             {
-                int m=(l+r)/2;
+                s+=a[i];
                 
-                int p=check(a,m,n);
-                
-                if(p<=k)
+                if(s>m)
                 {
-                   // cout<<m<<" ";
-                    ans=m;
-                    r=m-1;
-                }
-                else
-                {
-                    l=m+1;
+                    s=a[i];
+                    c++;
                 }
                 
+                mx=max(mx,s);
             }
             
-           
+            if(c<=k)
+            {
+                mi=m;
+                h=m-1;
+            }
+            else
+            {
+                l=m+1;
+            }
+        }
         
-         return ans;
+        return mi;
     }
 };
