@@ -17,8 +17,8 @@ public:
         
         while(head!=NULL)
         {
-            n++;
             head=head->next;
+            n++;
         }
         
         return n;
@@ -26,35 +26,37 @@ public:
     
     ListNode* swapNodes(ListNode* head, int k) {
         
+        if(head==NULL || head->next==NULL || k==0)
+        {
+            return head;    
+        }
+        
         int n=len(head);
         
-        if(n<=1)
-        {
-            return head;
-        }
-        
-        if(k>n)
         k=k%n;
+        cout<<k<<endl;
+        vector<int> v;
         
-        ListNode* p=head;
-        ListNode* q=head;
-        
-        int i=0,j=0;
-        
-        while(i<k-1)
+        while(head!=NULL)
         {
-            p=p->next;
-            i++;
+            v.push_back(head->val);
+            head=head->next;
         }
         
-        while(j<n-k)
+        if(k%n!=0)
+        k--;
+        
+        swap(v[k],v[v.size()-k-1]);
+        
+        ListNode* p=new ListNode(1);
+        ListNode* q=p;
+        
+        for(int i=0;i<v.size();i++)
         {
-            q=q->next;
-            j++;
+            p=p->next=new ListNode(v[i]);
         }
         
-        swap(p->val,q->val);
+        return q->next;
         
-        return head;
     }
 };
