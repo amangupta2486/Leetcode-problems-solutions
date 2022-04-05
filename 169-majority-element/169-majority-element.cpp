@@ -4,27 +4,28 @@ public:
         
         int n=a.size();
         
-        int b=0,c=0;
+        int b=a[0];
+        int c=1;
         
-        for(int i=0;i<n;i++)
+        for(int i=1;i<n;i++)
         {
-            if(c==0)
-            {
-                b=a[i];
-            }
-            
             if(b==a[i])
             {
                 c++;
             }
             
-            else
+            if(a[i]!=b)
             {
                 c--;
+            }
+            
+            if(c<0)
+            {
+                b=a[i];
+                c=1;
             }
         }
         
         return b;
     }
-    
 };
