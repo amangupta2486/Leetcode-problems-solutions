@@ -4,39 +4,30 @@ public:
         
         int n=a.size();
         
-        if(n<=1)
+        set<int> s;
+        
+        for(auto i:a)
         {
-            return n;
+            s.insert(i);
         }
         
-        sort(a.begin(),a.end());
+        int ans=0;
         
-        int j=0;
-        for(int i=0;i<n;i++)
+        for(auto i:s)
         {
-           if(a[i]!=a[j])
-           {
-               j++;
-               a[j]=a[i];
-           }
-        }
-        
-        int ans=1;
-        
-        int c=1;
-        
-        for(int i=0;i<j;i++)
-        {
-            if(a[i]+1==a[i+1])
+            if(s.count(i-1)==0)
             {
-                c++;
+                int l=0;
+                int j=i;
+                
+                while(s.count(j)>0)
+                {
+                    j++;
+                    l++;
+                }
+                
+                ans=max(ans,l);
             }
-            else
-            {
-                c=1;
-            }
-            
-            ans=max(ans,c);
         }
         
         return ans;
