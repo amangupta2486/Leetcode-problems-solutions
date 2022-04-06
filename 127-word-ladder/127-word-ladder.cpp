@@ -1,55 +1,56 @@
 class Solution {
 public:
-    int ladderLength(string b, string e, vector<string>& w) {
-        
-       // map<string,int> m;
-        
-        set<string> m;
-        
-        int n=w.size();
-        
-        for(int i=0;i<n;i++)
-        {
-            //m[w[i]]++;
-            
-            m.insert(w[i]);
-            
-        }
+    int ladderLength(string s, string t, vector<string>& w) {
         
         queue<pair<string,int>> q;
         
-        q.push({b,1});
+        q.push({s,0});
+        
+        set<string> mp;
+        
+        for(auto i:w)
+            mp.insert(i);
+        
+        int ans=INT_MAX;
         
         while(!q.empty())
         {
-            auto p = q.front();
+            auto p=q.front();
             q.pop();
             
-            string a=p.first;
-            int c=p.second;
+            string b=p.first;
+            int c= p.second;
             
-            if(a==e)
+            c++;
+                
+            if(b==t)
             {
-                return c;
+                ans=min(ans,c);
             }
             
-            for(int i=0;i<a.size();i++)
+            for(int i=0;i<b.size();i++)
             {
-                string d = a;
+                string d=b;
                 
                 for(int j=0;j<26;j++)
                 {
-                    d[i] = 'a'+j;
+                    d[i]='a'+j;
                     
-                    if(m.find(d)!=m.end())
+                    
+                    if(mp.count(d))
                     {
-                        m.erase(d);
-                        q.push({d,c+1});
+                        mp.erase(d);
+                        q.push({d,c});
                     }
                 }
             }
+                
         }
         
-        return 0;
+        
+        if(ans==INT_MAX)
+            return 0;
+        
+        return ans;
     }
 };
