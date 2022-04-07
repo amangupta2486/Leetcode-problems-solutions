@@ -1,5 +1,5 @@
 # Job Sequencing Problem
-## Medium 
+##  Medium 
 <div class="problem-statement" style="user-select: auto;">
                 <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a set of <strong style="user-select: auto;">N</strong> jobs where each <strong style="user-select: auto;">job<sub style="user-select: auto;">i</sub></strong>&nbsp;has a deadline and profit associated with it. </span></p>
 
