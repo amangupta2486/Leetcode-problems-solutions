@@ -29,29 +29,29 @@ class Solution
     //Function to find the maximum profit and the number of jobs done.
     vector<int> JobScheduling(Job a[], int n) 
     { 
-        sort(a,a+n,[](auto &a,auto &b){
-            return a.profit > b.profit;
-        });
         
-        int maxd=0;
-
+        int mx=0;
         for(int i=0;i<n;i++)
         {
-            maxd=max(maxd,a[i].dead);
+            mx=max(mx,a[i].dead);
         }
         
-        vector<int> v(maxd+1,-1);
+        int m[mx+1];
+        memset(m,-1,sizeof(m));
         
-        int p=0,c=0;
+        sort(a,a+n,[&](auto &a,auto &b){
+            return a.profit>b.profit;
+        });
+        
+        int c=0,p=0;
         
         for(int i=0;i<n;i++)
         {
             for(int j=a[i].dead;j>=1;j--)
             {
-                if(v[j]==-1)
+                if(m[j]==-1)
                 {
-                    //cout<<a[i].dead<<" ";
-                    v[j]=1;
+                    m[j]=1;
                     p+=a[i].profit;
                     c++;
                     break;
@@ -59,7 +59,12 @@ class Solution
             }
         }
         
-        return {c,p};
+        vector<int> v;
+        
+        v.push_back(c);
+        v.push_back(p);
+        
+        return v;
     } 
 };
 
