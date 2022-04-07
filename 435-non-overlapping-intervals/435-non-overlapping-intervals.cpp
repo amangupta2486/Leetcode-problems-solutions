@@ -1,31 +1,26 @@
-
 class Solution {
 public:
-    int eraseOverlapIntervals(vector<vector<int>>& p) {
+    int eraseOverlapIntervals(vector<vector<int>>& r) {
+         int n=r.size();
         
-        int n=p.size();
+        sort(r.begin(),r.end());
         
-        vector<vector<int>> m;
-        
-        sort(p.begin(),p.end());
-        
-        int prev=p[0][1];
-        int ans=0;
+        vector<int> p=r[0];
+        int c=0;
         
         for(int i=1;i<n;i++)
         {
-            if(p[i][0]>=prev)
+            if(r[i][0]>=p[1])
             {
-                prev=p[i][1];
+                p=r[i];
             }
             else
             {
-                ans++;
-                prev=min(prev,p[i][1]);
+                p[1]=min(p[1],r[i][1]);
+                c++;
             }
         }
         
-        return ans;
-        
+        return c;
     }
 };
