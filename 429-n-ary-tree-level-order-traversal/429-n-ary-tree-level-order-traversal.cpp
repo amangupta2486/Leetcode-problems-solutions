@@ -30,13 +30,11 @@ public:
         }
         
         queue<Node*> q;
-        
         q.push(root);
         
         while(!q.empty())
         {
             int k=q.size();
-            
             vector<int> v;
             
             while(k--)
@@ -46,12 +44,11 @@ public:
                 
                 v.push_back(p->val);
                 
-                for(auto x : p->children)
+                for(auto i:p->children)
                 {
-                    q.push(x);
+                    q.push(i);
                 }
             }
-            
             ans.push_back(v);
         }
         
