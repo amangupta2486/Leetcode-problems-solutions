@@ -16,26 +16,19 @@ class Solution
     {
         int l=0,h=0;
         
-        int mx=0;
-        
         for(int i=0;i<n;i++)
         {
+            l=max(a[i],l);
             h+=a[i];
-            if(a[i]>mx)
-            {
-                mx=a[i];
-            }
         }
         
-        l=mx;
         int ans=0;
         
         while(l<=h)
         {
-            int mid=(l+h)/2;
+            int mid=(l+h)>>1;
             
-            int c=1;
-            int s=0;
+            int s=0,c=1;
             
             for(int i=0;i<n;i++)
             {
