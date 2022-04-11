@@ -31,7 +31,7 @@ public:
             {
                 q.push(i);
                 ans.push_back(i);
-                
+                d[i]--;
             }
         }
         
