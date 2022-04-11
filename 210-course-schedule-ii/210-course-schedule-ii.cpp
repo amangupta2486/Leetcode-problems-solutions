@@ -13,49 +13,41 @@ public:
         }
         
         queue<int> q;
-        
-        int c=0;
-        vector<int> ans;
+        int ans=0;
+        vector<int> g,h;
         
         for(int i=0;i<n;i++)
         {
             if(d[i]==0)
             {
                 q.push(i);
-                ans.push_back(i);
-                c++;
+                g.push_back(i);
+                ans++;
             }
         }
         
         while(!q.empty())
         {
-            int k=q.size();
+            auto r=q.front();
+            q.pop();
             
-            while(k--)
+            for(auto x:v[r])
             {
-                auto p = q.front();
-                q.pop();
-
-                for(auto x :v[p])
+                d[x]--;
+                
+                if(d[x]==0)
                 {
-                    
-                    d[x]--;
-                    
-                    if(d[x]==0)
-                    {
-                        ans.push_back(x);
-                        c++;
-                        q.push(x);
-                    }
+                    q.push(x);
+                    g.push_back(x);
+                    ans++;
                 }
             }
         }
         
-        if(c==n)
-        {
-            return ans;
-        }
+       // cout<<ans<<endl;
+        if(ans!=n)
+            return h;
         
-        return {};
+        return g;
     }
 };
