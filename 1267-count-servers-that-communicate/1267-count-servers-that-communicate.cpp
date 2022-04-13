@@ -7,7 +7,7 @@ public:
         
         int ans=0;
         
-        set<vector<int>> s;
+        vector<int> row(n,0),col(m,0);
         
         for(int i=0;i<n;i++)
         {
@@ -15,55 +15,23 @@ public:
             {
                 if(g[i][j]==1)
                 {
-                    int x=i;
-                    int y=j;
-                    
-                    while(x-1>=0)
-                    {
-                        x--;
-                        if(g[x][j]==1)
-                        {
-                            s.insert({x,j});
-                            ans++;
-                        }
-                    }
-                    x=i;
-                    
-                    while(x+1<n)
-                    {
-                        x++;
-                        if(g[x][j]==1)
-                        {
-                            s.insert({x,j});
-                            ans++;
-                        }
-                    }
-                    
-                    
-                    while(y-1>=0)
-                    {
-                        y--;
-                        if(g[i][y]==1)
-                        {
-                            s.insert({i,y});
-                            ans++;
-                        }
-                    }
-                    y=j;
-                    
-                    while(y+1<m)
-                    {
-                        y++;
-                        if(g[i][y]==1)
-                        {
-                            s.insert({i,y});
-                            ans++;
-                        }
-                    }
+                    row[i]++;
+                    col[j]++;
                 }
             }
         }
         
-        return s.size();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(g[i][j]==1 && (row[i]>1 || col[j]>1))
+                {
+                    ans++;
+                }
+            }
+        }
+        
+        return ans;
     }
 };
