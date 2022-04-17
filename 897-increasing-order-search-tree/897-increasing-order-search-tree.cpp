@@ -12,10 +12,8 @@
 class Solution {
 public:
     
-    vector<int> v;
-    
-//     TreeNode* h;
-//     TreeNode* r=h;
+    TreeNode* h=new TreeNode(1);
+    TreeNode* r=h;
     
     void solve(TreeNode* root)
     {
@@ -25,28 +23,19 @@ public:
         }
         
         solve(root->left);
-        v.push_back(root->val);
-        //h=h->right=new TreeNode(root->val);
+        h=h->right=new TreeNode(root->val);
         solve(root->right);
     }
     
     TreeNode* increasingBST(TreeNode* root) {
         
-        //h=root;
         if(root==NULL)
         {
             return root;
         }
         
         solve(root);
-        
-        TreeNode* h=new TreeNode(1);
-        TreeNode* r=h;
-        
-        for(auto i:v)
-        {
-            h=h->right=new TreeNode(i);
-        }
+
         return r->right;
         
     }
