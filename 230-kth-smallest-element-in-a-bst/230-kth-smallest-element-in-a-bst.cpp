@@ -24,7 +24,6 @@ public:
         solve(root->left);
         v.push_back(root->val);
         solve(root->right);
-        
     }
     int kthSmallest(TreeNode* root, int k) {
         
