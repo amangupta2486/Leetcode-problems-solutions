@@ -18,7 +18,7 @@ public:
         
         while(curr!=NULL)
         {
-            nxt = curr->next;
+            nxt=curr->next;
             curr->next=prev;
             
             prev=curr;
