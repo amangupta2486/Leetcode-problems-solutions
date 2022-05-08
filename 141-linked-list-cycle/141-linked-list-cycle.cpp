@@ -10,21 +10,29 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) {
         
-        ListNode* slow = head;
-        ListNode* fast = head;
+//         ListNode* slow=head;
+//         ListNode* fast=head;
         
-        while(fast && fast->next)
+//         do{
+//             slow=slow->next;
+//             fast=fast->next->next;
+//         }while(fast->next && fast->next->next && slow!=fast);
+        
+//         return 
+        
+        unordered_map<ListNode*,bool> mp;
+        
+        while(head!=NULL)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-            
-            if(slow==fast)
+            if(mp[head])
             {
-                return 1;
+                return true;
             }
             
+            mp[head]=1;
+            head=head->next;
         }
-               
+        
         return 0;
     }
 };
