@@ -11,7 +11,7 @@
 class Solution {
 public:
     
-    int solve(ListNode* head)
+    int len(ListNode* head)
     {
         int n=0;
         
@@ -23,15 +23,20 @@ public:
         
         return n;
     }
+    
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         
         if(head==NULL || head->next==NULL)
+        {
             return NULL;
+        }
         
-        int l=solve(head);
+        int l=len(head);
         
         if(l==n)
+        {
             return head->next;
+        }
         
         int d=l-n-1;
         
@@ -41,9 +46,8 @@ public:
         {
             head=head->next;
             d--;
-            
         }
-
+        
         head->next=head->next->next;
         
         return p;
