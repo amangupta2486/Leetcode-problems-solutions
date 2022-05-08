@@ -110,35 +110,50 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-Node* flatten(Node *root)
+    
+Node* merge(Node* l1,Node* l2)
 {
-   priority_queue<int> q;
+    Node* tmp=new Node(0);
+    Node* res=tmp;
+    
+    while(l1!=NULL && l2!=NULL)
+    {
+        if(l1->data<=l2->data)
+        {
+            tmp->bottom=l1;
+            tmp=tmp->bottom;
+            l1=l1->bottom;
+        }
+        else
+        {
+            tmp->bottom=l2;
+            tmp=tmp->bottom;
+            l2=l2->bottom;
+        }
+    }
+    
+    if(l1)
+    {
+        tmp->bottom=l1;
+    }
+    else
+    {
+        tmp->bottom=l2;
+    }
+    
+    return res->bottom;
+}
+Node *flatten(Node *root)
+{
+    if(root==NULL || root->next==NULL)
+    {
+        return root;
+    }
+
+   root->next=flatten(root->next);
+    
+   root=merge(root,root->next);
    
-   while(root!=NULL)
-   {
-       q.push(-1*root->data);
-       Node* h=root->bottom;
-       
-       while(h!=NULL)
-       {
-           q.push(-1*h->data);
-          // cout<<h->data<<" ";
-           h=h->bottom;
-       }
-       root=root->next;
-   }
-   
-   Node* r=new Node(1);
-   Node* temp=r;
-   
-   while(q.size()>0)
-   {
-       auto p=q.top()*-1;
-       //cout<<p<<" ";
-       r=r->bottom=new Node(p);
-       q.pop();
-   }
-   
-   return temp->bottom;
+   return root;
 }
 
