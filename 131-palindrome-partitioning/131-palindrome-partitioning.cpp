@@ -3,46 +3,40 @@ public:
     
     vector<vector<string>> ans;
     
-    
-    bool check(string s)
+    bool check(string &s)
     {
         int n=s.size();
-        int i=0;
-        int j=n-1;
+        int i=0,j=n-1;
         
-        while(i<=j)
+        while(i<j)
         {
-            if(s[i]==s[j])
-            {
-                i++;
-                j--;
-            }
-            else
+            if(s[i]!=s[j])
             {
                 return 0;
             }
+            i++;
+            j--;
         }
         
         return 1;
     }
-    void solve(string s,int i,vector<string> v)
+    
+    void solve(vector<string> &v,int i,int n,string &s)
     {
-        if(i==s.size())
+        if(i==n)
         {
             ans.push_back(v);
             return;
         }
         
-        for(int j=i;j<s.size();j++)
+        for(int j=i;j<n;j++)
         {
             string b=s.substr(i,j-i+1);
-            //cout<<b<<" ";
             
             if(check(b))
             {
                 v.push_back(b);
-                solve(s,j+1,v);
-                //cout<<endl;
+                solve(v,j+1,n,s);
                 v.pop_back();
             }
         }
@@ -50,10 +44,9 @@ public:
     vector<vector<string>> partition(string s) {
         
         int n=s.size();
-        
         vector<string> v;
         
-        solve(s,0,v);
+        solve(v,0,n,s);
         
         return ans;
     }
