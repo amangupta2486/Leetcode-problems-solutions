@@ -6,7 +6,6 @@ public:
         
         int b=a[0];
         int c=a[0];
-        
         int ans=a[0];
         
         for(int i=1;i<n;i++)
@@ -21,7 +20,6 @@ public:
             
             ans=max(ans,b);
         }
-        
         
         return ans;
     }
