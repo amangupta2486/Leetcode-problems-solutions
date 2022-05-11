@@ -18,8 +18,6 @@ public:
         Node(int a)
         {
             data=a;
-            left=NULL;
-            right=NULL;
         }
     };
     
