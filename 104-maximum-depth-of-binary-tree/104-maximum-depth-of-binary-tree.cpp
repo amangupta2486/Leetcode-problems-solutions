@@ -19,14 +19,14 @@ public:
             return 0;
         }
         
-        int l= solve(root->left);
-        int r= solve(root->right);
+        int l=solve(root->left);
+        int r=solve(root->right);
         
         return 1+max(l,r);
     }
+    
     int maxDepth(TreeNode* root) {
         
-       return solve(root);
-        
+        return solve(root);
     }
 };
