@@ -2,21 +2,21 @@ class Solution {
 public:
     vector<int> countBits(int n) {
         
-        vector<int> v(n+1,0);
+        vector<int> dp(n+1,0);
         
-        for(int i=1;i<=n;i++)
+        dp[0]=0;
+        
+        if(n>0)
+        dp[1]=1;
+        
+        if(n>1)
+        dp[2]=1;
+        
+        for(int i=3;i<=n;i++)
         {
-            for(int j=0;j<25;i<j++)
-            {
-                int f=1<<j;
-                
-                if(f&i)
-                {
-                    v[i]++;
-                }
-            }
+            dp[i]=dp[i/2]+dp[i%2];
         }
         
-        return v;
+        return dp;
     }
 };
