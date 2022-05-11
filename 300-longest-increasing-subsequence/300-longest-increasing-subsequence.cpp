@@ -4,21 +4,19 @@ public:
         
         int n=a.size();
         
-        vector<int> lis(n,1);
-        // int lis[n];
-        // memset(lis,1,sizeof(lis));
+        vector<int> dp(n,1);
         
         for(int i=1;i<n;i++)
         {
             for(int j=0;j<i;j++)
             {
-                if(a[j]<a[i] && lis[j]+1>lis[i])
+                if(a[j]<a[i] && dp[j]+1>dp[i])
                 {
-                    lis[i]=lis[j]+1;
+                    dp[i]=1+dp[j];
                 }
             }
         }
         
-        return *max_element(lis.begin(),lis.end());
+        return *max_element(dp.begin(),dp.end());
     }
 };
