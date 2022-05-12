@@ -1,24 +1,24 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& a) {
+    int maxProfit(vector<int>& p) {
         
-        int n=a.size();
-        
-        int mx=0,mi=a[0];
+        int n=p.size();
+        int mi=p[0];
+        int ans=0;
         
         for(int i=1;i<n;i++)
         {
-            if(a[i]<mi)
+            if(mi>p[i])
             {
-                mi=a[i];
+                mi=p[i];
             }
             
-            else if(a[i]-mi>mx)
+            else if(ans<p[i]-mi)
             {
-                mx=a[i]-mi;
+                ans=p[i]-mi;
             }
         }
         
-        return mx;
+        return ans;
     }
 };
