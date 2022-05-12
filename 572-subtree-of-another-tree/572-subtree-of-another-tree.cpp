@@ -44,13 +44,9 @@ public:
             return 0;
         }
         
-        bool f=0;
+        if(solve(p,q))
+            return 1;
         
-        if(p->val==q->val)
-        {
-            f=solve(p,q);
-        }
-        
-        return f || isSubtree(p->left,q) || isSubtree(p->right,q);
+        return isSubtree(p->left,q) || isSubtree(p->right,q);
     }
 };
