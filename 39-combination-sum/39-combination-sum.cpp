@@ -3,33 +3,34 @@ public:
     
     vector<vector<int>> ans;
     
-    void solve(vector<int> &a,int t,int i,int n,int s,vector<int> v)
+    void solve(vector<int>& c,vector<int> v,int i,int n,int s,int t)
     {
         if(i==n || s==t)
         {
             if(s==t)
             {
                 ans.push_back(v);
-            } 
-            
-            return ;
+            }
+            return;
         }
         
-        if(s+a[i]<=t)
+        if(s+c[i]<=t)
         {
-            v.push_back(a[i]);
-            solve(a,t,i,n,s+a[i],v);
+            v.push_back(c[i]);
+            solve(c,v,i,n,s+c[i],t);
             v.pop_back();
         }
         
-        solve(a,t,i+1,n,s,v);
+        solve(c,v,i+1,n,s,t);
+        
     }
-    vector<vector<int>> combinationSum(vector<int>& a, int t) {
+    
+    vector<vector<int>> combinationSum(vector<int>& c, int t) {
         
+        int n=c.size();
         vector<int> v;
-        int n=a.size();
         
-        solve(a,t,0,n,0,v);
+        solve(c,v,0,n,0,t);
         
         return ans;
     }
