@@ -9,7 +9,7 @@ public:
         
         int ans=0;
         
-        while(i<=j)
+        while(i<j)
         {
             if(h[i]<=h[j])
             {
