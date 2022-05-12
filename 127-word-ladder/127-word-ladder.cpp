@@ -1,15 +1,21 @@
 class Solution {
 public:
-    int ladderLength(string s, string t, vector<string>& w) {
-        
-        queue<pair<string,int>> q;
-        
-        q.push({s,0});
-        
-        set<string> mp;
+    int ladderLength(string b, string e, vector<string>& w) {
+
+        unordered_map<string,int> mp;
         
         for(auto i:w)
-            mp.insert(i);
+        {
+            mp[i]++;
+        }
+
+        if(mp[e]==0)
+        {
+            return 0;
+        }
+        
+        queue<pair<string,int>> q;
+        q.push({b,1});
         
         int ans=INT_MAX;
         
@@ -17,39 +23,42 @@ public:
         {
             auto p=q.front();
             q.pop();
-            
-            string b=p.first;
-            int c= p.second;
-            
-            c++;
-                
-            if(b==t)
+
+            string r=p.first;
+            int c=p.second;
+
+            if(r==e)
             {
                 ans=min(ans,c);
             }
-            
-            for(int i=0;i<b.size();i++)
+
+            for(int i=0;i<r.size();i++)
             {
-                string d=b;
-                
+                string b=r;
+
                 for(int j=0;j<26;j++)
                 {
-                    d[i]='a'+j;
+                    b[i]='a'+j;
                     
-                    
-                    if(mp.count(d))
+                    //cout<<b<<endl;
+                
+                    if(mp.find(b)!=mp.end())
                     {
-                        mp.erase(d);
-                        q.push({d,c});
+
+                        q.push({b,c+1});
+                        mp.erase(b);
                     }
                 }
-            }
                 
+                
+            }
+            
         }
         
-        
         if(ans==INT_MAX)
+        {
             return 0;
+        }
         
         return ans;
     }
