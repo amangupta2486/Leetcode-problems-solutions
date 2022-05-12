@@ -4,36 +4,27 @@ public:
         
         int n=h.size();
         
-        int l_max=0,r_max=0;
-        int i=0,j=n-1;
-        
         int ans=0;
         
-        while(i<j)
+        vector<int> l(n,0),r(n,0);
+        
+        for(int i=1;i<n;i++)
         {
-            if(h[i]<=h[j])
+            l[i]=max(l[i-1],h[i-1]);
+        }
+
+        for(int i=n-2;i>=0;i--)
+        {
+            r[i]=max(r[i+1],h[i+1]);
+        }
+        
+        for(int k=0;k<n;k++)
+        {
+            int x=min(l[k],r[k]);
+            
+            if(x>=h[k])
             {
-                if(h[i]>l_max)
-                {
-                    l_max=h[i];
-                }
-                else
-                {
-                    ans+=l_max-h[i];
-                }
-                i++;
-            }
-            else
-            {
-                if(h[j]>r_max)
-                {
-                    r_max=h[j];
-                }
-                else
-                {
-                    ans+=r_max-h[j];
-                }
-                j--;
+                ans+=x-h[k];
             }
         }
         
