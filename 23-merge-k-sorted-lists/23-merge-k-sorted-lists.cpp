@@ -10,7 +10,46 @@
  */
 class Solution {
 public:
+
+    ListNode* merge(ListNode* l1,ListNode* l2)
+    {
+        if(l1==NULL)
+        {
+            return l2;
+        }
+        
+        if(l2==NULL)
+        {
+            return l1;
+        }
+        
+        if(l1->val>l2->val)
+        {
+            std::swap(l1,l2);
+        }
+        
+        ListNode* res=l1;
+        
+        while(l1 && l2)
+        {
+            ListNode* tmp=NULL;
+            
+            while(l1 && l1->val<=l2->val)
+            {
+                tmp=l1;
+                l1=l1->next;
+            }
+            
+            if(tmp)
+            tmp->next=l2;
+            
+            std::swap(l1,l2);
+        }
+        
+        return res;
+    }
     
+    /*
      ListNode* merge(ListNode* l1,ListNode* l2)
      {
          if(l1==NULL)
@@ -52,6 +91,7 @@ public:
          
          return y->next;
      }
+     */
     ListNode* mergeKLists(vector<ListNode*>& l) {
         
         int n=l.size();
@@ -77,6 +117,15 @@ public:
         }
         
         return p;
-
+//         if(l->next==NULL)
+//         {
+//             return l;
+//         }
+        
+//         ListNode* p=l->next;
+        
+//         ListNode* q=mergeKLists(p);
+        
+//         return merge(p,q);
     }
 };
