@@ -1,9 +1,11 @@
 class Solution {
 public:
     
-      void solve(int i,int n,vector<int> a,vector<vector<int>> &ans)
+    vector<vector<int>> ans;
+    
+    void solve(vector<int> a,int i,int n)
     {
-        if(i>=n)
+        if(i==n)
         {
             auto it=find(ans.begin(),ans.end(),a);
             
@@ -15,23 +17,19 @@ public:
         
         for(int j=i;j<n;j++)
         {
+            //cout<<j<<" ";
             swap(a[i],a[j]);
-            solve(i+1,n,a,ans);
+            solve(a,i+1,n);
             swap(a[i],a[j]);
         }
     }
     
-    
     vector<vector<int>> permuteUnique(vector<int>& a) {
         
-        int n=a.size();
+       int n=a.size();
+
+       solve(a,0,n);
         
-        vector<vector<int>> ans;
-        
-        sort(a.begin(),a.end());
-        
-        solve(0,n,a,ans);
-        
-        return ans;
+       return ans;
     }
 };
