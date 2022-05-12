@@ -1,55 +1,46 @@
 class Solution {
 public:
-    string longestPalindrome(string s) {
-        
+    
+    int solve(string s,int i,int j)
+    {
         int n=s.size();
         
-        int dp[n+1][n+1];
-        memset(dp,0,sizeof(dp));
+        while(i>=0 && j<n && s[i]==s[j])
+        {
+            i--;
+            j++;
+        }
+        
+        return j-i-1;
+    }
+    string longestPalindrome(string s) {
+        
+        int start=0,end=0,ans=1;
+        int n=s.size();
+        
+        if(n==0)
+        {
+            return "";
+        }
         
         for(int i=0;i<n;i++)
-        {
-            dp[i][i]=1;
-        }
-        
-        int ans=1,start=0,end=0,l=1;
-        
-        for(int i=0;i<n-1;i++)
-        {
-            if(s[i]==s[i+1])
+        {   
+            int l1=solve(s,i,i);
+            int l2=solve(s,i,i+1);
+
+            int l=max(l1,l2);
+
+            if(l>ans)
             {
-                dp[i][i+1]=1;
-                start=i;
-                ans=2;
-            }
-        }
-        
-        for(int k=3;k<=n;k++)
-        {
-            for(int i=0;i<n-k+1;i++)
-            {
-                int j=i+k-1;
+                ans=l;
                 
-                if(s[i]==s[j] && dp[i+1][j-1])
-                {
-                    dp[i][j]=1;
-                    start=i;
-                    
-                    if(k>ans)
-                    {
-                        ans=k;
-                    }
-                }
+                start = i-(l-1)/2;
+                end   = i+(l)/2;
             }
+
         }
-        
-        string t="";
-        
-        for(int i=start;i<start+ans;i++)
-        {
-            t+=s[i];
-        }
-        
-        return t;
+        cout<<ans<<endl;
+        return s.substr(start,end-start+1);
     }
+    
 };
