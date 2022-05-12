@@ -26,11 +26,12 @@ public:
         
         if(p->val==q->val)
         {
-            return solve(p->left,q->left) &&solve(p->right,q->right);
+            return solve(p->left,q->left) and solve(p->right,q->right);
         }
         
         return 0;
     }
+    
     bool isSubtree(TreeNode* p, TreeNode* q) {
         
         if(p==NULL && q==NULL)
@@ -38,15 +39,18 @@ public:
             return 1;
         }
         
-        //if(p->val==q->val)
-        if(solve(p,q))
+        if(p==NULL || q==NULL)
         {
-            return 1;
+            return 0;
         }
         
-        if(p!=NULL)
-        return isSubtree(p->left,q) || isSubtree(p->right,q);
+        bool f=0;
         
-        return 0;
+        if(p->val==q->val)
+        {
+            f=solve(p,q);
+        }
+        
+        return f || isSubtree(p->left,q) || isSubtree(p->right,q);
     }
 };
