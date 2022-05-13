@@ -5,7 +5,7 @@ public:
     
     int solve(string &a, string &b,int n,int m)
     {
-        if(n==0 || m==0)
+        if(n==0 || m==a.size())
         {
             return 0;
         }
@@ -14,19 +14,17 @@ public:
         {
             return dp[n][m];
         }
-        if(a[n-1]==b[m-1])
+        if(a[n-1]==b[m])
         {
-            return dp[n][m]=1+solve(a,b,n-1,m-1);
+            return dp[n][m]=1+solve(a,b,n-1,m+1);
         }
         
-        return dp[n][m]=max(solve(a,b,n-1,m),solve(a,b,n,m-1));
+        return dp[n][m]=max(solve(a,b,n-1,m),solve(a,b,n,m+1));
     }
     
     int longestPalindromeSubseq(string s) {
         int n=s.size();
-        string b=s;
-        reverse(b.begin(),b.end());
         memset(dp,-1,sizeof(dp));
-        return solve(s,b,n,n);
+        return solve(s,s,n,0);
     }
 };
