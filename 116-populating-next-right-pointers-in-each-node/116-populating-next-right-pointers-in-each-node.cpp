@@ -19,20 +19,21 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        
         if(root==NULL)
         {
-            return root;
+            return NULL;
         }
         
-        if(root->left!=NULL && root->right!=NULL)
+        if(root->left!=NULL)
         {
             root->left->next=root->right;
         }
         
-        if(root->right!=NULL && root->next!=NULL)
+        if(root->next!=NULL)
         {
-            root->right->next =root->next->left;
+            if(root->next->left!=NULL &&  root->right!=NULL)
+            root->right->next=root->next->left;
+            
         }
         
         connect(root->left);
