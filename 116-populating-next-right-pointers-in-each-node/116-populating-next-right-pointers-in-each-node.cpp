@@ -19,6 +19,7 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
+        
         if(root==NULL)
         {
             return NULL;
@@ -31,9 +32,10 @@ public:
         
         if(root->next!=NULL)
         {
-            if(root->next->left!=NULL &&  root->right!=NULL)
-            root->right->next=root->next->left;
-            
+            if(root->right!=NULL)
+            {
+                root->right->next=root->next->left;
+            }
         }
         
         connect(root->left);
