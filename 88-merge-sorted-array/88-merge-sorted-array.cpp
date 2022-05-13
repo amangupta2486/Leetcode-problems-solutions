@@ -1,10 +1,10 @@
 class Solution {
 public:
-    void merge(vector<int>& a, int m, vector<int>& b, int n) {
+    void merge(vector<int>& a, int n, vector<int>& b, int m) {
         
-        //a.resize(m+n);
+        a.resize(n+m);
         
-        int i=m-1,j=n-1;
+        int i=n-1,j=m-1;
         
         while(i>=0 && j>=0)
         {
@@ -13,6 +13,7 @@ public:
                 a[i+j+1]=a[i];
                 i--;
             }
+            
             else
             {
                 a[i+j+1]=b[j];
