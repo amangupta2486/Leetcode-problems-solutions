@@ -14,15 +14,13 @@ public:
         {
             return dp[n][m];
         }
-        
         if(a[n-1]==b[m-1])
         {
             return dp[n][m]=1+solve(a,b,n-1,m-1);
         }
         
-        return dp[n][m]=max({solve(a,b,n,m-1),solve(a,b,n-1,m)});
+        return dp[n][m]=max(solve(a,b,n-1,m),solve(a,b,n,m-1));
     }
-    
     int longestCommonSubsequence(string a, string b) {
         
         int n=a.size();
