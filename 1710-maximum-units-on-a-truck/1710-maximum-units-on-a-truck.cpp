@@ -15,19 +15,21 @@ public:
             auto p=b[i];
             int x=p[0];
             int c=p[1];
-            
-            while(x>0 && t>0)
+
+            if(x<=t)
             {
-                ans+=c;
-                x--;
-                t--;
-//                 int d=0;
-                
-//                 if(c<=t)
-//                 {
-//                     d=t/c;
-                    
-//                 }
+                ans+= x*c;
+                t-=x;
+            }
+            else
+            {
+                ans+=t*c;
+                t=0;
+            }
+            
+            if(t==0)
+            {
+                break;
             }
         }
         
