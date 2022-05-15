@@ -25,43 +25,21 @@ public:
             return NULL;
         }
         
-        queue<Node*> q;
-        q.push(root);
-        int f=1;
-
-        while(!q.empty())
+        if(root->left!=NULL)
         {
-            int k=q.size();
-            
-            Node* temp=q.front();
-            int f=1;
-            while(k>0)
-            {    
-                auto p=q.front();
-                q.pop();
-                
-                if(f==0)
-                {
-                    temp->next=p;
-                    //cout<<p->val<<" ";
-                    temp=temp->next;
-                }
-                
-                f=0;
-                
-                if(p->left!=NULL)
-                {
-                    q.push(p->left);
-                }
-                
-                if(p->right!=NULL)
-                {
-                    q.push(p->right);
-                }
-                
-                k--;
+            root->left->next=root->right;
+        }
+        
+        if(root->next!=NULL)
+        {
+            if(root->right!=NULL)
+            {
+                root->right->next= root->next->left;
             }
         }
+        
+        connect(root->left);
+        connect(root->right);
         
         return root;
     }
