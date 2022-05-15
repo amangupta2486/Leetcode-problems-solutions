@@ -9,7 +9,7 @@
 	<li style="user-select: auto;"><code style="user-select: auto;">"C"</code> - Invalidate the previous score, removing it from the record. It is guaranteed there will always be a previous score.</li>
 </ol>
 
-<p style="user-select: auto;">Return <em style="user-select: auto;">the sum of all the scores on the record</em>.</p>
+<p style="user-select: auto;">Return <em style="user-select: auto;">the sum of all the scores on the record</em>. The test cases are generated so that the answer fits in a 32-bit integer.</p>
 
 <p style="user-select: auto;">&nbsp;</p>
 <p style="user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></p>
@@ -43,8 +43,12 @@ The total sum is 5 + -2 + -4 + 9 + 5 + 14 = 27.
 
 <p style="user-select: auto;"><strong style="user-select: auto;">Example 3:</strong></p>
 
-<pre style="user-select: auto;"><strong style="user-select: auto;">Input:</strong> ops = ["1"]
-<strong style="user-select: auto;">Output:</strong> 1
+<pre style="user-select: auto;"><strong style="user-select: auto;">Input:</strong> ops = ["1","C"]
+<strong style="user-select: auto;">Output:</strong> 0
+<strong style="user-select: auto;">Explanation:</strong>
+"1" - Add 1 to the record, record is now [1].
+"C" - Invalidate and remove the previous score, record is now [].
+Since the record is empty, the total sum is 0.
 </pre>
 
 <p style="user-select: auto;">&nbsp;</p>
