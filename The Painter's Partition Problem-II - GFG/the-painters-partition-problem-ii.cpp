@@ -7,63 +7,49 @@ using namespace std;
 
  // } Driver Code Ends
 //User function template for C++
-#define ll long long
+
 class Solution
 {
   public:
-  
     long long minTime(int a[], int n, int k)
     {
-        // code here
-        // return minimum time
+        long long l=INT_MIN;
+        long long r=0;
         
-        ll l=0;
-        ll h=0;
-        
-        ll mx=0;
-            
         for(int i=0;i<n;i++)
         {
-            mx=max(mx,1ll*a[i]);
-        }
+            l=max(l,1ll*a[i]);
+            r+=a[i];
             
-        l=mx;
+        }
         
         if(k>=n)
         {
-            return mx;
+            return l;
         }
         
-        for(int i=0;i<n;i++)
+        while(l<r)
         {
-            h+=a[i];
-        }
-        ll mi=0;
-        
-        while(l<=h)
-        {
-            ll m=(l+h)/2;
+            long long m=(l+r)/2;
             
-            ll c=1;
-            ll s=0,mx=0;
+            long long c=1,s=0;
+            
             for(int i=0;i<n;i++)
             {
-
-                s+=a[i];
-                
-                if(s>m)
+                if(s+a[i]<=m)
+                {
+                    s+=a[i];
+                }
+                else
                 {
                     s=a[i];
                     c++;
                 }
-                
-                mx=max(mx,s);
             }
             
             if(c<=k)
             {
-                mi=m;
-                h=m-1;
+                r=m;
             }
             else
             {
@@ -71,7 +57,7 @@ class Solution
             }
         }
         
-        return mi;
+        return r;
     }
 };
 
