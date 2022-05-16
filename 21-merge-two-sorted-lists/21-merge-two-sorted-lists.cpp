@@ -22,34 +22,35 @@ public:
             return l1;
         }
         
-        if(l1->val>l2->val)
-        {
-            ListNode* t=l1;
-            l1=l2;
-            l2=t;
-            //std::swap(l1,l2);
-        }
-        
-        ListNode* res=l1;
+        ListNode* q=new ListNode(0);
+        ListNode* res=q;
         
         while(l1!=NULL && l2!=NULL)
         {
-            ListNode* tmp=NULL;
-            
-            while(l1!=NULL && l1->val<=l2->val)
+            if(l1->val<=l2->val)
             {
-                tmp=l1;
+                q->next=l1;
                 l1=l1->next;
+                q=q->next;
             }
-            
-            tmp->next=l2;
-            
-            ListNode* t=l1;
-            l1=l2;
-            l2=t;
-            //std::swap(l1,l2);
+            else
+            {
+                q->next=l2;
+                l2=l2->next;
+                q=q->next;
+            }
         }
         
-        return res;
+        if(l1)
+        {
+            q->next=l1;
+        }
+        
+        if(l2)
+        {
+            q->next=l2;
+        }
+        
+        return res->next;
     }
 };
