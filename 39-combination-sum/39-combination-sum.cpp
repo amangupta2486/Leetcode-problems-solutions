@@ -3,9 +3,9 @@ public:
     
     vector<vector<int>> ans;
     
-    void solve(vector<int>& c,vector<int> v,int i,int n,int s,int t)
+    void solve(vector<int>& a,vector<int> v,int s,int i,int t)
     {
-        if(i==n || s==t)
+        if(i==a.size() || s==t)
         {
             if(s==t)
             {
@@ -14,24 +14,22 @@ public:
             return;
         }
         
-        if(s+c[i]<=t)
+        if(s+a[i]<=t)
         {
-            v.push_back(c[i]);
-            solve(c,v,i,n,s+c[i],t);
+            v.push_back(a[i]);
+            solve(a,v,s+a[i],i,t);
             v.pop_back();
         }
         
-        solve(c,v,i+1,n,s,t);
-        
+        solve(a,v,s,i+1,t);
     }
-    
     vector<vector<int>> combinationSum(vector<int>& c, int t) {
         
         int n=c.size();
         vector<int> v;
         
-        solve(c,v,0,n,0,t);
+        solve(c,v,0,0,t);
         
-        return ans;
+         return ans;
     }
 };
