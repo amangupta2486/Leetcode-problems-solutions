@@ -28,8 +28,39 @@ public:
        
     }
     TreeNode* invertTree(TreeNode* root) {
-        solve(root);
+        //solve(root);
         
+        if(root==NULL)
+        {
+            return root;
+        }
+        queue<TreeNode*> s;
+        
+        s.push(root);
+        
+        while(!s.empty())
+        {
+            int k=s.size();
+            
+            while(k--)
+            {    
+                auto p=s.front();
+                s.pop();
+
+                TreeNode* tmp=p->left;
+                p->left = p->right;
+                p->right =tmp;
+
+                if(p->left!=NULL)
+                {
+                    s.push(p->left);
+                }
+                if(p->right!=NULL)
+                {
+                    s.push(p->right);
+                }
+            }
+        }
         return root;
     }
 };
