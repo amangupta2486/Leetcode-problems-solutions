@@ -43,8 +43,45 @@ public:
             return 0;
         }
         
-        solve(root,0,t);
+       // solve(root,0,t);
+        queue<pair<TreeNode*,int>> q;
+        q.push({root,root->val});
         
+        while(!q.empty())
+        {
+            int k=q.size();
+            
+            while(k--)
+            {
+                auto r=q.front();
+                q.pop();
+                
+                auto p=r.first;
+                int  s=r.second;
+                
+                //s+=root->val;
+               // cout<<s<<" ";
+                
+                if(p->left==NULL && p->right==NULL)
+                {
+                    if(s==t)
+                    {
+                        return 1;
+                    }
+                }
+                
+                if(p->left!=NULL)
+                {
+                    q.push({p->left,s+p->left->val});
+                }
+                
+                if(p->right!=NULL)
+                {
+                    q.push({p->right,s+p->right->val});
+                }
+            }
+        }
+        cout<<endl;
         return ans;
     }
 };
