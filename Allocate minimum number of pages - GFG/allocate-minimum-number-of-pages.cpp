@@ -12,44 +12,52 @@ class Solution
 {
     public:
     //Function to find minimum number of pages.
-    int findPages(int a[], int n, int m) 
+    int findPages(int a[], int n, int k) 
     {
-        int l=0,h=0;
+        int l=INT_MIN;
+        int r=0;
         
         for(int i=0;i<n;i++)
         {
-            l=max(a[i],l);
-            h+=a[i];
+            l=max(l,a[i]);
+            r+=a[i];
         }
         
-        int ans=0;
+        int ans=INT_MAX;
         
-        while(l<=h)
+        while(l<=r)
         {
-            int mid=(l+h)>>1;
+            long long m=(l+r)/2;
             
-            int s=0,c=1;
+            long long c=1,s=0;
             
             for(int i=0;i<n;i++)
             {
-                s+=a[i];
-                
-                if(s>mid)
+                if(s+a[i]<=m)
+                {
+                    s+=a[i];
+                }
+                else
                 {
                     s=a[i];
                     c++;
                 }
             }
             
-            if(c<=m)
+            if(c<=k)
             {
-                ans=mid;
-                h=mid-1;
+                ans=m;
+                r=m-1;
             }
             else
             {
-                l=mid+1;
+                l=m+1;
             }
+        }
+        
+        if(ans==INT_MAX)
+        {
+            return -1;
         }
         
         return ans;
