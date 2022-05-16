@@ -2,10 +2,10 @@ class Solution {
 public:
     
     int ans=INT_MAX;
-    // int dx[8]={1,1,-1,-1,0,0 ,1,-1};
-    // int dy[8]={0,1, 0,-1,1,-1,1, 1};
-    int dx[8]={1,1,1,-1,-1,-1,0,0};
-    int dy[8]={0,1,-1,1,-1,0,1,-1};
+    int dx[8]={1,1,-1,-1,0,0 ,-1,1};
+    int dy[8]={0,1, 0,-1,1,-1,1,-1};
+    // int dx[8]={1,1,1,-1,-1,-1,0,0};
+    // int dy[8]={0,1,-1,1,-1,0,1,-1};
     /*
     void solve(vector<vector<int>>& g,int i,int j,int n,int m,int c)
     {
