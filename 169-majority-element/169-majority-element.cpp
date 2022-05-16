@@ -3,9 +3,8 @@ public:
     int majorityElement(vector<int>& a) {
         
         int n=a.size();
-        
-        int b=a[0];
         int c=1;
+        int b=a[0];
         
         for(int i=1;i<n;i++)
         {
@@ -14,7 +13,7 @@ public:
                 c++;
             }
             
-            if(a[i]!=b)
+            else
             {
                 c--;
             }
