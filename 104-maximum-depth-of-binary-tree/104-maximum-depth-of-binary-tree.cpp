@@ -24,7 +24,6 @@ public:
         
         return 1+max(l,r);
     }
-    
     int maxDepth(TreeNode* root) {
         
         return solve(root);
