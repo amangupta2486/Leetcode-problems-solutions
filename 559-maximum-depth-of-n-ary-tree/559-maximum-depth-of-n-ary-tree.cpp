@@ -27,25 +27,29 @@ public:
             return 0;
         }
         
-        queue<Node*> q;
+        queue<pair<Node*,int>> q;
         
-        q.push(root);
+        int ans=1;
         
-        int ans=0;
+        q.push({root,1});
         
         while(!q.empty())
         {
             int k=q.size();
-            ans++;
             
             while(k--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                for(auto i:p->children)
+                auto r=p.first;
+                auto c=p.second;
+                
+                ans=max(ans,c);
+                
+                for(auto i:r->children)
                 {
-                    q.push(i);
+                    q.push({i,c+1});
                 }
             }
         }
