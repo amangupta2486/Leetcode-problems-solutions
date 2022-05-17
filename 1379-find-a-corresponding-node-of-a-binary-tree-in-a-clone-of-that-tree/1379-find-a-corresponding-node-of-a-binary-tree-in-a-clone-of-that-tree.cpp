@@ -30,8 +30,39 @@ public:
     }
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
         
-        solve(original,cloned,target);
+        //solve(original,cloned,target);
         
+        queue<vector<TreeNode*>> q;
+        
+        q.push({original,cloned});
+        
+        while(!q.empty())
+        {
+            int k=q.size();
+            
+            while(k--)
+            {
+                auto p=q.front();
+                q.pop();
+                
+                auto x=p[0];
+                auto y=p[1];
+                
+                if(x==target)
+                {
+                    return y;
+                }
+                
+                if(x->left!=NULL)
+                {
+                    q.push({x->left,y->left});
+                }
+                if(y->right!=NULL)
+                {
+                    q.push({x->right,y->right});
+                }
+            }
+        }
         return ans;
     }
 };
