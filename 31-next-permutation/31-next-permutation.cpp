@@ -1,22 +1,22 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& a) {
-        
+       
         int n=a.size();
-        
         int f=0;
+        int i=0;
         
-        int i=n-2;
-        
-        for(;i>=0;i--)
+        for(i=n-2;i>=0;--i)
         {
             if(a[i]<a[i+1])
             {
+                cout<<i<<" ";
+
                 f=1;
-               // i++;
                 break;
             }
         }
+        
         
         if(f)
         {
@@ -24,19 +24,20 @@ public:
             {
                 if(a[j]>a[i])
                 {
+                    cout<<j<<" ";
                     swap(a[j],a[i]);
                     break;
                 }
             }
         }
-        cout<<i<<" ";
         
         if(f)
-        {
-            sort(a.begin()+i+1,a.end());
-        }
+        sort(a.begin()+i+1,a.end());
         
         else
-        sort(a.begin(),a.end());
+        {
+            sort(a.begin(),a.end());
+        }
+        
     }
 };
