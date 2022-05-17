@@ -10,60 +10,42 @@
 
 class Solution {
 public:
-    
-    TreeNode* ans=NULL;
-    
-    void solve(TreeNode* original,TreeNode* cloned,TreeNode* t)
-    {
-        if(original==NULL)
-        {
-            return;
-        }
-        
-        if(original==t)
-        {
-            ans=cloned;
-        }
-        
-        solve(original->left,cloned->left,t);
-        solve(original->right,cloned->right,t);
-    }
+
+
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+
+        stack<TreeNode*> p,q;
+        auto x=original,y=cloned;
         
-        //solve(original,cloned,target);
-        
-        queue<vector<TreeNode*>> q;
-        
-        q.push({original,cloned});
-        
-        while(!q.empty())
+        while(!p.empty() || x!=NULL)
         {
-            int k=q.size();
-            
-            while(k--)
+            while(x!=NULL)
             {
-                auto p=q.front();
+
+                p.push(x);
+                q.push(y);
+                x=x->left;
+                y=y->left;
+
+            }
+                x=p.top();
+                p.pop();
+            
+                y=q.top();
                 q.pop();
-                
-                auto x=p[0];
-                auto y=p[1];
-                
-                
-                
-                if(x->left!=NULL)
-                {
-                    q.push({x->left,y->left});
-                }
+            
                 if(x==target)
                 {
                     return y;
                 }
-                if(y->right!=NULL)
+                
+                if(x!=NULL)
                 {
-                    q.push({x->right,y->right});
+                    x=x->right;
+                    y=y->right;
                 }
-            }
+            
         }
-        return ans;
+        return x;
     }
 };
