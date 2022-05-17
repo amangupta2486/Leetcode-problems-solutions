@@ -14,36 +14,33 @@ public:
         
         vector<int> v,p;
         
+        ListNode* a1=new ListNode(0);
+        ListNode* a2=a1;
+        ListNode* b1=new ListNode(0);
+        ListNode* b2=b1;
+        
         while(head!=NULL)
         {
             int a=head->val;
             
             if(a<x)
             {
-                v.push_back(a);
+                a1->next=head;
+                a1=a1->next;
             }
             else
             {
-                p.push_back(a);
+               b1->next=head;
+               b1=b1->next;
             }
             
             head=head->next;
         }
+        b1->next=NULL;
         
-        ListNode* r=new ListNode(0);
-        ListNode* s=r;
+        a1->next=b2->next;
         
-        for(auto i:v)
-        {
-            r=r->next=new ListNode(i);
-        }
-        
-        for(auto i:p)
-        {
-            r=r->next=new ListNode(i);
-        }
-        
-        return s->next;
+        return a2->next;
         
     }
 };
