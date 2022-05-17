@@ -1,34 +1,35 @@
 class Solution {
 public:
+    
+    int dp[205][205];
+    
+    int solve(vector<vector<int>>& g,int i,int j,int n,int m)
+    {
+        if(i>=n || j>=m)
+        {
+            return INT_MAX;
+        }
+        
+        if(i==n-1 && j==m-1)
+        {
+            return g[i][j];
+        }
+        
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        //cout<<g[i][j]<<" ";
+        
+        return  dp[i][j]=g[i][j]+min(solve(g,i+1,j,n,m),solve(g,i,j+1,n,m));
+    }
     int minPathSum(vector<vector<int>>& g) {
         
         int n=g.size();
         int m=g[0].size();
         
-        int dp[n+1][m+1];
+        memset(dp,-1,sizeof(dp));
         
-        memset(dp,0,sizeof(dp));
-        
-        for(int i=0;i<=n;i++)
-        {
-            dp[i][m]=INT_MAX;
-        }
-
-        for(int j=0;j<=m;j++)
-        {
-            dp[n][j]=INT_MAX;
-        }
-        
-        dp[n][m-1]=dp[n-1][m]=0;
-        
-        for(int i=n-1;i>=0;i--)
-        {
-            for(int j=m-1;j>=0;j--)
-            {
-                dp[i][j]=g[i][j]+min(dp[i][j+1],dp[i+1][j]);
-            }
-        }
-        
-        return dp[0][0];
+        return solve(g,0,0,n,m);
     }
 };
