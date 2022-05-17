@@ -48,14 +48,15 @@ public:
                 auto x=p[0];
                 auto y=p[1];
                 
-                if(x==target)
-                {
-                    return y;
-                }
+                
                 
                 if(x->left!=NULL)
                 {
                     q.push({x->left,y->left});
+                }
+                if(x==target)
+                {
+                    return y;
                 }
                 if(y->right!=NULL)
                 {
