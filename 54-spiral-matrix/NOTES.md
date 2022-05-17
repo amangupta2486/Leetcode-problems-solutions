@@ -34,8 +34,3 @@ v.push_back(matrix[i][n_start]);
 }
 m_start++;
 m_end--;
-n_start++;
-n_end--;
-}
-return v;
-}
