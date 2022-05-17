@@ -3,14 +3,15 @@ public:
     int distributeCandies(vector<int>& a) {
         
         int n=a.size();
-        map<int,int> mp;
+        // map<int,int> mp;
+        unordered_set<int> s;
         
         for(auto i:a)
         {
-            mp[i]++;
+            s.insert(i);
         }
         
-        int m=mp.size();
+        int m=s.size();
         
         if(m>=n/2)
         {
