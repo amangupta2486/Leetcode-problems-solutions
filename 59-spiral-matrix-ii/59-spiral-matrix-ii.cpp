@@ -2,46 +2,49 @@ class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
         
-        int a=0,b=n-1,c=0,d=n-1;
+        int n1=0,n2=n-1,m1=0,m2=n-1;
         
-        vector<int> v;
-        vector<vector<int>> g(n,vector<int>(n,0));
+        vector<vector<int>> v(n,vector<int>(n,0));
+        int x=1;
         
-        int ans=1;
-        
-        while(a<=b && c<=d)
+        while(n1<=n2 && m1<=m2)
         {
-           for(int j=c;j<=d;j++)
-           {
-               g[a][j]=ans++;
-           }
-           
-           for(int i=a+1;i<b;i++)
-           {
-               g[i][d]=ans++;
-           }
-           
-            if(a!=b)
-           {     
-               for(int j=d;j>=c;j--)
-               {
-                   g[b][j]=ans++;
-               }
-           }
+            for(int j=m1;j<=m2;j++)
+            {
+                v[n1][j]=x;
+                x++;
+            }
             
-            if(c!=d)
-            {    
-                for(int i=b-1;i>a;i--)
+            for(int i=n1+1;i<n2;i++)
+            {
+                v[i][m2]=x;
+                x++;
+            }
+            
+            if(n1!=n2)
+            {
+                for(int j=m2;j>=m1;j--)
                 {
-                    g[i][c]=ans++;
+                    v[n2][j]=x;
+                    x++;
                 }
             }
-           a++;
-           c++; 
-           b--;
-           d--;
+            
+            if(m1!=m2)
+            {
+                for(int i=n2-1;i>n1;i--)
+                {
+                    v[i][m1]=x;
+                    x++;
+                }
+            }
+            
+            n1++;
+            m1++;
+            n2--;
+            m2--;
         }
         
-        return g;
+        return v;
     }
 };
