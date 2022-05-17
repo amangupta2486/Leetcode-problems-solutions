@@ -20,13 +20,32 @@ public:
 
 class Solution {
 public:
+    
+    int ans=0;
+    
+    void solve(Node* r,int c)
+    {
+        if(r==NULL)
+        {
+            return;
+        }
+        
+        ans=max(ans,c);
+        
+        for(auto i:r->children)
+        {
+            solve(i,c+1);
+        }
+    }
     int maxDepth(Node* root) {
         
         if(root==NULL)
         {
             return 0;
         }
+        solve(root,1);
         
+        /*
         queue<pair<Node*,int>> q;
         
         int ans=1;
@@ -53,7 +72,7 @@ public:
                 }
             }
         }
-        
+        */
         return ans;
     }
 };
