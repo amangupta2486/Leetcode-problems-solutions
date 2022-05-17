@@ -10,26 +10,26 @@ public:
             auto it=find(ans.begin(),ans.end(),a);
             
             if(it==ans.end())
-            ans.push_back(a);
-            
+            {
+                ans.push_back(a);
+            }
             return;
         }
         
         for(int j=i;j<n;j++)
         {
-            //cout<<j<<" ";
             swap(a[i],a[j]);
             solve(a,i+1,n);
             swap(a[i],a[j]);
         }
     }
-    
     vector<vector<int>> permuteUnique(vector<int>& a) {
         
-       int n=a.size();
-
-       solve(a,0,n);
+        int n=a.size();
+        vector<int> v;
         
-       return ans;
+        solve(a,0,n);
+        
+        return ans;
     }
 };
