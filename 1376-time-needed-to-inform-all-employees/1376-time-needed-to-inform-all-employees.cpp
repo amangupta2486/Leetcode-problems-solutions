@@ -1,45 +1,52 @@
 class Solution {
 public:
-    
-    int v[100005];
-    
-    int numOfMinutes(int n, int h, vector<int>& m, vector<int>& t) {
+    int numOfMinutes(int n, int h, vector<int>& mg, vector<int>& t) {
         
-        v[h]=h;
+        queue<vector<int>> q;
         
-        for(int i=0;i<m.size();i++)
-        {
-            if(m[i]!=-1)
-            {
-                v[i]=m[i];
-            }
-        }
+        q.push({h,0});
         
-        int ans=0;
+        vector<int> v[n];
         
         for(int i=0;i<n;i++)
         {
-            int mx=t[i];
-            int x=i;
-            
-            while(x!=h)
+            if(mg[i]!=-1)
             {
-                x=v[x];
-                 mx+=t[x];
+                v[mg[i]].push_back(i);
             }
-            ans=max(ans,mx);
         }
-    
+        
+        vector<int> vis(n,0);
+        vis[h]=1;
+        
+        int ans=0;
+        
+        while(!q.empty())
+        {
+            int k=q.size();
+            
+            while(k--)
+            {
+                auto p=q.front();
+                q.pop();
+                
+                int x=p[0];
+                int c=p[1];
+                
+                ans=max(ans,c);
+                
+                vis[x]=1;
+                
+                for(auto j:v[x])
+                {
+                    if(!vis[j])
+                    {
+                        q.push({j,c+t[x]});
+                    }
+                }
+            }
+        }
+        
         return ans;
     }
 };
-
-
-// 7
-// 6
-// [1,2,3,4,5,6,-1]
-// [0,6,5,4,3,2,1]
-// Output
-// 16
-// Expected
-// 21
