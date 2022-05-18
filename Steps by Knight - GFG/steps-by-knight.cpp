@@ -7,72 +7,56 @@ class Solution
 {
     public:
     //Function to find out minimum steps Knight needs to reach target position.
-    
-    int dx[8] = { -2, -1, 1, 2, -2, -1, 1, 2 };
-    int dy[8] = { -1, -2, -2, -1, 1, 2, 2, 1 };
-    
-	int minStepToReachTarget(vector<int>& s,vector<int>& e,int n)
+	int minStepToReachTarget(vector<int>&a,vector<int>&b,int n)
 	{
-	   // if(s==e)
-	   // {
-	   //     return 0;
-	   // }
-	    
 	    int vis[n+1][n+1];
-	    
 	    memset(vis,0,sizeof(vis));
 	    
-	    int x=s[0];
-	    int y=s[1];
+	    if(a==b)
+	    {
+	        return 0;
+	    }
 	    
 	    queue<vector<int>> q;
+	    q.push({a[0],a[1],0});
 	    
-	    q.push({x,y,0});
+	    vis[a[0]][a[1]]=1;
 	    
-	    int f=1;
 	    int ans=0;
 	    
+	    int dx[8]={2,2,-2,-2,1,-1,1,-1};
+	    int dy[8]={-1,1,-1,1,2,2,-2,-2};
 	    while(!q.empty())
 	    {
 	        int k=q.size();
-	        
 	        while(k--)
 	        {
-	             auto p=q.front();
-	             q.pop();
-	             
-	             int a=p[0];
-	             int b=p[1];
-	             int c=p[2];
-	             
-	             if(a==e[0] && b==e[1])
-	             {
-	                 return c;
-	               //  ans=c;
-	               //  f=0;
-	               //  break;
-	             }
-	             for(int k=0;k<8;k++)
-        	    {
-        	        int i=a+dx[k];
-        	        int j=b+dy[k];
-        	        
-        	        if(i>=1 && j>=1 && i<=n && j<=n && !vis[i][j])
-        	        {
-        	            vis[i][j]=1;
-        	            q.push({i,j,c+1});
-        	        }
-        	    }
-	        }
-	        
-	        if(f==0)
-	        {
-	            break;
+	            auto p=q.front();
+	            q.pop();
+	            
+	            int i=p[0];
+	            int j=p[1];
+	            int c=p[2];
+	            
+	            if(i==b[0] && j==b[1])
+	            {
+	                return c;
+	            }
+	            for(int k=0;k<8;k++)
+	            {
+	                int x=i+dx[k];
+	                int y=j+dy[k];
+	                
+	                if(x>=1 && x<=n && y>=1 && y<=n && !vis[x][y])
+	                {
+	                    vis[x][y]=1;
+	                    q.push({x,y,c+1});
+	                }
+	            }
 	        }
 	    }
 	    
-	    return ans;
-	   
+	    return -1;
 	}
 };
 
