@@ -12,35 +12,36 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
         
-        vector<int> v,p;
+        if(head==NULL)
+        {
+            return head;
+        }
         
-        ListNode* a1=new ListNode(0);
-        ListNode* a2=a1;
-        ListNode* b1=new ListNode(0);
-        ListNode* b2=b1;
+        ListNode* p=new ListNode(0);
+        ListNode* q=p;
+        
+        ListNode* a=new ListNode(0);
+        ListNode* b=a;
         
         while(head!=NULL)
         {
-            int a=head->val;
-            
-            if(a<x)
+            if(head->val<x)
             {
-                a1->next=head;
-                a1=a1->next;
+                p->next=head;
+                p=p->next;
             }
             else
             {
-               b1->next=head;
-               b1=b1->next;
+                a->next=head;
+                a=a->next;
             }
             
             head=head->next;
         }
-        b1->next=NULL;
         
-        a1->next=b2->next;
+        p->next=b->next;
+        a->next=NULL;
         
-        return a2->next;
-        
+        return q->next;
     }
 };
