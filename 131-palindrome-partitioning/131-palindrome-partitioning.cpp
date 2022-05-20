@@ -6,7 +6,8 @@ public:
     bool check(string &s)
     {
         int n=s.size();
-        int i=0,j=n-1;
+        int i=0;
+        int j=n-1;
         
         while(i<j)
         {
@@ -20,8 +21,7 @@ public:
         
         return 1;
     }
-    
-    void solve(vector<string> &v,int i,int n,string &s)
+    void solve(vector<string> v,int i,int n,string s)
     {
         if(i==n)
         {
@@ -32,7 +32,7 @@ public:
         for(int j=i;j<n;j++)
         {
             string b=s.substr(i,j-i+1);
-            
+           // cout<<b<<" ";
             if(check(b))
             {
                 v.push_back(b);
@@ -42,7 +42,6 @@ public:
         }
     }
     vector<vector<string>> partition(string s) {
-        
         int n=s.size();
         vector<string> v;
         
