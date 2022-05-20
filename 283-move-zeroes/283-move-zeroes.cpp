@@ -4,25 +4,19 @@ public:
         
         int n=a.size();
         
-        vector<int> v;
-        int c=0;
+        int j=0;
         
-        for(auto i:a)
+        for(int i=0;i<n;i++)
         {
-            if(i!=0)
+            if(a[i]!=0)
             {
-                v.push_back(i);
-            }
-            else
-            {
-                c++;
+                a[j++]=a[i];
             }
         }
-        while(c--)
-        {
-            v.push_back(0);
-        }
         
-        a=v;
+        for(int i=j;i<n;i++)
+        {
+            a[i]=0;
+        }
     }
 };
