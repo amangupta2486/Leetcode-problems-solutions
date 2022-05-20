@@ -2,59 +2,59 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& a, int t) {
         
-        int n=a.size();
         vector<vector<int>> ans;
         
         sort(a.begin(),a.end());
         
-        for(int i=0;i<n;i++)
+        int n=a.size();
+        
+        for(int i=0;i<n-3;i++)
         {
-            for(int j=i+1;j<n;j++)
+            for(int j=i+1;j<n-2;j++)
             {
-                int l=j+1,h=n-1;
+                int x=j+1,y=n-1;
+                long s=t-(a[i]+a[j]);
                 
-                int b=t-a[i]-a[j];
-                
-                while(l<h)
+                while(x<y)
                 {
-                    int s = a[l]+a[h];
+                    long f=a[x]+a[y];
                     
-                    if(s<b)
+                    if(s-f>0)
                     {
-                        l++;
+                        x++;
                     }
-                    
-                    else if(s>b)
+                    else if(s-f<0)
                     {
-                        h--;
+                        y--;
                     }
-                    
                     else
                     {
-                        int x=a[l];
-                        int y=a[h];
+                        int p=a[x];
+                        int q=a[y];
                         
-                        ans.push_back({a[i],a[j],a[l],a[h]});
-                            
-                        while(l<h && a[l]==x)
+                        ans.push_back({a[i],a[j],p,q});
+                        
+                        while(x+1<y && a[x+1]==p)
                         {
-                            l++;
+                            x++;
+                        }
+                        while(x<y-1 && a[y-1]==q)
+                        {
+                            y--;
                         }
                         
-                        while(l<h && a[h]==y)
-                        {
-                            h--;
-                        }
+                        x++;
+                        y--;
                     }
                 }
                 
-                while(j+1<n && a[j]==a[j+1])
+                while(j+1<n-2 && a[j+1]==a[j])
                 {
                     j++;
                 }
             }
             
-            while(i+1<n && a[i]==a[i+1])
+            while(i+1<n-3 && a[i+1]==a[i])
             {
                 i++;
             }
