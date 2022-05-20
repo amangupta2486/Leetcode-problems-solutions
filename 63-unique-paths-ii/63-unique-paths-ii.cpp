@@ -10,17 +10,16 @@ public:
             return 0;
         }
         
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
         if(i==n-1 && j==m-1)
         {
             return 1;
         }
         
-        if(dp[i][j]!=-1)
-        {
-            return dp[i][j];
-        }
-        
-        return dp[i][j]=solve(g,i+1,j,n,m)+solve(g,i,j+1,n,m);
+        return dp[i][j]=solve(g,i+1,j,n,m) + solve(g,i,j+1,n,m);
     }
     int uniquePathsWithObstacles(vector<vector<int>>& g) {
         
@@ -28,7 +27,6 @@ public:
         int m=g[0].size();
         
         memset(dp,-1,sizeof(dp));
-        
         return solve(g,0,0,n,m);
     }
 };
