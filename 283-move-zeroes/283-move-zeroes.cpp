@@ -4,19 +4,14 @@ public:
         
         int n=a.size();
         
-        int j=0;
-        
-        for(int i=0;i<n;i++)
+
+        for(int i=0,j=0;i<n && j<n;i++)
         {
             if(a[i]!=0)
             {
-                a[j++]=a[i];
+                swap(a[j++],a[i]);
             }
         }
-        
-        for(int i=j;i<n;i++)
-        {
-            a[i]=0;
-        }
+       
     }
 };
