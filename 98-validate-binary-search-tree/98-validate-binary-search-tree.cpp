@@ -12,7 +12,9 @@
 class Solution {
 public:
     
-    vector<int> v;
+    
+    TreeNode* prev=NULL;
+    int ans=1;
     
     void solve(TreeNode* root)
     {
@@ -20,32 +22,30 @@ public:
         {
             return;
         }
-        
+            
         solve(root->left);
-        v.push_back(root->val);
+        
+        if(prev!=NULL)
+        {
+            if(root->val<=prev->val)
+            {
+                ans=0;
+            }
+        }
+        
+        prev=root;
+        
         solve(root->right);
     }
-    
     bool isValidBST(TreeNode* root) {
         
         if(root==NULL)
         {
-            return 1;
+            return 1;    
         }
         
         solve(root);
         
-        int n=v.size();
-        
-        for(int i=0;i<n-1;i++)
-        {
-            //cout<<v[i]<<" ";
-            if(v[i]>=v[i+1])
-            {
-                return 0;
-            }
-        }
-        
-        return 1;
+        return ans;
     }
 };
