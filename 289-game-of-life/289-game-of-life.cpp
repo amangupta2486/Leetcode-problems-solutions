@@ -25,7 +25,7 @@ public:
                     int x=i+dx[k];
                     int y=j+dy[k];
                     
-                    if(x>=0 && x<n && y>=0 && y<m && b[x][y]==1)
+                    if(x>=0 && x<n && y>=0 && y<m && (b[x][y]&1))
                     {
                         c++;
                     }
@@ -33,30 +33,28 @@ public:
                  //cout<<i<<" "<<j<<" "<<c<<endl;
                 if(b[i][j]==1)
                 {
-                    if(c<2)
+                    if(c==2 || c==3)
                     {
-                        v[i][j]=0;
-                    }
-                    else if(c==2 || c==3)
-                    {
-                        v[i][j]=1;
-                    }
-                    else if(c>3)
-                    {
-                        v[i][j]=0;
+                        b[i][j]|=2;
                     }
                 }
                 else if(b[i][j]==0)
                 {
                     if(c==3)
                     {
-                        v[i][j]=1;
+                        b[i][j]|=2;
                     }
                 }
             }   
         }
         
-        b=v;
+          for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)        
+            {
+                b[i][j]>>=1;
+            }
+          }
         
     }
 };
