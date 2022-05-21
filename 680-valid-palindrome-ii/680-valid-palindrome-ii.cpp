@@ -1,10 +1,14 @@
 class Solution {
 public:
     
-    bool check(int i,int j,string s)
+    bool check(string &s)
     {
+        int n=s.size();
+        int i=0;
+        int j=n-1;
+        
         while(i<j)
-        {    
+        {
             if(s[i]!=s[j])
             {
                 return 0;
@@ -12,6 +16,7 @@ public:
             i++;
             j--;
         }
+        
         return 1;
     }
     
@@ -19,20 +24,25 @@ public:
         
         int n=s.size();
         
-        int f=1;
+        int ans=check(s);
         
-        int j=n-1;
-        int i=0;
-        
-        while(i<j)
+        if(ans)
         {
-            if(s[i]!=s[j])
+            return 1;
+        }
+        
+        for(int i=0;i<n/2;i++)
+        {
+            if(s[i]!=s[n-i-1])
             {
-                if(check(i,j-1,s)&& f==1)
-                {
-                    return 1;
-                }
-                else if(check(i+1,j,s) && f==1)
+                string a=s,b=s;
+                
+                a.erase(a.begin()+i);
+                b.erase(b.begin()+n-i-1);
+                
+                // cout<<a<<endl;
+                // cout<<b<<endl;
+                if(check(a) || check(b))
                 {
                     return 1;
                 }
@@ -40,13 +50,10 @@ public:
                 {
                     return 0;
                 }
-                f=0;
             }
 
-            i++;
-            j--;
         }
-
-        return 1;
+        
+        return 0;
     }
 };
