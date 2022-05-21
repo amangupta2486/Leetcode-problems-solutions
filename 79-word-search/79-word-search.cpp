@@ -4,8 +4,8 @@ public:
     int dx[4]={1,-1,0,0};
     int dy[4]={0,0,1,-1};
     int ans=0;
-   // int vis[10][10];
-    void solve(vector<vector<char>>& b, string w,int i,int j,int n,int m,int z,vector<vector<int>> &vis)
+    int vis[10][10];
+    void solve(vector<vector<char>>& b, string w,int i,int j,int n,int m,int z)
     {
         if(z==w.size())
         {
@@ -22,7 +22,7 @@ public:
             {
                 //cout<<w[z];
                 vis[x][y]=1;
-                solve(b,w,x,y,n,m,z+1,vis);
+                solve(b,w,x,y,n,m,z+1);
                 vis[x][y]=0;
             }
         }
@@ -38,10 +38,9 @@ public:
             {
                 if(b[i][j]==w[0])
                 {
-                  //  memset(vis,0,sizeof(vis));
-                    vector<vector<int>> vis(n,vector<int>(m,0));
+                    memset(vis,0,sizeof(vis));
                     vis[i][j]=1;
-                    solve(b,w,i,j,n,m,1,vis);
+                    solve(b,w,i,j,n,m,1);
                   //cout<<endl;
                 }
             }
