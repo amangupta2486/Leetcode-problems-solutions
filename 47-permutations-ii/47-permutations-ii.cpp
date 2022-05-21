@@ -1,18 +1,16 @@
 class Solution {
 public:
-    
     vector<vector<int>> ans;
     
-    void solve(vector<int> a,int i,int n)
+    void solve(vector<int>& a,int i,int n)
     {
         if(i==n)
         {
             auto it=find(ans.begin(),ans.end(),a);
             
             if(it==ans.end())
-            {
-                ans.push_back(a);
-            }
+            ans.push_back(a);
+            
             return;
         }
         
@@ -23,11 +21,11 @@ public:
             swap(a[i],a[j]);
         }
     }
+    
     vector<vector<int>> permuteUnique(vector<int>& a) {
         
         int n=a.size();
-        vector<int> v;
-        
+
         solve(a,0,n);
         
         return ans;
