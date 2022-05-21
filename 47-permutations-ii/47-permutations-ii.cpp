@@ -1,32 +1,45 @@
 class Solution {
 public:
     vector<vector<int>> ans;
+    map<int,int> mp;
     
-    void solve(vector<int>& a,int i,int n)
+    void solve(vector<int>& a,vector<int> v,int n)
     {
-        if(i==n)
+        if(v.size()==n)
         {
-            auto it=find(ans.begin(),ans.end(),a);
-            
-            if(it==ans.end())
-            ans.push_back(a);
-            
-            return;
+           ans.push_back(v);            
+           return;
         }
         
-        for(int j=i;j<n;j++)
+        for(auto j:mp)
         {
-            swap(a[i],a[j]);
-            solve(a,i+1,n);
-            swap(a[i],a[j]);
+            int num=j.first;
+            int c=j.second;
+            
+            if(c==0)
+            {
+                continue;
+            }
+            
+            v.push_back(num);
+            mp[num]--;
+            solve(a,v,n);
+            mp[num]++;
+            v.pop_back();
         }
     }
     
     vector<vector<int>> permuteUnique(vector<int>& a) {
         
         int n=a.size();
-
-        solve(a,0,n);
+        
+        for(auto i:a)
+        {
+            mp[i]++;
+        }
+        vector<int> v;
+        
+        solve(a,v,n);
         
         return ans;
     }
