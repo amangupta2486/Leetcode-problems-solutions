@@ -3,33 +3,35 @@ public:
     int minimumLines(vector<vector<int>>& s) {
         
         sort(s.begin(),s.end());
+        map<float,int> mp;
         
         int n=s.size();
+        long double prev=INT_MAX;
+        int ans=0;
         
-        if(n==1)
+        for(int i=0;i<n-1;i++)
         {
-            return 0;
-        }
-        
-        int ans=1;
-        
-        for(int i=2;i<n;i++)
-        {
-            long int x1=s[i][0];
-            long int y1=s[i][1];
-            long int x2=s[i-1][0];
-            long int y2=s[i-1][1];
-            long int x3=s[i-2][0];
-            long int y3=s[i-2][1];
+            long double x1=s[i][0];
+            long double y1=s[i][1];
+            long double x2=s[i+1][0];
+            long double y2=s[i+1][1];
             
+            long double d=((x2-x1)/(y2-y1));
             
+             //cout<<prev<<" "<<d<<endl;
             
-            long int d1=((x2-x1)*(y3-y2));
-            long int d2=((x3-x2)*(y2-y1));
-            
-            if(d1!=d2)
+            if(prev==INT_MAX)
             {
+                prev=d;
                 ans++;
+                continue;
+            }
+            
+            if(prev!=d)
+            {
+                // cout<<prev<<" "<<d<<endl;
+                ans++;
+                prev=d;
             }
         }
         
