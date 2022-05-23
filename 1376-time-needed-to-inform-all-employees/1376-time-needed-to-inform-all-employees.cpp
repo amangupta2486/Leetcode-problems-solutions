@@ -1,23 +1,18 @@
 class Solution {
 public:
-    int numOfMinutes(int n, int h, vector<int>& mg, vector<int>& t) {
-        
-        queue<vector<int>> q;
-        
-        q.push({h,0});
+    int numOfMinutes(int n, int h, vector<int>& m, vector<int>& t) {
         
         vector<int> v[n];
         
         for(int i=0;i<n;i++)
         {
-            if(mg[i]!=-1)
-            {
-                v[mg[i]].push_back(i);
-            }
+            if(m[i]!=-1)
+            v[m[i]].push_back(i);
         }
         
-        vector<int> vis(n,0);
-        vis[h]=1;
+        queue<vector<int>> q;
+        
+        q.push({h,0});
         
         int ans=0;
         
@@ -30,20 +25,14 @@ public:
                 auto p=q.front();
                 q.pop();
                 
-                int x=p[0];
+                int r=p[0];
                 int c=p[1];
                 
                 ans=max(ans,c);
+   
+                for(auto j:v[r])
+                q.push({j,c+t[r]});
                 
-                vis[x]=1;
-                
-                for(auto j:v[x])
-                {
-                    if(!vis[j])
-                    {
-                        q.push({j,c+t[x]});
-                    }
-                }
             }
         }
         
