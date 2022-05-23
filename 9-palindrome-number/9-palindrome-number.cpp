@@ -2,18 +2,36 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         
-        string s=to_string(x);
+        int n=x;
+        int s=0;
+        int c=0;
         
-        int n=s.size();
-        
-        for(int i=0;i<n/2;i++)
+        while(x>0)
         {
-            if(s[i]!=s[n-i-1])
-            {
-                return 0;
-            }
+            c++;
+            x=x/10;
         }
         
-        return 1;
+        int l=c/2;
+        
+        while(l--)
+        {
+            int p=n%10;
+            s*=10;
+            s+=p;
+            n=n/10;
+        }
+        
+        if(c&1)
+        {
+            n=n/10;
+        }
+        
+        if(n==s)
+        {
+            return 1;
+        }
+        
+        return 0;
     }
 };
