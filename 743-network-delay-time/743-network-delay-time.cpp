@@ -2,20 +2,23 @@ class Solution {
 public:
     
     vector<vector<int>> v[105];
+    int vis[105];
     //map<int,int> mp;
+    int mp[105];
 
-    void dfs(int k,vector<int> &mp)
+    void dfs(int i,int c)
     {
-        int c=mp[k];
-       // cout<<k<<"->";
-        for(auto j:v[k])
+        vis[i]=1;
+        
+        for(auto j:v[i])
         {
             int x=j[1];
-            
-            if(j[0]+c<mp[x])
+            int y=j[0];
+          //  cout<<x<<" "<<y<<endl;
+            if(mp[x]>c+y)
             {
-                mp[x]=j[0]+c;
-                dfs(x,mp);
+                mp[x]=c+y;
+                dfs(x,mp[x]);
             }
             else
             {
@@ -23,35 +26,38 @@ public:
             }
         }
     }
-    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+    
+    int networkDelayTime(vector<vector<int>>& t, int n, int k) {
         
-
-        vector<int> mp(n+1,100000);
-        mp[k]=0;
-        for(auto i:times)
+        memset(vis,0,sizeof(vis));
+        memset(mp,10000,sizeof(mp));
+        
+        for(auto i:t)
         {
             v[i[0]].push_back({i[2],i[1]});
         }
         
-        for(int i=1;i<=n;i++)
+        for(int i=0;i<n;i++)
         {
             sort(v[i].begin(),v[i].end());
         }
         
-
-        dfs(k,mp);
+        mp[k]=0;
         
+        dfs(k,0);
         int ans=0;
-
+        
         for(int i=1;i<=n;i++)
         {
-            if(mp[i]==100000)
+            if(vis[i]==0)
             {
                 return -1;
             }
-            ans=max(ans,mp[i]);
+            else
+            {
+                ans=max(ans,mp[i]);
+            }
         }
-       // cout<<endl;
         
         return ans;
     }
