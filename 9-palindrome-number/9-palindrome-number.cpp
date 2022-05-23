@@ -2,36 +2,19 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         
-        int n=x;
-        int s=0;
-        int c=0;
-        
-        while(x>0)
+        if(x<0 || (x%10==0 && x!=0))
         {
-            c++;
+            return 0;
+        }
+        
+        int r=0;
+        
+        while(x>r)
+        {
+            r=(r*10)+(x%10);
             x=x/10;
         }
         
-        int l=c/2;
-        
-        while(l--)
-        {
-            int p=n%10;
-            s*=10;
-            s+=p;
-            n=n/10;
-        }
-        
-        if(c&1)
-        {
-            n=n/10;
-        }
-        
-        if(n==s)
-        {
-            return 1;
-        }
-        
-        return 0;
+        return x==r || x==r/10 ;
     }
 };
