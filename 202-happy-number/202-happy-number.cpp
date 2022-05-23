@@ -4,7 +4,7 @@ public:
         
         int f=0;
         
-        int t=1000;
+        int t=10;
         while(t--)
         {
             int s=0;
