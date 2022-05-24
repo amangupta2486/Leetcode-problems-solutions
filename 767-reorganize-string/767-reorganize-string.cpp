@@ -2,61 +2,73 @@ class Solution {
 public:
     string reorganizeString(string s) {
         
+        vector<int> v(26,0);
         int n=s.size();
         
-        map<char,int> m;
-        
-        for(auto i:s)
+        for(int i=0;i<n;i++)
         {
-            m[i]++;
+            v[s[i]-'a']++;
         }
         
+        priority_queue<pair<int,int>> q;
         
-        priority_queue<pair<int,char>> q;
+        int mx=0;
         
-        for(auto i :m)
+        for(int i=0;i<26;i++)
         {
-            if(i.second > (n+1)/2)
-            {
-                return "";
-            }
+            if(v[i]>0)
+           q.push({v[i],i});
             
-            q.push({i.second,i.first});
+           mx=max(mx,v[i]);
+        }
+        
+        int sum=0;
+        for(int i=0;i<26;i++)
+        {
+            sum+=v[i];
+        }
+        
+        auto r=q.top();
+        int c=r.first;
+        
+        if(mx-1>sum-mx)
+        {
+           // cout<<c<<" "<<sum<<endl;
+            return "";
         }
         
         string ans="";
         
         while(q.size()>1)
         {
+            auto p=q.top();
+            q.pop();
+            
+            int x=p.first;
+            char ch=p.second+'a';
+            x--;
+            
             auto p1=q.top();
             q.pop();
             
-          
-            auto p2=q.top();
-            q.pop();
+            int x1=p1.first;
+            char ch1=p1.second+'a';
+            x1--;
             
+            ans+=ch;
             
-            ans= ans+ p1.second + p2.second;
+            if(x>0)
+            q.push({x,p.second});
             
-            if(p1.first>1)
-            {
-                int d= p1.first -1;
-                q.push({d,p1.second});
-            }
+            ans+=ch1;
             
-            if(p2.first>1)
-            {
-                int d= p2.first -1;
-                q.push({d,p2.second});
-            }
+            if(x1>0)
+            q.push({x1,p1.second});
         }
         
-        if(q.size()==1)
-        {
-            auto p1=q.top();
-            ans+= p1.second;
-            q.pop();
-        }
+        if(q.size()>0)
+            ans+=q.top().second+'a';
+        
         return ans;
     }
 };
