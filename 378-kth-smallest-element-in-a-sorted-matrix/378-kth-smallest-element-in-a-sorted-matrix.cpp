@@ -10,17 +10,23 @@ public:
         {
             for(int j=0;j<n;j++)
             {
+                
                 q.push({g[i][j]});
+                
+                if(q.size()>(n*n)-k+1)
+                {
+                    q.pop();
+                }
             }
         }
         
-        while(q.size()>(n*n)-k+1)
-        {
-            //cout<<q.top()<<" ";
-            q.pop();
-        }
+//         while(q.size()>(n*n)-k+1)
+//         {
+//             //cout<<q.top()<<" ";
+//             q.pop();
+//         }
         
-        cout<<endl;
+//         cout<<endl;
         
         return q.top();
     }
