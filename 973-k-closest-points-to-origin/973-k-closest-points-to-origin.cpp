@@ -11,15 +11,15 @@ public:
             int x=(i[0]*i[0])+(i[1]*i[1]);
             
             v.push({x,i});
+            
+            if(v.size()>k)
+            {
+                v.pop();
+            }
         }
         
        // sort(v.begin(),v.end());
-        
-        while(v.size()>k)
-        {
-            v.pop();
-        }
-        
+            
         while(k--)
         {
             auto p=v.top();
