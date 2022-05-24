@@ -5,23 +5,23 @@ public:
     
     int solve(vector<vector<int>>& g,int i,int j,int n,int m)
     {
-        if(i>=n || j>=m)
-        {
-            return INT_MAX;
-        }
-        
         if(i==n-1 && j==m-1)
         {
-            return g[i][j];
+            return g[i][j];;
+        }
+        
+        if(i>=n || j>=m)
+        {
+            return 100000;
         }
         
         if(dp[i][j]!=-1)
         {
             return dp[i][j];
         }
-        //cout<<g[i][j]<<" ";
+        int ans=g[i][j]+min(solve(g,i+1,j,n,m),solve(g,i,j+1,n,m));
         
-        return  dp[i][j]=g[i][j]+min(solve(g,i+1,j,n,m),solve(g,i,j+1,n,m));
+        return dp[i][j]=ans;
     }
     int minPathSum(vector<vector<int>>& g) {
         
