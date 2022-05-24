@@ -3,7 +3,7 @@
 class Solution {
 public:
     
-    int p[5000005];
+    bool p[5000005];
     
     int countPrimes(int n) {
         
