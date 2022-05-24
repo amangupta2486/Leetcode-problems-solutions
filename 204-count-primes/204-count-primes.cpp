@@ -3,11 +3,13 @@
 class Solution {
 public:
     
+    int p[5000005];
+    
     int countPrimes(int n) {
         
         int ans=0;
         
-        vector<int> p(n,0);
+        memset(p,0,sizeof(p));
         
         for(int i=2;i*i<n;i++)
         {
