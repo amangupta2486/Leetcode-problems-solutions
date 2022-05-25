@@ -5,6 +5,11 @@ public:
         int n=a.size();
         int i=0,j=n-1;
         
+        if(a[i]<=a[j])
+        {
+            return a[0];
+        }
+        
         if(n<=2)
         {
             return *min_element(a.begin(),a.end());    
