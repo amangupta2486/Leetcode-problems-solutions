@@ -9,13 +9,12 @@ public:
             a.push_back(a[i]);
         }
         
+        int p;
         stack<int> s;
         
-        vector<int> ans(a.size(),0);
-        
-        for(int i=(2*n)-1;i>=0;i--)
+        for(int i=2*n-1;i>=0;i--)
         {
-            //cout<<a[i]<<" ";
+            p=a[i];
             while(!s.empty() && s.top()<=a[i])
             {
                 s.pop();
@@ -23,21 +22,20 @@ public:
             
             if(s.empty())
             {
-                ans[i]=-1;
+                a[i]=-1;
             }
             else
             {
-                ans[i]=s.top();
+                a[i]=s.top();
             }
-            
-            s.push(a[i]);
+            s.push(p);
         }
         
         while(n--)
         {
-            ans.pop_back();
+            a.pop_back();
         }
         
-        return ans;
+        return a;
     }
 };
