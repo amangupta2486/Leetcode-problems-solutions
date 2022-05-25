@@ -4,17 +4,31 @@ public:
         
         int n=a.size();
         
-        int mi=INT_MIN,j=0;
-        
-        for(int i=0;i<n;i++)
+        if(n==1)
         {
-            if(a[i]>mi)
+            return 0;
+        }
+        //int mi=INT_MIN,j=0;
+        
+        if(a[0]>a[1])
+        {
+            return 0;
+        }
+          
+        for(int i=1;i<n-1;i++)
+        {
+            if(a[i]>a[i-1] && a[i]>a[i+1])
             {
-                mi=a[i];
-                j=i;
+                return i;
             }
         }
         
-        return j;
+         if(a[n-2]<a[n-1])
+        {
+            return n-1;
+        }
+        
+        
+        return -1;
     }
 };
