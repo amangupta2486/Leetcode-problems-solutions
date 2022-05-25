@@ -1,26 +1,10 @@
 class Solution {
 public:
     
-     int findMin(vector<int>& a) {
+      int findMin(vector<int>& a) {
         
         int n=a.size();
         int i=0,j=n-1;
-        
-        if(n==1)
-        {
-            return 0;
-        }
-         
-        if(n==2)
-        {
-           if(a[0]<=a[1])
-           {
-               return 0;
-           }
-            
-           else
-               return 1;
-        }
         
         while(i<=j)
         {
@@ -31,19 +15,19 @@ public:
                 return m;
             }
             
-            else if(a[m]>a[0])
+            else if(a[m]>=a[0])
             {
                 i++;
             }
             
-            else if(a[m]<a[n-1])
+            else if(a[m]<=a[n-1])
             {
                 j--;
             }
         }
         
         return 0;
-    }
+     }
     
     int solve(vector<int>& a,int i,int j,int t)
     {
