@@ -4,21 +4,16 @@ public:
         
         int n=a.size();
         
-        int l=n-1;
+        int good_index=n-1;
         
         for(int i=n-2;i>=0;i--)
         {
-            if(i+a[i]>=l)
+            if(i+a[i]>=good_index)
             {
-                l=i;
+                good_index=i;
             }
         }
-        
-        return l==0;
+
+        return good_index==0;
     }
 };
-
-// [2,3,1,1,4]
-// [3,2,1,0,4]
-// [2,0,0]
-// [0,2,3]
