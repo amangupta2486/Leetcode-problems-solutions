@@ -1,43 +1,72 @@
 class Solution {
 public:
-    int myAtoi(string input) {
-        int sign = 1; 
-        int result = 0; 
-        int index = 0;
-        int n = input.size();
+    int myAtoi(string s) {
         
-        // Discard all spaces from the beginning of the input string.
-        while (index < n && input[index] == ' ') { 
-            index++; 
-        }
+        long long a=0;
+        int f=1;
+        int n=s.size();
+        int start=0,y=0,g=0;
         
-        // sign = +1, if it's positive number, otherwise sign = -1. 
-        if (index < n && input[index] == '+') {
-            sign = 1;
-            index++;
-        } else if (index < n && input[index] == '-') {
-            sign = -1;
-            index++;
-        }
-        
-        // Traverse next digits of input and stop if it is not a digit. 
-        // End of string is also non-digit character.
-        while (index < n && isdigit(input[index])) {
-            int digit = input[index] - '0';
-
-            // Check overflow and underflow conditions. 
-            if ((result > INT_MAX / 10) || (result == INT_MAX / 10 && digit > INT_MAX % 10)) { 
-                // If integer overflowed return 2^31-1, otherwise if underflowed return -2^31.    
-                return sign == 1 ? INT_MAX : INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='-' && y==0)
+            {
+                if(g && a==0)
+                {
+                    break;
+                }
+                g=1;
+                
+                f=-1;
+                continue;
             }
-            
-            // Append current digit to the result.
-            result = 10 * result + digit;
-            index++;
+            if(s[i]==' ' || s[i]=='+' )
+            {
+                if(y || g)
+                {
+                    break;
+                }
+                if(s[i]=='+')
+                {
+                    if(g && a==0)
+                    {
+                        break;
+                    }
+                    g=1;
+                }
+                continue;
+            }
+            if(s[i]>='0' && s[i]<='9')
+            {
+                if(y==0)
+                {
+                    start=i;
+                    y=1;
+                }
+                
+                a*=10;
+                a+=s[i]-'0';        
+                
+                if(f*a<=INT_MIN || a>=INT_MAX)
+                {
+                    if(f*a<=INT_MIN)
+                    {
+                        f=1;
+                        a=INT_MIN;
+                    }
+                    else 
+                    {
+                        a=INT_MAX;
+                    }
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
         }
         
-        // We have formed a valid number without any overflow/underflow.
-        // Return it after multiplying it with its sign.
-        return sign * result;
+        return f*a;
     }
 };
