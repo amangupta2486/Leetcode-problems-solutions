@@ -17,13 +17,12 @@ public:
         
         if(root==NULL)
         {
-            return ans;   
+            return ans;
         }
         
         queue<TreeNode*> q;
         q.push(root);
-        
-        int f=1;
+        int f=0;
         
         while(!q.empty())
         {
@@ -34,31 +33,26 @@ public:
             {
                 auto p=q.front();
                 q.pop();
-                
                 v.push_back(p->val);
                 
                 if(p->left!=NULL)
                 {
-                    q.push(p->left);
+                    q.push({p->left});
                 }
                 
                 if(p->right!=NULL)
                 {
-                    q.push(p->right);
+                    q.push({p->right});
                 }
             }
             
-            if(f==0)
+            if(f)
             {
                 reverse(v.begin(),v.end());
-                ans.push_back(v);
             }
-            else
-            {
-                ans.push_back(v);
-            }
-            f^=1;
             
+            ans.push_back(v);
+            f^=1;
         }
         
         return ans;
