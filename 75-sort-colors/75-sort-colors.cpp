@@ -4,23 +4,21 @@ public:
         
         int n=a.size();
         
-        int m=0,l=0,h=n-1;
+        int l=0,m=0,h=n-1;
         
         while(m<=h)
         {
             switch(a[m])
             {
                 case 0:swap(a[l],a[m]);
-                    l++;m++;
-                    break;
+                       l++;m++;break;
+                
+                case 1:m++;break;
                     
-                case 1:m++;
-                    break;
-                    
-                case 2:swap(a[m],a[h]);
-                    h--;
-                    break;
+                case 2:swap(a[m],a[h--]);
+                       break;
             }
         }
+    
     }
 };
