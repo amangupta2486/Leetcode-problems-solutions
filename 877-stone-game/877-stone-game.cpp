@@ -1,13 +1,10 @@
 class Solution {
 public:
     
-    int solve(vector<int>& p,int n,int i,int j,vector<vector<int>> &dp)
+    int dp[505][505];
+    
+    int solve(vector<int>& a,int i,int j)
     {
-        if(i==j)
-        {
-            return p[i];
-        }
-        
         if(i>j)
         {
             return 0;
@@ -18,26 +15,29 @@ public:
             return dp[i][j];
         }
         
-        int l =p[i]+min(solve(p,n,i+2,j,dp),solve(p,n,i+1,j-1,dp));
-        int r =p[j]+min(solve(p,n,i,j-2,dp),solve(p,n,i+1,j-1,dp));
+        int l=a[i]+min({solve(a,i+2,j),solve(a,i,j-1)});
+        int r=a[j]+min({solve(a,i+1,j),solve(a,i,j-2)});
         
         return dp[i][j]=max(l,r);
     }
-    
-    bool stoneGame(vector<int>& p) {
+    bool stoneGame(vector<int>& a) {
         
-        int n=p.size();
-        int s=0;
-        vector<vector<int>> dp(n,vector<int>(n,-1));
+        int n=a.size();
+        
+        int sum=0;
+        
+        memset(dp,-1,sizeof(dp));
         
         for(int i=0;i<n;i++)
         {
-            s+=p[i];
+            sum+=a[i];
         }
         
-        int q =solve(p,n,0,n-1,dp);
+        int alice=solve(a,0,n-1);
         
-        if(q>s-q)
+        int bob=sum-alice;
+        
+        if(alice>bob)
         {
             return 1;
         }
