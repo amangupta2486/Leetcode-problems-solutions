@@ -4,11 +4,14 @@ public:
         
         int n=a.size();
         
-        sort(a.begin(),a.end());
+        map<int,int> mp;
+        
+        for(int i=0;i<n;i++)
+            mp[a[i]]++;
         
         for(int i=0;i<n;i++)
         {
-           if(a[i]!=i)
+           if(mp[i]==0)
                return i;
         }
         
