@@ -1,14 +1,17 @@
 class NumMatrix {
 public:
     
-    int dp[205][205];
+    
+    //int dp[205][205];
+    vector<vector<int>> dp;
     
     NumMatrix(vector<vector<int>>& g) {
-     memset(dp,0,sizeof(dp));
+        //memset(dp,0,sizeof(dp));
         
         int n=g.size();
         int m=g[0].size();
         
+        dp.resize(n+1,vector<int>(m+1,0));
         for(int i=1;i<=n;i++)
         {
             for(int j=1;j<=m;j++)
