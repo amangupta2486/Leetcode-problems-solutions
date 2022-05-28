@@ -4,18 +4,14 @@ public:
         
         int n=a.size();
         
-        int ans=0;
+        sort(a.begin(),a.end());
         
         for(int i=0;i<n;i++)
         {
-            ans^=a[i];
+           if(a[i]!=i)
+               return i;
         }
         
-        for(int i=1;i<=n;i++)
-        {
-            ans^=i;
-        }
-        
-        return ans;
+        return n;
     }
 };
