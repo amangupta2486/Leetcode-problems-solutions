@@ -11,38 +11,26 @@ public:
         
         for(int i=1;i<=n;i++)
         {
-            //dp[i][0]=g[i][0];
-            
             for(int j=1;j<=m;j++)
             {
                 dp[i][j]=dp[i][j-1]+g[i-1][j-1];
             }
         }
         
-//         for(int i=1;i<=n;i++)
-//         {
-//             //dp[i][0]=g[i][0];
-            
-//             for(int j=1;j<=m;j++)
-//             {
-//                 cout<<dp[i][j]<<" ";
-//             }
-//             cout<<endl;
-//         }
-        
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                dp[i][j]+=dp[i-1][j];
+            }
+        }
+
     }
     
     int sumRegion(int r1, int c1, int r2, int c2) {
         
-        long s=0;
-        
-        for(int i=r1+1;i<=r2+1;i++)
-        {
-            //cout<<dp[i][c2+1]<<","<<dp[i][c1]<<" ";
-            s+=dp[i][c2+1]-dp[i][c1];
-        }
-        //cout<<endl;
-        return s;
+        long ans=dp[r2+1][c2+1]-dp[r1][c2+1]-dp[r2+1][c1]+dp[r1][c1];
+        return ans;
     }
 };
 
