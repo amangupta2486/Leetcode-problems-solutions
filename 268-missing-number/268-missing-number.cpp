@@ -4,18 +4,18 @@ public:
         
         int n=a.size();
         
-        int s=0;
+        int ans=0;
         
         for(int i=0;i<n;i++)
         {
-            s^=a[i];
+            ans^=a[i];
         }
         
-        for(int i=0;i<=n;i++)
+        for(int i=1;i<=n;i++)
         {
-            s^=i;
+            ans^=i;
         }
         
-        return s;
+        return ans;
     }
 };
