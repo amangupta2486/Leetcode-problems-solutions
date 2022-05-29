@@ -5,14 +5,20 @@ public:
         int n=w.size();
         int ans=0;
         
+        vector<map<char,int>> mp(n);
+        
+         for(int i=0;i<n;i++)
+         {
+            for(auto x:w[i])
+            {
+                mp[i][x]++;
+            }
+         }
+        
         for(int i=0;i<n;i++)
         {
-            unordered_map<char,int> mp1;
+            auto mp1=mp[i];
             int m=w[i].size();
-            for(auto l:w[i])
-            {
-                mp1[l]++;
-            }
             for(int j=i+1;j<n;j++)
             {
                 string x=w[j];
