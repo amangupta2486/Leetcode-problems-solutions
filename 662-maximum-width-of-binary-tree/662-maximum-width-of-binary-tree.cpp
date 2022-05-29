@@ -26,25 +26,33 @@ public:
         while(!q.empty())
         {
             long first=INT_MAX,last=0;
+            long mi=q.front().second;
             int k=q.size();
             
-            while(k--)
+            for(int j=0;j<k;j++)
             {
                 auto p=q.front();
                 q.pop();
                 
                 auto r=p.first;
-                long i=p.second;
-                first=min(first,p.second);
-                last=max(last,p.second);
+                long ind=p.second-mi;
+                
+                if(j==0)
+                {
+                    first=ind;
+                }
+                if(j==k-1)
+                {
+                    last=ind;
+                }
                 
                 if(r->left!=NULL)
                 {
-                    q.push({r->left,((2*i))-first});
+                    q.push({r->left,(2*ind)+1});
                 }
                 if(r->right!=NULL)
                 {
-                     q.push({r->right,((2*i)+1)-first});
+                     q.push({r->right,(2*ind)+2});
                 }
             }
             
