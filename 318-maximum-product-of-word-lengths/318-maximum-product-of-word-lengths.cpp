@@ -7,7 +7,7 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            map<char,int> mp1;
+            unordered_map<char,int> mp1;
             int m=w[i].size();
             for(auto l:w[i])
             {
