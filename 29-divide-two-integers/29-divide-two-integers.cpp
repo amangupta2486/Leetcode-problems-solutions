@@ -1,32 +1,50 @@
 class Solution {
 public:
-    int divide(int a, int b) {
+    int divide(int divisor, int dividend) {
         
-        if(a==INT_MIN && b==-1)
+        int s=1;
+        
+        long div=divisor;
+        long d=dividend;
+        
+        if(div==INT_MIN && d==-1)
         {
             return INT_MAX;
         }
         
-        int s = a>0 ^ b>0 ? -1 :1;
-        long x=abs(a);
-        long y=abs(b);
-        
-        long ans=0;
-        
-        while(x>=y)
+        if(d==1 || d==-1)
         {
-            long t=y,m=1;
-            
-            while(t<<1 <= x)
-            {
-                t=t<<1;
-                m=m<<1;
-            }
-            
-            x-=t;
-            ans+=m;
+            return d*div;
         }
         
-        return s*ans;
+        return div/d;
+        
+        /*
+        if(div<0)
+        {
+            s*=-1;
+            div*=-1;
+        }
+        if(d<0)
+        {
+            s*=-1;
+            d*=-1;
+        }
+        
+        long c=0;
+        
+        while(div>=d)
+        {
+            div-=d;
+            c++;
+        }
+        
+        if(c>=INT_MAX)
+        {
+            return INT_MAX;
+        }
+        
+      return s*c;
+        */
     }
 };
