@@ -14,47 +14,51 @@ public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         
         vector<vector<int>> ans;
-        map<int,vector<int>> mp;
+        
+        if(root==NULL)
+        {
+            return ans;
+        }
         
         queue<pair<TreeNode*,int>> q;
-        
         q.push({root,0});
+        
+        map<int,vector<int>> mp1;
         
         while(!q.empty())
         {
             int k=q.size();
-            map<int,vector<int>> mp1;
-            mp1.clear();
+            map<int,vector<int>> mp;
             while(k--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                auto r=p.first;
-                int i=p.second;
+                TreeNode* r=p.first;
+                int x=p.second;
                 
-                mp1[i].push_back(r->val);
+                mp[x].push_back(r->val);
                 
                 if(r->left!=NULL)
                 {
-                    q.push({r->left,i-1});
+                    q.push({r->left,x-1});
                 }
                 if(r->right!=NULL)
                 {
-                    q.push({r->right,i+1});
+                    q.push({r->right,x+1});
                 }
             }
             
-             for(auto i:mp1)
+            for(auto i:mp)
             {
-                vector<int> v=i.second;
+                auto v=i.second;
                 sort(v.begin(),v.end());
                 for(auto j:v)
-                mp[i.first].push_back(j);
+                mp1[i.first].push_back(j);
             }
         }
         
-        for(auto i:mp)
+        for(auto i:mp1)
         {
             ans.push_back(i.second);
         }
@@ -62,12 +66,3 @@ public:
         return ans;
     }
 };
-
-/*
-Input
-[3,1,4,0,2,2]
-Output
-[[0],[1],[2,2,3],[4]]
-Expected
-[[0],[1],[3,2,2],[4]]
-*/
