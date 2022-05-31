@@ -11,9 +11,9 @@ using namespace std;
 class Solution{
   public:
     int cutRod(int p[], int n) {
-        
+        //code here
         int dp[n+1][n+1];
-        
+        int ans=0;
         memset(dp,0,sizeof(dp));
         
         for(int i=1;i<=n;i++)
@@ -22,16 +22,18 @@ class Solution{
             {
                 if(i<=j)
                 {
-                    dp[i][j]=max(dp[i][j-i]+p[i-1],dp[i-1][j]);
+                    dp[i][j]=max(p[i-1]+dp[i][j-i],dp[i-1][j]);
                 }
                 else
                 {
                     dp[i][j]=dp[i-1][j];
                 }
+                
+                ans=max(ans,dp[i][j]);
             }
         }
         
-        return dp[n][n];
+        return ans;
     }
 };
 
