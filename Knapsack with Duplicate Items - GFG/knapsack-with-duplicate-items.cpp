@@ -12,7 +12,6 @@ public:
     int knapSack(int n, int w, int val[], int wt[])
     {
         int dp[n+1][w+1];
-        
         memset(dp,0,sizeof(dp));
         
         for(int i=1;i<=n;i++)
@@ -21,7 +20,7 @@ public:
             {
                 if(wt[i-1]<=j)
                 {
-                    dp[i][j]=max(dp[i][j-wt[i-1]]+val[i-1],dp[i-1][j]);
+                    dp[i][j]=max(val[i-1]+dp[i][j-wt[i-1]],dp[i-1][j]);
                 }
                 else
                 {
