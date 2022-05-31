@@ -9,13 +9,13 @@ using namespace std;
 
 class Solution{
 public:
-    /*
+    
     int ans=0;
     int dp[1005][1005];
     
     int solve(int i,int s,int n, int w, int val[], int wt[],int c)
     {
-        if(i==0 || s>=w)
+        if(i<0 || s>=w)
         {
             return 0;
         }
@@ -36,15 +36,13 @@ public:
         
         return dp[i][s]=max(l,r);
     }
-    */
     int knapSack(int n, int w, int val[], int wt[])
     {
         
-        //memset(dp,-1,sizeof(dp));
-        //solve(n-1,0,n,w,val,wt,0);
-        
-        //return ans;
-        
+        memset(dp,-1,sizeof(dp));
+        return solve(n-1,0,n,w,val,wt,0);
+
+        /*
         int dp[n+1][w+1];
         memset(dp,0,sizeof(dp));
         
@@ -64,7 +62,7 @@ public:
         }
         
         return dp[n][w];
-        
+        */
     }
 };
 
