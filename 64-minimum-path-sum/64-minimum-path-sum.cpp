@@ -3,33 +3,28 @@ public:
     
     int dp[205][205];
     
-    int solve(vector<vector<int>>& g,int i,int j,int n,int m)
+    int solve(vector<vector<int>>& g,int i,int j)
     {
-        if(i==n-1 && j==m-1)
+        if(i>=g.size() || j>=g[0].size())
         {
-            return g[i][j];;
+            return INT_MAX;
         }
         
-        if(i>=n || j>=m)
+        if(i==g.size()-1 && j==g[0].size()-1)
         {
-            return 100000;
+            return g[i][j];
         }
         
         if(dp[i][j]!=-1)
         {
             return dp[i][j];
         }
-        int ans=g[i][j]+min(solve(g,i+1,j,n,m),solve(g,i,j+1,n,m));
-        
-        return dp[i][j]=ans;
+        return dp[i][j]=g[i][j]+min(solve(g,i+1,j),solve(g,i,j+1));
     }
+    
     int minPathSum(vector<vector<int>>& g) {
         
-        int n=g.size();
-        int m=g[0].size();
-        
         memset(dp,-1,sizeof(dp));
-        
-        return solve(g,0,0,n,m);
+        return solve(g,0,0);
     }
 };
