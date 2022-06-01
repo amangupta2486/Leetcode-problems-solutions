@@ -15,7 +15,13 @@ public:
 	    
 	    for(int i=0;i<n;i++)
 	    {
-	        bolts[i]=nuts[i];
+	        for(int j=0;j<n;j++)
+	        {
+    	        if(bolts[j]==nuts[i])
+    	        {
+    	            swap(bolts[i],bolts[j]);
+    	        }
+	        }
 	    }
 	}
 
