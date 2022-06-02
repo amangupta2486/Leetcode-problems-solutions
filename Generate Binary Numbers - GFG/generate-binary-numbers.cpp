@@ -9,25 +9,30 @@ using namespace std;
 //Function to generate binary numbers from 1 to N using a queue.
 vector<string> generate(int n)
 {
-	vector<string> v(n+1);
-	v[0]="0";
-	v[1]="1";
-	
-	for(int i=2;i<=n;i++)
-	{
-	    v[i]=v[i/2];
-	    if(i%2==0)
-	    {
-	        v[i]+='0';
-	    }
-	    else
-	    {
-	        v[i]+='1';
-	    }
-	}
-	v.erase(v.begin()+0);
-	
-	return v;
+    vector<string> ans;
+    
+    for(int i=1;i<=n;i++)
+    {
+        string s="";
+        int m=i;
+        while(m>0)
+        {
+            int p=m%2;
+            if(p==0)
+            {
+                s+='0';
+            }
+            else
+            {
+                s+='1';
+            }
+            m=m/2;
+        }
+        reverse(s.begin(),s.end());
+        ans.push_back(s);
+    }
+    
+    return ans;
 }
 
 
