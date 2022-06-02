@@ -8,19 +8,44 @@ class Solution
 {
     public:
     //Function to find the maximum money the thief can get.
-    int FindMaxSum(int a[], int n)
+    int dp[10005];
+    
+    int solve(int a[], int i)
     {
-        vector<int> dp(n+1,0);
-        dp[0]=a[0];
-        if(n>1)
-        dp[1]=max(a[0],a[1]);
-        
-        for(int i=2;i<n;i++)
+        if(i<0)
         {
-            dp[i]=max(dp[i-1],dp[i-2]+a[i]);
+            return 0;
+        }
+        if(i==0)
+        {
+            return a[0];
         }
         
-        return dp[n-1];
+        if(dp[i]!=-1)
+        {
+            return dp[i];
+        }
+        int l=a[i]+solve(a,i-2);
+        int r=solve(a,i-1);
+        
+        return dp[i]=max(l,r);
+    }
+    int FindMaxSum(int a[], int n)
+    {
+        memset(dp,-1,sizeof(dp));
+        
+        return solve(a,n-1);
+        // vector<int> dp(n+1,0);
+        // dp[0]=a[0];
+        // if(n>1)
+        // dp[1]=max(a[0],a[1]);
+        
+        // for(int i=2;i<n;i++)
+        // {
+        //     dp[i]=max(dp[i-1],dp[i-2]+a[i]);
+        // }
+        
+        // return dp[n-1];
     }
 };
 
