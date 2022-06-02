@@ -10,72 +10,62 @@ class Solution{
     public:
     // arr[] : int input array of integers
     // k : the quadruple sum required
-    vector<vector<int> > fourSum(vector<int> &a, int b) {
-        // Your code goes here
+    vector<vector<int> > fourSum(vector<int> &a, int k) {
         
-    int n=a.size();
-    vector<vector<int>> ans;
-
-    if(n<4)
-    {
-        return ans;
-    }
-    
-    sort(a.begin(),a.end());
-    for(int i=0;i<n;i++)
-    {
-        for(int j=i+1;j<n;j++)
+        vector<vector<int> > ans;
+        sort(a.begin(),a.end());
+        int n=a.size();
+        
+        for(int i=0;i<n-3;i++)
         {
-            int l=j+1;
-            int r=n-1;
-            int k=b-a[i]-a[j];
-
-            while(l<r)
+            for(int j=i+1;j<n-2;j++)
             {
-                int s=a[l]+a[r];
-
-                if(s>k)
+                int l=j+1,r=n-1;
+                
+                while(l<r)
                 {
-                    r--;
-                }
-
-                else if(s<k)
-                {
-                    l++;
-                }
-
-                else
-                {
-                    int x=a[l];
-                    int y=a[r];
-
-                    ans.push_back({a[i],a[j],a[l],a[r]});
-
-                    while(l<r && a[l]==x)
+                    int s=a[i]+a[j]+a[l]+a[r];
+                    
+                    if(s<k)
                     {
                         l++;
                     }
-                    while(l<r && a[r]==y)
+                    
+                    else if(s>k)
                     {
                         r--;
                     }
-
+                    else
+                    {
+                        int x=a[l];
+                        int y=a[r];
+                        
+                        while(l+1<r && a[l+1]==x)
+                        {
+                            l++;
+                        }
+                        while(l<r-1 && a[r-1]==x)
+                        {
+                            r--;
+                        }
+                        
+                        ans.push_back({a[i],a[j],x,y});
+                        l++;
+                        r--;
+                    }
+                }
+                while(j+1<n-2 && a[j+1]==a[j] )
+                {
+                    j++;
                 }
             }
-
-            while(j+1<n && a[j]==a[j+1])
+            while(i+1<n-3 && a[i+1]==a[i] )
             {
-                j++;
+                i++;
             }
         }
-
-        while(i+1<n && a[i]==a[i+1])
-        {
-            i++;
-        }
-    }
-
-    return ans;
+        
+        return ans;
     }
 };
 
