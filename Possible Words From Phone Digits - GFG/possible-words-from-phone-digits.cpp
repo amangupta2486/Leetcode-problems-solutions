@@ -15,10 +15,11 @@ class Solution
     public:
     //Function to find list of all words possible by pressing given numbers.
     
-    string key[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    string k[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     
     vector<string> ans;
-    void solve(int *a,int n,int i,string s)
+    
+    void solve(int a[],string s,int i,int n)
     {
         if(i==n)
         {
@@ -26,18 +27,17 @@ class Solution
             return;
         }
         
-        int k=a[i];
-        string b=key[k];
+        int num=a[i];
+        string b=k[num];
         
         for(int j=0;j<b.size();j++)
         {
-            solve(a,n,i+1,s+b[j]);
+            solve(a,s+b[j],i+1,n);
         }
     }
     vector<string> possibleWords(int a[], int n)
     {
-        
-        solve(a,n,0,"");
+        solve(a,"",0,n);
         
         return ans;
     }
