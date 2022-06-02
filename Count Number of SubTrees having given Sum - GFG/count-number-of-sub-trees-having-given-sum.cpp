@@ -125,27 +125,33 @@ struct Node
 
 int ans=0;
 
-int solve(Node* root,int x)
+int solve(Node* root, int x)
 {
     if(root==NULL)
     {
         return 0;
     }
-    
-    int s=root->data + solve(root->left,x)+solve(root->right,x);
-    
-    if(s==x)
-    {
-        ans++;
-    }
-    
-    return s;
-}
 
+
+     int l=0,r=0;
+    
+     l=solve(root->left,x);
+     r=solve(root->right,x);
+     
+     if(l+r+root->data==x)
+     {
+        ans++;
+     }
+    // solve(root->left,x,s);
+
+    // solve(root->right,x,s);
+    
+    return root->data+l+r;
+}
 int countSubtreesWithSumX(Node* root, int x)
 {
     ans=0;
-   solve(root,x);
-   
-   return ans;
+    solve(root,x);
+    
+    return ans;
 }
