@@ -9,40 +9,39 @@ class Solution{
     public:
     string amendSentence (string s)
     {
-        // your code here
-        
         int n=s.size();
+        string t="";
+        
+        if(s[0]>='A' && s[0]<='Z')
+        t+=s[0]+32;
+        
+        else
+        t+=s[0];
         
         vector<string> v;
         
-        string a="";
-        a+=tolower(s[0]);
-        
         for(int i=1;i<n;i++)
         {
-            if(s[i]>=97 && s[i]<=122)
+            if(s[i]>='A' && s[i]<='Z')
             {
-                a+=tolower(s[i]);
+                v.push_back(t);
+                t=s[i]+32;
             }
-            
             else
             {
-                v.push_back(a);
-                a="";
-                a+=tolower(s[i]);
+                t+=s[i];
             }
         }
         
-        v.push_back(a);
+        v.push_back(t);
         
         string ans="";
         
         for(auto i:v)
         {
-            ans+= i;    
+            ans+=i;
             ans+=" ";
         }
-        
         ans.pop_back();
         
         return ans;
