@@ -4,28 +4,32 @@ public:
         
         int n=a.size();
         
-        set<int> s;
-        
-        for(auto i:a)
+        if(n==0)
         {
-            s.insert(i);
+            return 0;
         }
+        //set<int> s;
+        unordered_map<int,int> s;
         
-        int ans=0;
-        
-        for(auto i:s)
+        for(int i=0;i<n;i++)
         {
-            if(s.count(i-1)==0)
+            s[a[i]]=1;
+        }
+        int ans=1;
+        sort(a.begin(),a.end());
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s.find(a[i]-1)==s.end())
             {
-                int l=0;
-                int j=i;
+                int j=a[i];
+                int l=1;
                 
-                while(s.count(j)>0)
+                while(s.find(j+1)!=s.end())
                 {
-                    j++;
                     l++;
+                    j++;
                 }
-                
                 ans=max(ans,l);
             }
         }
