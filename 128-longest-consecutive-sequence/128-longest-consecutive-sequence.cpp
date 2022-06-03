@@ -8,15 +8,16 @@ public:
         {
             return 0;
         }
-        //set<int> s;
-        unordered_map<int,int> s;
+        unordered_set<int> s;
+        //unordered_map<int,int> s;
         
         for(int i=0;i<n;i++)
         {
-            s[a[i]]=1;
+            s.insert(a[i]);
+            //s[a[i]]=1;
         }
         int ans=1;
-        sort(a.begin(),a.end());
+        //sort(a.begin(),a.end());
         
         for(int i=0;i<n;i++)
         {
