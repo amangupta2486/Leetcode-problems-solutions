@@ -1,40 +1,40 @@
 # Amend The Sentence
 ## Easy 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a string&nbsp;which is basically a sentence without spaces between words. However the first letter of every word is in uppercase. You need to print this sentence after following amendments:<br>
-(i) Put a single space between these words<br>
-(ii) Convert the uppercase letters to lowercase.<br>
-<strong>Note:&nbsp;</strong>The first character of the string can be both uppercase/lowercase.</span></p>
+<div class="problem-statement" style="user-select: auto;">
+                <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a string&nbsp;which is basically a sentence without spaces between words. However the first letter of every word is in uppercase. You need to print this sentence after following amendments:<br style="user-select: auto;">
+(i) Put a single space between these words<br style="user-select: auto;">
+(ii) Convert the uppercase letters to lowercase.<br style="user-select: auto;">
+<strong style="user-select: auto;">Note:&nbsp;</strong>The first character of the string can be both uppercase/lowercase.</span></p>
 
-<p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></span></p>
 
-<pre><span style="font-size:18px"><strong>Input:</strong>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong>
 s = "BruceWayneIsBatman"
-<strong>Output:</strong> bruce wayne is batman
-<strong>Explanation</strong>: The words in the string are
+<strong style="user-select: auto;">Output:</strong> bruce wayne is batman
+<strong style="user-select: auto;">Explanation</strong>: The words in the string are
 "Bruce", "Wayne", "Is", "Batman".
 </span>
 </pre>
 
-<p><span style="font-size:18px">â€‹<strong>Example 2:</strong></span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">â€‹<strong style="user-select: auto;">Example 2:</strong></span></p>
 
-<pre><span style="font-size:18px"><strong>Input</strong>: 
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input</strong>: 
 s = "You"
-<strong>Output:</strong> you
-<strong>Explanation</strong>: The only word in the string
+<strong style="user-select: auto;">Output:</strong> you
+<strong style="user-select: auto;">Explanation</strong>: The only word in the string
 is "You".</span>
 </pre>
 
-<p><br>
-<span style="font-size:18px"><strong>Your Task:&nbsp;</strong><br>
-You don't need to read input or print anything. Your task is to complete the function&nbsp;<strong>amendSentence()&nbsp;</strong>which takes the string s as input and returns a string with the stated amendments.</span></p>
+<p style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your Task:&nbsp;</strong><br style="user-select: auto;">
+You don't need to read input or print anything. Your task is to complete the function&nbsp;<strong style="user-select: auto;">amendSentence()&nbsp;</strong>which takes the string s as input and returns a string with the stated amendments.</span></p>
 
-<p><br>
-<span style="font-size:18px"><strong>Expected Time Complexity:&nbsp;</strong>O(N).<br>
-<strong>Expected Auxiliary Space:&nbsp;</strong>O(N) (for output string).</span></p>
+<p style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:&nbsp;</strong>O(N).<br style="user-select: auto;">
+<strong style="user-select: auto;">Expected Auxiliary Space:&nbsp;</strong>O(N) (for output string).</span></p>
 
-<p><br>
-<span style="font-size:18px"><strong>Constraints:</strong></span><br>
-<span style="font-size:18px">1&lt;=Size of String &lt;=10<sup>6</sup></span></p>
- <p></p>
+<p style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Constraints:</strong></span><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;">1&lt;=Size of String &lt;=10<sup style="user-select: auto;">6</sup></span></p>
+ <p style="user-select: auto;"></p>
             </div>
