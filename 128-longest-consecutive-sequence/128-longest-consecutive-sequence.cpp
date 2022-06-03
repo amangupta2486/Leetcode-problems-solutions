@@ -21,12 +21,12 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            if(s.find(a[i]-1)==s.end())
+            if(s.count(a[i]-1)==0)
             {
                 int j=a[i];
                 int l=1;
                 
-                while(s.find(j+1)!=s.end())
+                while(s.count(j+1)!=0)
                 {
                     l++;
                     j++;
