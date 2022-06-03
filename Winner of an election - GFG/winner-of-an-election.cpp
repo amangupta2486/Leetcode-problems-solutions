@@ -19,54 +19,26 @@ class Solution{
         // Return the string containing the name and an integer
         // representing the number of votes the winning candidate got
         
-        string b="zzzzzzzz";
-        int c=0;
-        
-        int ans=0;
-        
-        unordered_map<string,int> m;
-        
-        // for(auto i:a)
-        // {
-        //     m[i]++;
-        // }
-        
-        vector<string> p;
-        for(int i=0;i<n;i++)
-        {
-            m[a[i]]++;    
-        }
+        map<string,int> mp;
         
         for(int i=0;i<n;i++)
         {
-            if(m[a[i]]>ans)
-            {
-                ans=m[a[i]];
-            }
+            mp[a[i]]++;
         }
-        for(auto i:m)
+        int mx=0;
+        string ans="";
+        for(auto i:mp)
         {
-            if(i.second==ans)
+            if(mx<i.second)
             {
-                c=i.second;
-                
-                if(i.first<b)
-                b=i.first;
-                
-                //p.push_back(i.first);
+                mx=i.second;
+                ans=i.first;
             }
         }
-        
-       
-        sort(p.begin(),p.end());
-        
         vector<string> v;
-        string d=to_string(c);
-        
-        v.push_back(b);
-        v.push_back(d);
-        
-        return v;
+        string b=to_string(mx);
+
+        return {ans,b};
     }
 };
 
