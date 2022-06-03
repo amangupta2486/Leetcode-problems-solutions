@@ -4,42 +4,26 @@ public:
         
         int n=s.size();
         
-//         map<char,int> mp;
-//         vector<vector<int>> p;
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             if(mp.find(s[i])==mp.end())
-//             {    
-//                 mp[s[i]]==i;
-//             }
-//             else
-//             {
-                
-//             }
-//         }
-        
+        vector<int> v;
         map<char,vector<int>> mp;
+        int j=0;
         
         for(int i=0;i<n;i++)
         {
             mp[s[i]].push_back(i);
         }
         
-        vector<vector<int>> p;
+        vector<vector<int>> p,ans;
         
         for(auto i:mp)
         {
-            
             auto x=i.second;
             int m=x.size();
-            //cout<<i.first<<" "<<x[0]<<" "<<x[m-1]<<endl;
+            
             p.push_back({x[0],x[m-1]});
         }
         
         sort(p.begin(),p.end());
-        
-        vector<vector<int>> ans;
         
         for(auto i:p)
         {
@@ -53,14 +37,13 @@ public:
             }
         }
         
-        vector<int> v;
+        vector<int> b;
         
         for(auto i:ans)
         {
-            //cout<<i[0]<<" "<<i[1]<<endl;
-            v.push_back(i[1]-i[0]+1);
+            b.push_back(i[1]-i[0]+1);
         }
         
-        return v;
+        return b;
     }
 };
