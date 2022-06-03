@@ -1,7 +1,7 @@
 class NumMatrix {
 public:
     
-    int dp[1005][1005];
+    int dp[205][205];
     NumMatrix(vector<vector<int>>& g) {
         
         int n=g.size();
@@ -39,7 +39,7 @@ public:
     
     int sumRegion(int r1, int c1, int r2, int c2) {
         
-        long long ans=dp[r2+1][c2+1]-dp[r1][c2+1]-dp[r2+1][c1]+dp[r1][c1];
+        int ans=dp[r2+1][c2+1]-dp[r1][c2+1]-dp[r2+1][c1]+dp[r1][c1];
         return ans;
     }
 };
