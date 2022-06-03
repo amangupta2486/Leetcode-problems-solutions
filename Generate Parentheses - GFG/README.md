@@ -1,14 +1,14 @@
 # Generate Parentheses
 ## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given an integer <strong>N</strong> representing the number of pairs of parentheses, the task is to generate all combinations of well-formed(balanced) parentheses.</span></p>
+<div class="problem-statement" style="user-select: auto;">
+                <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given an integer <strong style="user-select: auto;">N</strong> representing the number of pairs of parentheses, the task is to generate all combinations of well-formed(balanced) parentheses.</span></p>
 
-<p><br>
-<span style="font-size:18px"><strong>Example 1:</strong></span></p>
+<p style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></span></p>
 
-<pre><span style="font-size:18px"><strong>Input</strong>:
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input</strong>:
 N = 3
-<strong>Output:</strong>
+<strong style="user-select: auto;">Output:</strong>
 ((()))
 (()())
 (())()
@@ -16,24 +16,24 @@ N = 3
 ()()()</span>
 </pre>
 
-<div><span style="font-size:18px"><strong>Example 2:</strong></span></div>
+<div style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 2:</strong></span></div>
 
-<pre><span style="font-size:18px"><strong>Input</strong>:
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input</strong>:
 N = 1
-<strong>Output:</strong>
+<strong style="user-select: auto;">Output:</strong>
 ()</span>
 </pre>
 
-<div><br>
-<span style="font-size:18px"><strong>Your Task:&nbsp;&nbsp;</strong><br>
-You don't need to read input or print anything. Complete the function <strong>AllParenthesis()&nbsp;</strong>which takes <strong>N</strong><strong> </strong>as input parameter and returns the list of balanced parenthesis</span>.</div>
+<div style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your Task:&nbsp;&nbsp;</strong><br style="user-select: auto;">
+You don't need to read input or print anything. Complete the function <strong style="user-select: auto;">AllParenthesis()&nbsp;</strong>which takes <strong style="user-select: auto;">N</strong><strong style="user-select: auto;"> </strong>as input parameter and returns the list of balanced parenthesis</span>.</div>
 
-<div><br>
-<span style="font-size:18px"><strong>Expected Time Complexity:</strong>&nbsp;O(2<sup>N</sup>&nbsp;* N).</span><br>
-<span style="font-size:18px"><strong>Expected Auxiliary Space:</strong>&nbsp;O(2*N*X), X = Number of valid Parenthesis.</span></div>
+<div style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:</strong>&nbsp;O(2<sup style="user-select: auto;">N</sup>&nbsp;* N).</span><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Auxiliary Space:</strong>&nbsp;O(2*N*X), X = Number of valid Parenthesis.</span></div>
 
-<div><br>
-<span style="font-size:18px"><strong>Constraints: </strong></span><br>
-<span style="font-size:18px">1 ≤ N ≤ 12 </span></div>
- <p></p>
+<div style="user-select: auto;"><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Constraints: </strong></span><br style="user-select: auto;">
+<span style="font-size: 18px; user-select: auto;">1 ≤ N ≤ 12 </span></div>
+ <p style="user-select: auto;"></p>
             </div>
