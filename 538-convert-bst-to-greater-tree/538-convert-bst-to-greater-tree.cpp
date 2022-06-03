@@ -14,15 +14,21 @@ public:
     
     int s=0;
     
-    TreeNode* convertBST(TreeNode* root) {
-        
-        if(root!=NULL)
+    void solve(TreeNode* root)
+    {
+        if(root==NULL)
         {
-            convertBST(root->right);
-            s+=root->val;
-            root->val=s;
-            convertBST(root->left);
+            return;
         }
+        
+        solve(root->right);
+        s+=root->val;
+        root->val=s;
+        solve(root->left);
+    }
+    TreeNode* convertBST(TreeNode* root) {
+      
+        solve(root);
         
         return root;
     }
