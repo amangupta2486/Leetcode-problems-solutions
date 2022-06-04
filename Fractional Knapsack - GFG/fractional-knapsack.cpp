@@ -22,23 +22,18 @@ class Solution
 {
     public:
     //Function to get the maximum total value in the knapsack.
-    bool cmp(auto &a,auto &b)
+    static bool cmp(Item &a,Item &b)
     {
         double p=(double)a.value/(double)a.weight;
         double q=(double)b.value/(double)b.weight;
         
-        return p>q;
+        return (p>q);
     }
 
     double fractionalKnapsack(int w, Item a[], int n)
     {
-        sort(a,a+n,[&](auto &a,auto &b)
-        {
-            double p=(double)a.value/(double)a.weight;
-            double q=(double)b.value/(double)b.weight;
-            
-            return p>q;
-        });
+        sort(a,a+n,cmp);
+        
         double ans=0;
         
         for(int i=0;i<n;i++)
