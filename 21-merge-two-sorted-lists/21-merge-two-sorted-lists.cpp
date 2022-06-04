@@ -16,41 +16,39 @@ public:
         {
             return l2;
         }
-        
         if(l2==NULL)
         {
             return l1;
         }
         
-        ListNode* q=new ListNode(0);
-        ListNode* res=q;
+        ListNode* p=new ListNode(0);
+        ListNode* q=p;
         
         while(l1!=NULL && l2!=NULL)
         {
             if(l1->val<=l2->val)
             {
-                q->next=l1;
+                p->next=l1;
+                p=p->next;
                 l1=l1->next;
-                q=q->next;
             }
             else
             {
-                q->next=l2;
+                p->next=l2;
+                p=p->next;
                 l2=l2->next;
-                q=q->next;
             }
         }
         
-        if(l1)
+        if(l1!=NULL)
         {
-            q->next=l1;
+            p->next=l1;
+        }
+        if(l2!=NULL)
+        {
+            p->next=l2;
         }
         
-        if(l2)
-        {
-            q->next=l2;
-        }
-        
-        return res->next;
+        return q->next;
     }
 };
