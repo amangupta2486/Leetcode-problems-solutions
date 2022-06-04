@@ -1,65 +1,66 @@
 class Solution {
 public:
+    
     vector<vector<string>> ans;
     
-    
-    bool check(vector<string> &v,int x,int y,int n)
+    bool check(vector<string> &v,int x,int y)
     {
-        for(int j=y;j>=0;j--)
+        for(int i=y;i>=0;i--)
         {
-            if(v[x][j]=='Q')
+            if(v[x][i]=='Q')
             {
-                return 0;
+                return false;
             }
         }
         
-        for(int i=x,j=y;i>=0 && j>=0;i--,j--)
+        for(int i=x,j=y;i>=0 && j>=0 ;i--,j--)
         {
             if(v[i][j]=='Q')
             {
-                return 0;
+                return false;
             }
         }
-        for(int i=x,j=y;i<n && j>=0;i++,j--)
+        
+        for(int i=x,j=y;i<v.size() && j>=0;i++,j--)
         {
             if(v[i][j]=='Q')
             {
-                return 0;
+                return false;
             }
         }
-        return 1;
+        
+        return true;
     }
-    
-    void solve(vector<string> v,int j,int n)
+    void solve(int c,vector<string> &v,int n)
     {
-        if(j==n)
+        if(c==n)
         {
-            ans.push_back(v);
+           ans.push_back(v);
             return;
         }
         
         for(int i=0;i<n;i++)
         {
-            if(check(v,i,j,n))
+            if(check(v,i,c))
             {
-                v[i][j]='Q';
-                solve(v,j+1,n);
-                v[i][j]='.';
+                v[i][c]='Q';
+                solve(c+1,v,n);
+                v[i][c]='.';
             }
         }
     }
     vector<vector<string>> solveNQueens(int n) {
         
-        vector<string> v;
+        vector<string> v(n);
         
         string s(n,'.');
         
         for(int i=0;i<n;i++)
         {
-            v.push_back(s);
+            v[i]=s;
         }
         
-        solve(v,0,n);
+        solve(0,v,n);
         
         return ans;
     }
