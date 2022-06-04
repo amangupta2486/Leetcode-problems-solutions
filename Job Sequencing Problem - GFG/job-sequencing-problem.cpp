@@ -29,42 +29,39 @@ class Solution
     //Function to find the maximum profit and the number of jobs done.
     vector<int> JobScheduling(Job a[], int n) 
     { 
-        
+        // your code here
         int mx=0;
         for(int i=0;i<n;i++)
         {
             mx=max(mx,a[i].dead);
         }
         
-        int m[mx+1];
-        memset(m,-1,sizeof(m));
+        int d[mx+1];
+        memset(d,1,sizeof(d));
+        
+        int cnt=0,p=0;
         
         sort(a,a+n,[&](auto &a,auto &b){
             return a.profit>b.profit;
         });
         
-        int c=0,p=0;
-        
         for(int i=0;i<n;i++)
         {
             for(int j=a[i].dead;j>=1;j--)
             {
-                if(m[j]==-1)
+                if(d[j]!=-1)
                 {
-                    m[j]=1;
+                   // cout<<d[j]<<" ";
+                    d[j]=-1;
+                    //cout<<d[j]<<" ";
                     p+=a[i].profit;
-                    c++;
+                    cnt++;
                     break;
                 }
             }
         }
         
-        vector<int> v;
-        
-        v.push_back(c);
-        v.push_back(p);
-        
-        return v;
+        return {cnt,p};
     } 
 };
 
