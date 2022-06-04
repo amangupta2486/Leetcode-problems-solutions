@@ -3,7 +3,6 @@ public:
     int maxProduct(vector<int>& a) {
         
         int n=a.size();
-        
         int b=a[0];
         int c=a[0];
         int ans=a[0];
@@ -15,8 +14,8 @@ public:
                 swap(b,c);
             }
             
-            b=max(a[i],a[i]*b);
-            c=min(a[i],a[i]*c);
+            b=max(a[i],b*a[i]);
+            c=min(a[i],c*a[i]);
             
             ans=max(ans,b);
         }
