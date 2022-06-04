@@ -10,88 +10,48 @@
  */
 class Solution {
 public:
-
-    ListNode* merge(ListNode* l1,ListNode* l2)
-    {
+    
+    ListNode* merge(ListNode* l1, ListNode* l2) {
+        
         if(l1==NULL)
         {
             return l2;
         }
-        
         if(l2==NULL)
         {
             return l1;
         }
         
-        if(l1->val>l2->val)
-        {
-            std::swap(l1,l2);
-        }
+        ListNode* p=new ListNode(0);
+        ListNode* q=p;
         
-        ListNode* res=l1;
-        
-        while(l1 && l2)
+        while(l1!=NULL && l2!=NULL)
         {
-            ListNode* tmp=NULL;
-            
-            while(l1 && l1->val<=l2->val)
+            if(l1->val<=l2->val)
             {
-                tmp=l1;
+                p->next=l1;
+                p=p->next;
                 l1=l1->next;
             }
-            
-            if(tmp)
-            tmp->next=l2;
-            
-            std::swap(l1,l2);
+            else
+            {
+                p->next=l2;
+                p=p->next;
+                l2=l2->next;
+            }
         }
         
-        return res;
+        if(l1!=NULL)
+        {
+            p->next=l1;
+        }
+        if(l2!=NULL)
+        {
+            p->next=l2;
+        }
+        
+        return q->next;
     }
-    
-    /*
-     ListNode* merge(ListNode* l1,ListNode* l2)
-     {
-         if(l1==NULL)
-         {
-             return l2;
-         }
-         if(l2==NULL)
-         {
-             return l1;
-         }
-         
-         ListNode* x=new ListNode(0);
-         ListNode* y=x;
-         
-         while(l1 && l2)
-         {
-             if(l1->val <= l2->val)
-             {
-                 x->next=l1;
-                 l1=l1->next;
-                 x=x->next;
-             }
-             else
-             {
-                 x->next=l2;
-                 l2=l2->next;
-                 x=x->next;
-             }
-         }
-         
-         if(l1)
-         {
-             x->next=l1;
-         }
-         if(l2)
-         {
-             x->next=l2;
-         }
-         
-         return y->next;
-     }
-     */
     ListNode* mergeKLists(vector<ListNode*>& l) {
         
         int n=l.size();
@@ -101,31 +61,13 @@ public:
             return NULL;
         }
         
-        if(n==1)
-        {
-            return l[0];
-        }
+        ListNode* p=l[0];
         
-        ListNode* p=new ListNode(0);
-        ListNode* q=p;
-        p->next=merge(l[0],l[1]);
-        p=p->next;
-        
-        for(int i=2;i<n;i++)
+        for(int i=1;i<n;i++)
         {
-           p=merge(p,l[i]);
+            p=merge(l[i],p);
         }
         
         return p;
-//         if(l->next==NULL)
-//         {
-//             return l;
-//         }
-        
-//         ListNode* p=l->next;
-        
-//         ListNode* q=mergeKLists(p);
-        
-//         return merge(p,q);
     }
 };
