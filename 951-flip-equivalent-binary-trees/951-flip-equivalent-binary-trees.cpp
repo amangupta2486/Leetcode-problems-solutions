@@ -11,19 +11,19 @@
  */
 class Solution {
 public:
-    
     bool flipEquiv(TreeNode* p, TreeNode* q) {
         
         if(p==NULL && q==NULL)
         {
-            return true;
+            return 1;
         }
         
         if(p==NULL || q==NULL || p->val!=q->val)
         {
-            return false;
+            return 0;
         }
         
-        return (flipEquiv(p->left,q->left) && flipEquiv(p->right,q->right)) || (flipEquiv(p->left,q->right) && flipEquiv(p->right,q->left));
+    
+        return (flipEquiv(p->left,q->left) && flipEquiv(p->right,q->right))||(flipEquiv(p->left,q->right) && flipEquiv(p->right,q->left));
     }
 };
