@@ -3,25 +3,25 @@ public:
     int majorityElement(vector<int>& a) {
         
         int n=a.size();
-        int c=1;
         int b=a[0];
+        int c=0;
         
-        for(int i=1;i<n;i++)
+        for(int i=0;i<n;i++)
         {
             if(b==a[i])
             {
                 c++;
             }
             
-            else
-            {
-                c--;
-            }
-            
-            if(c<0)
+            else if(c==0)
             {
                 b=a[i];
                 c=1;
+            }
+            
+            else
+            {
+                c--;
             }
         }
         
