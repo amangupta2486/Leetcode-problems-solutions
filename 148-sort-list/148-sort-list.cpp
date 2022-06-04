@@ -10,77 +10,29 @@
  */
 class Solution {
 public:
-    
-     ListNode* middleNode(ListNode* head) {
+    ListNode* sortList(ListNode* head) {
         
-        ListNode* slow=NULL;
-        ListNode* fast=head;
+        vector<int> v;
         
-        while(fast && fast->next)
+        while(head!=NULL)
         {
-            slow=(slow==NULL)? head : slow->next;
-            fast=fast->next->next;
-        }
-
-         ListNode* p = slow->next;
-         slow->next= NULL;
-         
-        return p;
-         
-    }
-    
-     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        
-        ListNode* p=new ListNode(1);
-        ListNode* q= p;
-        
-        while(l1!=NULL && l2!=NULL)
-        {
-            if(l1->val<=l2->val)
-            {
-                p=p->next=new ListNode(l1->val);
-        
-                l1=l1->next;
-            }
-            else
-            {
-                p=p->next=new ListNode(l2->val);
-                
-                l2=l2->next;
-            }
+            v.push_back(head->val);
+            head=head->next;
         }
         
-        while(l1!=NULL)
-        {
-             p=p->next=new ListNode(l1->val);
-
-             l1=l1->next;
-        }
+        ListNode* p=new ListNode(0);
+        ListNode* q=p;
         
-        while(l2!=NULL)
+        int i=0;
+        sort(v.begin(),v.end());
+        
+        while(i<v.size())
         {
-            p=p->next=new ListNode(l2->val);
-
-            l2=l2->next;
+            p->next=new ListNode(v[i]);
+            p=p->next;
+            i++;
         }
         
         return q->next;
-    }
-    
-    
-    ListNode* sortList(ListNode* head) {
-        
-        if(head==NULL || !head->next)
-        {
-            return head;
-        }
-        
-        ListNode* mid = middleNode(head);
-        
-        ListNode* left =sortList(head);
-        
-        ListNode* right =sortList(mid);
-        
-        return mergeTwoLists(left,right);
     }
 };
