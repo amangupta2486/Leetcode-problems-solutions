@@ -20,29 +20,24 @@ public:
         
         unordered_map<Node*,Node*> mp;
         
-        Node* h=head;
-        Node* q=h;
+        Node* p=head;
         
-        while(q!=NULL)
+        while(p!=NULL)
         {
-            Node* p=new Node(q->val);
-            
-            mp[q]=p;
-            
-            q=q->next;
+            Node* q=new Node(p->val);
+            mp[p]=q;
+            p=p->next;
         }
         
-        Node* s=head;
-        Node* r=s;
-
+        Node* r=head;
+        
         while(r!=NULL)
         {
-            //cout<<r->val<<" ";
-            
-            Node* a=mp[r];
-            Node* b=mp[r->next];
-            a->next=b;
-            a->random=mp[r->random];
+            Node* x=mp[r];
+            Node* y=mp[r->random];
+            Node* z=mp[r->next];
+            x->next=z;
+            x->random=y;
             
             r=r->next;
         }
