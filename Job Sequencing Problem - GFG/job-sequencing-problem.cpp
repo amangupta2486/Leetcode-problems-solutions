@@ -36,8 +36,7 @@ class Solution
             mx=max(mx,a[i].dead);
         }
         
-        int d[mx+1];
-        memset(d,1,sizeof(d));
+        vector<int> d(mx+1,1);
         
         int cnt=0,p=0;
         
@@ -49,7 +48,7 @@ class Solution
         {
             for(int j=a[i].dead;j>=1;j--)
             {
-                if(d[j]!=-1)
+                if(d[j]==1)
                 {
                    // cout<<d[j]<<" ";
                     d[j]=-1;
