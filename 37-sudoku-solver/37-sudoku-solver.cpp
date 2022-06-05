@@ -1,20 +1,23 @@
 class Solution {
 public:
-
-    bool check(vector<vector<char>>& b,int x,int y,char k)
+    
+    bool check(int i,int j,vector<vector<char>>& b,char x)
     {
-        for(int i=0;i<9;i++)
+        for(int k=0;k<9;k++)
         {
-            if(b[x][i]==k)
+            if(b[i][k]==x)
             {
                 return 0;
             }
-            if(b[i][y]==k)
+            if(b[k][j]==x)
             {
                 return 0;
             }
             
-            if(b[3*(x/3)+(i/3)][3*(y/3)+(i%3)]==k)
+            int p=(3*(i/3))+(k/3);
+            int q=(3*(j/3))+(k%3);
+           // cout<<p<<","<<q<<" ";
+            if(b[p][q]==x)
             {
                 return 0;
             }
@@ -22,31 +25,32 @@ public:
         
         return 1;
     }
-    
-    bool solve(vector<vector<char>>& g)
+    bool solve(vector<vector<char>>& b)
     {
-
         for(int i=0;i<9;i++)
         {
             for(int j=0;j<9;j++)
             {
-                if(g[i][j]=='.')
+                if(b[i][j]=='.')
                 {
-                    for(int k='1';k<='9';k++)
-                    {                       
-                        if(check(g,i,j,k))
+                    for(char k='1';k<='9';k++)
+                    {
+                        if(check(i,j,b,k))
                         {
-                            g[i][j]=k;
-                            if(solve(g))
+                            b[i][j]=k;
+                            
+                            if(solve(b))
                             {
-                                return true;
+                                return 1;
                             }
-                             else
+                            
+                            else
                             {
-                                g[i][j]='.';
+                                b[i][j]='.';
                             }
                         }                       
                     }
+                    
                     return false;
                 }
             }
@@ -55,7 +59,7 @@ public:
         return true;
     }
     void solveSudoku(vector<vector<char>>& b) {
-
+        
         solve(b);
     }
 };
