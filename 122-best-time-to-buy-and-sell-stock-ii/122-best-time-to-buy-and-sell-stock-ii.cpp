@@ -1,14 +1,15 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& p) {
+    int maxProfit(vector<int>& a) {
+        
+        int n=a.size();
         
         int ans=0;
-        int n=p.size();
         
-        for(int i=0;i<n-1;i++)
+        for(int i=1;i<n;i++)
         {
-            if(p[i+1]>p[i])
-            ans+=p[i+1]-p[i];
+            if(a[i]>a[i-1])
+            ans+=a[i]-a[i-1];
         }
         
         return ans;
