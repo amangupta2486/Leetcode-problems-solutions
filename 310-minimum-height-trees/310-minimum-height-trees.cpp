@@ -2,13 +2,14 @@ class Solution {
 public:
     vector<int> findMinHeightTrees(int n, vector<vector<int>>& e) {
         
-        vector<int> d(n,0);
-        vector<int> v[n];
-        
         if(n==1)
         {
             return {0};
         }
+        
+        vector<int> d(n,0);
+        
+        vector<int> v[n];
         
         for(auto i:e)
         {
@@ -19,16 +20,19 @@ public:
         }
         
         queue<int> q;
+        
         vector<int> ans;
         
         for(int i=0;i<n;i++)
         {
             if(d[i]==1)
             {
-                q.push(i);
+                q.push(i);      
+                ans.push_back(i);
             }
         }
         
+
         while(!q.empty())
         {
             int k=q.size();
@@ -38,7 +42,6 @@ public:
             {
                 auto p=q.front();
                 q.pop();
-                
                 ans.push_back(p);
                 
                 for(auto x:v[p])
