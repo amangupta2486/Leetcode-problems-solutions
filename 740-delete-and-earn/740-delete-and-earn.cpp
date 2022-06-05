@@ -27,12 +27,10 @@ public:
         
         for(int i=2;i<=mx;i++)
         {
-          //  dp[i]=sum-(mp[i+1]*i+1)-(mp[i-1]*i-1);
-            
             dp[i]=max(dp[i-2]+(mp[i]*i),dp[i-1]);
             //cout<<dp[i]<<" ";
         }
         
-        return *max_element(dp.begin(),dp.end());
+        return dp[mx];
     }
 };
