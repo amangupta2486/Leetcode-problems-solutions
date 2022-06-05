@@ -1,42 +1,35 @@
 class Solution {
 public:
-    int maxArea(int h, int w, vector<int>& a, vector<int>& b) {
+    int maxArea(int h, int w, vector<int>& ho, vector<int>& v) {
         
-        a.push_back(h);
-        b.push_back(w);
+        int n=ho.size();
+        int m=v.size();
         
-        a.insert(a.begin(),0);
-        b.insert(b.begin(),0);
+        sort(ho.begin(),ho.end());
+        sort(v.begin(),v.end());
         
-        int n=a.size();
-        int m=b.size();
+        ho.insert(ho.begin(),0);
+        v.insert(v.begin(),0);
+        ho.push_back(h);
+        v.push_back(w);
         
-        int l=0,br=0;
+        long long l=0,b=0,mod=1e9+7;
         
-        sort(a.begin(),a.end());
-        sort(b.begin(),b.end());
-        
-        int mod=1000000007;
-        
-        for(int i=0;i<n-1;i++)
+        for(int i=0;i<=n;i++)
         {
-            l=max(l,abs(a[i+1]-a[i]));
-            l=l%mod;
+            l=max(l,(ho[i+1]-ho[i])*1ll);
+            //cout<<l<<" ";
+            l%=mod;
         }
-        
-        for(int i=0;i<m-1;i++)
+        //cout<<endl;
+        for(int i=0;i<=m;i++)
         {
-            br=max(br,abs(b[i+1]-b[i]));
-            br=br%mod;
+            b=max(b,(v[i+1]-v[i])*1ll);
+            //cout<<b<<" ";
+            b%=mod;
         }
+        //cout<<endl;
         
-        //cout<<l<<" "<<br<<endl;
-        
-        
-       //int mod=1000000007;
-        long long int x=(1ll*l*br)%mod;
-        int y=x;
-        
-        return (y)%mod;
+        return (l*b)%mod;       
     }
 };
