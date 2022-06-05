@@ -4,23 +4,35 @@ public:
         
         int n=a.size();
         
-        int mx=*max_element(a.begin(),a.end());
-        
-        vector<int> f(mx+2,0),dp(mx+2,0);
+        map<int,int> mp;
         
         for(auto i:a)
         {
-            f[i]++;
+            mp[i]++;
         }
         
-        dp[1]=f[1];
-        dp[2]=max(dp[1],f[2]*2);
+        int sum=0,mx=0;
         
-        for(int i=3;i<=mx;i++)
+        for(int i=0;i<n;i++)
         {
-            dp[i]=max(dp[i-1],dp[i-2]+(f[i]*i));
+            sum+=a[i];
+            mx=max(mx,a[i]);
+        }
+        //cout<<sum<<" ";
+        vector<int> dp(mx+2,0);
+        
+        dp[0]=0;
+        dp[1]=mp[1];
+       // dp[2]=max(dp[1],mp[2]*2);
+        
+        for(int i=2;i<=mx;i++)
+        {
+          //  dp[i]=sum-(mp[i+1]*i+1)-(mp[i-1]*i-1);
+            
+            dp[i]=max(dp[i-2]+(mp[i]*i),dp[i-1]);
+            //cout<<dp[i]<<" ";
         }
         
-        return dp[mx];
+        return *max_element(dp.begin(),dp.end());
     }
 };
