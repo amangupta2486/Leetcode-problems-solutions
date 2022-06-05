@@ -3,17 +3,16 @@ public:
     bool canJump(vector<int>& a) {
         
         int n=a.size();
-        
-        int good_index=n-1;
+        int l=n-1;
         
         for(int i=n-2;i>=0;i--)
         {
-            if(i+a[i]>=good_index)
+            if(i+a[i]>=l)
             {
-                good_index=i;
+                l=i;
             }
         }
-
-        return good_index==0;
+        
+        return l==0;
     }
 };
