@@ -1,60 +1,43 @@
 class Solution {
 public:
     
-    set<int> mp;
-    int dp[400];
+    vector<int> dp;
     
-    int solve(int i,vector<int>& c)
+    int solve(vector<int>& d, vector<int>& c,int j)
     {
-        if(i>365)
+        int n=d.size();
+        
+        if(j>=n)
         {
             return 0;
         }
         
-        if(dp[i])
+        if(dp[j])
         {
-            return dp[i];
+            return dp[j];
         }
+        int x=c[0]+solve(d,c,j+1);
         
-        int ans=0;
+        int i=0;
         
-        if(mp.find(i)!=mp.end())
-        {
-            ans=min({c[0]+solve(i+1,c),c[1]+solve(i+7,c),c[2]+solve(i+30,c)});
-        }
-        //dp[i]=min({c[0]+solve(i+1,n,d,c),c[1]+solve(i+7,n,d,c),c[2]+solve(i+30,n,d,c)});
+        for(i=j;i<n && d[i]<d[j]+7;i++);
         
-        else
-        {
-            ans=solve(i+1,c);
-        }
+        int y=c[1]+solve(d,c,i);
         
-        return dp[i]=ans;
+        for(i=j;i<n && d[i]<d[j]+30;i++);
+        
+        int z=c[2]+solve(d,c,i);
+
+        int ans=min({x,y,z});
+        
+        return dp[j]=ans;
     }
     int mincostTickets(vector<int>& d, vector<int>& c) {
         
         int n=d.size();
         
-        for(auto i:d)
-        {
-            mp.insert(i);
-        }
+        dp.resize(n+1);
         
-        memset(dp,0,sizeof(dp));
-        
-        solve(1,c);
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             dp[d[i]]=solve(i,n,d,c);
-//         }
-        
-        // for(int i=0;i<n;i++)
-        // {
-        //     cout<<dp[d[i]]<<" ";
-        // }
-        
-        return dp[1];
-        
+        return solve(d,c,0);
     }
 };
