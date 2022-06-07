@@ -13,7 +13,7 @@ public:
         
         vector<pair<int,char>> v;
         
-        int mx=0;
+        int mx=n;
         
         for(auto i:mp)
         {
@@ -27,15 +27,18 @@ public:
         int ans=0;
         unordered_set<int> st;
         
+        int f=mx+1;
         for(int i=0;i<v.size();i++)
         {
             int x=v[i].first;
             
-            while(x>0 && st.count(x)>0)
+            if(x>mx)
             {
-                ans++;
-                x--;
+                ans+=x-mx;
+                x=mx;
             }
+            
+            mx=max(0,x-1);
             
             st.insert(x);
         }
