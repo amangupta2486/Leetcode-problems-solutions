@@ -15,13 +15,6 @@ class Solution{
     }
     sort(a.begin(),a.end());
     
-    vector<long long> p(n,0);
-    
-    for(int i=1;i<n;i++)
-    {
-        p[i]=p[i-1]+(a[i]-a[i-1]);
-    }
-    
     // for(int i=0;i<n;i++)
     // {
     //     cout<<p[i]<<" ";
@@ -30,7 +23,7 @@ class Solution{
     
     for(int i=0;i<n-m+1;i++)
     {
-        long long d=p[i+m-1]-p[i];
+        long long d=a[i+m-1]-a[i];
         
         mi=min(mi,d);
     }
