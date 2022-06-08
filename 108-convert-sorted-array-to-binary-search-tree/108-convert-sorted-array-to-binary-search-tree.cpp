@@ -19,11 +19,10 @@ public:
             return NULL;
         }
         
-        int m=(i+j)/2;
-        
-        TreeNode* root=new TreeNode(a[m]);
-        root->left = solve(a,i,m-1);
-        root->right= solve(a,m+1,j);
+        int mid=(i+j)/2;
+        TreeNode* root=new TreeNode(a[mid]);
+        root->left=solve(a,i,mid-1);
+        root->right=solve(a,mid+1,j);
         
         return root;
     }
