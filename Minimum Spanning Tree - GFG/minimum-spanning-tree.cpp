@@ -9,50 +9,67 @@ class Solution
 {
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int v, vector<vector<int>> adj[])
+	int pr[1005];
+	
+	int find(int x)
+	{
+	    while(x!=pr[x])
+	    {
+	        x=pr[x];
+	    }
+	    
+	    return x;
+	}
+	
+	void Union(int a,int b)
+	{
+	    int x=find(a);
+	    int y=find(b);
+	    
+	    if(x!=y)
+	    {
+	        pr[y]=x;
+	    }
+	}
+    int spanningTree(int V, vector<vector<int>> adj[])
     {
-        int n=v;
+        int n=V;
         
-        int key[n],pr[n];
+        int key[n];
         bool mst[n];
         
         for(int i=0;i<n;i++)
         {
             key[i]=INT_MAX;
             mst[i]=false;
-            pr[i]=-1;
-        }
-        key[0]=0;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
-        q.push({0,0});
-        
-        while(!q.empty())
-        {
-            auto p=q.top();
-            q.pop();
-            
-            int u=p.second;
-            mst[u]=true;
-            
-            for(auto x:adj[u])
-            {
-                int v=x[0];
-                int w=x[1];
-                
-                if(mst[v]==false && key[v]>w)
-                {
-                    q.push({w,v});
-                    key[v]=w;
-                    pr[v]=u;
-                }
-            }
+            pr[i]=i;
         }
         
-        int ans=0;
+        vector<vector<int>> v;
         
         for(int i=0;i<n;i++)
         {
-            ans+=key[i];
+            for(auto j:adj[i])
+            {
+                v.push_back({j[1],i,j[0]});
+            }
+        }
+        
+        sort(v.begin(),v.end());
+        
+        int ans=0;
+        
+        for(auto i:v)
+        {
+            int w=i[0];
+            int x=i[1];
+            int y=i[2];
+            
+            if(find(x)!=find(y))
+            {
+                Union(x,y);
+                ans+=w;
+            }
         }
         
         return ans;
