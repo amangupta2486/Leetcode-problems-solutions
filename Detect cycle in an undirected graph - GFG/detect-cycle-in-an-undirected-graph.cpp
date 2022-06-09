@@ -8,21 +8,20 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     int vis[100005];
     
-    bool dfs(int i,int p, vector<int> adj[])
+    bool dfs(int i,vector<int> adj[],int p)
     {
         vis[i]=1;
-        //cout<<i<<"->";
-        for(auto j:adj[i])
+        
+        for(auto x:adj[i])
         {
-            if(!vis[j])
+            if(!vis[x])
             {
-                if(dfs(j,i,adj))
+                if(dfs(x,adj,i))
                 {
                     return true;
                 }
             }
-            
-            else if(j!=p)
+            else if(x!=p)
             {
                 return true;
             }
@@ -30,22 +29,23 @@ class Solution {
         
         return false;
     }
-    bool isCycle(int v, vector<int> adj[]) {
+    bool isCycle(int V, vector<int> adj[]) {
         
-        memset(vis,0,sizeof(vis));
-        
-        for(int i=0;i<v;i++)
-        {
-            if(!vis[i])
-            {
-                if(dfs(i,-1,adj))
-                {
-                    return 1;
-                }
-            }
-        }
-        
-        return 0;
+       int n=V;
+       memset(vis,0,sizeof(vis));
+       
+       for(int i=0;i<n;i++)
+       {
+           if(!vis[i])
+           {
+               if(dfs(i,adj,-1))
+               {
+                   return true;
+               }
+           }
+       }
+       
+       return false;
     }
 };
 
