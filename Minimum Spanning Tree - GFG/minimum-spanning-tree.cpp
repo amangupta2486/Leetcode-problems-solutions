@@ -13,30 +13,25 @@ class Solution
     {
         int n=v;
         
-        int key[n],p[n];
+        int key[n],pr[n];
         bool mst[n];
         
         for(int i=0;i<n;i++)
         {
             key[i]=INT_MAX;
             mst[i]=false;
-            p[i]=-1;
+            pr[i]=-1;
         }
         key[0]=0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
+        q.push({0,0});
         
-        for(int c=0;c<n-1;c++)
+        while(!q.empty())
         {
-            int mini=INT_MAX,u;
+            auto p=q.top();
+            q.pop();
             
-            for(int v=0;v<n;v++)
-            {
-                if(mst[v]==false && key[v]<mini)
-                {
-                    mini=key[v];
-                    u=v;
-                }
-            }
-            
+            int u=p.second;
             mst[u]=true;
             
             for(auto x:adj[u])
@@ -46,7 +41,9 @@ class Solution
                 
                 if(mst[v]==false && key[v]>w)
                 {
+                    q.push({w,v});
                     key[v]=w;
+                    pr[v]=u;
                 }
             }
         }
