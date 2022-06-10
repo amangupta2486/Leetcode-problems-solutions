@@ -3,9 +3,9 @@ public:
     int lengthOfLongestSubstring(string s) {
         
         int n=s.size();
+        map<int,int> mp;
         
         int j=0;
-        map<int,int> mp;
         int ans=0;
         
         for(int i=0;i<n;i++)
