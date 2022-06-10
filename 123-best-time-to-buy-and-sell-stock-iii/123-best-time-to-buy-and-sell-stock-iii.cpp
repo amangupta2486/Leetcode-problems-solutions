@@ -1,5 +1,6 @@
 class Solution {
 public:
+    /*
     int dp[100005][2][3];
     
     int solve(int i,vector<int>& p,int buy,int k)
@@ -26,13 +27,16 @@ public:
         
         return dp[i][buy][k]=profit;
     }
-    
+    */
     int maxProfit(vector<int>& p) {
         
         int n=p.size();
         // int dp[n+1][2];
-        memset(dp,0,sizeof(dp));
+        // int after[2][3],curr[2][3];
+        // memset(after,0,sizeof(after));
+        // memset(curr,0,sizeof(curr));
         
+        vector<vector<int>> after(2,vector<int>(3,0)),curr(2,vector<int>(3,0));
         //return solve(0,p,1,2);
         
         for(int i=n-1;i>=0;i--)
@@ -44,17 +48,18 @@ public:
                     int profit=0;
                     if(buy)
                     {
-                        profit=max(-p[i]+dp[i+1][0][k],dp[i+1][1][k]);
+                        profit=max(-p[i]+after[0][k],after[1][k]);
                     }
                     else
                     {
-                        profit=max(p[i]+dp[i+1][1][k-1],dp[i+1][0][k]);
+                        profit=max(p[i]+after[1][k-1],after[0][k]);
                     }
-                    dp[i][buy][k]=profit;
+                    curr[buy][k]=profit;
                 }
+                after=curr;
             }
         }
         
-        return dp[0][1][2];
+        return after[1][2];
     }
 };
