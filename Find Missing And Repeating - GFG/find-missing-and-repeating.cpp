@@ -7,39 +7,32 @@ using namespace std;
 class Solution{
 public:
     int *findTwoElement(int *a, int n) {
-       
-       vector<int> v(100005,0);
-       
-       for(int i=0;i<n;i++)
-       {
-          // cout<<a[i]<<" ";
-           v[a[i]]++;
-       }
-    //   for(int i=0;i<n+1;i++)
-    //   {
-    //       cout<<v[i]<<" ";
-    //   }
-       
-       int f1=0,f2=0;
-       
-       int* ans=new int[2];
-       
-       for(int i=1;i<=n;i++)
-       {
-           if(v[i]==2 && f2==0)
-           {
-               ans[0]=i;
-               f2=1;
-           }
-           
-           if(v[i]==0 && f1==0)
-           {
-               ans[1]=i;
-               f1=1;
-           }
-       }
-       
-       return ans;
+        
+        int*ans =new int[2];
+        
+        for(int i=0;i<n;i++)
+        {
+
+            if(a[abs(a[i])-1]>0)
+            {
+                a[abs(a[i])-1]= -1*a[abs(a[i])-1];
+            }
+            
+            else
+            {
+                ans[0]=abs(a[i]);
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]>0)
+            {
+                ans[1]=i+1;
+            }
+        }
+        
+        return ans;
     }
 };
 
