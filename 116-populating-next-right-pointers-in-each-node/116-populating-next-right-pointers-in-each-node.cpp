@@ -25,17 +25,14 @@ public:
             return NULL;
         }
         
-        if(root->left!=NULL)
+        if(root->right!=NULL)
         {
             root->left->next=root->right;
         }
         
-        if(root->next!=NULL)
+        if(root->left!=NULL && root->next!=NULL)
         {
-            if(root->right!=NULL)
-            {
-                root->right->next= root->next->left;
-            }
+            root->right->next=root->next->left;
         }
         
         connect(root->left);
