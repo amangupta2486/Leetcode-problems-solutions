@@ -3,24 +3,25 @@ public:
     
     int dp[1005][1005];
     
-    int solve(string &a, string &b,int n,int m)
+    int solve(string &a, string &b,int i,int j)
     {
-        if(n==0 || m==0)
+        if(i==0 || j==0)
         {
             return 0;
         }
         
-        if(dp[n][m]!=-1)
+        if(dp[i][j]!=-1)
         {
-            return dp[n][m];
+            return dp[i][j];
         }
-        if(a[n-1]==b[m-1])
+        if(a[i-1]==b[j-1])
         {
-            return dp[n][m]=1+solve(a,b,n-1,m-1);
+            return dp[i][j]=1+solve(a,b,i-1,j-1);
         }
         
-        return dp[n][m]=max(solve(a,b,n-1,m),solve(a,b,n,m-1));
+        return dp[i][j]=max(solve(a,b,i,j-1),solve(a,b,i-1,j));
     }
+    
     int longestCommonSubsequence(string a, string b) {
         
         int n=a.size();
