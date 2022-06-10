@@ -1,5 +1,5 @@
 # Find Missing And Repeating
-## Medium 
+##  Medium 
 <div class="problem-statement" style="user-select: auto;">
                 <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given an unsorted array <strong style="user-select: auto;">Arr</strong> of size <strong style="user-select: auto;">N</strong> of positive integers. <strong style="user-select: auto;">One number 'A'</strong> from set {1, 2, …N} is missing and <strong style="user-select: auto;">one number 'B'</strong> occurs twice in array. Find these two numbers.</span></p>
 
