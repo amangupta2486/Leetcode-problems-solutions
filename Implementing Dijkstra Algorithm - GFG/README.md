@@ -1,5 +1,5 @@
 # Implementing Dijkstra Algorithm
-## Medium 
+##  Medium 
 <div class="problem-statement" style="user-select: auto;">
                 <p style="user-select: auto;"></p><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a weighted, undirected and connected graph of V vertices and E edges, Find the shortest distance of all the vertex's from the source vertex S.</span><br style="user-select: auto;">
 <span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Note: </strong>The Graph doesn't contain any negative weight cycle.</span></p>
