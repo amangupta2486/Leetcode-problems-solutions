@@ -12,34 +12,37 @@ class Solution{
     *   S: source vertex to start traversing graph with
     *   V: number of vertices
     */
-    vector <int> bellman_ford(int V, vector<vector<int>> v, int s) {
-        int n=V;
-        
-        vector<vector<int>> adj[n];
-        
-        for(auto i:v)
-        {
-            adj[i[0]].push_back({i[1],i[2]});
-        }
-        vector<int> key(n,100000000);
-        key[s]=0;
-        
-        for(int c=0;c<=n-1;c++)
-        {
-            for(int i=0;i<n;i++)
-            {
-                for(auto j:adj[i])
-                {
-                    int w=j[1];
-                    int x=j[0];
-                    if(key[x]>w+key[i])
-                    {
-                       key[x]=w+key[i]; 
-                    }
-                }
-            }
-        }
-        return key;
+    vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) {
+       
+       int n=V;
+       
+       vector<int> key(n,100000000);
+       key[S]=0;
+       vector<vector<int>> v[n];
+       
+       for(auto i:adj)
+       {
+           v[i[0]].push_back({i[1],i[2]});
+           
+       }
+       for(int c=0;c<n-1;c++)
+       {
+           for(int i=0;i<n;i++)
+           {
+               for(auto j:v[i])
+               {
+                   int v=j[0];
+                   int w=j[1];
+                   
+                   if(key[v]>key[i]+w)
+                   {
+                       key[v]=key[i]+w;
+                   }
+               }
+           }
+       }
+       
+       return key;
     }
 };
 
