@@ -8,63 +8,37 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    vector <int> dijkstra(int v, vector<vector<int>> adj[], int s)
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-       int n=v;
+        int n=V;
+        vector<int> key(n,100000);
         
-        vector<int> key(n);
-        int pr[n];
-        bool mst[n];
-        
-        for(int i=0;i<n;i++)
-        {
-            key[i]=INT_MAX;
-            mst[i]=false;
-            pr[i]=-1;
-        }
-        key[s]=0;
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
-        q.push({0,s});
-        
-        while(!q.empty())
-        {
-            auto p=q.top();
-            q.pop();
-            
-            int u=p.second;
-
-            for(auto x:adj[u])
-            {
-                int v=x[0];
-                int w=x[1];
-                
-                if(key[v]>w+key[u])
-                {
-                    key[v]=w+key[u];
-                    q.push({w,v});
-                    pr[v]=u;
-                }
-            }
-        }
-        
-        // queue<int> p;
-        // p.push(s);
-        
-        // while(!q.empty())
-        // {
-        //     int r=p.front();
-        //     p.pop();
-            
-        //     for(int i=0;i<n;i++)
-        //     {
-        //         if(pr[i]==r)
-        //         {
-        //             key[i]+=key[r];
-        //         }
-        //     }
-        // }
-        return key;
-
+         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
+         key[S]=0;
+         
+         q.push({0,S});
+         
+         while(!q.empty())
+         {
+             auto p=q.top();
+             q.pop();
+             
+             int u=p.second;
+             
+             for(auto j:adj[u])
+             {
+                 int v=j[0];
+                 int w=j[1];
+                 
+                 if(key[v]>key[u]+w)
+                 {
+                     key[v]=key[u]+w;
+                     q.push({key[v],v});
+                 }
+             }
+         }
+         
+         return key;
     }
 };
 
