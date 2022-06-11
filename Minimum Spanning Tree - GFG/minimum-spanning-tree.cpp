@@ -12,20 +12,25 @@ class Solution
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         int n=V;
-        vector<int> key(n,100000);
+        vector<int> key(n,100000),p(n,-1);
         vector<bool> mst(n,false);
         
-         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
          key[0]=0;
-        
-         q.push({0,0});
-         
-         while(!q.empty())
+
+         for(int c=1;c<=n-1;c++)
          {
-             auto p=q.top();
-             q.pop();
+
+             int u,mi=INT_MAX;
              
-             int u=p.second;
+             for(int i=0;i<n;i++)
+             {
+                 if(mst[i]==false && key[i]<mi)
+                 {
+                     mi=key[i];
+                     u=i;
+                 }
+             }
+             
              mst[u]=true;
              for(auto j:adj[u])
              {
@@ -35,7 +40,7 @@ class Solution
                  if(mst[v]==false && key[v]>w)
                  {
                      key[v]=w;
-                     q.push({key[v],v});
+                     p[v]=u;
                  }
              }
          }
