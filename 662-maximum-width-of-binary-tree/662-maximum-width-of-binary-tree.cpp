@@ -18,41 +18,40 @@ public:
             return 0;
         }
         
-        queue<pair<TreeNode*,long>> q;
-        q.push({root,1});
+        queue<pair<TreeNode*,long long>> q;
         
-        long ans=0;
+        q.push({root,0});
+        long long first=0,last=0,ans=0;
         
         while(!q.empty())
         {
-            long first=INT_MAX,last=0;
-            long mi=q.front().second;
             int k=q.size();
-            
-            for(int j=0;j<k;j++)
+            long long mi=q.front().second;
+            //cout<<mi<<endl;
+            for(int i=0;i<k;i++)
             {
                 auto p=q.front();
                 q.pop();
                 
                 auto r=p.first;
-                long ind=p.second-mi;
-                
-                if(j==0)
+                long long idx=p.second-mi;
+                //cout<<idx<<" ";
+                if(i==0)
                 {
-                    first=ind;
+                    first=idx;
                 }
-                if(j==k-1)
+                if(i==k-1)
                 {
-                    last=ind;
+                    last=idx;
                 }
                 
                 if(r->left!=NULL)
                 {
-                    q.push({r->left,(2*ind)+1});
+                    q.push({r->left,(2*idx)});
                 }
-                if(r->right!=NULL)
+                 if(r->right!=NULL)
                 {
-                     q.push({r->right,(2*ind)+2});
+                    q.push({r->right,(2*idx)+1});
                 }
             }
             
