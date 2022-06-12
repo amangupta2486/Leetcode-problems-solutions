@@ -28,24 +28,25 @@ public:
         while(!q.empty())
         {
             int k=q.size();
+            
             map<int,vector<int>> mp;
+            
             while(k--)
             {
                 auto p=q.front();
                 q.pop();
+                auto r=p.first;
+                int idx=p.second;
                 
-                TreeNode* r=p.first;
-                int x=p.second;
-                
-                mp[x].push_back(r->val);
+                mp[idx].push_back(r->val);
                 
                 if(r->left!=NULL)
                 {
-                    q.push({r->left,x-1});
+                   q.push({r->left,idx-1}); 
                 }
                 if(r->right!=NULL)
                 {
-                    q.push({r->right,x+1});
+                   q.push({r->right,idx+1}); 
                 }
             }
             
