@@ -1,35 +1,36 @@
 class Solution {
 public:
-    int coinChange(vector<int>& c, int a) {
+    int coinChange(vector<int>& coins, int target) {
         
-        int n=c.size();
-        
-        vector<int> dp(a+1,INT_MAX);
-        
+        int N=coins.size();
+        vector<int> dp(target+1,0);
         dp[0]=0;
-        for(int i=1;i<=a;i++)
+        
+        for(int i=1;i<=target;i++)
         {
             int ans=INT_MAX;
-            for(int j=0;j<n;j++)
+            
+            for(int j=0;j<N;j++)
             {
-                if(c[j]<=i)
-                {
-                    ans=min(ans,dp[i-c[j]]);
-                }
-               // cout<<ans<<" ";
+                if(coins[j]<=i)
+                ans=min(ans,dp[i-coins[j]]);
             }
-
-            if(ans<dp[i])
+            
+            if(ans!=INT_MAX)
             {
                 dp[i]=1+ans;
             }
-         
+            else
+            {
+                dp[i]=INT_MAX;
+            }
         }
-
-        if(dp[a]==INT_MAX)
+        
+        if(dp[target]==INT_MAX)
         {
             return -1;
         }
-        return dp[a];
+        
+        return dp[target];
     }
 };
