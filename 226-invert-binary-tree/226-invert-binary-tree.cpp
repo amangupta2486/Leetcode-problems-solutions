@@ -16,51 +16,20 @@ public:
     {
         if(root==NULL)
         {
-            return;
+            return ;
         }
-        
-        TreeNode* tmp=root->left;
-        root->left = root->right;
-        root->right =tmp;
         
         solve(root->left);
         solve(root->right);
-       
+        
+        TreeNode* tmp=root->left;
+        root->left=root->right;
+        root->right=tmp;
     }
     TreeNode* invertTree(TreeNode* root) {
-        //solve(root);
         
-        if(root==NULL)
-        {
-            return root;
-        }
-        queue<TreeNode*> s;
+        solve(root);
         
-        s.push(root);
-        
-        while(!s.empty())
-        {
-            int k=s.size();
-            
-            while(k--)
-            {    
-                auto p=s.front();
-                s.pop();
-
-                TreeNode* tmp=p->left;
-                p->left = p->right;
-                p->right =tmp;
-
-                if(p->left!=NULL)
-                {
-                    s.push(p->left);
-                }
-                if(p->right!=NULL)
-                {
-                    s.push(p->right);
-                }
-            }
-        }
         return root;
     }
 };
