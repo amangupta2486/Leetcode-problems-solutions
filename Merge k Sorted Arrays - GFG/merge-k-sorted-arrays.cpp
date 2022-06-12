@@ -19,27 +19,30 @@ class Solution
 {
     public:
     //Function to merge k sorted arrays.
-    vector<int> mergeKArrays(vector<vector<int>> a, int k)
+    vector<int> mergeKArrays(vector<vector<int>> a, int K)
     {
+        int n=a.size();
+        
         priority_queue<int> q;
         
-        for(int i=0;i<k;i++)
+        for(int i=0;i<n;i++)
         {
-            for(int j=0;j<k;j++)
+            for(auto j:a[i])
             {
-                q.push((-1)*a[i][j]);
+                q.push(-1*j);
             }
         }
         
-        vector<int> v;
+        vector<int> ans;
         
         while(!q.empty())
         {
-            v.push_back((-1)*q.top());
+            ans.push_back(-1*q.top());
             q.pop();
         }
         
-        return v;
+        return ans;
+        
     }
 };
 
@@ -52,7 +55,7 @@ int main()
 	while(t--){
 	    int k;
 	    cin>>k;
-	    vector<vector<int>> arr(N, vector<int> (N, 0));
+	    vector<vector<int>> arr(k, vector<int> (k, 0));
 	    for(int i=0; i<k; i++){
 	        for(int j=0; j<k; j++)
 	        {
