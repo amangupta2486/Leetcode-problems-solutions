@@ -1,25 +1,23 @@
 class Solution {
 public:
-    int maximumCandies(vector<int>& a, long long k) {
+    int maximumCandies(vector<int>& candies, long long k) {
         
+        int n=candies.size();
+        
+        int l=1,r=0;
         long long s=0;
-        int n=a.size();
         
         for(int i=0;i<n;i++)
         {
-            s+=a[i];
+            r=max(r,candies[i]);
+            s+=candies[i];
         }
         
-        if(s<k)
+        if(k>s)
         {
             return 0;
         }
-        
-        int l=1;
-        int r=*max_element(a.begin(),a.end());
-        
-        
-        long long ans=INT_MAX;
+        int ans=0;
         
         while(l<=r)
         {
@@ -29,31 +27,29 @@ public:
             
             for(int i=0;i<n;i++)
             {
-                c+=a[i]/m;
+                c+=candies[i]/m;   
             }
             
-            if(c>=k)
+            if(c<k)
+            {
+                r=m-1;
+            }
+            else
             {
                 ans=m;
                 l=m+1;
-            }
-            
-            else
-            {
-                r=m-1;
             }
         }
         
         return ans;
     }
 };
-
 /*
 Input
 [5,6,4,10,10,1,1,2,2,2]
 9
 Output
-4
+0
 Expected
 3
 */
