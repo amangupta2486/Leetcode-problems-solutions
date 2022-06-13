@@ -20,24 +20,21 @@ public:
             return;
         }
         
-        int x=root->val;
-        s+=to_string(x);
-  
+        s+=to_string(root->val);
+        
         if(root->left==NULL && root->right==NULL)
         {
             ans.push_back(s);
             return;
         }
-        
-        solve(root->left,s+"->");
-
-        solve(root->right,s+"->");
-        
+        s+="->";
+        solve(root->left,s);
+        solve(root->right,s);
+       
     }
     vector<string> binaryTreePaths(TreeNode* root) {
         
         solve(root,"");
-        
         return ans;
     }
 };
