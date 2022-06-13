@@ -27,7 +27,7 @@ public:
         solve(root->left);
     }
     TreeNode* convertBST(TreeNode* root) {
-      
+        
         solve(root);
         
         return root;
