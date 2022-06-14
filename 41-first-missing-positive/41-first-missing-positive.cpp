@@ -1,30 +1,35 @@
 class Solution {
 public:
-    
-    bool v[500005];
-    
     int firstMissingPositive(vector<int>& a) {
         
         int n=a.size();
         
-        memset(v,0,sizeof(v));
-    
-        for(int i=0;i,i<n;i++)
+        for(int i=0;i<n;i++)
         {
-            if(a[i]>0 && a[i]<500001)
+            if(a[i]<=0)
             {
-                v[a[i]]=1;
+                a[i]=n+1;
             }
         }
-
-        for(int i=1;i<=500000;i++)
+        for(int i=0;i<n;i++)
         {
-            if(v[i]==0)
+            if(abs(a[i])-1>=0 && abs(a[i])-1<n && a[abs(a[i])-1]>0)
             {
-                return i;
+                a[abs(a[i])-1]=-1*a[abs(a[i])-1];
             }
         }
-
-        return 500001;
+        
+        for(int i=0;i<n;i++)
+        {
+           // cout<<a[i]<<" ";
+            if(a[i]>=0)
+            {
+                 //cout<<endl;
+                return i+1;
+            }
+        }
+       // cout<<endl;
+        
+        return n+1;
     }
 };
