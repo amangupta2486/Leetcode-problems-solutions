@@ -17,12 +17,13 @@ public:
         }
         
         string l=solve(i+1,n,s+'0');
-        string r=solve(i+1,n,s+'1');
-        
         if(l!="")
         {
             return l;
         }
+        
+        string r=solve(i+1,n,s+'1');
+        
         return r;
     }
     string findDifferentBinaryString(vector<string>& v) {
