@@ -1,24 +1,22 @@
 class Solution {
 public:
     
-    vector<vector<int>> v[105];
     int vis[105];
-    //map<int,int> mp;
     int mp[105];
-
-    void dfs(int i,int c)
+    
+    void dfs(int i,vector<vector<int>> adj[])
     {
         vis[i]=1;
-        
-        for(auto j:v[i])
+
+        for(auto j:adj[i])
         {
-            int x=j[1];
-            int y=j[0];
-          //  cout<<x<<" "<<y<<endl;
-            if(mp[x]>c+y)
+            int w=j[0];
+            int v=j[1];
+            
+            if(mp[v]>mp[i]+w)
             {
-                mp[x]=c+y;
-                dfs(x,mp[x]);
+                mp[v]=mp[i]+w;
+                dfs(v,adj);
             }
             else
             {
@@ -26,26 +24,27 @@ public:
             }
         }
     }
-    
-    int networkDelayTime(vector<vector<int>>& t, int n, int k) {
+    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         
         memset(vis,0,sizeof(vis));
         memset(mp,10000,sizeof(mp));
         
-        for(auto i:t)
+        vector<vector<int>> v[n+1];
+        
+        for(auto i:times)
         {
             v[i[0]].push_back({i[2],i[1]});
         }
         
-        for(int i=0;i<n;i++)
+        for(int i=1;i<=n;i++)
         {
             sort(v[i].begin(),v[i].end());
         }
         
         mp[k]=0;
+        dfs(k,v);
         
-        dfs(k,0);
-        int ans=0;
+        int mx=0;
         
         for(int i=1;i<=n;i++)
         {
@@ -53,12 +52,9 @@ public:
             {
                 return -1;
             }
-            else
-            {
-                ans=max(ans,mp[i]);
-            }
+            mx=max(mx,mp[i]);
         }
         
-        return ans;
+        return mx;
     }
 };
