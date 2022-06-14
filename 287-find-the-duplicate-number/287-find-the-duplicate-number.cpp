@@ -17,6 +17,7 @@ public:
             slow=a[slow];
             fast=a[fast];
         }
+        
         return slow;
     }
 };
