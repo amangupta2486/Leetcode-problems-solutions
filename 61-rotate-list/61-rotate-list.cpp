@@ -11,7 +11,7 @@
 class Solution {
 public:
     
-    int solve(ListNode* head)
+    int len(ListNode* head)
     {
         int n=0;
         
@@ -23,40 +23,44 @@ public:
         
         return n;
     }
+    
     ListNode* rotateRight(ListNode* head, int k) {
         
-        int n=solve(head);
+        int n=len(head);
         
-        if(n==0 || k%n==0)
+        if(head==NULL || head->next==NULL || k==0 )
         {
             return head;
         }
-        
+        if(k!=1 && k%n==0)
+        {
+            return head;
+        }
+        if(k>=n)
         k=k%n;
-        int d=n-k;
         
+        int d=n-k-1;
+        //cout<<n<<" "<<d<<endl;
         ListNode* p=head;
-        ListNode* q=p;
-        d--;
         
-        while(d--)
+        while(d>0)
         {
             head=head->next;
+            d--;
         }
         
-        q=head;
-        
-        
-        ListNode* ans=head->next;
+        ListNode* q=head;
+        ListNode* r=head->next;
+        //cout<<q->val<<endl;
         
         while(head->next!=NULL)
         {
             head=head->next;
         }
-        
         q->next=NULL;
+        
         head->next=p;
         
-        return ans;
+        return r;
     }
 };
