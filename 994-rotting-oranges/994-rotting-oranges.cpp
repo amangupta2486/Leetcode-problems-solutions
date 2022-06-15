@@ -7,33 +7,35 @@ public:
         
         queue<vector<int>> q;
         
-        int fresh=0;
+        int cnt=0;
         
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(g[i][j]!=0)
-                {
-                    fresh++;
-                }
                 if(g[i][j]==2)
                 {
                     q.push({i,j});
+                    cnt++;
+                }
+                else if(g[i][j]==1)
+                {
+                    cnt++;
                 }
             }
         }
         
-        int d=0,ans=0,days=0;
+        int ans=0,d=0;
         
         int dx[4]={1,-1,0,0};
         int dy[4]={0,0,1,-1};
+        
         while(!q.empty())
         {
-            int k=q.size();
-            ans+=k;
+            int l=q.size();
+            ans+=l;
             
-            while(k--)
+            while(l--)
             {
                 auto p=q.front();
                 q.pop();
@@ -41,25 +43,25 @@ public:
                 int i=p[0];
                 int j=p[1];
                 
-                for(int l=0;l<4;l++)
+                for(int k=0;k<4;k++)
                 {
-                    int x=i+dx[l];
-                    int y=j+dy[l];
+                    int x=i+dx[k];
+                    int y=j+dy[k];
                     
                     if(x>=0 && x<n && y>=0 && y<m && g[x][y]==1)
                     {
-                        // ans++;
                         g[x][y]=2;
                         q.push({x,y});
                     }
                 }
             }
             
-            if(q.size()!=0)
-            days++;
+            if(!q.empty())
+            {
+                d++;
+            }
         }
         
-        //cout<<ans<<" "<<fresh;
-        return ans==fresh ? days : -1 ;
+        return ans==cnt ? d : -1;
     }
 };
