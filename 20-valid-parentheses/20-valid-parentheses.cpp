@@ -4,7 +4,11 @@ public:
         
         int n=s.size();
         
-        stack<int> st;
+        if(n&1)
+        {
+            return 0;
+        }
+        stack<char> st;
         
         for(int i=0;i<n;i++)
         {
@@ -25,11 +29,11 @@ public:
                 {
                     return 0;
                 }
-                if(s[i]=='}' && p!='{')
+                if(s[i]==']' && p!='[')
                 {
                     return 0;
                 }
-                if(s[i]==']' && p!='[')
+                if(s[i]=='}' && p!='{')
                 {
                     return 0;
                 }
