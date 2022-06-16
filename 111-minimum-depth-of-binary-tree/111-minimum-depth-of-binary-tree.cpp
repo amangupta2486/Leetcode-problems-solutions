@@ -14,29 +14,32 @@ public:
     
     int ans=INT_MAX;
     
-    void solve(TreeNode* root,int s)
+    void solve(TreeNode* root,int c)
     {
         if(root==NULL)
         {
-            return ;
+            return;
         }
         
         if(root->left==NULL && root->right==NULL)
         {
-            ans=min(ans,s);
+            ans=min(ans,c);
+            return;
         }
         
-        solve(root->left,s+1);
-        solve(root->right,s+1);
+        solve(root->left,c+1);      
+        solve(root->right,c+1);
+
     }
-    
     int minDepth(TreeNode* root) {
         
         if(root==NULL)
         {
             return 0;
         }
-        solve(root,1);
+        
+        int c=1;
+        solve(root,c);
         
         return ans;
     }
