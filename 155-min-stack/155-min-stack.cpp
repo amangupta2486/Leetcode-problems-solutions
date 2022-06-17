@@ -1,51 +1,40 @@
-
-template<typename T>
-class custom_priority_queue : public std::priority_queue<T, std::vector<T>,greater<T>>
-{
-  public:
-
-      bool remove(const T& value) {
-        auto it = std::find(this->c.begin(), this->c.end(), value);
-        if (it != this->c.end()) {
-            this->c.erase(it);
-            std::make_heap(this->c.begin(), this->c.end(), this->comp);
-            return true;
-       }
-       else {
-        return false;
-       }
- }
-};
-
 class MinStack {
 public:
+    stack<pair<int,int>> s;
 
-    custom_priority_queue<int> p;
-    stack<int> s;
-    
     MinStack() {
         
     }
     
     void push(int val) {
-        s.push(val);
-        p.push(val);
+        
+        int min;
+        if(s.empty())
+        {
+            min=val;
+        }
+        else
+        {
+            min=std::min(s.top().second,val);
+        }
+        
+        s.push({val,min});
     }
     
     void pop() {
-        int a=s.top();
-        p.remove(a);
-        
         s.pop();
-
     }
     
     int top() {
-        return s.top();
+        auto p=s.top();
+
+        return p.first;
     }
     
     int getMin() {
-        return p.top();
+        auto p=s.top();
+         
+        return p.second;
     }
 };
 
