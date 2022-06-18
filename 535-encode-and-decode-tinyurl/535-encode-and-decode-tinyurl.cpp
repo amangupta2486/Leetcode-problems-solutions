@@ -1,18 +1,14 @@
 class Solution {
 public:
-    
-    string s,z="http://tinyurl.com/4e9iAk";
-    
+
     // Encodes a URL to a shortened URL.
     string encode(string longUrl) {
-        s=longUrl;
-        
-        return z;
+        return longUrl;
     }
 
     // Decodes a shortened URL to its original URL.
-    string decode(string shortUrl) { 
-        return s;
+    string decode(string shortUrl) {
+        return shortUrl;
     }
 };
 
