@@ -24,24 +24,24 @@ public:
         
         while(p!=NULL)
         {
-            Node* q=new Node(p->val);
-            mp[p]=q;
+            Node* newNode = new Node(p->val);
+            mp[p]=newNode;
             p=p->next;
         }
         
-        Node* r=head;
+        Node* q=head;
         
-        while(r!=NULL)
+        while(q!=NULL)
         {
-            Node* x=mp[r];
-            Node* y=mp[r->random];
-            Node* z=mp[r->next];
-            x->next=z;
-            x->random=y;
+            Node* r=mp[q];
             
-            r=r->next;
+            r->next=mp[q->next];
+            r->random=mp[q->random];
+            
+            q=q->next;
         }
         
         return mp[head];
+
     }
 };
