@@ -1,26 +1,39 @@
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& v, vector<int>& a) {
+    vector<vector<int>> insert(vector<vector<int>>& a, vector<int>& b) {
         
-        vector<vector<int>> m;
+        int n=a.size();
         
-        v.push_back(a);
+        int f=0;
         
-        sort(v.begin(),v.end());
-        
-        for(auto i:v)
+        for(int i=0;i<n;i++)
         {
-            if(m.empty() || m.back()[1]<i[0])
+            if(b[0]<a[i][0])
             {
-                m.push_back(i);
-            }
-            else
-            {
-                m.back()[1]=max(m.back()[1],i[1]);
+                a.insert(a.begin()+i,b);
+                f==1;
+                break;
             }
         }
         
-        return m;
+        if(f==0)
+        {
+            a.push_back(b);
+        }
+        vector<vector<int>> ans;
         
+        for(auto i:a)
+        {
+            if(ans.empty() || ans.back()[1]<i[0])
+            {
+                ans.push_back(i);
+            }
+            else
+            {
+                ans.back()[1]=max(ans.back()[1],i[1]);
+            }
+        }
+                
+        return ans;
     }
 };
