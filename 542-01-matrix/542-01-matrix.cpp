@@ -15,43 +15,43 @@ public:
                 {
                     q.push({i,j,0});
                 }
+                else
+                {
+                    g[i][j]=10000;
+                }
             }
         }
-        
-        int vis[n][m];
-        memset(vis,0,sizeof(vis));
         
         int dx[4]={1,-1,0,0};
         int dy[4]={0,0,1,-1};
         
         while(!q.empty())
         {
-            int l=q.size();
-            
-            while(l--)
+            int k=q.size();
+            while(k--)
             {
                 auto p=q.front();
                 q.pop();
                 
                 int i=p[0];
                 int j=p[1];
-                int d=p[2];
+                int c=p[2];
                 
                 for(int k=0;k<4;k++)
                 {
                     int x=i+dx[k];
                     int y=j+dy[k];
                     
-                    if(x>=0 && x<n && y>=0 && y<m && g[x][y]!=0 && !vis[x][y])
+                    if(x>=0 && x<n && y>=0 && y<m && g[x][y]>c+1)
                     {
-                        vis[x][y]=1;
-                        g[x][y]=1+d;
-                        q.push({x,y,1+d});
+                        g[x][y]=c+1;
+                        q.push({x,y,c+1});
                     }
                 }
             }
         }
         
         return g;
+        
     }
 };
