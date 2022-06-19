@@ -5,41 +5,41 @@ public:
         int n=g.size();
         int m=g[0].size();
         
-        int n1=0,n2=n-1,m1=0,m2=m-1;
-        
+        int nstart=0,nend=n-1,mstart=0,mend=m-1;
         vector<int> v;
         
-        while(n1<=n2 && m1<=m2)
+        while(nstart<=nend && mstart<=mend)
         {
-            for(int i=m1;i<=m2;i++)
+            for(int j=mstart;j<=mend;j++)
             {
-                v.push_back(g[n1][i]);
+                v.push_back(g[nstart][j]);
             }
             
-            for(int i=n1+1;i<n2;i++)
+            for(int i=nstart+1;i<nend;i++)
             {
-                v.push_back(g[i][m2]);
+                v.push_back(g[i][mend]);
             }
             
-            if(n1!=n2)
-            {    
-                for(int j=m2;j>=m1;j--)
+            if(nstart<nend)
+            {
+                for(int j=mend;j>=mstart;j--)
                 {
-                    v.push_back(g[n2][j]);
+                    v.push_back(g[nend][j]);
                 }
             }
             
-            if(m1!=m2)
-            {    
-                for(int i=n2-1;i>n1;i--)
+            if(mstart<mend)
+            {
+                for(int i=nend-1;i>nstart;i--)
                 {
-                    v.push_back(g[i][m1]);
+                    v.push_back(g[i][mstart]);
                 }
             }
-            n1++;
-            m1++;
-            n2--;
-            m2--;
+            
+            nstart++;
+            mstart++;
+            nend--;
+            mend--;
         }
         
         return v;
