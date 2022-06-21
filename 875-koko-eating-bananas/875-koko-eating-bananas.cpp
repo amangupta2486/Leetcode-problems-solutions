@@ -1,38 +1,34 @@
 class Solution {
 public:
-    int minEatingSpeed(vector<int>& a, int h) {
-        int l=1;
-        int r=0;
-        int n=a.size();
+    int minEatingSpeed(vector<int>& p, int h) {
+        
+        long long l=1,r=0;
+        int n=p.size();
         
         for(int i=0;i<n;i++)
         {
-            r=max(r,a[i]);
+            r+=p[i];
         }
         
-        int ans=INT_MAX;
-        
-        while(l<=r)
+        while(l<r)
         {
-            int m=(l+r)/2;
+            long long m=(l+r)/2;
             
-            int c=0,s=0;
+            int c=0;
             
             for(int i=0;i<n;i++)
             {
-                c+=(a[i]/m);
+                c+=p[i]/m;
                 
-                if(a[i]%m)
+                if(p[i]%m)
                 {
                     c++;
                 }
             }
-           // cout<<c<<" ";
             
             if(c<=h)
             {
-                ans=m;
-                r=m-1;
+                r=m;
             }
             else
             {
@@ -40,6 +36,6 @@ public:
             }
         }
         
-        return ans;
+        return r;
     }
 };
