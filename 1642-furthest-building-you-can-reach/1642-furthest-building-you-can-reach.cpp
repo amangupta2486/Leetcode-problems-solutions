@@ -27,6 +27,10 @@ public:
             {
                 ans=i;
             }
+            else
+            {
+                break;
+            }
         }
         
         if(ans==-1)
