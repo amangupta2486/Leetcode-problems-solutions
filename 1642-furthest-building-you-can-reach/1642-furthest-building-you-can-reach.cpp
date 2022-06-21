@@ -4,7 +4,7 @@ public:
         
         int n=h.size();
         
-        priority_queue<long long,vector<long long>,greater<long long>> q;
+        priority_queue<int,vector<int>,greater<int>> q;
         
         long long s=0,ans=-1;
         
