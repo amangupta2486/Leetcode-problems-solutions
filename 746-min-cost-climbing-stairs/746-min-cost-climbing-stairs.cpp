@@ -3,21 +3,11 @@ public:
     
     int dp[1005];
     
-    int solve(vector<int>& a,int i)
+    int solve(int i,int n,vector<int>& cost)
     {
-        if(i==0)
+        if(i==0 || i==1)
         {
-            return a[0];
-        }
-        
-        if(i==1)
-        {
-            return a[1];
-        }
-        
-        if(i<0)
-        {
-            return 0;
+            return cost[i];
         }
         
         if(dp[i]!=-1)
@@ -25,20 +15,13 @@ public:
             return dp[i];
         }
         
-        int r=INT_MAX;
-        
-        int l=a[i]+solve(a,i-1);
-        
-        if(i-2>=0)
-        r=a[i]+solve(a,i-2);
-        
-        return dp[i]=min(l,r);
+        return dp[i]=cost[i]+min(solve(i-1,n,cost),solve(i-2,n,cost));
     }
-    int minCostClimbingStairs(vector<int>& c) {
+    int minCostClimbingStairs(vector<int>& cost) {
         
-        int n=c.size();
+        int n=cost.size();
         memset(dp,-1,sizeof(dp));
         
-        return min({solve(c,n-1),solve(c,n-2)});
+        return min(solve(n-1,n,cost),solve(n-2,n,cost));
     }
 };
