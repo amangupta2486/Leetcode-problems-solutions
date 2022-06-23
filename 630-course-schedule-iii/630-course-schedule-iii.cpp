@@ -39,17 +39,11 @@ public:
               {
                   ans-=q.top();
                   q.pop();
-                  c--;
-              
-              }
-              
-              if(ans+a[i][0]<=a[i][1])
-              {
                   ans+=a[i][0];
                   q.push(a[i][0]);
-                  c++;
+
               }
-              
+           
           }
         }
         
