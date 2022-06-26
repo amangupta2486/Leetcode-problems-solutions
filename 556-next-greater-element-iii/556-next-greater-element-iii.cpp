@@ -1,28 +1,17 @@
 class Solution {
 public:
-    int nextGreaterElement(int num) {
+    int nextGreaterElement(int a) {
         
-        vector<int> a;
-            
-        while(num>0)
-        {
-            int p=num%10;
-           // cout<<p<<" ";
-            a.push_back(p);
-            num=num/10;
-        }
+        string s=to_string(a);
         
-        reverse(a.begin(),a.end());
- 
-        int n=a.size();
-        int i=n-1;
-        int f=0;
+        int n=s.size();
+        
+        int i,f=0;
         
         for(i=n-2;i>=0;i--)
         {
-            if(a[i]<a[i+1])
+            if(s[i]<s[i+1])
             {
-               // cout<<3<<endl;
                 f=1;
                 break;
             }
@@ -32,37 +21,24 @@ public:
         {
             for(int j=n-1;j>i;j--)
             {
-                if(a[j]>a[i])
+                if(s[j]>s[i])
                 {
-                    //cout<<3<<endl;
-                    swap(a[j],a[i]);
+                    swap(s[j],s[i]);
                     break;
                 }
             }
-        }
-        
-        if(f)
-        {
-            sort(a.begin()+i+1,a.end());
             
-            long long s=0;
+            sort(s.begin()+i+1,s.end());
             
-            for(int i=0;i<n;i++)
-            {
-               // cout<<a[i]<<" ";
-                s+=a[i];
-                if(i!=n-1)
-                {
-                    s*=10;
-                }
-            }
+            long b=stol(s);
+            //cout<<b<<endl;
             
-            if(s>INT_MAX)
+            if(b>INT_MAX)
             {
                 return -1;
             }
             
-            return s;
+            return b;
         }
         
         return -1;
