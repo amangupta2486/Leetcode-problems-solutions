@@ -2,15 +2,15 @@ class Solution {
 public:
     int furthestBuilding(vector<int>& h, int b, int l) {
         
-        int n=h.size();
-        
         priority_queue<int,vector<int>,greater<int>> q;
         
-        long long s=0,ans=-1;
+        int n=h.size();
+        
+        int s=0,ans=0;
         
         for(int i=0;i<n-1;i++)
         {
-            long long d=h[i+1]-h[i];
+            int d=h[i+1]-h[i];
             
             if(d>0)
             {
@@ -21,23 +21,16 @@ public:
                     s+=q.top();
                     q.pop();
                 }
+                
+                if(s>b)
+                {
+                    break;
+                }
             }
             
-            if(s<=b)
-            {
-                ans=i;
-            }
-            else
-            {
-                break;
-            }
+            ans=i+1;
         }
         
-        if(ans==-1)
-        {
-            return 0;
-        }
-        
-        return ans+1;
+        return ans;
     }
 };
