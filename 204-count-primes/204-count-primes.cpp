@@ -1,9 +1,10 @@
 class Solution {
 public:
-    
+
     void solve(int n,int &ans)
     {
-        vector<int> p(n+1,0);
+        bool p[n+1];
+        memset(p,false,sizeof(p));
         
         for(int i=2;i*i<n;i++)
         {
