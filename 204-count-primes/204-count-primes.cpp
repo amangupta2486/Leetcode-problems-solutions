@@ -1,21 +1,15 @@
-
-
 class Solution {
 public:
     
-    bool p[5000005];
-    
-    int countPrimes(int n) {
-        
-        int ans=0;
-        
-        memset(p,0,sizeof(p));
+    void solve(int n,int &ans)
+    {
+        vector<int> p(n+1,0);
         
         for(int i=2;i*i<n;i++)
         {
-            if(!p[i])
+            if(p[i]==0)
             {
-                for(int j=i*i;j<n;j+=i)
+                for(int j=i+i;j<n;j+=i)
                 {
                     p[j]=1;
                 }
@@ -29,6 +23,12 @@ public:
                 ans++;
             }
         }
+    }
+    int countPrimes(int n) {
+        
+        int ans=0;
+        
+        solve(n,ans);
         
         return ans;
     }
