@@ -3,35 +3,29 @@ public:
     
     int dp[105][105];
     
-    int solve(vector<vector<int>> &g,int i,int j,int n,int m)
+    int solve(int i,int j,vector<vector<int>>& g)
     {
-       
-        if(i>=n || j>=m || g[i][j]==1)
+        if(i>=g.size() || j>=g[0].size() || g[i][j]==1)
         {
             return 0;
         }
         
-         if(i==n-1 && j==m-1)
+        
+        if(i==g.size()-1 && j==g[0].size()-1)
         {
             return 1;
         }
-        
+          
         if(dp[i][j]!=-1)
         {
             return dp[i][j];
         }
-        
-        return dp[i][j]=solve(g,i+1,j,n,m)+ solve(g,i,j+1,n,m);
+        return dp[i][j]=solve(i+1,j,g) + solve(i,j+1,g);
     }
-    
-    int uniquePathsWithObstacles(vector<vector<int>> &g) {
-        
-        int n=g.size();
-        int m=g[0].size();
+    int uniquePathsWithObstacles(vector<vector<int>>& g) {
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(g,0,0,n,m);
+        return solve(0,0,g);
     }
 };
-
