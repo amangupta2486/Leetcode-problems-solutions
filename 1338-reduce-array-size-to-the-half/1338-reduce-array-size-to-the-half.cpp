@@ -4,7 +4,7 @@ public:
         
         int n=a.size();
         
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         
         for(auto i:a)
         {
