@@ -7,46 +7,52 @@ class Solution {
   public:
     // Function to detect cycle in a directed graph.
     int vis[100005];
-    int d[100005];
+    int ans=0;
+    int dfs[100005];
     
-    bool dfs(int i,vector<int> adj[])
+    bool solve(int i,vector<int> adj[])
     {
         vis[i]=1;
-        d[i]=1;
-        for(auto x:adj[i])
+        dfs[i]=1;
+        
+        for(auto j:adj[i])
         {
-            if(!vis[x])
+            if(!vis[j])
             {
-                if(dfs(x,adj))
-                return true;
+                if(solve(j,adj))
+                {
+                    return 1;
+                }
             }
-            else if(d[x])
+            
+            else if(dfs[j])
             {
-                return true;
+                return 1;
             }
         }
-        d[i]=0;
-       // d[x]=0;
+        dfs[i]=0;
         
-        return false;
+        return 0;
     }
     bool isCyclic(int V, vector<int> adj[]) {
-       int n=V;
-       memset(vis,0,sizeof(vis));
-       memset(d,0,sizeof(d));
-       
-       for(int i=0;i<n;i++)
-       {
-           if(!vis[i])
-           {
-               if(dfs(i,adj))
-               {
-                   return true;
-               }
-           }
-       }
-       
-       return false;
+        
+        memset(vis,0,sizeof(vis));
+        memset(dfs,0,sizeof(dfs));
+        
+        int n=V;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                if(solve(i,adj))
+                {
+                    return 1;
+                }
+            }
+        }
+        
+        return 0;
     }
 };
 
