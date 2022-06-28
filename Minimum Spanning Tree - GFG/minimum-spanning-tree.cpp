@@ -9,54 +9,64 @@ class Solution
 {
 	public:
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+	
+	int dsu[1005];
+	
+	int find(int x)
+	{
+	    while(x!=dsu[x])
+	    {
+	        x=dsu[x];
+	    }
+	    
+	    return x;
+	}
+	
+	void Union(int a,int b)
+	{
+	    int x=find(a);
+	    int y=find(b);
+	    
+	    if(x!=y)
+	    {
+	        dsu[y]=x;
+	    }
+	}
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         int n=V;
         
-        int key[n],mst[n],p[n];
+        for(int i=0;i<n;i++)
+        {
+            dsu[i]=i;
+        }
+        //queue<vector<int>,vector<vector<int>>,greater<vector<int>> q;
+        
+        vector<vector<int>> v;
         
         for(int i=0;i<n;i++)
         {
-            key[i]=INT_MAX;
-            mst[i]=0;
-            p[i]=-1;
-        }
-        
-        key[0]=0;
-        
-        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> q;
-        
-        q.push({0,0});
-        
-        while(!q.empty())
-        {
-            auto r=q.top();
-            q.pop();
-            
-            int u=r[1];
-            //cout<<u<<" ";
-            mst[u]=1;
-            
-            for(auto j:adj[u])
+            for(auto j:adj[i])
             {
-                int v=j[0];
-                int w=j[1];
-                
-                if(!mst[v] && w<key[v])
-                {
-                    key[v]=w;
-                    p[v]=u;
-                    q.push({w,v});
-                }
+                v.push_back({j[1],i,j[0]});
             }
         }
         
+        sort(v.begin(),v.end());
+        
         int ans=0;
         
-        for(int i=0;i<n;i++)
+        for(auto i:v)
         {
-            //cout<<key[i]<<" ";
-            ans+=key[i];
+            int w=i[0];
+            int u=i[1];
+            int v=i[2];
+            
+            if(find(u)!=find(v))
+            {
+                ans+=w;
+                Union(u,v);
+            }
         }
         
         return ans;
