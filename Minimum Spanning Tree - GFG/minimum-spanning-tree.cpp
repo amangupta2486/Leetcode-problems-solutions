@@ -24,19 +24,17 @@ class Solution
         
         key[0]=0;
         
-        for(int c=1;c<n;c++)
+        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> q;
+        
+        q.push({0,0});
+        
+        while(!q.empty())
         {
-            int u,mi=INT_MAX;
+            auto r=q.top();
+            q.pop();
             
-            for(int v=0;v<n;v++)
-            {
-                if(!mst[v] && key[v]<mi)
-                {
-                    mi=key[v];
-                    u=v;
-                }
-            }
-            
+            int u=r[1];
+            //cout<<u<<" ";
             mst[u]=1;
             
             for(auto j:adj[u])
@@ -48,6 +46,7 @@ class Solution
                 {
                     key[v]=w;
                     p[v]=u;
+                    q.push({w,v});
                 }
             }
         }
