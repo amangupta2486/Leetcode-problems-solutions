@@ -13,36 +13,39 @@ class Solution{
     *   V: number of vertices
     */
     vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) {
-       
-       int n=V;
-       
-       vector<int> key(n,100000000);
-       key[S]=0;
-       vector<vector<int>> v[n];
-       
-       for(auto i:adj)
-       {
-           v[i[0]].push_back({i[1],i[2]});
-           
-       }
-       for(int c=0;c<n-1;c++)
-       {
-           for(int i=0;i<n;i++)
-           {
-               for(auto j:v[i])
-               {
-                   int v=j[0];
-                   int w=j[1];
-                   
-                   if(key[v]>key[i]+w)
-                   {
-                       key[v]=key[i]+w;
-                   }
-               }
-           }
-       }
-       
-       return key;
+        
+        int n=V;
+        
+        vector<int> key(n,100000000);
+        
+        vector<vector<int>> v[n];
+        
+        for(auto i:adj)
+        {
+            v[i[0]].push_back({i[1],i[2]});
+        }
+        
+        key[S]=0;
+        
+        for(int c=1;c<n;c++)
+        {
+            for(int u=0;u<n;u++)
+            {
+                for(auto j:v[u])
+                {
+                    int v=j[0];
+                    int w=j[1];
+                    
+                    if(key[u]+w<key[v])
+                    {
+                        key[v]=key[u]+w;
+                    }
+                }
+            }
+        }
+        
+
+        return key;
     }
 };
 
