@@ -11,34 +11,37 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         int n=V;
+        
         vector<int> key(n,100000);
         
-         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
-         key[S]=0;
-         
-         q.push({0,S});
-         
-         while(!q.empty())
-         {
-             auto p=q.top();
-             q.pop();
-             
-             int u=p.second;
-             
-             for(auto j:adj[u])
-             {
-                 int v=j[0];
-                 int w=j[1];
-                 
-                 if(key[v]>key[u]+w)
-                 {
-                     key[v]=key[u]+w;
-                     q.push({key[v],v});
-                 }
-             }
-         }
-         
-         return key;
+        key[S]=0;
+        
+        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> q;
+        
+        q.push({0,S});
+        
+        while(!q.empty())
+        {
+            auto r=q.top();
+            q.pop();
+            
+            int u=r[1];
+            
+            //cout<<u<<" ";
+            for(auto j:adj[u])
+            {
+                int v=j[0];
+                int w=j[1];
+               // cout<<v<<" "<<w<<endl;
+                if(key[u]+w<key[v])
+                {
+                    key[v]=key[u]+w;
+                    q.push({key[v],v});
+                }
+            }
+        }
+        
+        return key;
     }
 };
 
