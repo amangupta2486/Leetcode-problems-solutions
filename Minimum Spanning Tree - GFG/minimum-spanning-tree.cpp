@@ -12,47 +12,55 @@ class Solution
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         int n=V;
-        vector<int> key(n,100000),p(n,-1);
-        vector<bool> mst(n,false);
         
-         key[0]=0;
-
-         for(int c=1;c<=n-1;c++)
-         {
-
-             int u,mi=INT_MAX;
-             
-             for(int i=0;i<n;i++)
-             {
-                 if(mst[i]==false && key[i]<mi)
-                 {
-                     mi=key[i];
-                     u=i;
-                 }
-             }
-             
-             mst[u]=true;
-             for(auto j:adj[u])
-             {
-                 int v=j[0];
-                 int w=j[1];
-                 
-                 if(mst[v]==false && key[v]>w)
-                 {
-                     key[v]=w;
-                     p[v]=u;
-                 }
-             }
-         }
-         
-         int ans=0;
-         
-         for(int i=0;i<n;i++)
-         {
-             ans+=key[i];
-         }
-         
-         return ans;
+        int key[n],mst[n],p[n];
+        
+        for(int i=0;i<n;i++)
+        {
+            key[i]=INT_MAX;
+            mst[i]=0;
+            p[i]=-1;
+        }
+        
+        key[0]=0;
+        
+        for(int c=1;c<n;c++)
+        {
+            int u,mi=INT_MAX;
+            
+            for(int v=0;v<n;v++)
+            {
+                if(!mst[v] && key[v]<mi)
+                {
+                    mi=key[v];
+                    u=v;
+                }
+            }
+            
+            mst[u]=1;
+            
+            for(auto j:adj[u])
+            {
+                int v=j[0];
+                int w=j[1];
+                
+                if(!mst[v] && w<key[v])
+                {
+                    key[v]=w;
+                    p[v]=u;
+                }
+            }
+        }
+        
+        int ans=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            //cout<<key[i]<<" ";
+            ans+=key[i];
+        }
+        
+        return ans;
     }
 };
 
