@@ -1,48 +1,58 @@
 class Solution {
 public:
     
-    void dfs(vector<vector<int>>& h,int i,int j,int prev,vector<vector<bool>> &q)
+    int dx[4]={1,-1,0,0};
+    int dy[4]={0,0,1,-1};
+    
+    void dfs(int i,int j,int n,int m,vector<vector<int>>& h,vector<vector<int>> &g)
     {
-        if(i<0 || j<0 || i>=h.size() || j>=h[0].size() || h[i][j]<prev || q[i][j]==1)
+        
+        for(int k=0;k<4;k++)
         {
-            return ;
+            int x=i+dx[k];
+            int y=j+dy[k];
+            
+            if(x>=0 && x<n && y>=0 && y<m && h[x][y]>=h[i][j] && !g[x][y])
+            {
+                g[x][y]=1;
+                dfs(x,y,n,m,h,g);
+            }
         }
-        
-        q[i][j]=1;
-        
-        dfs(h,i+1,j,h[i][j],q);
-        dfs(h,i,j+1,h[i][j],q);
-        dfs(h,i-1,j,h[i][j],q);
-        dfs(h,i,j-1,h[i][j],q);
     }
+    
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& h) {
         
         int n=h.size();
         int m=h[0].size();
         
-        vector<vector<int>> ans;
+        vector<vector<int>> p(n,vector<int>(m,0));
+        vector<vector<int>> at(n,vector<int>(m,0));
             
-        vector<vector<bool>> p(n,vector<bool>(m,0));
-        vector<vector<bool>> a(n,vector<bool>(m,0));
+        for(int j=0;j<m;j++)
+        {
+            p[0][j]=1;
+            at[n-1][j]=1;
+            
+            dfs(0,j,n,m,h,p);
+            dfs(n-1,j,n,m,h,at);
+        }
         
         for(int i=0;i<n;i++)
         {
-            dfs(h,i,0,0,p);
-            dfs(h,i,m-1,0,a);
+            p[i][0]=1;
+            at[i][m-1]=1;
+            
+            dfs(i,0,n,m,h,p);
+            dfs(i,m-1,n,m,h,at);
         }
         
-        for(int i=0;i<m;i++)
-        {
-            dfs(h,0,i,0,p);
-            dfs(h,n-1,i,0,a);
-        }
-        
+        vector<vector<int>> ans;
         
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(p[i][j]&& a[i][j])
+                if(p[i][j]==1 && at[i][j]==1)
                 {
                     ans.push_back({i,j});
                 }
