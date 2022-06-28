@@ -11,13 +11,22 @@
  */
 class Solution {
 public:
-    int ans=0;
+    
+    int ans=0,ans2=0;
+    // 2 camera in node
+    // 1 covered
+    // 0 uncovered
     
     int solve(TreeNode* root)
     {
         if(root==NULL)
         {
-            return 2;
+            return 1;
+        }
+        
+        if(root->left==NULL && root->right==NULL)
+        {
+            return 0;
         }
         
         int l=solve(root->left);
@@ -26,14 +35,25 @@ public:
         if(l==0 || r==0)
         {
             ans++;
-            return 1;
+            return 2;
         }
         
-        return l==1 || r==1 ? 2 : 0;
+        return l==2 || r==2 ? 1 : 0;
     }
+    
     int minCameraCover(TreeNode* root) {
         
-        return (solve(root)<1 ? 1 :0 )+ ans;
-        
+        if(solve(root)==0)
+        {
+            ans++;
+        }
+
+        return ans;
     }
 };
+/*
+[0,0,null,0,0]
+[0,0,null,0,null,0,null,null,0]
+[0,0,0,null,null,null,0]
+[0,0,null,null,0,0,null,null,0,0]
+*/
