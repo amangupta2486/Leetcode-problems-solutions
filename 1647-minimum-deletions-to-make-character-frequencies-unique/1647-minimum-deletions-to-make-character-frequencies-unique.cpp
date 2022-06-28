@@ -4,43 +4,52 @@ public:
         
         int n=s.size();
         
-        map<char,int> mp;
+        vector<int> v(26,0);
         
+        int mx=0;
         for(auto i:s)
         {
-            mp[i]++;
+            v[i-'a']++;
+            mx=max(mx,i-'a');
         }
         
-        vector<pair<int,char>> v;
-        
-        int mx=n;
-        
-        for(auto i:mp)
+        for(int i=0;i<26;i++)
         {
-           // cout<<i.second<<" "<<i.first<<endl;
-            v.push_back({i.second,i.first});
-            mx=max(mx,i.second);
+            mx=max(mx,v[i]);
         }
         
-        sort(v.rbegin(),v.rend());
+        vector<int> vis(mx+1,0);
+        
+        
+        vector<vector<int>> b;
+        
+        for(int i=0;i<26;i++)
+        {
+            b.push_back({v[i],i});
+        }
+        
+        sort(b.rbegin(),b.rend());
         
         int ans=0;
-        unordered_set<int> st;
         
-        int f=mx+1;
-        for(int i=0;i<v.size();i++)
+        for(int i=0;i<26;i++)
         {
-            int x=v[i].first;
-            
-            if(x>mx)
+            auto p=b[i];
+            int x=p[0];
+            int ch=p[1];
+            //cout<<x<<" "<<ch<<endl;
+            for(int j=x;j>0;j--)
             {
-                ans+=x-mx;
-                x=mx;
+                if(vis[j])
+                {
+                    ans++;
+                }
+                else
+                {
+                    vis[j]=1;
+                    break;
+                }
             }
-            
-            mx=max(0,x-1);
-            
-            st.insert(x);
         }
         
         return ans;
