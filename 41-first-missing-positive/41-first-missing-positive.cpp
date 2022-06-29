@@ -11,24 +11,29 @@ public:
                 a[i]=n+1;
             }
         }
-        for(int i=0;i<n;i++)
-        {
-            if(abs(a[i])-1>=0 && abs(a[i])-1<n && a[abs(a[i])-1]>0)
-            {
-                a[abs(a[i])-1]=-1*a[abs(a[i])-1];
-            }
-        }
         
         for(int i=0;i<n;i++)
         {
-           // cout<<a[i]<<" ";
+            int idx=abs(a[i]);
+            if(idx>0 && idx<=n && a[idx-1]>0)
+            {
+                a[idx-1]=-1*a[idx-1];
+            }
+        }
+        
+         // for(int i=0;i<n;i++)
+         // {
+         //     cout<<a[i]<<" ";
+         // }
+         //  cout<<endl;
+        
+        for(int i=0;i<n;i++)
+        {
             if(a[i]>=0)
             {
-                 //cout<<endl;
                 return i+1;
             }
         }
-       // cout<<endl;
         
         return n+1;
     }
