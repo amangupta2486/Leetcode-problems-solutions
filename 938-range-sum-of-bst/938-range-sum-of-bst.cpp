@@ -12,7 +12,8 @@
 class Solution {
 public:
     
-    int sum=0;
+    
+    int ans=0;
     
     void solve(TreeNode* root, int low, int high)
     {
@@ -21,19 +22,18 @@ public:
             return;
         }
         
-        int x=root->val;
-        if(x>=low && x<=high)
-        {
-            sum+=x;
-        }
-        
         solve(root->left,low,high);
+        if(root->val>= low and root->val<=high)
+        {
+            ans+=root->val;
+        }
         solve(root->right,low,high);
+        
     }
     int rangeSumBST(TreeNode* root, int low, int high) {
         
         solve(root,low,high);
         
-        return sum;
+        return ans;
     }
 };
