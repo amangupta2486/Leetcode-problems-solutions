@@ -1,21 +1,20 @@
 class Solution {
 public:
-    int minMoves(vector<int>& a) {
+    int minMoves(vector<int>& nums) {
         
-        int n=a.size();
-        
-        int mi=INT_MAX;
+        int n=nums.size();
+        int mi=nums[0];
         
         for(int i=0;i<n;i++)
         {
-            mi=min(mi,a[i]);
+            mi=min(mi,nums[i]);
         }
         
         int ans=0;
         
         for(int i=0;i<n;i++)
         {
-            ans+=a[i]-mi;
+            ans+=nums[i]-mi;
         }
         
         return ans;
