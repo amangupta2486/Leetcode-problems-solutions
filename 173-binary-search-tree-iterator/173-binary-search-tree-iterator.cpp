@@ -12,23 +12,25 @@
 class BSTIterator {
 public:
     
+    int i=0;
+    int n;
     vector<int> v;
-    int n=0,i=0;
     
-    void solve(TreeNode* root)
+    void inorder(TreeNode* root)
     {
         if(root==NULL)
         {
             return;
         }
         
-        solve(root->left);
+        inorder(root->left);
         v.push_back(root->val);
-        solve(root->right);
+        inorder(root->right);
     }
     BSTIterator(TreeNode* root) {
-        solve(root);
-        //cout<<v.size();
+        
+        inorder(root);
+        n=v.size();
     }
     
     int next() {
@@ -37,11 +39,8 @@ public:
     }
     
     bool hasNext() {
-        if(i==v.size())
-        {
-            return 0;
-        }
-        return 1;
+        
+        return i<n;
     }
 };
 
