@@ -1,46 +1,43 @@
 class Solution {
 public:
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        int n=numCourses;
+    vector<int> findOrder(int n, vector<vector<int>>& p) {
         
-        vector<int> d(n,0);
-        vector<int> v[n];
+        vector<int> ind(n,0);
+        vector<int> adj[n];
         
-        for(auto i:prerequisites)
+        for(auto i:p)
         {
-            v[i[1]].push_back(i[0]);
-            d[i[0]]++;
+            adj[i[1]].push_back(i[0]);
+            ind[i[0]]++;
         }
         
         queue<int> q;
+        vector<int> ans;
         
         for(int i=0;i<n;i++)
         {
-            if(d[i]==0)
+            if(ind[i]==0)
             {
                 q.push(i);
             }
         }
         
-        int cnt=0;
-        
-        vector<int> ans,emp;
-        
         while(!q.empty())
         {
             int k=q.size();
+            
             while(k--)
             {
                 auto p=q.front();
                 q.pop();
                 
                 ans.push_back(p);
-                cnt++;
                 
-                for(auto x:v[p])
+                for(auto x:adj[p])
                 {
-                    d[x]--;
-                    if(d[x]==0)
+                    ind[x]--;
+                    
+                    if(ind[x]==0)
                     {
                         q.push(x);
                     }
@@ -48,6 +45,8 @@ public:
             }
         }
         
-        return cnt==n ? ans : emp;
+        vector<int> emp;
+        
+        return ans.size()==n ? ans : emp;
     }
 };
