@@ -1,66 +1,60 @@
 class LRUCache {
 public:
     
-    class Node{
-        public:
+    struct Node{
         int key;
         int val;
-        Node* next;
-        Node* prev;
+        Node* next=NULL;
+        Node* prev=NULL;
         
-        Node(int key_,int val_)
-        {
-            key=key_;
-            val=val_;
+        Node(int x,int y){
+            key=x;
+            val=y;
         }
     };
     
-            
-    Node* head=new Node(-1,-1);
-    Node* tail=new Node(-1,-1);
-    
     int cap;
+    map<int,int> mpval;
     unordered_map<int,Node*> mp;
+
+    Node* head=new Node(0,0);
+    Node* tail=new Node(0,0);
     
     LRUCache(int capacity) {
         cap=capacity;
-
+        
         head->next=tail;
         tail->prev=head;
     }
     
-    void addnode(Node* newnode)
+    void addnode(Node* node)
     {
         Node* temp=head->next;
-        head->next=newnode;
-        temp->prev=newnode;
-        newnode->next=temp;
-        newnode->prev=head;
-        
+        node->next=temp;
+        temp->prev=node;
+        head->next=node;
+        node->prev=head;
     }
     
-    void deletenode(Node* delnode)
+    void deletenode(Node* node)
     {
-        Node* delprev=delnode->prev;
-        Node* delnext=delnode->next;
-        delprev->next=delnext;
-        delnext->prev=delprev;
+        Node* nodeprev=node->prev;
+        Node* nodenxt=node->next;
+        nodeprev->next=nodenxt;
+        nodenxt->prev=nodeprev;
     }
-
-    
     int get(int key) {
         
         if(mp.find(key)!=mp.end())
         {
-            Node* resnode=mp[key];
-            
-            int res=resnode->val;
+            Node* res=mp[key];
+            int val=res->val;
             mp.erase(key);
-            deletenode(resnode);
-            
-            addnode(resnode);
+            deletenode(res);
+            addnode(res);
             mp[key]=head->next;
-            return res;
+            
+            return val;
         }
         
         return -1;
@@ -70,9 +64,9 @@ public:
         
         if(mp.find(key)!=mp.end())
         {
-            Node* resnode=mp[key];
+            Node* node=mp[key];
             mp.erase(key);
-            deletenode(resnode);
+            deletenode(node);
         }
         
         if(mp.size()==cap)
@@ -81,8 +75,7 @@ public:
             deletenode(tail->prev);
         }
         
-        Node* newnode=new Node(key,value);
-        addnode(newnode);
+        addnode(new Node(key,value));
         mp[key]=head->next;
     }
 };
