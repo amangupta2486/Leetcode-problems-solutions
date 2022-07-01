@@ -1,42 +1,53 @@
 class Solution {
 public:
+    
+    set<string> mp;
+    int n;
+    int ans=0;
+    
+    int dp[305];
+    
+    int solve(int j,string &s)
+    {
 
+        if(j==n)
+        {
+            return 1;
+        }
+        
+        if(dp[j]!=-1)
+        {
+            return dp[j];
+        }
+
+       string t="";
+        
+        for(int i=j;i<n;i++)
+        {
+            t+=s[i];
+            //string t=s.substr(j,i-j);
+            if(mp.find(t)!=mp.end() && solve(i+1,s)){
+                return dp[j]=1;
+            }
+        }
+        
+        return dp[j]=0;
+    }
+    
     bool wordBreak(string s, vector<string>& w) {
         
-        int n=s.size();
-        int m=w.size();
+        n=s.size();
         
-        if(m==0)
-        {
-            return 0;
-        }
+        memset(dp,-1,sizeof(dp));
         
-        unordered_map<string,bool> mp;
+        for(auto x:w)
+        mp.insert(x);
         
-        bool dp[n+1];
-        memset(dp,0,sizeof(dp));
-        
-        for(auto i:w)
-        {
-           mp[i]=1;
-        }
-        
-        dp[0]=1;
-        
-        for(int i=1;i<=n;i++)
-        {
-             for(int j=i;j>=0;j--)
-             {
-                 if(dp[j])
-                 {
-                     string b=s.substr(j,i-j);
-                     
-                     if(mp[b])
-                     dp[i]=1;
-                 }
-             }
-        }
-        
-        return dp[n];
+        return solve(0,s);
+
     }
 };
+/*
+"bccdbacdbdacddabbaaaadababadad"
+["cbc","bcda","adb","ddca","bad","bbb","dad","dac","ba","aa","bd","abab","bb","dbda","cb","caccc","d","dd","aadb","cc","b","bcc","bcd","cd","cbca","bbd","ddd","dabb","ab","acd","a","bbcc","cdcbd","cada","dbca","ac","abacd","cba","cdb","dbac","aada","cdcda","cdc","dbc","dbcb","bdb","ddbdd","cadaa","ddbc","babb"]
+*/
