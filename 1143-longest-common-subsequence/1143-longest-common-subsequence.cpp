@@ -3,29 +3,33 @@ public:
     
     int dp[1005][1005];
     
-    int solve(string &word1, string &word2,int n,int m)
+    int solve(string &a,string &b,int i,int j)
     {
-        if(n==0 ||m==0)
+        if(i<0 || j<0)
         {
             return 0;
         }
         
-        if(dp[n][m]!=-1)
+        if(dp[i][j]!=-1)
         {
-            return dp[n][m];
-        }
-        if(word1[n-1]==word2[m-1])
-        {
-            return dp[n][m]=1+solve(word1,word2,n-1,m-1);
+            return dp[i][j];
         }
         
-        return dp[n][m]=max(solve(word1,word2,n-1,m),solve(word1,word2,n,m-1));
+        if(a[i]==b[j])
+        {
+            return 1+solve(a,b,i-1,j-1);
+        }
+        
+        return dp[i][j]=max(solve(a,b,i-1,j),solve(a,b,i,j-1));
     }
-    int longestCommonSubsequence(string word1, string word2) {
-        int n=word1.size();
-        int m=word2.size();
+    
+    int longestCommonSubsequence(string a, string b) {
+        
+        int n=a.size();
+        int m=b.size();
+        
         memset(dp,-1,sizeof(dp));
         
-        return solve(word1,word2,n,m);
+        return solve(a,b,n-1,m-1);    
     }
 };
