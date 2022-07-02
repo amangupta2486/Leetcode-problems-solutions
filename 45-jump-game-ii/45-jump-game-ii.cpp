@@ -3,7 +3,7 @@ public:
     
     int dp[10005];
     
-    int solve(int i,int n,vector<int>& a)
+    int solve(int i,vector<int>& a,int n)
     {
         if(i>=n-1)
         {
@@ -14,28 +14,20 @@ public:
         {
             return dp[i];
         }
-        
-        int ans=INT_MAX;
-        
-        if(a[i]==0)
-        {
-            return 10000;
-        }
+        int ans=10000;
         
         for(int j=1;j<=a[i];j++)
         {
-            ans=min(ans,solve(i+j,n,a));
+            ans=min(ans,1+solve(i+j,a,n));
         }
         
-        return dp[i]=1+ans;
+        return dp[i]=ans;
     }
-    
     int jump(vector<int>& a) {
         
         int n=a.size();
-        
         memset(dp,-1,sizeof(dp));
         
-        return solve(0,n,a);
+        return solve(0,a,n);
     }
 };
