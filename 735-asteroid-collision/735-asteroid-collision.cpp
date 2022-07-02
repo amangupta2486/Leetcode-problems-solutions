@@ -4,56 +4,41 @@ public:
         
         int n=a.size();
         
-        stack<int> s;
+        vector<int> s;
         
         for(int i=0;i<n;i++)
         {
             int f=1;
             
-            while(!s.empty() && a[i]<0 && s.top()>0 && s.top()<=abs(a[i]))
+            while(!s.empty() && a[i]<0 && s.back()>0 && s.back()<=abs(a[i]))
             {
 
-               if(s.top()==abs(a[i]))
+               if(s.back()==abs(a[i]))
                {
                    f=0;
-                   s.pop();
+                   s.pop_back();
                    break;
                }
                 
-               s.pop();
+               s.pop_back();
                 
             }
             
             if(a[i]<0 && f)
             {
-//                 if(i>0 &&  abs(a[i])==a[i-1])
-//                 {
-//                     continue;
-//                 }
-                
-                if(s.empty() || s.top()<0)
+                if(s.empty() || s.back()<0)
                 {
-                    s.push(a[i]);
+                    s.push_back(a[i]);
                 }
             }
             
             else if(a[i]>0)
             {
-                s.push(a[i]);
+                s.push_back(a[i]);
             }
             
         }
         
-        vector<int> ans;
-        
-        while(!s.empty())
-        {
-            ans.push_back(s.top());
-            s.pop();
-        }
-        
-        reverse(ans.begin(),ans.end());
-        
-        return ans;
+        return s;
     }
 };
