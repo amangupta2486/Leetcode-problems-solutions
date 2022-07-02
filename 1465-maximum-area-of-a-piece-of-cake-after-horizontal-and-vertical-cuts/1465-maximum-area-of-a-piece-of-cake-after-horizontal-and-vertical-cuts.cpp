@@ -1,35 +1,35 @@
 class Solution {
 public:
-    int maxArea(int h, int w, vector<int>& ho, vector<int>& v) {
+    int maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>& verticalCuts) {
         
-        int n=ho.size();
-        int m=v.size();
+        horizontalCuts.push_back(0);
+        horizontalCuts.push_back(h);
         
-        sort(ho.begin(),ho.end());
-        sort(v.begin(),v.end());
+        verticalCuts.push_back(0);
+        verticalCuts.push_back(w);
         
-        ho.insert(ho.begin(),0);
-        v.insert(v.begin(),0);
-        ho.push_back(h);
-        v.push_back(w);
+        sort(horizontalCuts.begin(),horizontalCuts.end());
+        sort(verticalCuts.begin(),verticalCuts.end());
         
-        long long l=0,b=0,mod=1e9+7;
+        int n=horizontalCuts.size();
+        int m=verticalCuts.size();
         
-        for(int i=0;i<=n;i++)
+        long long len=0,brd=0;
+        int mod=1e9 +7;
+        
+        for(int i=0;i<n-1;i++)
         {
-            l=max(l,(ho[i+1]-ho[i])*1ll);
-            //cout<<l<<" ";
-            l%=mod;
+            len=max(len,(long long)horizontalCuts[i+1]-horizontalCuts[i]);
+            
         }
-        //cout<<endl;
-        for(int i=0;i<=m;i++)
-        {
-            b=max(b,(v[i+1]-v[i])*1ll);
-            //cout<<b<<" ";
-            b%=mod;
-        }
-        //cout<<endl;
         
-        return (l*b)%mod;       
+        for(int i=0;i<m-1;i++)
+        {
+            brd=max(brd,(long long)verticalCuts[i+1]-verticalCuts[i]);
+        }
+        
+        //cout<<len<<" "<<brd<<endl;
+        
+        return (len*brd)%mod;
     }
 };
