@@ -1,16 +1,12 @@
 class Solution {
 public:
-    
-    set<string> mp;
-    int n;
-    int ans=0;
+    unordered_set<string> mp;
     
     int dp[305];
     
-    int solve(int j,string &s)
+    bool solve(int j,string s, vector<string>& word)
     {
-
-        if(j==n)
+        if(j==s.size())
         {
             return 1;
         }
@@ -19,35 +15,31 @@ public:
         {
             return dp[j];
         }
-
-       string t="";
         
-        for(int i=j;i<n;i++)
+        string t="";
+        
+        for(int i=j;i<s.size();i++)
         {
             t+=s[i];
-            //string t=s.substr(j,i-j);
-            if(mp.find(t)!=mp.end() && solve(i+1,s)){
+            
+            if(mp.find(t)!=mp.end() && solve(i+1,s,word))
+            {
                 return dp[j]=1;
             }
         }
         
         return dp[j]=0;
     }
-    
-    bool wordBreak(string s, vector<string>& w) {
+    bool wordBreak(string s, vector<string>& word) {
         
-        n=s.size();
+        int n=s.size();
         
+        for(auto i:word)
+        {
+            mp.insert(i);
+        }
         memset(dp,-1,sizeof(dp));
         
-        for(auto x:w)
-        mp.insert(x);
-        
-        return solve(0,s);
-
+        return solve(0,s,word);
     }
 };
-/*
-"bccdbacdbdacddabbaaaadababadad"
-["cbc","bcda","adb","ddca","bad","bbb","dad","dac","ba","aa","bd","abab","bb","dbda","cb","caccc","d","dd","aadb","cc","b","bcc","bcd","cd","cbca","bbd","ddd","dabb","ab","acd","a","bbcc","cdcbd","cada","dbca","ac","abacd","cba","cdb","dbac","aada","cdcda","cdc","dbc","dbcb","bdb","ddbdd","cadaa","ddbc","babb"]
-*/
