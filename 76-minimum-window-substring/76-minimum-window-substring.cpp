@@ -2,78 +2,57 @@ class Solution {
 public:
     string minWindow(string s, string t) {
         
-        if(s=="" || t=="" )
-        {
-            return "";
-        }
-        
         int n=s.size();
         int m=t.size();
         
-        if(n<m)
-        {
-            return "";
-        }
-        if(s==t)
-        {
-            return s;
-        }
         map<char,int> mp,mp2;
         
         for(auto i:t)
         {
-            mp[i]++;
+            mp2[i]++;
         }
-        int fsize=mp.size();
-        int f=0;
+        
+        int formed=0,req=m;
         
         int j=0;
-        string ans=s,d=s;
-        ans+=s;
-        d+=s;
-        
-        //cout<<mp.size()<<endl;
+        int l=n;
+        string ans="";
         
         for(int i=0;i<n;i++)
         {
-            //cout<<f<<" ";
-            mp2[s[i]]++;
+            mp[s[i]]++;
             
-            if(mp2[s[i]]==mp[s[i]] && mp[s[i]]>0)
+            if(mp[s[i]]<=mp2[s[i]])
             {
-                f++;
+                formed++;
             }
             
-            while(f==fsize && j<=i)
+            if(formed==req)
             {
-
-                string b=s.substr(j,i-j+1);
-                //cout<<b<<endl;
-                if(b.size()<ans.size())
+                
+                while(j<n && formed==req)
                 {
-                    ans=b;
+                    if(l>i-j)
+                    {
+                        l=i-j;
+                        ans=s.substr(j,i-j+1);
+                       // cout<<ans<<" ";
+                    }
+                    
+                    char ch=s[j];
+                    mp[ch]--;
+                    
+                    if(mp[ch]<mp2[ch] && mp2[ch]>0)
+                    {
+                        formed--;
+                    }
+                    
+                    j++;
                 }
-
-                mp2[s[j]]--;
-                if(mp2[s[j]]<mp[s[j]] &&  mp[s[j]]>0)
-                {
-                    f--;
-                }
-                j++;
-               
             }
         }
         
-        if(ans==d)
-        {
-            return "";
-        }
-        
+        cout<<endl;
         return ans;
     }
 };
-
-/*
-"acbbaca"
-"aba"
-*/
