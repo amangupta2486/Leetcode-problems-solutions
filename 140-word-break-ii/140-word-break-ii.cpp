@@ -1,41 +1,37 @@
 class Solution {
 public:
-    
-    int n;
-    int dp[25];
-    unordered_set<string> mp;
+    map<string,int> mp;
     vector<string> ans;
     
-    void solve(int j,string &s,string t)
+    void solve(int j,int n,string s,string r, vector<string>& w)
     {
         if(j==n)
         {
-            t.pop_back();
-            ans.push_back(t);
+            r.pop_back();
+            ans.push_back(r);
             return;
         }
         
-        string r="";
-        
+        string t="";
         for(int i=j;i<n;i++)
         {
-            r+=s[i];
-            
-            if(mp.find(r)!=mp.end())
+            t+=s[i];
+            if(mp.find(t)!=mp.end())
             {
-                solve(i+1,s,t+r+" ");
+                solve(i+1,n,s,r+t+" ",w);
             }
         }
     }
-    
     vector<string> wordBreak(string s, vector<string>& w) {
         
-        n=s.size();
+        int n=s.size();
         
-        for(auto x:w)
-        mp.insert(x);
+        for(auto i:w)
+        {
+            mp[i]++;
+        }
         
-        solve(0,s,"");
+        solve(0,n,s,"",w);
         
         return ans;
     }
