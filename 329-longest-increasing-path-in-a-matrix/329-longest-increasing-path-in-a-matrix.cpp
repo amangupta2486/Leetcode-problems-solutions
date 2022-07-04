@@ -18,7 +18,7 @@ public:
             return dp[i][j];    
         }
         
-        int ans=1;
+        int ans=0;
         
         //ans=len;
         
@@ -59,6 +59,6 @@ public:
             }
         }
         
-        return ans;
+        return ans+1;
     }
 };
