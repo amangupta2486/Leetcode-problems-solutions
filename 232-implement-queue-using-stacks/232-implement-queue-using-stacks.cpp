@@ -1,9 +1,10 @@
 class MyQueue {
 public:
+    
     stack<int> s1,s2;
     
     MyQueue() {
-
+        
     }
     
     void push(int x) {
@@ -21,13 +22,12 @@ public:
             s1.push(s2.top());
             s2.pop();
         }
-        
     }
     
     int pop() {
         int p=s1.top();
         s1.pop();
-               
+        
         return p;
     }
     
