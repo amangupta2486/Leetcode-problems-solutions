@@ -6,14 +6,6 @@ public:
         
         int i=0,j=n-1;
         
-        if(n==2)
-        {
-            if(a[0]>=a[1])
-            {
-                return 1;
-            }
-        }
-        
         if(a[i]<=a[j])
         {
             return a[0];
