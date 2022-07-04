@@ -1,13 +1,11 @@
 class Solution {
 public:
-    
-    int solve(vector<int> &a)
-    {
+    int findMin(vector<int>& a) {
         int n=a.size();
         
         int i=0,j=n-1;
         
-        if(a[0]<=a[n-1])
+        if(a[i]<=a[j])
         {
             return 0;
         }
@@ -16,7 +14,7 @@ public:
         {
             int m=(i+j)/2;
             
-            if(a[m]<=a[(n+m-1)%n] && a[m]<=a[(m+1)%n])
+            if(a[m]<=a[(m+1)%n] && a[m]<=a[((m-1)+n)%n])
             {
                 return m;
             }
@@ -25,7 +23,8 @@ public:
             {
                 i=m+1;
             }
-            else
+            
+            else if(a[m]<=a[n-1])
             {
                 j=m-1;
             }
@@ -34,11 +33,8 @@ public:
         return 0;
     }
     
-    int binarysearch(vector<int>& a, int t,int x,int y)
+    int find(vector<int>& a,int i,int j,int t)
     {
-        int n=a.size();
-        int i=x,j=y-1;
-      //  cout<<i<<" "<<j<<endl;
         while(i<=j)
         {
             int m=(i+j)/2;
@@ -48,13 +44,13 @@ public:
                 return m;
             }
             
-            if(a[m]>t)
+            if(a[m]<t)
             {
-                j=m-1;
+                i=m+1;
             }
             else
             {
-                i=m+1;
+                j=m-1;
             }
         }
         
@@ -63,14 +59,16 @@ public:
     int search(vector<int>& a, int t) {
         
         int n=a.size();
-        int m=solve(a);
-       // cout<<m<<endl;
+        
+        int m=findMin(a);
+        
         if(a[m]==t)
         {
             return m;
         }
-        int f1=binarysearch(a,t,0,m);
-        int f2=binarysearch(a,t,m,n);
+        
+        int f1=find(a,0,m-1,t);
+        int f2=find(a,m,n-1,t);
         
         if(f1!=-1)
         {
