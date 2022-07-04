@@ -1,26 +1,37 @@
 class Solution {
 public:
     
-    int dp[205][205];
+    int n,m;
+    
     int dx[4]={1,-1,0,0};
     int dy[4]={0,0,1,-1};
     
-    int dfs(vector<vector<int>>& g,int i,int j,int n,int m)
+    
+    int dp[205][205];
+    
+    int solve(int i,int j,vector<vector<int>>& g,vector<vector<int>>& vis,int len)
     {
+        //ans=max(ans,len);
+        
         if(dp[i][j]!=-1)
         {
-            return dp[i][j];
+            return dp[i][j];    
         }
-        int ans=0;
+        
+        int ans=1;
+        
+        //ans=len;
         
         for(int k=0;k<4;k++)
         {
             int x=i+dx[k];
             int y=j+dy[k];
             
-            if(x>=0 && x<n && y>=0 && y<m && g[x][y]>g[i][j])
+            if(x>=0 && x<n && y>=0 && y<m && g[x][y]>g[i][j] && !vis[x][y])
             {
-                ans=max(ans,1+dfs(g,x,y,n,m));
+                vis[x][y]=1;
+                ans=max(ans,1+solve(x,y,g,vis,1+len));
+                vis[x][y]=0;
             }
         }
         
@@ -28,17 +39,23 @@ public:
     }
     int longestIncreasingPath(vector<vector<int>>& g) {
         
-        int n=g.size();
-        int m=g[0].size();
-        
+        n=g.size();
+        m=g[0].size();
         int ans=0;
+        
         memset(dp,-1,sizeof(dp));
+        vector<vector<int>> vis(n,vector<int>(m,0));
         
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                ans=max(ans,1+dfs(g,i,j,n,m));
+                
+                vis[i][j]=1;
+                
+                ans=max(ans,solve(i,j,g,vis,1));
+                //solve(i,j,g,vis,1);
+                vis[i][j]=0;
             }
         }
         
