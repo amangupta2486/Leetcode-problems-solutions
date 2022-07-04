@@ -14,13 +14,14 @@ public:
                 return 1;
             }
             
-            if(g[i][j]<t)
-            {
-                i++;
-            }
-            else
+            if(g[i][j]>t)
             {
                 j--;
+            }
+            
+            else if(g[i][j]<t)
+            {
+                i++;
             }
         }
         
