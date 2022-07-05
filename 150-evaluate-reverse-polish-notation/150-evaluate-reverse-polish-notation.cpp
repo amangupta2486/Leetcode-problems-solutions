@@ -1,53 +1,59 @@
 class Solution {
 public:
-    int evalRPN(vector<string>& t) {
+    int evalRPN(vector<string>& a) {
         
-        int n=t.size();
+        int n=a.size();
         
         stack<int> s;
         
         for(int i=0;i<n;i++)
         {
-            if(t[i]=="*")
+            if(a[i]=="+")
             {
-                int p=s.top();
+                auto p=s.top();
                 s.pop();
-                int q=s.top();
+                auto q=s.top();
                 s.pop();
                 
-                s.push(p*q);
+                int x=q+p;
+                s.push(x);
             }
-            else if(t[i]=="+" )
+            else if(a[i]=="*")
             {
-                int p=s.top();
+                auto p=s.top();
                 s.pop();
-                int q=s.top();
+                auto q=s.top();
                 s.pop();
                 
-                s.push(p+q);
+                int x=q*p;
+                s.push(x);
             }
-            else if(t[i]=="-")
+            else if(a[i]=="/")
             {
-                int p=s.top();
+                auto p=s.top();
                 s.pop();
-                int q=s.top();
+                auto q=s.top();
                 s.pop();
                 
-                s.push(q-p);
+                int x=q/p;
+                s.push(x);
             }
-            else if(t[i]=="/")
+            else if(a[i]=="-")
             {
-                int p=s.top();
+                auto p=s.top();
                 s.pop();
-                int q=s.top();
+                auto q=s.top();
                 s.pop();
-                //cout<<p/q<<endl;
-                s.push(q/p);
+                
+                int x=q-p;
+                s.push(x);
             }
             else
             {
-                //cout<<stoi(t[i])<<" ";
-                s.push(stoi(t[i]));
+                //cout<<a[i]<<" ";
+                
+                int x=stoi(a[i]);
+                s.push(x);
             }
         }
         
