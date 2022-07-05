@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    
     vector<int> v;
     
     void solve(TreeNode* root)
@@ -27,6 +28,7 @@ public:
     int kthSmallest(TreeNode* root, int k) {
         
         solve(root);
+        
         return v[k-1];
     }
 };
