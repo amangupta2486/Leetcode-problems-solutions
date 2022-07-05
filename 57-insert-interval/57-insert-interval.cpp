@@ -1,39 +1,39 @@
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& a, vector<int>& b) {
+    vector<vector<int>> insert(vector<vector<int>>& itr, vector<int>& nitr) {
         
-        int n=a.size();
+        int n=itr.size();
         
-        int f=0;
+        int f=1;
         
         for(int i=0;i<n;i++)
         {
-            if(b[0]<a[i][0])
+            if(itr[i][0]>nitr[0])
             {
-                a.insert(a.begin()+i,b);
-                f==1;
+                f=0;
+                itr.insert(itr.begin()+i,nitr);
                 break;
             }
         }
         
-        if(f==0)
+        if(f)
         {
-            a.push_back(b);
+            itr.push_back(nitr);
         }
-        vector<vector<int>> ans;
+        vector<vector<int>> merge;
         
-        for(auto i:a)
+        for(auto x:itr)
         {
-            if(ans.empty() || ans.back()[1]<i[0])
+            if(merge.empty() || merge.back()[1]<x[0])
             {
-                ans.push_back(i);
+                merge.push_back(x);
             }
             else
             {
-                ans.back()[1]=max(ans.back()[1],i[1]);
+                merge.back()[1]=max(merge.back()[1],x[1]);
             }
         }
-                
-        return ans;
+        
+        return merge;
     }
 };
