@@ -1,9 +1,7 @@
-#define pp pair<string,int>
-
 class TimeMap {
 public:
     
-    unordered_map<string,vector<pair<string,int>>> mp;
+    map<string,vector<pair<int,string>>> mp;
     
     TimeMap() {
         mp.clear();
@@ -11,22 +9,20 @@ public:
     
     void set(string key, string value, int timestamp) {
         
-        mp[key].push_back({value,timestamp});
-        
+        mp[key].push_back({timestamp,value});
     }
     
     string get(string key, int timestamp) {
         
-        int time=0;
-        string ans="";
         int n=mp[key].size();
+        
         int i=0,j=n-1;
         
         while(i<=j)
         {
-            int m=(j-i)/2 + i;
+            int m=(i+j)/2;
             
-            if(mp[key][m].second>timestamp)
+            if(mp[key][m].first>timestamp)
             {
                 j=m-1;
             }
@@ -37,24 +33,11 @@ public:
         }
         
         if(i==0)
-            return "";
-        
-        return mp[key][i-1].first;
-        
-        /*
-        for(auto i:mp[key])
         {
-            int t=i.second;
-            
-            if(t<=timestamp && t>=time)
-            {
-              time=t;
-              ans=i.first;
-            }
+            return "";
         }
         
-        return ans;
-        */
+        return mp[key][i-1].second;
     }
 };
 
