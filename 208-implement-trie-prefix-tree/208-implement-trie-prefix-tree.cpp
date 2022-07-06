@@ -1,11 +1,12 @@
-struct Node
-{
-    Node* link[26];
-    bool flag= false;
+struct Node{
+    public:
     
-    bool conatinKey(char ch)
+    Node* link[26];
+    bool flag=false;
+    
+    bool containskey(char ch)
     {
-        return link[ch-'a'];
+        return link[ch-'a']!=NULL;
     }
     
     void put(char ch,Node* node)
@@ -17,7 +18,6 @@ struct Node
     {
         return link[ch-'a'];
     }
-    
     
     void setEnd()
     {
@@ -32,60 +32,57 @@ struct Node
 
 class Trie {
 public:
+    
     Node* root;
     
     Trie() {
-        root=new Node();    
+        root=new Node();
     }
     
-    void insert(string word) {
+    void insert(string w) {
+        
         Node* node=root;
-        int n=word.size();
+        int n=w.size();
         
         for(int i=0;i<n;i++)
         {
-            if(!node->conatinKey(word[i]))
+            if(!node->containskey(w[i]))
             {
-                node->put(word[i],new Node());
+                node->put(w[i],new Node());
             }
-            
-            node=node->get(word[i]);
+            node=node->get(w[i]);
         }
         
         node->setEnd();
     }
     
-    bool search(string word) {
-        
+    bool search(string w) {
         Node* node=root;
-        int n=word.size();
+        int n=w.size();
         
         for(int i=0;i<n;i++)
         {
-            if(!node->conatinKey(word[i]))
+            if(!node->containskey(w[i]))
             {
                 return 0;
             }
-            
-            node=node->get(word[i]);
+            node=node->get(w[i]);
         }
         
         return node->isEnd();
     }
     
-    bool startsWith(string prefix) {
-        
+    bool startsWith(string p) {
         Node* node=root;
-        int n=prefix.size();
+        int n=p.size();
         
         for(int i=0;i<n;i++)
         {
-            if(!node->conatinKey(prefix[i]))
+            if(!node->containskey(p[i]))
             {
-               return 0;
+                return 0;
             }
-            
-            node=node->get(prefix[i]);
+            node=node->get(p[i]);
         }
         
         return 1;
