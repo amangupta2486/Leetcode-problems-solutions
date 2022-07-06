@@ -1,7 +1,7 @@
 /**
  * Definition for a binary tree node.
- * struct TreeNode {
  *     int val;
+ * struct TreeNode {
  *     TreeNode *left;
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
@@ -11,42 +11,25 @@
  */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
-        
-        queue<TreeNode*> q;
-        vector<int> ans;
-        
+    vector<int> ans;
+    
+    void solve(TreeNode* root,int level)
+    {
         if(root==NULL)
         {
-            return ans;
+            return;
         }
         
-        q.push(root);
+        if(ans.size()==level)
+        ans.push_back(root->val);
         
-        while(!q.empty())
-        {
-            int k=q.size();
-            vector<int> v;
-            
-            while(k--)
-            {
-                auto p=q.front();
-                q.pop();
-                
-                v.push_back(p->val);
-                
-                if(p->left!=NULL)
-                {
-                    q.push(p->left);
-                }
-                if(p->right!=NULL)
-                {
-                    q.push(p->right);
-                }
-            }
-            
-            ans.push_back(v.back());
-        }
+        solve(root->right,level+1);
+        solve(root->left,level+1);
+        
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        
+        solve(root,0);
         
         return ans;
     }
