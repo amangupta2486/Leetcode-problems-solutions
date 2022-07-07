@@ -1,62 +1,69 @@
 class Solution {
 public:
     
+    int n,m,l;
     
-    int dp[1005][1005];
+    //int ans=0;
     
-    bool solve(string s1, string s2, string s3,int i,int j,int k)
+    int dp[105][105];
+    
+    int solve(string &s1, string &s2, string &s3,int i,int j,int k,string s)
     {
-        if(i==s1.size())
+        // if(s.size()==n+m)
+        // cout<<s<<endl;
+        
+        if(i==n && j==m)
         {
-            return s2.substr(j)==s3.substr(k);
+            if(s==s3)
+            {
+                return 1;
+            }
+            return 0;
         }
         
-         if(j==s2.size())
+        if(i>n || j>m)
         {
-            return s1.substr(i)==s3.substr(k);
+            return 0;
         }
-        
+       
         if(dp[i][j]!=-1)
         {
-            return dp[i][j]==1 ? 1:0 ;
-        }
-        bool ans=false;
-        
-        if((s3[k]==s1[i] && solve(s1,s2,s3,i+1,j,k+1)) || (s3[k]==s2[j] && solve(s1,s2,s3,i,j+1,k+1)))
-        {
-            ans=true;
+            return dp[i][j];
         }
         
-        dp[i][j]=ans? 1: 0;
+        int ans=0;
         
-        return ans;
+         if(i<n && s1[i]==s3[k])
+         ans|=solve(s1,s2,s3,i+1,j,k+1,s+s1[i]); 
+         
+         if(j<m && s2[j]==s3[k])
+         ans|=solve(s1,s2,s3,i,j+1,k+1,s+s2[j]);
+        
+        return dp[i][j]=ans;
+    
     }
     bool isInterleave(string s1, string s2, string s3) {
         
-        int n=s1.size();
-        int m=s2.size();
-        int p=s3.size();
+        n=s1.size();
+        m=s2.size();
+        l=s3.size();
         
-        if(n+m!=p)
+        if(l!=n+m)
         {
             return 0;
         }
         
-        int i=0,j=0,k=0;
         memset(dp,-1,sizeof(dp));
         
-        return solve(s1,s2,s3,i,j,k);
+        string s="";
         
+        return solve(s1,s2,s3,0,0,0,s);
+        
+        //return ans;
     }
 };
-
-// "aabc"
-// "abad"
-// "aabcabad"
-
-// stdout
-// 3
-// Output
-// false
-// Expected
-// true
+/*
+"abaaacbacaab"
+"bcccababccc"
+"bcccabaaaaabccaccbacabb"
+*/
