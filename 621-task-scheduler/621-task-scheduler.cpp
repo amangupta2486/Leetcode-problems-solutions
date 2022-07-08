@@ -25,10 +25,26 @@ public:
             }
         }
         
-        int time=(mx-1)*n + mx;
+        int partcount=mx-1;
+        int partlength = n-(cnt-1);
         
-        int ans=time+(cnt-1);
+        int emptyslots= partcount*partlength;
         
-        return max(ans,m);
+        int availabletasks= tasks.size() - (mx*cnt);
+        
+        int idle=max(0,emptyslots-availabletasks);
+        
+//         int time=(mx-1)*n + mx;  // (maxfrefreq-1)*idel time + max frequency;
+        
+//         int ans=time+(cnt-1); // add count of max freuency
+        
+        return m+idle;
     }
 };
+/*
+ n==1
+ 5+1=6
+ 
+ 5*2=10 + 6 =16
+ 
+*/
