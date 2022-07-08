@@ -3,21 +3,20 @@ public:
     int maxProduct(vector<int>& a) {
         
         int n=a.size();
-        int b=a[0];
-        int c=a[0];
-        int ans=a[0];
+        
+        int mx=a[0],mi=a[0],ans=a[0];
         
         for(int i=1;i<n;i++)
         {
             if(a[i]<0)
             {
-                swap(b,c);
+                swap(mx,mi);
             }
             
-            b=max(a[i],b*a[i]);
-            c=min(a[i],c*a[i]);
+            mx=max(a[i],mx*a[i]);
+            mi=min(a[i],mi*a[i]);
             
-            ans=max(ans,b);
+            ans=max(ans,mx);
         }
         
         return ans;
