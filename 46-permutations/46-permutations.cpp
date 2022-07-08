@@ -1,28 +1,27 @@
 class Solution {
 public:
-    
     vector<vector<int>> ans;
     
-    void solve(int i,vector<int>& a)
+    void solve(int i,int n,vector<int>& a)
     {
-        if(i==a.size())
+        if(i==n)
         {
             ans.push_back(a);
             return;
         }
         
-        for(int j=i;j<a.size();j++)
+        for(int j=i;j<n;j++)
         {
             swap(a[i],a[j]);
-            solve(i+1,a);
+            solve(i+1,n,a);
             swap(a[i],a[j]);
         }
     }
-    vector<vector<int>> permute(vector<int>& a) {
-        
+    
+    vector<vector<int>> permute(vector<int>& a) {     
         int n=a.size();
         
-        solve(0,a);
+        solve(0,n,a);
         
         return ans;
     }
