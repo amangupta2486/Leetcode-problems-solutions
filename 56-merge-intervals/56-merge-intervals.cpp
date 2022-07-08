@@ -1,23 +1,23 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& i) {
+    vector<vector<int>> merge(vector<vector<int>>& in) {
         
-        vector<vector<int>> ans;
+        vector<vector<int>> merge;
         
-        sort(i.begin(),i.end());
+        sort(in.begin(),in.end());
         
-        for(auto j:i)
+        for(auto x: in)
         {
-            if(ans.empty() || ans.back()[1]<j[0])
+            if(merge.empty() || merge.back()[1]<x[0])
             {
-                ans.push_back(j);
+                merge.push_back(x);
             }
             else
             {
-                ans.back()[1]=max(ans.back()[1],j[1]);
+                merge.back()[1]=max(merge.back()[1],x[1]);
             }
         }
         
-        return ans;
+        return merge;
     }
 };
