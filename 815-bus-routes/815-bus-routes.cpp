@@ -3,22 +3,7 @@ public:
     
     vector<int> adj[505];
     int vis[505],mp[505];
-    
-//     void dfs(int i)
-//     {
-//         vis[i]=1;
 
-//         for(auto j:adj[i])
-//         {
-//             if(!vis[j])
-//             {
-//                 if(mp[j]>mp[i]+1)
-//                 mp[j]=mp[i]+1;
-                
-//                 dfs(j);
-//             }
-//         }
-//     }
     
     bool intersect(vector<int> &a,vector<int> &b)
     {
@@ -46,6 +31,7 @@ public:
         
         return 0;;
     }
+    
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         
         if(source==target)
@@ -54,12 +40,11 @@ public:
         }
         
         memset(vis,0,sizeof(vis));
-//         memset(mp,1000000,sizeof(mp));
-        
-        //cout<<routes.size()<<endl;
-        
+
         int j=0;
         int buses=routes.size();
+        
+         vector<int> sr,tar;
         
         for(auto x:routes)
         {
@@ -69,38 +54,23 @@ public:
             //cout<<x.size()<<endl;
             for(int i=0;i<n;i++)
             {
-                //cout<<v[i]<<"->";
                 
-                    //cout<<v[j]<<"->";
+                if(p[i]==source)
+                {
+                    sr.push_back(j);
+                }
+                
+                if(p[i]==target)
+                {
+                    tar.push_back(j);
+                }
+                
                 adj[j].push_back(p[i]);
 
                // cout<<endl;
             }
             sort(routes[j].begin(),routes[j].end());
             j++;
-        }
-        
-        vector<unordered_map<int,int>> v(buses);
-        
-        
-        vector<int> sr,tar;
-        
-        for(int i=0;i<buses;i++)
-        {
-            for(auto x:adj[i])
-            {
-                //cout<<x<<" ";
-                if(x==source)
-                {
-                    sr.push_back(i);
-                }
-                
-                if(x==target)
-                {
-                    tar.push_back(i);
-                }
-                v[i][x]=1;
-            }
         }
         
         vector<int> bs[buses];
@@ -171,19 +141,5 @@ public:
         
         return ans;
         
-        // mp[source]=0;
-        // dfs(source);
-        
-        // if(mp[target]==10000)
-        // {
-        //     return -1;
-        // }
-        
-//         if(!vis[target])
-//         {
-//             return -1;
-//         }
-        
-//         return mp[target];
     }
 };
