@@ -3,9 +3,9 @@ public:
     
     int dp[30005][2];
     
-    int solve(int i,vector<int>& p,int buy)
+    int solve(int i,int buy,int n,vector<int>& p)
     {
-        if(i==p.size())
+        if(i==n)
         {
             return 0;
         }
@@ -14,24 +14,27 @@ public:
         {
             return dp[i][buy];
         }
-        int profit=0;
+        
+        int ans=0;
         
         if(buy)
         {
-            profit=max(-p[i]+solve(i+1,p,0),solve(i+1,p,1));    
+            ans=max(-p[i]+solve(i+1,0,n,p),solve(i+1,1,n,p));
         }
         else
         {
-            profit=max(p[i]+solve(i+1,p,1),solve(i+1,p,0));
+            ans=max(p[i]+solve(i+1,1,n,p),solve(i+1,0,n,p));
         }
         
-        return dp[i][buy]=profit;
+        return dp[i][buy]=ans;
     }
+    
     int maxProfit(vector<int>& p) {
         
         int n=p.size();
+        
         memset(dp,-1,sizeof(dp));
         
-        return solve(0,p,1);
+        return solve(0,1,n,p);
     }
 };
