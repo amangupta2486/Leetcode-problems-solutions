@@ -22,61 +22,41 @@ public:
         
         if(root==NULL)
         {
-            return NULL;
+            return root;
         }
-        
         queue<Node*> q;
+        
         q.push(root);
-        int f=1;
-
+        
         while(!q.empty())
         {
             int k=q.size();
             
-            Node* temp=q.front();
-            int f=1;
-            while(k>0)
-            {    
+            while(k--)
+            {
                 auto p=q.front();
                 q.pop();
-                
-                if(f==0)
+                //cout<<p->val<<" "<<k<<" ";
+                Node* r=NULL;
+                if(k>0)
                 {
-                    temp->next=p;
-                    //cout<<p->val<<" ";
-                    temp=temp->next;
+                    r=q.front();
                 }
                 
-                f=0;
+                p->next=r;
                 
                 if(p->left!=NULL)
                 {
-                    q.push(p->left);
+                    q.push({p->left});
                 }
-                
                 if(p->right!=NULL)
                 {
-                    q.push(p->right);
+                    q.push({p->right});
                 }
-                
-                k--;
             }
+           // cout<<endl;
         }
         
         return root;
     }
 };
-
-/*
-Input
-[1,2,3,4,5,null,6,7,null,null,null,null,8]
-Output
-[1,#,2,3,#,4,5,6,#,7,#]
-Expected
-[1,#,2,3,#,4,5,6,#,7,8,#]
-
-[1,2,3,4,5,null,7]
-[]
-[1,2,3,4,null,null,5]
-[1,2,3,4,5,null,6,7,null,null,null,null,8]
-*/
