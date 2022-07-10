@@ -5,39 +5,19 @@ public:
         int n=a.size();
         int m=b.size();
         
-        if(n<m)
+        if(m==0)
         {
-            return -1;
+            return 0;
         }
-        
-        int f=1,start=0;
         
         for(int i=0;i<n-m+1;i++)
         {
-            int j=i+m-1;
-            
-            f=1;
-            int h=0;
-            
-            for(int k=i;k<=j;k++)
+            string s=a.substr(i,m);
+            //cout<<s<<" ";
+            if(s==b)
             {
-                if(a[k]!=b[h])
-                {
-                    f=0;
-                    break;
-                }
-                h++;
+                return i;
             }
-            if(f==1)
-            {
-                start=i;
-                break;
-            }
-        }
-        
-        if(f)
-        {
-            return start;
         }
         
         return -1;
