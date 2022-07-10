@@ -2,78 +2,49 @@ class Solution {
 public:
     int compareVersion(string v1, string v2) {
         
-        string a,b;
+        stringstream ss1(v1),ss2(v2);
         
-        stringstream s(v1);
-        stringstream ss(v2);
+        string str="";
         
-        vector<int> p,q;
+        vector<string> a,b;
         
-        while(getline(s,a,'.'))
+        while(getline(ss1,str,'.'))
         {
-            int c = stoi(a);
+            a.push_back(str);
+        }
+        
+        str="";
+        
+        while(getline(ss2,str,'.'))
+        {
+            b.push_back(str);
+        }
+        
+        int n=a.size(),m=b.size();
+        
+        for(int i=0;i<max(n,m);i++)
+        {
+            int x=0,y=0;
             
-            p.push_back(c);
-            cout<<c<<" ";
-        }
-        
-        cout<<endl;
-        
-        while(getline(ss,b,'.'))
-        {
-            int c = stoi(b);
-            q.push_back(c);
-            cout<<c<<" ";
-        }
-         cout<<endl;
-        int n=p.size(),m=q.size();
-        
-        int f=0,i=0,j=0;
-        
-        while(i<p.size() && j<q.size())
-        {
-            if(p[i]>q[i])
+            if(i<n)
+            x=stoi(a[i]);
+            
+            if(i<m)
+            y=stoi(b[i]);
+            
+            if(x>y)
             {
-                f=1;
-                break;
+                return 1;
             }
             
-             if(p[i]<q[i])
+            else if(x<y)
             {
-                f=-1;
-                break;
+                return -1;
             }
-            
-            i++;
-            j++;
+                
         }
         
-         while(i<p.size())
-         {
-             if(p[i]==0)
-             i++;
-             
-             else
-             break;
-         }
+        return 0;
         
-         while(j<q.size())
-         {
-             if(q[j]==0)
-                j++;
-             
-             else
-             break;
-         }
-        
-        if(n-i > m-j && f==0)
-        {
-            f=1;
-        }
-         if(n-i < m-j && f==0)
-        {
-            f=-1;
-        }
-        return f;
     }
 };
