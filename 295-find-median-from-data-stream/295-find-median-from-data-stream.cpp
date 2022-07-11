@@ -36,42 +36,26 @@ public:
         
         if(n%2==0)
         {
-            while(x>y)
+            if(x>y)
             {
                 pq2.push(pq1.top());
                 pq1.pop();
-                x--;
-                y++;
             }
             
-            while(y>x)
+            if(y>x)
             {
                 pq1.push(pq2.top());
                 pq2.pop();
-                x++;
-                y--;
             }
         }
         
         else
         {
-            int c=(n+1)/2;
-            
-            while(x<c)
+            if(x<y)
             {
                 pq1.push(pq2.top());
                 pq2.pop();
-                x++;
-                y--;
-            }
-            
-            while(x>c)
-            {
-                pq2.push(pq1.top());
-                pq1.pop();
-                x--;
-                y++;
-            }
+            }   
         }
         
     }
