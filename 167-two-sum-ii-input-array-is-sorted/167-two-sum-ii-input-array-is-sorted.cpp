@@ -1,20 +1,58 @@
 class Solution {
 public:
+    
+    int find(int i,int j,vector<int>& a, int t)
+    {
+        while(i<=j)
+        {
+            int m=(i+j)/2;
+            
+            if(a[m]==t)
+            {
+                return m;
+            }
+            
+            if(a[m]<t)
+            {
+                i=m+1;
+            }
+            else
+            {
+                j=m-1;
+            }
+        }
+        
+        return -1;
+    }
+    
     vector<int> twoSum(vector<int>& a, int t) {
         
         int n=a.size();
-        map<int,int> mp;
+        
+        vector<int> v;
         
         for(int i=0;i<n;i++)
         {
-            if(mp.find(t-a[i])!=mp.end())
+            int y=t-a[i];
+            int x=0;
+            
+            if(y>=a[i])
             {
-                return {mp[t-a[i]]+1,i+1};
+               x=find(i+1,n-1,a,y);
+            }
+            else
+            {
+               x=find(0,i-1,a,y);
             }
             
-            mp[a[i]]=i;
+            if(x!=-1)
+            {
+                v.push_back(i+1);
+                v.push_back(x+1);
+                break;
+            }
         }
         
-        return {};
+        return v;
     }
 };
