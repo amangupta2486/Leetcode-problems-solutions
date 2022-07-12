@@ -10,7 +10,7 @@ class Solution{
 	int mod=1e9 +7;
 	int solve(int i,int n,int *a,int s,int t,vector<vector<int>> &dp)
 	{
-	    if(i==n || s==t)
+	    if(i==n)
 	    {
 	        if(s==t)
 	        {
@@ -39,10 +39,10 @@ class Solution{
 	int perfectSum(int a[], int n, int s)
 	{
 	    
-	    //vector<vector<int>> dp(n+1,vector<int>(s+1,-1));
+	    vector<vector<int>> dp(n+1,vector<int>(s+1,-1));
 
-	    //return solve(0,n,a,0,s,dp);
-	    
+	    return solve(0,n,a,0,s,dp);
+	    /*
         int dp[n+1][s+1];
         memset(dp,0,sizeof(dp));
         
@@ -69,6 +69,7 @@ class Solution{
         }
         
         return dp[n][s];
+        */
 	}
 	  
 };
