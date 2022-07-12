@@ -2,11 +2,8 @@ class Solution {
 public:
     int numSquares(int n) {
         
-        vector<int> dp(n+1,0);
-        //memset(dp,0,sizeof(dp));
-        
+        vector<int> dp(n+1);
         dp[0]=0;
-        dp[1]=1;
         
         for(int i=1;i<=n;i++)
         {
@@ -16,7 +13,7 @@ public:
                 mi=min(mi,dp[i-(j*j)]);
             }
             
-            dp[i]=1+mi;
+            dp[i]=mi+1;
         }
         
         return dp[n];
