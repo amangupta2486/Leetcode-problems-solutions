@@ -1,18 +1,18 @@
 class Solution {
 public:
     
-    int solve(vector<int>& a)
+    int find(vector<int> &h)
     {
-        int n=a.size();
+        int n=h.size();
         
-        stack<int> s;
         int i=0;
+        stack<int> s;
         
         vector<int> l(n,0),r(n,0);
         
         while(i<n)
         {
-            while(!s.empty() && a[s.top()]>=a[i])
+            while(!s.empty() && h[s.top()]>=h[i])
             {
                 s.pop();
             }
@@ -21,6 +21,7 @@ public:
             {
                 l[i]=0;
             }
+            
             else
             {
                 l[i]=s.top()+1;
@@ -30,18 +31,18 @@ public:
             i++;
         }
         
+        i=n-1;
+        
         while(!s.empty())
         {
             s.pop();
         }
         
-        i=n-1;
-        
         int ans=0;
-          
+        
         while(i>=0)
         {
-            while(!s.empty() && a[s.top()]>=a[i])
+            while(!s.empty() && h[s.top()]>=h[i])
             {
                 s.pop();
             }
@@ -55,7 +56,7 @@ public:
                 r[i]=s.top()-1;
             }
             
-            ans=max(ans,(r[i]-l[i]+1)*a[i]);
+            ans=max(ans,h[i]*(r[i]-l[i]+1));
             s.push(i);
             i--;
         }
@@ -67,41 +68,30 @@ public:
         int n=g.size();
         int m=g[0].size();
         
-        int ans=0;
-
-        vector<vector<int>> d(n,vector<int>(m,0));
+        vector<vector<int>> dp(n,vector<int>(m,0));
         
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(g[i][j]=='1')
-                {
-                    d[i][j]=1;
-                }
-            }
-        }
+        for(int i=0;i<m;i++)
+            if(g[0][i]=='1')
+            dp[0][i]=1;
         
-        ans=max(ans,solve(d[0]));
+        int area=0;
+        
+        area=max(area,find(dp[0]));
         
         for(int i=1;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(d[i][j]==1)
+                if(g[i][j]=='1')
                 {
-                    d[i][j]+=d[i-1][j];
+                    dp[i][j]=1+dp[i-1][j];
                 }
-                else
-                {
-                    d[i][j]=0;
-                }
+                
             }
             
-            ans=max(ans,solve(d[i]));
+            area=max(area,find(dp[i]));
         }
-         
         
-        return ans;
+        return area;
     }
 };
