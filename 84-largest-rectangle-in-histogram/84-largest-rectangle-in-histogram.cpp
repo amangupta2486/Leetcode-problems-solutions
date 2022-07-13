@@ -1,16 +1,18 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& a) {
-        int n=a.size();
+    int largestRectangleArea(vector<int>& h) {
+        
+        int n=h.size();
         
         stack<int> s;
-        int i=0;
         
         vector<int> l(n,0),r(n,0);
         
+        int i=0;
+        
         while(i<n)
         {
-            while(!s.empty() && a[s.top()]>=a[i])
+            while(!s.empty() && h[s.top()]>=h[i])
             {
                 s.pop();
             }
@@ -19,6 +21,7 @@ public:
             {
                 l[i]=0;
             }
+            
             else
             {
                 l[i]=s.top()+1;
@@ -28,18 +31,18 @@ public:
             i++;
         }
         
+        i=n-1;
+        
         while(!s.empty())
         {
             s.pop();
         }
         
-        i=n-1;
-        
         int ans=0;
-          
+        
         while(i>=0)
         {
-            while(!s.empty() && a[s.top()]>=a[i])
+            while(!s.empty() && h[s.top()]>=h[i])
             {
                 s.pop();
             }
@@ -53,11 +56,22 @@ public:
                 r[i]=s.top()-1;
             }
             
-            ans=max(ans,(r[i]-l[i]+1)*a[i]);
+            ans=max(ans,h[i]*(r[i]-l[i]+1));
+            
             s.push(i);
             i--;
         }
         
+        // for(auto i:l)
+        // {
+        //     cout<<i<<" ";
+        // }
+        // cout<<endl;
+        // for(auto i:r)
+        // {
+        //     cout<<i<<" ";
+        // }
+        // cout<<endl;
         return ans;
     }
 };
