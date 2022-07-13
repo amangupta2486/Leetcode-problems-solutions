@@ -14,8 +14,8 @@ public:
     
     unordered_map<TreeNode*,int> mp;
     
-    int solve(TreeNode* root)
-    {
+    int rob(TreeNode* root) {
+        
         if(root==NULL)
         {
             return 0;
@@ -25,22 +25,19 @@ public:
         {
             return mp[root];
         }
-        int ans=0;
+        
+        int l=rob(root->left)+rob(root->right);
+        int r=root->val;
         
         if(root->left!=NULL)
         {
-            ans+=solve(root->left->left)+solve(root->left->right);
+            r+=rob(root->left->left)+rob(root->left->right);
         }
         if(root->right!=NULL)
         {
-            ans+=solve(root->right->left)+solve(root->right->right);
+            r+=rob(root->right->left)+rob(root->right->right);
         }
         
-        return mp[root]=max({ans+root->val,solve(root->left)+solve(root->right)});
-    }
-    
-    int rob(TreeNode* root) {
-        
-        return solve(root);
+        return mp[root]=max(l,r);
     }
 };
