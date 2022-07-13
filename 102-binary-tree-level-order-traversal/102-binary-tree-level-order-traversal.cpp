@@ -16,7 +16,9 @@ public:
         vector<vector<int>> ans;
         
         if(root==NULL)
+        {
             return ans;
+        }
         
         queue<TreeNode*> q;
         q.push(root);
@@ -26,6 +28,7 @@ public:
             int k=q.size();
             
             vector<int> v;
+            
             while(k--)
             {
                 auto p=q.front();
@@ -37,11 +40,13 @@ public:
                 {
                     q.push(p->left);
                 }
+                
                 if(p->right!=NULL)
                 {
                     q.push(p->right);
                 }
             }
+            
             ans.push_back(v);
         }
         
