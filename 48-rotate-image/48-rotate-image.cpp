@@ -1,24 +1,25 @@
 class Solution {
 public:
-    void rotate(vector<vector<int>>& g) {
+    void rotate(vector<vector<int>>& a) {
         
-        int n=g.size();
-        int m=g[0].size();
+        int n=a.size();
+        int m=a[0].size();
         
         for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<m;j++)
+            for(int j=i;j<n;j++)
             {
-                swap(g[i][j],g[j][i]);
+                swap(a[i][j],a[j][i]);
             }
         }
         
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<m/2;j++)
+            for(int j=0;j<n/2;j++)
             {
-                swap(g[i][j],g[i][m-j-1]);
+                swap(a[i][j],a[i][n-j-1]);
             }
         }
+        
     }
 };
