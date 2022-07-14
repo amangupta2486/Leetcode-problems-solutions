@@ -11,25 +11,30 @@
  */
 class Solution {
 public:
-    map<int,int> mp;
     
-    TreeNode* solve(vector<int>& pre, vector<int>& in,int prestart,int preend,int instart,int inend)
+    unordered_map<int,int> mp;
+    
+    TreeNode* solve(int preStart,int preEnd,vector<int>& pre,int inStart,int inEnd,vector<int>& in)
     {
-        if(prestart>preend || instart>inend)
+        if(inStart>inEnd || preStart>preEnd)
         {
             return NULL;
         }
         
-        int data=pre[prestart];
-        TreeNode* root= new TreeNode(data);
-        int i=mp[data];
-        int j=i-instart;
-        root->left = solve(pre,in,prestart+1,prestart+j,instart,i-1);
-        root->right= solve(pre,in,prestart+j+1,preend,i+1,inend);
+        int ele=pre[preStart];
+        int idx=mp[ele];
+        int nele=idx-inStart;
+        
+        TreeNode* root=new TreeNode(ele);
+        
+        root->left=solve(preStart+1,preStart+nele,pre,inStart,idx-1,in);
+        root->right=solve(preStart+nele+1,preEnd,pre,idx+1,inEnd,in);
         
         return root;
     }
+    
     TreeNode* buildTree(vector<int>& pre, vector<int>& in) {
+        
         int n=in.size();
         
         for(int i=0;i<n;i++)
@@ -37,6 +42,6 @@ public:
             mp[in[i]]=i;
         }
         
-        return solve(pre,in,0,n-1,0,n-1);
+        return solve(0,n-1,pre,0,n-1,in);
     }
 };
