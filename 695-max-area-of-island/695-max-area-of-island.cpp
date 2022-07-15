@@ -11,11 +11,13 @@ public:
         g[i][j]=2;
         c++;
         
-         dfs(i+1,j,g,c);
-         dfs(i,j+1,g,c);
-         dfs(i-1,j,g,c);
-         dfs(i,j-1,g,c);
+        dfs(i+1,j,g,c);
+        dfs(i,j+1,g,c);
+        dfs(i-1,j,g,c);
+        dfs(i,j-1,g,c);
+    
     }
+    
     int maxAreaOfIsland(vector<vector<int>>& g) {
         
         int n=g.size();
