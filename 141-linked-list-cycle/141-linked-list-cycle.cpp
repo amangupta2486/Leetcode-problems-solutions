@@ -8,9 +8,9 @@
  */
 class Solution {
 public:
-    bool hasCycle(ListNode *head) {
+    bool hasCycle(ListNode* head) {
         
-       ListNode* slow=head;
+        ListNode* slow=head;
         ListNode* fast=head;
         
         while(fast && fast->next)
@@ -20,15 +20,10 @@ public:
             
             if(slow==fast)
             {
-                break;
+                return 1;
             }
         }
         
-        if(fast==NULL || fast->next==NULL)
-        {
-            return 0;
-        }
-        
-        return 1;
+        return 0;
     }
 };
