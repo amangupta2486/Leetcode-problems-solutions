@@ -7,17 +7,16 @@ public:
         
         queue<vector<int>> q;
         
+        vector<vector<int>> ans(n,vector<int>(m,1000000));
+        
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
                 if(g[i][j]==0)
                 {
-                    q.push({i,j,0});
-                }
-                else
-                {
-                    g[i][j]=10000;
+                    q.push({i,j,1});
+                    ans[i][j]=0;
                 }
             }
         }
@@ -27,8 +26,9 @@ public:
         
         while(!q.empty())
         {
-            int k=q.size();
-            while(k--)
+            int l=q.size();
+            
+            while(l--)
             {
                 auto p=q.front();
                 q.pop();
@@ -36,22 +36,23 @@ public:
                 int i=p[0];
                 int j=p[1];
                 int c=p[2];
+               // cout<<i<<" "<<j<<" "<<c<<endl;
                 
                 for(int k=0;k<4;k++)
                 {
                     int x=i+dx[k];
                     int y=j+dy[k];
                     
-                    if(x>=0 && x<n && y>=0 && y<m && g[x][y]>c+1)
+                    if(x>=0 && x<n && y>=0 && y<m && ans[x][y]>c)
                     {
-                        g[x][y]=c+1;
+                        //cout<<1<<" ";
+                        ans[x][y]=c;
                         q.push({x,y,c+1});
                     }
                 }
             }
         }
         
-        return g;
-        
+        return ans;
     }
 };
