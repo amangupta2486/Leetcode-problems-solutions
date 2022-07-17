@@ -42,12 +42,12 @@ public:
             for(int i=0;i<n;i++)
             {
                //reverse(v[i].begin(),v[i].end());
-                string s=a[i].substr(z,l);
+               // string s=a[i].substr(z,l);
                 //string s=adj[z][i];
                 // s+=a[i][z];
                 //int y=stoi(s);
                 //cout<<y<<" ";
-                b.push({s,i});
+                b.push({a[i].substr(z,l),i});
                 
                 if(b.size()>n-idx)
                 {
