@@ -15,12 +15,12 @@ public:
         
         if(p==NULL && q==NULL)
         {
-            return true;
+            return 1;
         }
         
         if(p==NULL || q==NULL || p->val!=q->val)
         {
-            return false;
+            return 0;
         }
         
         return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
