@@ -10,15 +10,13 @@ public:
         {
             switch(a[m])
             {
-                case 0:swap(a[l],a[m]);
-                       l++;m++;break;
-                
-                case 1:m++;break;
-                    
+                case 0:swap(a[l++],a[m++]);
+                       break;
+                case 1:m++;
+                       break;
                 case 2:swap(a[m],a[h--]);
                        break;
             }
         }
-    
     }
 };
