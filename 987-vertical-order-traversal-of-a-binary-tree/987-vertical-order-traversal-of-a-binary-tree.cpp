@@ -15,51 +15,51 @@ public:
         
         vector<vector<int>> ans;
         
-        if(root==NULL)
-        {
-            return ans;
-        }
+        map<int,vector<int>> mp;
         
         queue<pair<TreeNode*,int>> q;
         q.push({root,0});
         
-        map<int,vector<int>> mp1;
-        
         while(!q.empty())
         {
             int k=q.size();
-            
-            map<int,vector<int>> mp;
+            map<int,vector<int>> mp1;
             
             while(k--)
             {
                 auto p=q.front();
                 q.pop();
-                auto r=p.first;
+                
+                TreeNode* r=p.first;
                 int idx=p.second;
                 
-                mp[idx].push_back(r->val);
+                mp1[idx].push_back(r->val);
                 
                 if(r->left!=NULL)
                 {
-                   q.push({r->left,idx-1}); 
+                    q.push({r->left,idx-1});
                 }
+                
                 if(r->right!=NULL)
                 {
-                   q.push({r->right,idx+1}); 
+                    q.push({r->right,idx+1});
                 }
             }
             
-            for(auto i:mp)
+            for(auto x:mp1)
             {
-                auto v=i.second;
-                sort(v.begin(),v.end());
-                for(auto j:v)
-                mp1[i.first].push_back(j);
+                auto p=x.second;
+                
+                sort(p.begin(),p.end());
+                
+                for(auto i:p)
+                {
+                    mp[x.first].push_back(i);
+                }
             }
         }
         
-        for(auto i:mp1)
+        for(auto i:mp)
         {
             ans.push_back(i.second);
         }
