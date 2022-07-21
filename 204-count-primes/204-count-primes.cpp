@@ -1,14 +1,13 @@
 class Solution {
 public:
-
-    void solve(int n,int &ans)
-    {
+    int countPrimes(int n) {
+        
         bool p[n+1];
-        memset(p,false,sizeof(p));
+        memset(p,0,sizeof(p));
         
         for(int i=2;i*i<n;i++)
         {
-            if(p[i]==0)
+            if(!p[i])
             {
                 for(int j=i+i;j<n;j+=i)
                 {
@@ -17,20 +16,16 @@ public:
             }
         }
         
+        int cnt=0;
+        
         for(int i=2;i<n;i++)
         {
             if(p[i]==0)
             {
-                ans++;
+                cnt++;
             }
         }
-    }
-    int countPrimes(int n) {
         
-        int ans=0;
-        
-        solve(n,ans);
-        
-        return ans;
+        return cnt;
     }
 };
