@@ -1,29 +1,29 @@
 class Solution {
 public:
     
-    bool check(int i,int j,vector<vector<char>>& b,char x)
+    bool check(int i,int j,char ch,vector<vector<char>>& b)
     {
         for(int k=0;k<9;k++)
         {
-            if(b[i][k]==x)
+            if(b[k][j]==ch )
             {
-                return 0;
+                return false;
             }
-            if(b[k][j]==x)
+            if(b[i][k]==ch )
             {
-                return 0;
+                return false;
             }
             
-            int p=(3*(i/3))+(k/3);
-            int q=(3*(j/3))+(k%3);
-           // cout<<p<<","<<q<<" ";
-            if(b[p][q]==x)
+            int x=k/3;
+            int y=k%3;
+            
+            if(b[((i/3)*3)+x][((j/3)*3)+y]==ch)
             {
-                return 0;
+                return false;
             }
         }
         
-        return 1;
+        return true;
     }
     bool solve(vector<vector<char>>& b)
     {
@@ -32,23 +32,26 @@ public:
             for(int j=0;j<9;j++)
             {
                 if(b[i][j]=='.')
-                {
+                {    
                     for(char k='1';k<='9';k++)
                     {
-                        if(check(i,j,b,k))
+                       
+                        //b[i][j]=k;
+                        if(check(i,j,k,b))
                         {
-                            b[i][j]=k;
+                           b[i][j]=k;
                             
-                            if(solve(b))
-                            {
-                                return 1;
-                            }
-                            
-                            else
+                           if(solve(b))
+                           {
+                               return true;
+                           }
+                           else
                             {
                                 b[i][j]='.';
                             }
-                        }                       
+                          
+                        }
+                        
                     }
                     
                     return false;
