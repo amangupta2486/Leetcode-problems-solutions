@@ -12,14 +12,8 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
         
-        if(head==NULL)
-        {
-            return head;
-        }
-        
         ListNode* p=new ListNode(0);
         ListNode* q=p;
-        
         ListNode* a=new ListNode(0);
         ListNode* b=a;
         
@@ -39,8 +33,10 @@ public:
             head=head->next;
         }
         
-        p->next=b->next;
+        //cout<<p->val<<" ";
         a->next=NULL;
+        
+        p->next=b->next;
         
         return q->next;
     }
