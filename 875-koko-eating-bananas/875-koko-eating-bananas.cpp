@@ -2,17 +2,20 @@ class Solution {
 public:
     int minEatingSpeed(vector<int>& p, int h) {
         
-        long long l=1,r=0;
         int n=p.size();
+        
+        long long int l=1,r=0;
         
         for(int i=0;i<n;i++)
         {
             r+=p[i];
         }
         
-        while(l<r)
+        int ans=0;
+        
+        while(l<=r)
         {
-            long long m=(l+r)/2;
+            long long int m=(l+r)/2;
             
             int c=0;
             
@@ -28,7 +31,8 @@ public:
             
             if(c<=h)
             {
-                r=m;
+                ans=m;
+                r=m-1;
             }
             else
             {
@@ -36,6 +40,6 @@ public:
             }
         }
         
-        return r;
+        return ans;
     }
 };
