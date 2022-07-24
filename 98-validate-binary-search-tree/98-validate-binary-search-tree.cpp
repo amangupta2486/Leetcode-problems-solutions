@@ -11,7 +11,10 @@
  */
 class Solution {
 public:
-    vector<int> v;
+    
+    int p=INT_MIN;
+    int ans=1;
+    int f=0;
     
     void solve(TreeNode* root)
     {
@@ -21,7 +24,16 @@ public:
         }
         
         solve(root->left);
-        v.push_back(root->val);
+        
+
+        if(p>=root->val && f)
+        {
+            ans=0;
+        }
+        
+        f=1;
+        p=root->val;
+        
         solve(root->right);
     }
     
@@ -29,14 +41,6 @@ public:
         
         solve(root);
         
-        for(int i=0;i<v.size()-1;i++)
-        {
-            if(v[i]>=v[i+1])
-            {
-                return 0;
-            }
-        }
-        
-        return 1;
+        return ans;
     }
 };
