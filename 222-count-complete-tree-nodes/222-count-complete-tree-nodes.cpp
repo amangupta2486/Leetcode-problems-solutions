@@ -11,7 +11,6 @@
  */
 class Solution {
 public:
-    
     int ans=0;
     
     void solve(TreeNode* root)
@@ -25,6 +24,7 @@ public:
         ans++;
         solve(root->right);
     }
+    
     int countNodes(TreeNode* root) {
         
         solve(root);
