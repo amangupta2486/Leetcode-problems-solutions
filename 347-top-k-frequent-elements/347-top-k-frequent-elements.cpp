@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> topKFrequent(vector<int>& a, int k) {
         
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         
         for(auto i:a)
         {
@@ -16,17 +16,15 @@ public:
             v.push_back({i.second,i.first});
         }
         
-        sort(v.rbegin(),v.rend());
+        sort(v.begin(),v.end(),[&](auto a,auto b){
+            return a[0]>b[0];
+        });
         
         vector<int> ans;
         
-        int i=0;
-        
-        while(k>0)
+        for(int i=0;i<k;i++)
         {
             ans.push_back(v[i][1]);
-            i++;
-            k--;
         }
         
         return ans;
