@@ -9,22 +9,21 @@ public:
             mp[i]++;
         }
         
-        vector<vector<int>> v;
+        priority_queue<pair<int,int>> pq;
         
         for(auto i:mp)
         {
-            v.push_back({i.second,i.first});
+            pq.push({i.second,i.first});
         }
-        
-        sort(v.begin(),v.end(),[&](auto a,auto b){
-            return a[0]>b[0];
-        });
         
         vector<int> ans;
         
-        for(int i=0;i<k;i++)
+        while(k>0)
         {
-            ans.push_back(v[i][1]);
+            auto v=pq.top();
+            pq.pop();
+            ans.push_back(v.second);
+            k--;
         }
         
         return ans;
