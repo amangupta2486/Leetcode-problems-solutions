@@ -1,7 +1,6 @@
 class Solution {
 public:
-    
-    int dp[205][205];
+     int dp[205][205];
     
     int solve(int i,int j,int n,int m,vector<vector<int>>& g)
     {
@@ -20,9 +19,8 @@ public:
             return dp[i][j];
         }
         
-        return dp[i][j]=g[i][j]+min({solve(i+1,j,n,m,g),solve(i,j+1,n,m,g)});
+        return dp[i][j]= g[i][j]+min(solve(i+1,j,n,m,g) , solve(i,j+1,n,m,g));
     }
-    
     int minPathSum(vector<vector<int>>& g) {
         
         int n=g.size();
