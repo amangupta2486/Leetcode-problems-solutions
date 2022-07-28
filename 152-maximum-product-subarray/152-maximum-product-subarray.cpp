@@ -4,19 +4,20 @@ public:
         
         int n=a.size();
         
-        int mx=a[0],mi=a[0],ans=a[0];
+        int curr_mx=a[0],curr_mi=a[0];
+        int ans=a[0];
         
         for(int i=1;i<n;i++)
         {
             if(a[i]<0)
             {
-                swap(mx,mi);
+                swap(curr_mx,curr_mi);
             }
             
-            mx=max(a[i],mx*a[i]);
-            mi=min(a[i],mi*a[i]);
+            curr_mx=max(a[i],curr_mx*a[i]);
+            curr_mi=min(a[i],curr_mi*a[i]);
             
-            ans=max(ans,mx);
+            ans=max(ans,curr_mx);
         }
         
         return ans;
