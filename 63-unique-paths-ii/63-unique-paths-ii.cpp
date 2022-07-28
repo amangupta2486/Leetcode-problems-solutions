@@ -5,7 +5,7 @@ public:
     
     int solve(int i,int j,int n,int m,vector<vector<int>>& g)
     {
-        if(i<0 || i>=n || j<0 || j>=m || g[i][j]==1)
+        if(i>=n || j>=m || g[i][j]==1)
         {
             return 0;
         }
@@ -19,7 +19,8 @@ public:
         {
             return dp[i][j];
         }
-        return dp[i][j] = solve(i+1,j,n,m,g) + solve(i,j+1,n,m,g);
+        
+        return dp[i][j]=solve(i+1,j,n,m,g) + solve(i,j+1,n,m,g);
     }
     int uniquePathsWithObstacles(vector<vector<int>>& g) {
         
