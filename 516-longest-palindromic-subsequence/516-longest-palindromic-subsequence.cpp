@@ -19,7 +19,6 @@ public:
         {
             return dp[i][j];
         }
-        
         if(s[i]==s[j])
         {
             return dp[i][j]=2+solve(s,i+1,j-1);
@@ -27,9 +26,11 @@ public:
         
         return dp[i][j]=max(solve(s,i+1,j),solve(s,i,j-1));
     }
+    
     int longestPalindromeSubseq(string s) {
         
         int n=s.size();
+
         memset(dp,-1,sizeof(dp));
         
         return solve(s,0,n-1);
