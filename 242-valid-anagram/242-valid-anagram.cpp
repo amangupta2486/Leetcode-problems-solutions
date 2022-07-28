@@ -2,22 +2,28 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         
-        vector<int> a(26,0),b(26,0);
+        vector<int> v(26,0),b(26,0);
         
-        for(auto i:s)
+        int n=s.size();
+        
+        for(int i=0;i<n;i++)
         {
-            a[i-'a']++;
-        }
-        for(auto j:t)
-        {
-            b[j-'a']++;
+            v[s[i]-'a']++;
         }
         
-        if(a==b)
+        for(int i=0;i<t.size();i++)
         {
-            return 1;
+            b[t[i]-'a']++;
         }
         
-        return 0;
+        for(int i=0;i<26;i++)
+        {
+            if(b[i]!=v[i])
+            {
+                return 0;
+            }
+        }
+        
+        return 1;
     }
 };
