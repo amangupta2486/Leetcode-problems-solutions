@@ -3,9 +3,9 @@ public:
     
     int dp[1005][1005];
     
-    int solve(string &a,string &b,int i,int j)
+    int solve(string &a, string &b,int i,int j)
     {
-        if(i<0 || j<0)
+        if(i==0 || j==0)
         {
             return 0;
         }
@@ -14,10 +14,9 @@ public:
         {
             return dp[i][j];
         }
-        
-        if(a[i]==b[j])
+        if(a[i-1]==b[j-1])
         {
-            return 1+solve(a,b,i-1,j-1);
+            return dp[i][j]=1+solve(a,b,i-1,j-1);
         }
         
         return dp[i][j]=max(solve(a,b,i-1,j),solve(a,b,i,j-1));
@@ -30,6 +29,6 @@ public:
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(a,b,n-1,m-1);    
+        return solve(a,b,n,m);
     }
 };
