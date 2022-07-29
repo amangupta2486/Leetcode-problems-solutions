@@ -9,34 +9,34 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
 class Solution {
 public:
-    int ans=0;
     
-    void solve(TreeNode* root,int x)
+    int ans=0;
+
+    void solve(TreeNode* root,int p)
     {
         if(root==NULL)
         {
             return;
         }
-        
-        if(root->val>=x)
+
+        if(root->val>=p)
         {
             ans++;
         }
-        
-        solve(root->left,max(x,root->val));
-        solve(root->right,max(x,root->val));
+
+        solve(root->left,max(p,root->val));
+
+        solve(root->right,max(p,root->val));
     }
+    
     int goodNodes(TreeNode* root) {
         
-        if(root==NULL)
-        {
-            return 0;
-        }
-        int x=root->val;
         
-        solve(root,-10001);
+        solve(root,root->val);
         
         return ans;
     }
