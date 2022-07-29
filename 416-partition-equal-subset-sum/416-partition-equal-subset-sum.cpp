@@ -11,18 +11,20 @@ public:
             s+=a[i];
         }
         
-        if(s&1)
+        if(s%2)
         {
             return 0;
         }
         
         s=s/2;
         
-        bool dp[n+1][s+1];
+        int dp[n+1][s+1];
         memset(dp,0,sizeof(dp));
         
         for(int i=0;i<=n;i++)
+        {
             dp[i][0]=1;
+        }
         
         for(int i=1;i<=n;i++)
         {
@@ -30,11 +32,11 @@ public:
             {
                 if(a[i-1]<=j)
                 {
-                    dp[i][j]=  dp[i-1][j-a[i-1]] ||  dp[i-1][j];
+                    dp[i][j] = dp[i-1][j-a[i-1]] || dp[i-1][j];
                 }
                 else
                 {
-                     dp[i][j] =  dp[i-1][j];
+                    dp[i][j] = dp[i-1][j];
                 }
             }
         }
