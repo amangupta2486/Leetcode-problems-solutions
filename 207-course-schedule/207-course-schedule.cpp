@@ -1,16 +1,15 @@
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        
-        int n=numCourses;
+    bool canFinish(int n, vector<vector<int>>& p) {
         
         vector<int> d(n,0);
-        vector<int> v[n];
         
-        for(auto i:prerequisites)
+        vector<int> adj[n];
+        
+        for(auto i:p)
         {
-            v[i[1]].push_back(i[0]);
-            d[i[0]]++;
+            adj[i[0]].push_back(i[1]);
+            d[i[1]]++;
         }
         
         queue<int> q;
@@ -27,17 +26,19 @@ public:
         
         while(!q.empty())
         {
-            int k=q.size();
-            while(k--)
+            int l=q.size();
+            
+            while(l--)
             {
-                auto p=q.front();
+                int r=q.front();
                 q.pop();
                 
                 cnt++;
                 
-                for(auto x:v[p])
+                for(auto x:adj[r])
                 {
                     d[x]--;
+                    
                     if(d[x]==0)
                     {
                         q.push(x);
@@ -46,6 +47,6 @@ public:
             }
         }
         
-        return cnt==n ? 1 :0 ;
+        return cnt==n ? 1 : 0;
     }
 };
