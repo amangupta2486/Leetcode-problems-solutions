@@ -16,16 +16,20 @@ public:
     
     void solve(TreeNode* root)
     {
-        if(root==NULL)
-        {
-            return;
-        }
+      if(root==NULL)
+      {
+          return ;
+      }
+      
+      solve(root->right);
         
-        solve(root->right);
-        s+=root->val;
-        root->val=s;
-        solve(root->left);
+      root->val+=s;
+      s=root->val;
+        
+      solve(root->left);
+          
     }
+    
     TreeNode* convertBST(TreeNode* root) {
         
         solve(root);
