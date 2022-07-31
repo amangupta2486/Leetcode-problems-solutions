@@ -10,19 +10,23 @@ public:
             ans.push_back(s);
             return;
         }
+        
         if(i>j)
         {
-            return;
+            return; 
         }
+        
         if(i==0)
         {
             solve(s+')',i,j-1);
             return;
         }
         
+        
         solve(s+'(',i-1,j);
         solve(s+')',i,j-1);
     }
+    
     vector<string> generateParenthesis(int n) {
         
         solve("",n,n);
