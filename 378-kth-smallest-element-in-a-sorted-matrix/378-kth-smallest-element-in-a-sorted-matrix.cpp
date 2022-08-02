@@ -2,25 +2,18 @@ class Solution {
 public:
     int kthSmallest(vector<vector<int>>& g, int k) {
         
-        int n=g.size();
-        int m=g[0].size();
+        vector<int> v;
         
-        priority_queue<int> q;
-        
-        int h=n-k;
-        for(int i=0;i<n;i++)
+        for(auto i:g)
         {
-            for(int j=0;j<m;j++)
+            for(auto j:i)
             {
-                q.push(g[i][j]);
+                v.push_back(j);
             }
         }
         
-        while(q.size()>k)
-        {
-            q.pop();
-        }
+        sort(v.begin(),v.end());
         
-        return q.top();
+        return v[k-1];
     }
 };
