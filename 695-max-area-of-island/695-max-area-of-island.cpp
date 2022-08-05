@@ -8,14 +8,13 @@ public:
             return;
         }
         
-        g[i][j]=2;
         c++;
+        g[i][j]=2;
         
         dfs(i+1,j,g,c);
         dfs(i,j+1,g,c);
         dfs(i-1,j,g,c);
         dfs(i,j-1,g,c);
-    
     }
     
     int maxAreaOfIsland(vector<vector<int>>& g) {
@@ -32,7 +31,9 @@ public:
                 if(g[i][j]==1)
                 {
                     int c=0;
+                    
                     dfs(i,j,g,c);
+                    
                     ans=max(ans,c);
                 }
             }
