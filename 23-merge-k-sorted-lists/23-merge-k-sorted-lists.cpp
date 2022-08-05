@@ -11,12 +11,13 @@
 class Solution {
 public:
     
-    ListNode* merge(ListNode* l1, ListNode* l2) {
-        
+    ListNode* merge(ListNode* l1,ListNode* l2)
+    {
         if(l1==NULL)
         {
             return l2;
         }
+        
         if(l2==NULL)
         {
             return l1;
@@ -35,9 +36,9 @@ public:
             }
             else
             {
-                p->next=l2;
-                p=p->next;
-                l2=l2->next;
+              p->next=l2;
+              p=p->next;
+              l2=l2->next;   
             }
         }
         
@@ -45,6 +46,7 @@ public:
         {
             p->next=l1;
         }
+        
         if(l2!=NULL)
         {
             p->next=l2;
@@ -52,22 +54,23 @@ public:
         
         return q->next;
     }
-    ListNode* mergeKLists(vector<ListNode*>& l) {
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
         
-        int n=l.size();
+        int n=lists.size();
         
         if(n==0)
         {
             return NULL;
         }
         
-        ListNode* p=l[0];
+        ListNode* prev=lists[0];
         
         for(int i=1;i<n;i++)
         {
-            p=merge(l[i],p);
+            prev=merge(prev,lists[i]);
         }
         
-        return p;
+        return prev;
     }
 };
