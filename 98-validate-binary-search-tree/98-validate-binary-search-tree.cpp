@@ -12,9 +12,9 @@
 class Solution {
 public:
     
-    int p=INT_MIN;
+    TreeNode* prev=NULL;
+    
     int ans=1;
-    int f=0;
     
     void solve(TreeNode* root)
     {
@@ -25,14 +25,15 @@ public:
         
         solve(root->left);
         
-
-        if(p>=root->val && f)
+        if(prev!=NULL)
         {
-            ans=0;
+            if(prev->val>=root->val)
+            {
+                ans=0;
+            }
         }
         
-        f=1;
-        p=root->val;
+        prev=root;
         
         solve(root->right);
     }
