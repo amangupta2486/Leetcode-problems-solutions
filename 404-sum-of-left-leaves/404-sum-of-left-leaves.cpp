@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    int ans=0;
+    int s=0;
     
     void solve(TreeNode* root)
     {
@@ -20,18 +20,21 @@ public:
         {
             return;
         }
+        
         if(root->left!=NULL && root->left->left==NULL && root->left->right==NULL)
         {
-            ans+=root->left->val;
+            //cout<<root->val<<" ";
+            s+=root->left->val;
         }
         
         solve(root->left);
         solve(root->right);
     }
+    
     int sumOfLeftLeaves(TreeNode* root) {
         
         solve(root);
         
-        return ans;
+        return s;
     }
 };
