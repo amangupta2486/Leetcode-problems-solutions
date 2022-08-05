@@ -1,18 +1,19 @@
 class Solution {
 public:
-    void dfs(vector<vector<char>>& g,int i,int j,int n,int m)
+    
+    void dfs(int i,int j,vector<vector<char>>& g)
     {
-        if(i<0 || i>=n ||j<0 || j>=m || g[i][j]!='1')
+        if(i<0 || i>=g.size() || j<0 || j>=g[0].size() || g[i][j]!='1')
         {
             return;
         }
-        
+
         g[i][j]='2';
         
-        dfs(g,i-1,j,n,m);
-        dfs(g,i,j-1,n,m);
-        dfs(g,i+1,j,n,m);
-        dfs(g,i,j+1,n,m);
+        dfs(i+1,j,g);
+        dfs(i,j+1,g);
+        dfs(i-1,j,g);
+        dfs(i,j-1,g);
     }
     
     int numIslands(vector<vector<char>>& g) {
@@ -28,7 +29,8 @@ public:
             {
                 if(g[i][j]=='1')
                 {
-                    dfs(g,i,j,n,m);
+                    dfs(i,j,g);
+                    
                     ans++;
                 }
             }
