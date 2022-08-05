@@ -1,60 +1,43 @@
 class Solution {
 public:
+    
+    bool check(string &s)
+    {
+        int n=s.size();
+        int i=0,j=n-1;
+        
+        while(i<j)
+        {
+            if(s[i]!=s[j])
+            {
+                return 0;
+            }
+            i++;
+            j--;
+        }
+        
+        return 1;
+    }
+    
     int countSubstrings(string s) {
         
         int n=s.size();
         
-        int dp[n+1][n+1];
-        memset(dp,0,sizeof(dp));
+        int ans=0;
         
         for(int i=0;i<n;i++)
         {
-            dp[i][i]=1;
-        }
-        
-        int ans=1,start=0;
-        
-        for(int i=0;i<n-1;i++)
-        {
-            if(s[i]==s[i+1])
+            for(int j=i;j<n;j++)
             {
-                ans=2;
-                start=i;
-                dp[i][i+1]=1;
-            }
-        }
-        
-        for(int k=3;k<=n;k++)
-        {
-            for(int i=0;i<n-k+1;i++)
-            {
-                int j=i+k-1;
+                string b=s.substr(i,j-i+1);
                 
-                if(s[i]==s[j] && dp[i+1][j-1])
+                if(check(b))
                 {
-                    dp[i][j]=1;
-                    if(ans<k)
-                    {
-                        ans=k;
-                        start=i;
-                    }
+                    ans++;
                 }
             }
         }
         
-        int cnt=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
-                if(dp[i][j]==1)
-                {
-                    cnt++;
-                }
-            }
-        }
-        
-        return cnt;
+        return ans;
     }
 };
