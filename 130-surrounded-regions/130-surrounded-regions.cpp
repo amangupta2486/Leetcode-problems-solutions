@@ -1,20 +1,19 @@
 class Solution {
 public:
     
-    void dfs(vector<vector<char>> &g,int i,int j,int n,int m)
+    void dfs(int i,int j,vector<vector<char>>& g)
     {
-        if(i<0 || i>=n || j<0 || j>=m || g[i][j]!='O')
+        if(i<0 || i>=g.size() || j<0 || j>=g[0].size() || g[i][j]!='O')
         {
             return;
         }
-        
+
         g[i][j]='_';
         
-        dfs(g,i-1,j,n,m);
-        dfs(g,i,j-1,n,m);
-        dfs(g,i+1,j,n,m);
-        dfs(g,i,j+1,n,m);
-        
+        dfs(i+1,j,g);
+        dfs(i,j+1,g);
+        dfs(i-1,j,g);
+        dfs(i,j-1,g);
     }
     
     void solve(vector<vector<char>>& g) {
@@ -22,37 +21,31 @@ public:
         int n=g.size();
         int m=g[0].size();
         
-        for(int i=0;i<n;i++)
-        {
-            if(g[i][0]=='O')
-            {
-                dfs(g,i,0,n,m);
-            }
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(g[i][m-1]=='O')
-            {
-                dfs(g,i,m-1,n,m);
-            }
-        }
-        
         for(int j=0;j<m;j++)
         {
             if(g[0][j]=='O')
-            {
-                dfs(g,0,j,n,m);
-            }
+            dfs(0,j,g);
         }
+        
         for(int j=0;j<m;j++)
         {
             if(g[n-1][j]=='O')
-            {
-                dfs(g,n-1,j,n,m);
-            }
+            dfs(n-1,j,g);
         }
         
-         for(int i=0;i<n;i++)
+        for(int i=0;i<n;i++)
+        {
+            if(g[i][0]=='O')
+            dfs(i,0,g);
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(g[i][m-1]=='O')
+            dfs(i,m-1,g);
+        }
+        
+        for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
@@ -63,7 +56,8 @@ public:
             }
         }
         
-         for(int i=0;i<n;i++)
+        
+        for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
