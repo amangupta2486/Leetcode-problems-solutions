@@ -16,18 +16,19 @@ public:
     {
         if(root==NULL)
         {
-            return ;
+            return;
         }
         
         solve(root->left);
         solve(root->right);
         
-        TreeNode* temp=root->left;
+        TreeNode* t=root->left;
         root->left=root->right;
-        root->right=temp;
+        root->right=t;
     }
+    
     TreeNode* invertTree(TreeNode* root) {
-     
+      
         solve(root);
         
         return root;
