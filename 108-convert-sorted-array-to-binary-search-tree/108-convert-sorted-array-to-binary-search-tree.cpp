@@ -12,19 +12,19 @@
 class Solution {
 public:
     
-    TreeNode* solve(vector<int> &a,int i,int j)
+    TreeNode* solve(vector<int>& a,int i,int j)
     {
         if(i>j)
         {
             return NULL;
         }
         
-        int mid=(i+j)/2;
+        int m=(i+j)/2;
         
-        TreeNode* root=new TreeNode(a[mid]);
+        TreeNode* root=new TreeNode(a[m]);
         
-        root->left=solve(a,i,mid-1);
-        root->right=solve(a,mid+1,j);
+        root->left=solve(a,i,m-1);
+        root->right=solve(a,m+1,j);
         
         return root;
     }
