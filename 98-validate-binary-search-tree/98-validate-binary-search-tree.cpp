@@ -12,8 +12,7 @@
 class Solution {
 public:
     
-    TreeNode* prev=NULL;
-    
+    TreeNode* prev;
     int ans=1;
     
     void solve(TreeNode* root)
@@ -37,9 +36,8 @@ public:
         
         solve(root->right);
     }
-    
     bool isValidBST(TreeNode* root) {
-        
+     
         solve(root);
         
         return ans;
