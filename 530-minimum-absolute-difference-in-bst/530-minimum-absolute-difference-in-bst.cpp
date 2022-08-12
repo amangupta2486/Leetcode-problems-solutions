@@ -11,31 +11,33 @@
  */
 class Solution {
 public:
-    vector<int> v;
+    
     int ans=INT_MAX;
-    int prev=-1;
+    int p=INT_MAX;
     
     void solve(TreeNode* root)
     {
         if(root==NULL)
         {
-            return;
+            return ;
         }
         
         solve(root->left);
         
-        if(prev!=-1)
+        if(p!=INT_MAX)
         {
-            ans=min(ans,root->val-prev);
+            ans=min(ans,root->val - p);    
         }
-        prev=root->val;
+        
+        p=root->val;
         
         solve(root->right);
     }
     
     int getMinimumDifference(TreeNode* root) {
         
-        solve(root);       
+        solve(root);
+        
         return ans;
     }
 };
