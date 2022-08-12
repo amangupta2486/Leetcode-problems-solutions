@@ -3,12 +3,13 @@ public:
     
     int dp[30005][2];
     
-    int solve(int i,int n,vector<int>& p,int buy)
+    int solve(int i,vector<int>& p,int buy)
     {
-        if(i==n)
+        if(i==p.size())
         {
             return 0;
         }
+        
         
         if(dp[i][buy]!=-1)
         {
@@ -19,11 +20,11 @@ public:
         
         if(buy)
         {
-            ans=max(-p[i]+solve(i+1,n,p,0),solve(i+1,n,p,1));
+            ans=max(-p[i]+solve(i+1,p,0),solve(i+1,p,1));
         }
         else
         {
-            ans=max(p[i]+solve(i+1,n,p,1),solve(i+1,n,p,0));
+            ans=max(p[i]+solve(i+1,p,1),solve(i+1,p,0));
         }
         
         return dp[i][buy]=ans;
@@ -35,6 +36,6 @@ public:
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(0,n,p,1);
+        return solve(0,p,1);
     }
 };
