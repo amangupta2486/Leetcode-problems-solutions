@@ -2,17 +2,15 @@ class Solution {
 public:
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
         
-        if(n==1)
-        {
-            return 0;
-        }
         
-        vector<int> v[n];
+        vector<int> adj[n];
         
         for(int i=0;i<n;i++)
         {
             if(manager[i]!=-1)
-            v[manager[i]].push_back(i);
+            {
+                adj[manager[i]].push_back(i);
+            }
         }
         
         queue<vector<int>> q;
@@ -23,23 +21,21 @@ public:
         
         while(!q.empty())
         {
-            int l=q.size();
+            int k=q.size();
             
-            while(l--)
+            while(k--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                int x=p[0];
-                int c=p[1];
+                int r=p[0];
+                int t=p[1];
                 
-                c+=informTime[x];
+                ans=max(ans,t);
                 
-                ans=max(ans,c);
-                
-                for(auto j:v[x])
+                for(auto j:adj[r])
                 {
-                    q.push({j,c});
+                    q.push({j,t+informTime[r]});
                 }
             }
         }
