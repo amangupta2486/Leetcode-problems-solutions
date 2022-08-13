@@ -4,14 +4,20 @@ public:
         
         int n=s.size();
         
-        map<char,int> mp;
+        vector<int> mp(26,0);
         
         for(auto i:s)
-            mp[i]++;
+        {
+            mp[i-'a']++;
+        }
         
         for(int i=0;i<n;i++)
-            if(mp[s[i]]==1)
+        {
+            if(mp[s[i]-'a']==1)
+            {
                 return i;
+            }
+        }
         
         return -1;
     }
