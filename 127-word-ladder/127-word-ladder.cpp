@@ -2,14 +2,14 @@ class Solution {
 public:
     int ladderLength(string a, string b, vector<string>& w) {
         
-        unordered_map<string,int> mp;
+        unordered_set<string> mp;
         
         for(auto i:w)
         {
-            mp[i]++;
+            mp.insert(i);
         }
         
-        if(mp[b]==0)
+        if(mp.count(b)==0)
         {
             return 0;
         }
@@ -43,9 +43,9 @@ public:
                     {
                         d[i]=j+'a';
                         
-                        if(mp[d]>0)
+                        if(mp.find(d)!=mp.end())
                         {
-                            mp[d]--;
+                            mp.erase(d);
                             q.push({d,c+1});
                         }
                     }
