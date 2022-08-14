@@ -1,14 +1,13 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& g) {
-       
+        
         int n=g.size();
         int m=g[0].size();
         
-        int rotten=0;
-        int oranges=0;
+        int total=0;
         
-        queue<vector<int>> q;
+        queue<pair<int,int>> q;
         
         for(int i=0;i<n;i++)
         {
@@ -21,12 +20,13 @@ public:
                 
                 if(g[i][j]!=0)
                 {
-                    oranges++;
+                    total++;
                 }
             }
         }
         
-        int days=0;
+        int cnt=0,days=0;
+        
         int dx[4]={1,-1,0,0};
         int dy[4]={0,0,1,-1};
         
@@ -39,15 +39,15 @@ public:
                 auto p=q.front();
                 q.pop();
                 
-                int i=p[0];
-                int j=p[1];
+                int i=p.first;
+                int j=p.second;
                 
-                rotten++;
+                cnt++;
                 
                 for(int k=0;k<4;k++)
                 {
-                    int x=i+dx[k];
-                    int y=j+dy[k];
+                    int x = i+dx[k];
+                    int y = j+dy[k];
                     
                     if(x>=0 && x<n && y>=0 && y<m && g[x][y]==1)
                     {
@@ -63,8 +63,8 @@ public:
             }
         }
         
-       // cout<<rotten<<" "<<oranges<<endl;
+        //cout<<cnt<<" "<<total<<endl;
         
-        return rotten==oranges ? days : -1;
+        return cnt==total ? days : -1;
     }
 };
