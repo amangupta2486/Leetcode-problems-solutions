@@ -1,52 +1,53 @@
 class Solution {
 public:
-    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+    int ladderLength(string a, string b, vector<string>& w) {
         
-        if(beginWord==endWord)
-        {
-            return 1;
-        }
-        unordered_set<string> s;
+        unordered_map<string,int> mp;
         
-        for(auto i:wordList)
+        for(auto i:w)
         {
-            s.insert(i);
+            mp[i]++;
         }
-        if(s.find(endWord)==s.end())
+        
+        if(mp[b]==0)
         {
             return 0;
         }
         
         queue<pair<string,int>> q;
-        q.push({beginWord,1});
+        
+        q.push({a,1});
         
         while(!q.empty())
         {
-            auto p=q.front();
-            q.pop();
+            int l=q.size();
             
-            string curr=p.first;
-            int c=p.second;
-            
-            if(curr==endWord)
+            while(l--)
             {
-                return c;
-            }
-            
-            int m=curr.size();
-            
-            for(int i=0;i<m;i++)
-            {
-                string b=curr;
+                auto p=q.front();
+                q.pop();
                 
-                for(int j=0;j<26;j++)
+                string s=p.first;
+                int c= p.second;
+                
+                if(s==b)
                 {
-                    b[i]='a'+j;
+                    return c;
+                }
+                
+                for(int i=0;i<s.size();i++)
+                {
+                    string d=s;
                     
-                    if(s.count(b)>0)
+                    for(int j=0;j<26;j++)
                     {
-                        q.push({b,c+1});
-                        s.erase(b);
+                        d[i]=j+'a';
+                        
+                        if(mp[d]>0)
+                        {
+                            mp[d]--;
+                            q.push({d,c+1});
+                        }
                     }
                 }
             }
