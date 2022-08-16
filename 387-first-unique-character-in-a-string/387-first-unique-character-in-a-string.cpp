@@ -2,18 +2,18 @@ class Solution {
 public:
     int firstUniqChar(string s) {
         
-        int n=s.size();
-        
-        vector<int> mp(26,0);
+        vector<int> v(26,0);
         
         for(auto i:s)
         {
-            mp[i-'a']++;
+            v[i-'a']++;
         }
+        
+        int n=s.size();
         
         for(int i=0;i<n;i++)
         {
-            if(mp[s[i]-'a']==1)
+            if(v[s[i]-'a']==1)
             {
                 return i;
             }
