@@ -1,40 +1,30 @@
 class Solution {
 public:
-    int trap(vector<int>& h) {
+    int trap(vector<int>& a) {
         
-        int n=h.size();
+        int n=a.size();
         
-        int lmax=0,rmax=0;
-        int i=0,j=n-1;
+        vector<int> l(n,0),r(n,0);
+        
+        l[0]=a[0];
+        
+        for(int i=1;i<n;i++)
+        {
+            l[i]=max(l[i-1],a[i]);
+        }
+        
+        r[n-1]=a[n-1];
+        
+        for(int i=n-2;i>=0;i--)
+        {
+            r[i]=max(r[i+1],a[i]);
+        }
         
         int ans=0;
         
-        while(i<=j)
+        for(int i=0;i<n;i++)
         {
-            if(h[i]<=h[j])
-            {
-                if(h[i]>lmax)
-                {
-                    lmax=h[i];
-                }
-                else
-                {
-                    ans+=lmax-h[i];
-                }
-                i++;
-            }
-            else
-            {
-                if(h[j]>rmax)
-                {
-                    rmax=h[j];
-                }
-                else
-                {
-                    ans+=rmax-h[j];
-                }
-                j--;
-            }
+            ans+=min(l[i],r[i])-a[i];
         }
         
         return ans;
