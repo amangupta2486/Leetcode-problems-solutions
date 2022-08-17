@@ -5,8 +5,7 @@ public:
         int n=g.size();
         int m=g[0].size();
         
-        int dp[n+2][m+2];
-        
+        int dp[n+1][m+1];
         memset(dp,0,sizeof(dp));
         
         int ans=0;
@@ -17,12 +16,14 @@ public:
             {
                 if(g[i-1][j-1]=='1')
                 {
-                    dp[i][j]=1+min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]});
+                    dp[i][j]= 1+min({dp[i-1][j],dp[i][j-1],dp[i-1][j-1]});
                 }
-                //cout<<dp[i][j]<<" ";
+                
+                else
+                dp[i][j]=0;
+                
                 ans=max(ans,dp[i][j]);
             }
-            //cout<<endl;
         }
         
         return ans*ans;
