@@ -11,32 +11,38 @@
  */
 class Solution {
 public:
-    
-    int c=1;
-    int ans=0;
-    
-    void solve(TreeNode* root, int k)
-    {
-        if(root==NULL)
-        {
-            return;
-        }
-        
-        solve(root->left,k);
-        
-        if(c==k)
-        {
-            ans=root->val;
-        }
-        c++;
-        
-        solve(root->right,k);
-    }
-    
     int kthSmallest(TreeNode* root, int k) {
         
-        solve(root,k);
+        stack<TreeNode*> st;
         
-        return ans;
+        while(true)
+        {
+            while(root!=NULL)
+            {
+                st.push(root);
+                root=root->left;
+            }
+            
+            auto p=st.top();
+            st.pop();
+            
+            k--;
+            
+            cout<<p->val<<" ";
+            
+            if(k==0)
+            {
+                cout<<endl;
+                return p->val;
+            }
+            
+            if(p->right!=NULL)
+            {
+                root=p->right;
+            }
+            
+        }
+        
+        return 0;
     }
 };
