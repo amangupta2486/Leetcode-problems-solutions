@@ -1,34 +1,25 @@
 class Solution {
 public:
-    int numPairsDivisibleBy60(vector<int>& t) {
+    int numPairsDivisibleBy60(vector<int>& time) {
         
-        int n=t.size();
+        int n=time.size();
+        
+        unordered_map<int,int> mp;
         
         int ans=0;
         
-        unordered_map<int,int> mp;
-        vector<int> v;
-        
-        for(int i=1;i<=20;i++)
-        {
-
-           v.push_back(i*60);
-        }
-
         for(int i=0;i<n;i++)
         {
-            for(int j=0;j<20;j++)
+            for(int j=1;j<=16;j++)
             {
-                if(mp[v[j]-t[i]]>0)
+                if(mp[(60*j)-time[i]]>0)
                 {
-                    //cout<<t[i]<<" ";
-                    ans+=mp[v[j]-t[i]];
-                } 
+                    ans+=mp[(60*j)-time[i]];
+                }
             }
-            mp[t[i]]++;
-        }
         
-       // cout<<endl;
+            mp[time[i]]++;
+        }
         
         return ans;
     }
