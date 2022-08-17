@@ -2,44 +2,42 @@ class Solution {
 public:
     int findLeastNumOfUniqueInts(vector<int>& a, int k) {
         
-        vector<vector<int>> v;
+        int n=a.size();
         
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         
         for(auto i:a)
         {
             mp[i]++;
         }
         
-        for(auto i:mp)
+        vector<vector<int>> v;
+        
+        for(auto x:mp)
         {
-            v.push_back({i.second,i.first});
+            v.push_back({x.second,x.first});
         }
         
         sort(v.begin(),v.end());
         
-        int i=0;
-        int n=v.size();
+        int m=v.size();
         
-        while(k>0 && i<n)
+        for(int i=0;i<n && k>0;i++)
         {
-            auto p=v[i];
-            int x=p[0];
+            int c=v[i][0];
             
-            if(x<=k)
+            if(c<=k)
             {
-                k-=x;
-                mp.erase(p[1]);
+                k-=c;
+                m--;
             }
             else
             {
-                x-=k;
                 k=0;
-                mp[p[1]]=x;
+                break;
             }
-            i++;
         }
         
-        return mp.size();
+        return m;
     }
 };
