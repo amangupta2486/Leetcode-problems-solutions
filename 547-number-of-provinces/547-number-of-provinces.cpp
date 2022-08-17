@@ -1,11 +1,7 @@
 class Solution {
 public:
     
-    vector<int> adj[205];
-    int vis[205];
-    
-    
-    void dfs(int i)
+    void dfs(int i,vector<int> adj[],vector<int> &vis)
     {
         vis[i]=1;
         
@@ -13,22 +9,23 @@ public:
         {
             if(!vis[j])
             {
-                dfs(j);
+                dfs(j,adj,vis);
             }
         }
     }
-    int findCircleNum(vector<vector<int>>& isConnected) {
     
-        memset(vis,0,sizeof(vis));
+    int findCircleNum(vector<vector<int>>& g) {
         
-        int n=isConnected.size();
-        int m=isConnected[0].size();
+        int n=g.size();
+        int m=g[0].size();
+        
+        vector<int> adj[n];
         
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(isConnected[i][j]==1)
+                if(g[i][j]==1)
                 {
                     adj[i].push_back(j);
                     adj[j].push_back(i);
@@ -36,18 +33,19 @@ public:
             }
         }
         
-        int ans=0;
+        int cc=0;
+        
+        vector<int> vis(n,0);
         
         for(int i=0;i<n;i++)
         {
             if(!vis[i])
             {
-                dfs(i);
-                ans++;
+                dfs(i,adj,vis);
+                cc++;
             }
         }
         
-        return ans;
-        
+       return cc;
     }
 };
