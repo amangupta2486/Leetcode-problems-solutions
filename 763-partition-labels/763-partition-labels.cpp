@@ -2,48 +2,47 @@ class Solution {
 public:
     vector<int> partitionLabels(string s) {
         
-        int n=s.size();
-        
-        vector<int> v;
         map<char,vector<int>> mp;
-        int j=0;
+        
+        int n=s.size();
         
         for(int i=0;i<n;i++)
         {
-            mp[s[i]].push_back(i);
+            int x=i,y=0;
+        
+            mp[s[i]].push_back(i);    
         }
         
-        vector<vector<int>> p,ans;
+        vector<vector<int>> v,p;
         
-        for(auto i:mp)
+        for(int i=0;i<n;i++)
         {
-            auto x=i.second;
-            int m=x.size();
+            auto b=mp[s[i]];
+            int m=b.size();
             
-            p.push_back({x[0],x[m-1]});
+            v.push_back({b[0],b[m-1]});
         }
         
-        sort(p.begin(),p.end());
         
-        for(auto i:p)
+        for(auto x:v)
         {
-            if(ans.empty() || ans.back()[1]<i[0])
+            if(p.empty() || p.back()[1]<x[0])
             {
-                ans.push_back(i);
+                p.push_back(x);
             }
             else
             {
-                ans.back()[1]=max(ans.back()[1],i[1]);
+                p.back()[1]=max(p.back()[1],x[1]);
             }
         }
         
-        vector<int> b;
+        vector<int> ans;
         
-        for(auto i:ans)
+        for(auto x:p)
         {
-            b.push_back(i[1]-i[0]+1);
+            ans.push_back(x[1]-x[0]+1);
         }
         
-        return b;
+        return ans;
     }
 };
