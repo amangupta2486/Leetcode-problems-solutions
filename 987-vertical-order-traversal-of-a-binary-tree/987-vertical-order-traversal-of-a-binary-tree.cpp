@@ -11,26 +11,28 @@
  */
 class Solution {
 public:
+    
+    
+    
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        
-        vector<vector<int>> ans;
-        
+     
         map<int,vector<int>> mp;
         
         queue<pair<TreeNode*,int>> q;
+        
         q.push({root,0});
         
         while(!q.empty())
         {
-            int k=q.size();
-            map<int,vector<int>> mp1;
+            int l=q.size();
+            unordered_map<int,vector<int>> mp1;
             
-            while(k--)
+            while(l--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                TreeNode* r=p.first;
+                auto r=p.first;
                 int idx=p.second;
                 
                 mp1[idx].push_back(r->val);
@@ -48,22 +50,23 @@ public:
             
             for(auto x:mp1)
             {
-                auto p=x.second;
+                auto v=x.second;
                 
-                sort(p.begin(),p.end());
+                sort(v.begin(),v.end());
                 
-                for(auto i:p)
-                {
-                    mp[x.first].push_back(i);
-                }
+                for(auto j:v)
+                mp[x.first].push_back(j);
             }
+            
         }
         
-        for(auto i:mp)
+        vector<vector<int>> ans;
+            
+        for(auto x:mp)
         {
-            ans.push_back(i.second);
+            ans.push_back(x.second);
         }
-        
+
         return ans;
     }
 };
