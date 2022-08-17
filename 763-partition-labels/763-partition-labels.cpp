@@ -17,10 +17,10 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            auto b=mp[s[i]];
-            int m=b.size();
+            //auto b=mp[s[i]];
+            int m=mp[s[i]].size();
             
-            v.push_back({b[0],b[m-1]});
+            v.push_back({mp[s[i]][0],mp[s[i]][m-1]});
         }
         
         
