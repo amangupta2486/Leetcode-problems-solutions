@@ -11,14 +11,12 @@ public:
             if(c==0)
             {
                 b=a[i];
-                c++;
             }
             
-            else if(a[i]==b)
+            if(b==a[i])
             {
                 c++;
             }
-            
             else
             {
                 c--;
