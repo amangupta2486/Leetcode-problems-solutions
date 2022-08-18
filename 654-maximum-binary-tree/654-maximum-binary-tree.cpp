@@ -19,23 +19,21 @@ public:
             return NULL;
         }
         
-        int mx=0,mi=0;
+        int mx=0,mi=i;
         
         for(int k=i;k<=j;k++)
         {
-            if(mx<=a[k])
+            if(a[k]>mx)
             {
                 mx=a[k];
                 mi=k;
             }
         }
         
-        //cout<<mi<<" ";
-        
         TreeNode* root=new TreeNode(a[mi]);
-        
         root->left=solve(a,i,mi-1);
         root->right=solve(a,mi+1,j);
+        
         
         return root;
     }
@@ -43,7 +41,7 @@ public:
     TreeNode* constructMaximumBinaryTree(vector<int>& a) {
         
         int n=a.size();
-        
+    
         return solve(a,0,n-1);
     }
 };
