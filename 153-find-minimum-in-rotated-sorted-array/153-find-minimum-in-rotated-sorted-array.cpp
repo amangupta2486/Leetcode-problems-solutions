@@ -4,6 +4,11 @@ public:
         
         int n=a.size();
         
+        if(n==1)
+        {
+            return a[0];
+        }
+        
         if(a[0]<=a[n-1])
         {
             return a[0];
@@ -15,21 +20,22 @@ public:
         {
             int m=(i+j)/2;
             
-            if(a[m]<a[(m+1)%n] && a[m]<a[((m-1)+n)%n])
+            if(a[m]<=a[(m-1+n)%n] && a[m]<=a[(m+1)%n])
             {
                 return a[m];
             }
             
             if(a[m]>=a[0])
             {
-                j++;
+                i++;
             }
+            
             else
             {
-                i--;
+                j--;
             }
         }
         
-        return a[0];
+        return 0;
     }
 };
