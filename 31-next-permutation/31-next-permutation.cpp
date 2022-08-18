@@ -4,9 +4,9 @@ public:
         
         int n=a.size();
         
-        int i=n-2,f=0;
+        int i,f=0;
         
-        for(;i>=0;i--)
+        for(i=n-2;i>=0;i--)
         {
             if(a[i]<a[i+1])
             {
@@ -25,9 +25,14 @@ public:
                     break;
                 }
             }
+            
+            sort(a.begin()+i+1,a.end());
         }
         
-        reverse(a.begin()+i+1,a.end());
-        
+        else
+        {
+            sort(a.begin(),a.end());
+        }
+
     }
 };
