@@ -1,24 +1,27 @@
 class Solution {
 public:
-    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
-             
-        sort(boxTypes.begin(),boxTypes.end(),[&](auto &a,auto &b){
+    int maximumUnits(vector<vector<int>>& boxTypes, int k) {
+        
+        sort( boxTypes.begin(), boxTypes.end(),[&](auto &a,auto &b){
             return a[1]>b[1];
         });
         
+        int n= boxTypes.size();
+        
         int ans=0;
         
-        for(auto box:boxTypes)
+        for(int i=0;i<n && k>0;i++)
         {
-            if(box[0]<=truckSize)
+            int c= boxTypes[i][0];
+            
+            if(c<=k)
             {
-                ans+=box[0]*box[1];
-                truckSize-=box[0];
+                k-=c;
+                ans+=c* boxTypes[i][1];
             }
-            else if(truckSize>0)
+            else
             {
-                ans+=box[1]*truckSize;
-                truckSize=0;
+                ans+=k* boxTypes[i][1];
                 break;
             }
         }
