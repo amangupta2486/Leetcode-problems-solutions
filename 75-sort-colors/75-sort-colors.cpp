@@ -12,10 +12,12 @@ public:
             {
                 case 0:swap(a[l++],a[m++]);
                        break;
+                    
                 case 1:m++;
-                       break;
+                      break;
+                    
                 case 2:swap(a[m],a[h--]);
-                       break;
+                      break;
             }
         }
     }
