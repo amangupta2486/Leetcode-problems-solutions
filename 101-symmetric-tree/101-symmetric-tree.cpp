@@ -19,19 +19,15 @@ public:
             return 1;
         }
         
-        if(p==NULL || q==NULL || p->val!=q->val)
+        if(p==NULL ||q==NULL || p->val!=q->val)
         {
             return 0;
         }
         
         return solve(p->left,q->right) && solve(p->right,q->left);
     }
+    
     bool isSymmetric(TreeNode* root) {
-        
-        if(root==NULL)
-        {
-            return 1;
-        }
         
         return solve(root->left,root->right);
     }
