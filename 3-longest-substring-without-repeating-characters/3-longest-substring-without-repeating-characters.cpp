@@ -4,10 +4,9 @@ public:
         
         int n=s.size();
         
-        int j=0;
-        unordered_map<char,int> mp;
+        map<char,int> mp;
         
-        int ans=0;
+        int j=0,ans=0;
         
         for(int i=0;i<n;i++)
         {
