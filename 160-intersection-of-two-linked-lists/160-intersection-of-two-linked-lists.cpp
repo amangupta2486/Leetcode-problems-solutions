@@ -18,44 +18,55 @@ public:
             head=head->next;
             n++;
         }
+        
         return n;
     }
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    
+    ListNode *getIntersectionNode(ListNode *l1, ListNode *l2) {
         
-        int n=solve(headA);
-        int m=solve(headB);
+        int n=solve(l1);
+        int m=solve(l2);
         
-        ListNode *p,*q;
+        ListNode* p;
+        ListNode* q;
         
-        if(n>=m)
+        int d;
+        
+        if(n>m)
         {
-            p=headA;
-            q=headB;
+            p=l1;
+            q=l2;
+            
+            d=n-m;
+            
         }
         else
         {
-            p=headB;
-            q=headA;
-        }
-        
-        int d=abs(n-m);
-        
-        while(d--)
-        {
-            p=p->next;
-        }
-        
-        while(p!=NULL && q!=NULL)
-        {
-            if(p==q)
-            {
-                return p;
-            }
+            p=l2;
+            q=l1;
             
+            d=m-n;
+            
+        }
+        
+         while(d>0)
+        {
+            if(p==NULL)
+            {
+                return NULL;
+            }
+
+            p=p->next;
+            d--;
+        }
+        
+        while(p!=q)
+        {
             p=p->next;
             q=q->next;
         }
         
-        return NULL;
+        return p;
+        
     }
 };
