@@ -24,8 +24,9 @@ public:
         
         while(p!=NULL)
         {
-            Node* newNode = new Node(p->val);
-            mp[p]=newNode;
+            Node* r=new Node(p->val);
+            mp[p]=r;
+            
             p=p->next;
         }
         
@@ -34,7 +35,6 @@ public:
         while(q!=NULL)
         {
             Node* r=mp[q];
-            
             r->next=mp[q->next];
             r->random=mp[q->random];
             
@@ -42,6 +42,5 @@ public:
         }
         
         return mp[head];
-
     }
 };
