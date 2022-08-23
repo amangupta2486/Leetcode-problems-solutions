@@ -1,10 +1,10 @@
 class Solution {
 public:
-    int splitArray(vector<int>& a, int k) {
+    int splitArray(vector<int>& a, int m) {
         
         int n=a.size();
         
-        int l=0,r=0;
+        int l=a[0],r=0;
         
         for(int i=0;i<n;i++)
         {
@@ -12,38 +12,40 @@ public:
             r+=a[i];
         }
         
-        int ans=r;
+        int ans=-1;
         
         while(l<=r)
         {
-            int m=(l+r)/2;
+            int mid=(l+r)/2;
             
-            int s=0,c=1;
+            int c=1,s=0;
             
             for(int i=0;i<n;i++)
             {
-                if(s+a[i]<=m)
+                if(s+a[i]<=mid)
                 {
                     s+=a[i];
                 }
                 else
                 {
-                    s=a[i];
                     c++;
+                    s=a[i];
                 }
             }
             
-            if(c<=k)
+            if(c<=m)
             {
-                ans=m;
-                r=m-1;
+                 ans=mid;
+                 r=mid-1;
             }
             else
             {
-                l=m+1;
+                l=mid+1;
             }
+            
+           
         }
         
-        return ans;
+         return ans;
     }
 };
