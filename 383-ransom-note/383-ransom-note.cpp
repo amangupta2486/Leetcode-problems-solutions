@@ -1,25 +1,22 @@
 class Solution {
 public:
-    bool canConstruct(string r, string mg) {
+    bool canConstruct(string a, string b) {
         
-        map<char,int> mp1,mp2;
+        vector<int> v1(26,0),v2(26,0);
         
-        int n=r.size();
-        int m=mg.size();
-        
-        for(int i=0;i<n;i++)
+        for(auto i:a)
         {
-            mp1[r[i]]++;
+            v1[i-'a']++;
         }
         
-        for(int j=0;j<m;j++)
+        for(auto i:b)
         {
-            mp2[mg[j]]++;
+            v2[i-'a']++;
         }
         
-        for(int i=0;i<n;i++)
+        for(int i=0;i<a.size();i++)
         {
-            if(mp2[r[i]]<mp1[r[i]])
+            if(v1[a[i]-'a']>v2[a[i]-'a'])
             {
                 return 0;
             }
