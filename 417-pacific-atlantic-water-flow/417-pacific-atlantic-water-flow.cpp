@@ -1,23 +1,21 @@
 class Solution {
 public:
     
-    int dx[4]={1,-1,0,0};
-    int dy[4]={0,0,1,-1};
     
-    void dfs(int i,int j,int n,int m,vector<vector<int>>& h,vector<vector<int>> &g)
+    void dfs(int i,int j,vector<vector<int>>& h,vector<vector<int>> &vis,int p,vector<vector<int>> &v)
     {
-        
-        for(int k=0;k<4;k++)
+        if(i<0 || j<0 || i>=h.size() || j>=h[0].size() || h[i][j]<p || v[i][j]==1)
         {
-            int x=i+dx[k];
-            int y=j+dy[k];
-            
-            if(x>=0 && x<n && y>=0 && y<m && h[x][y]>=h[i][j] && !g[x][y])
-            {
-                g[x][y]=1;
-                dfs(x,y,n,m,h,g);
-            }
+            return ;
         }
+        
+        vis[i][j]=1;
+        v[i][j]=1;
+        
+        dfs(i+1,j,h,vis,h[i][j],v);
+        dfs(i,j+1,h,vis,h[i][j],v);
+        dfs(i-1,j,h,vis,h[i][j],v);
+        dfs(i,j-1,h,vis,h[i][j],v);
     }
     
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& h) {
@@ -25,25 +23,30 @@ public:
         int n=h.size();
         int m=h[0].size();
         
-        vector<vector<int>> p(n,vector<int>(m,0));
+        vector<vector<int>> pac(n,vector<int>(m,0));
         vector<vector<int>> at(n,vector<int>(m,0));
-            
-        for(int j=0;j<m;j++)
-        {
-            p[0][j]=1;
-            at[n-1][j]=1;
-            
-            dfs(0,j,n,m,h,p);
-            dfs(n-1,j,n,m,h,at);
-        }
+       // vector<vector<int>> v(n,vector<int>(m,0));
         
         for(int i=0;i<n;i++)
         {
-            p[i][0]=1;
+            vector<vector<int>> v(n,vector<int>(m,0));
+        
+            pac[i][0]=1;
+            dfs(i,0,h,pac,-1,v);
             at[i][m-1]=1;
-            
-            dfs(i,0,n,m,h,p);
-            dfs(i,m-1,n,m,h,at);
+            vector<vector<int>> b(n,vector<int>(m,0));
+            dfs(i,m-1,h,at,-1,b);
+        }
+        
+        for(int j=0;j<m;j++)
+        {
+            vector<vector<int>> v(n,vector<int>(m,0));
+        
+            pac[0][j]=1;
+            dfs(0,j,h,pac,-1,v);
+            at[n-1][j]=1;
+            vector<vector<int>> b(n,vector<int>(m,0));
+            dfs(n-1,j,h,at,-1,b);
         }
         
         vector<vector<int>> ans;
@@ -52,7 +55,7 @@ public:
         {
             for(int j=0;j<m;j++)
             {
-                if(p[i][j]==1 && at[i][j]==1)
+                if(pac[i][j]==1 && at[i][j]==1)
                 {
                     ans.push_back({i,j});
                 }
