@@ -2,14 +2,13 @@ class Solution {
 public:
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
         
-        
-        vector<int> adj[n];
+        vector<int> v[n];
         
         for(int i=0;i<n;i++)
         {
             if(manager[i]!=-1)
             {
-                adj[manager[i]].push_back(i);
+                v[manager[i]].push_back(i);
             }
         }
         
@@ -29,13 +28,13 @@ public:
                 q.pop();
                 
                 int r=p[0];
-                int t=p[1];
+                int c=p[1];
                 
-                ans=max(ans,t);
+                ans=max(ans,c);
                 
-                for(auto j:adj[r])
+                for(auto x:v[r])
                 {
-                    q.push({j,t+informTime[r]});
+                    q.push({x,c+informTime[r]});
                 }
             }
         }
