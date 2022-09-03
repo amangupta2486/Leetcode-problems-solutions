@@ -3,29 +3,26 @@ public:
     vector<int> sortedSquares(vector<int>& a) {
         
         int n=a.size();
-        for(int i=0;i<n;i++)
-        {
-            a[i]=abs(a[i]);
-        }
         
-        vector<int> v(n);
-        int m=n-1;
-        int l=0,r=n-1;
+        int i=0,j=n-1;
         
-        while(l<=r)
+        vector<int> v;
+        
+        while(i<=j)
         {
-            if(a[l]>=a[r])
+            if(a[i]*a[i]>=a[j]*a[j])
             {
-                v[m]=a[l]*a[l];
-                l++;
+                v.push_back(a[i]*a[i]);
+                i++;
             }
             else
             {
-                v[m]=a[r]*a[r];
-                r--;
+                v.push_back(a[j]*a[j]);
+                j--;
             }
-            m--;
         }
+        
+        reverse(v.begin(),v.end());
         
         return v;
     }
