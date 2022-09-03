@@ -22,13 +22,13 @@ public:
         solve(root->left);
         solve(root->right);
         
-        TreeNode* t=root->left;
+        TreeNode* temp=root->left;
         root->left=root->right;
-        root->right=t;
+        root->right=temp;
     }
     
     TreeNode* invertTree(TreeNode* root) {
-      
+        
         solve(root);
         
         return root;
