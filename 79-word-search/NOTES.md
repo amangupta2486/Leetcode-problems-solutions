@@ -1,3 +1,11 @@
+Input
+[["A","B","C","E"],["S","F","E","S"],["A","D","E","E"]]
+"ABCESEEEFS"
+Output
+false
+Expected
+true
+​
 [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
 "ABCCED"
 [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
@@ -23,16 +31,3 @@ char letter = word.back();
 if (board.at(i).at(j) != letter)
 {
 return;
-}
-word.pop_back();
-if (word.compare("") == 0)
-{
-found = true;
-return;
-}
-board.at(i).at(j) = '.';
-if (i + 1 < board.size() && board.at(i + 1).at(j) != '.')
-{
-backtrack(board, word, found, i + 1, j);
-}
-if (i - 1 >= 0 && board.at(i - 1).at(j) != '.')
