@@ -1,31 +1,33 @@
 class Solution {
 public:
-    vector<string> ans;
     
     string key[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     
-    void solve(int i,int n,string d,string s)
+    
+    vector<string> ans;
+    
+    void solve(int i,string d,string s)
     {
-        if(i==n)
+        if(i==d.size())
         {
-            if(s!="")
+            if(i!=0)
             ans.push_back(s);
+            
             return;
         }
         
-        string k=key[d[i]-'0'];
-        int m=k.size();
+        int id=d[i]-'0';
+        string k=key[id];
         
-        for(int j=0;j<m;j++)
+        for(int j=0;j<k.size();j++)
         {
-            solve(i+1,n,d,s+k[j]);
+            solve(i+1,d,s+k[j]);
         }
     }
+    
     vector<string> letterCombinations(string d) {
         
-        int n=d.size();
-        
-        solve(0,n,d,"");
+        solve(0,d,"");
         
         return ans;
     }
