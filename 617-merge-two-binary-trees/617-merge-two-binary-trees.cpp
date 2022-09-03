@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    
     TreeNode* mergeTrees(TreeNode* a, TreeNode* b) {
         
         if(a==NULL)
         {
             return b;
         }
+        
         if(b==NULL)
         {
             return a;
@@ -25,8 +25,8 @@ public:
         
         a->val+=b->val;
         
-        a->left=mergeTrees(a->left,b->left);
-        a->right=mergeTrees(a->right,b->right);
+        a->left = mergeTrees(a->left,b->left);
+        a->right= mergeTrees(a->right,b->right);
         
         return a;
     }
