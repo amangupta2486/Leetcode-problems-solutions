@@ -15,16 +15,15 @@ public:
             return dp[i];
         }
         
-        int ans=10000;
+        int ans=100000;
         
-        for(int j=i;j<i+a[i] && j<n;j++)
+        for(int j=i;j<i+a[i] && j<n ;j++)
         {
-            ans=min(ans,1+solve(j+1,n,a));    
+            ans=min(ans,1+solve(j+1,n,a));
         }
         
         return dp[i]=ans;
     }
-    
     
     int jump(vector<int>& a) {
         
