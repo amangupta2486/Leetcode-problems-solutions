@@ -2,25 +2,29 @@ class Solution {
 public:
     vector<int> findOrder(int n, vector<vector<int>>& p) {
         
-        vector<int> ind(n,0);
-        vector<int> adj[n];
+        vector<int> v[n];
         
-        for(auto i:p)
+        vector<int> d(n,0);
+        
+        for(auto x:p)
         {
-            adj[i[1]].push_back(i[0]);
-            ind[i[0]]++;
+            v[x[1]].push_back(x[0]);
+            d[x[0]]++;
         }
         
         queue<int> q;
-        vector<int> ans;
         
         for(int i=0;i<n;i++)
         {
-            if(ind[i]==0)
+            if(d[i]==0)
             {
                 q.push(i);
             }
         }
+        
+        int c=0;
+        
+        vector<int> ans;
         
         while(!q.empty())
         {
@@ -28,16 +32,18 @@ public:
             
             while(k--)
             {
-                auto p=q.front();
+                auto r=q.front();
                 q.pop();
                 
-                ans.push_back(p);
+                ans.push_back(r);
                 
-                for(auto x:adj[p])
+                c++;
+                
+                for(auto x:v[r])
                 {
-                    ind[x]--;
+                    d[x]--;
                     
-                    if(ind[x]==0)
+                    if(d[x]==0)
                     {
                         q.push(x);
                     }
@@ -45,8 +51,11 @@ public:
             }
         }
         
-        vector<int> emp;
+        if(c==n)
+        {
+            return ans;
+        }
         
-        return ans.size()==n ? ans : emp;
+        return {};
     }
 };
