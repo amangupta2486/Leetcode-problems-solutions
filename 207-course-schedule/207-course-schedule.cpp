@@ -2,14 +2,14 @@ class Solution {
 public:
     bool canFinish(int n, vector<vector<int>>& p) {
         
+        vector<int> v[n];
+        
         vector<int> d(n,0);
         
-        vector<int> adj[n];
-        
-        for(auto i:p)
+        for(auto x:p)
         {
-            adj[i[0]].push_back(i[1]);
-            d[i[1]]++;
+            v[x[1]].push_back(x[0]);
+            d[x[0]]++;
         }
         
         queue<int> q;
@@ -22,20 +22,20 @@ public:
             }
         }
         
-        int cnt=0;
+        int c=0;
         
         while(!q.empty())
         {
-            int l=q.size();
+            int k=q.size();
             
-            while(l--)
+            while(k--)
             {
-                int r=q.front();
+                auto r=q.front();
                 q.pop();
                 
-                cnt++;
+                c++;
                 
-                for(auto x:adj[r])
+                for(auto x:v[r])
                 {
                     d[x]--;
                     
@@ -47,6 +47,6 @@ public:
             }
         }
         
-        return cnt==n ? 1 : 0;
+        return c==n;
     }
 };
