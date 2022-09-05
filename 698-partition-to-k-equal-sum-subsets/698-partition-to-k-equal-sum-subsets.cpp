@@ -1,46 +1,42 @@
 class Solution {
 public:
     
+    int ans=0;
+    
     int vis[20];
     
-    bool solve(int j,int s,int n,int t,vector<int>& a,int k)
+    void solve(int j,vector<int>& a,int x,int s, int k)
     {
         if(k==1)
         {
-            return 1;
+            ans=1;
+            return;
         }
         
-        if(j>=n)
+        if(j>=a.size())
         {
-            return 0;
+            return;
         }
         
-        if(s==t)
+        if(x==s)
         {
-            if(solve(0,0,n,t,a,k-1))
-            {
-                return 1;
-            }
+            solve(0,a,0,s,k-1);
         }
         
-        for(int i=j;i<n;i++)
+        for(int i=j;i<a.size();i++)
         {
-            if(a[i]+s>t || vis[i])
+            if(vis[i] || x+a[i]>s)
             {
                 continue;
             }
             
             vis[i]=1;
             
-            if(solve(i+1,s+a[i],n,t,a,k))
-            {
-                return 1;
-            }
+            solve(i+1,a,x+a[i],s,k);
             
             vis[i]=0;
         }
         
-        return 0;
     }
     
     bool canPartitionKSubsets(vector<int>& a, int k) {
@@ -63,6 +59,8 @@ public:
         
         memset(vis,0,sizeof(vis));
         
-        return solve(0,0,n,s,a,k);
+        solve(0,a,0,s,k);
+        
+        return ans;
     }
 };
