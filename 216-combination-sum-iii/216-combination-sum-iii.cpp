@@ -3,37 +3,37 @@ public:
     
     vector<vector<int>> ans;
     
-    void solve(vector<int>&a,vector<int> q,int s,int k,int i,int n)
+    
+    
+    void solve(int i,int n,int j,int k,vector<int> v,vector<int> &vis,int s,int t)
     {
-        if(i==9 || q.size()==k)
+        if(i>n || j==k)
         {
-            if(s==n && q.size()==k)
+            if(j==k &&s==t)
             {
-                ans.push_back(q);
+                ans.push_back(v);
             }
             return;
         }
         
-        if(s+a[i]<=n)
-        {
-            q.push_back(a[i]);
-            solve(a,q,s+a[i],k,i+1,n);
-            q.pop_back();
-        }
-        
-        solve(a,q,s,k,i+1,n);
-    }
-    
-    vector<vector<int>> combinationSum3(int k, int n) {
-      
-        vector<int> v,q;
-        
-        for(int i=1;i<=9;i++)
+        if(s+i<=t)
         {
             v.push_back(i);
+            solve(i+1,n,j+1,k,v,vis,s+i,t);
+            v.pop_back();
         }
         
-        solve(v,q,0,k,0,n);
+        
+        solve(i+1,n,j,k,v,vis,s,t);
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int s) {
+        
+        vector<int> v;
+        
+        vector<int> vis(10,0);
+        
+        solve(1,9,0,k,v,vis,0,s);
         
         return ans;
     }
