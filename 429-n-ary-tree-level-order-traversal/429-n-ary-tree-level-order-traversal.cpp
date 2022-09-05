@@ -30,6 +30,7 @@ public:
         }
         
         queue<Node*> q;
+        
         q.push(root);
         
         while(!q.empty())
@@ -44,11 +45,12 @@ public:
                 
                 v.push_back(p->val);
                 
-                for(auto i:p->children)
+                for(auto x:p->children)
                 {
-                    q.push(i);
+                    q.push(x);
                 }
             }
+            
             ans.push_back(v);
         }
         
