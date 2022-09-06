@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> ans;
     
-    void solve(int i,int n,vector<int>& a)
+    void solve(int i,int n,vector<int> &a)
     {
         if(i==n)
         {
@@ -18,7 +18,8 @@ public:
         }
     }
     
-    vector<vector<int>> permute(vector<int>& a) {     
+    vector<vector<int>> permute(vector<int>& a) {
+        
         int n=a.size();
         
         solve(0,n,a);
