@@ -5,13 +5,14 @@ public:
     
     int find(int x)
     {
-        while(v[x]!=x)
+        while(x!=v[x])
         {
             x=v[x];
         }
         
         return x;
     }
+    
     void Union(int a,int b)
     {
         int x=find(a);
@@ -22,27 +23,26 @@ public:
             v[y]=x;
         }
     }
-    vector<int> findRedundantConnection(vector<vector<int>>& e) {
+    
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         
-        int n=e.size();
+        int n=edges.size();
         
         for(int i=0;i<=n;i++)
         {
             v[i]=i;
         }
-        
-        for(auto i:e)
+
+        for(auto x:edges)
         {
-            int a=i[0];
-            int b=i[1];
-            
-            if(find(a)==find(b))
+            if(find(x[0])!=find(x[1]))
             {
-                return i;
+                Union(x[0],x[1]);  
             }
+            
             else
             {
-                Union(a,b);
+                 return x;
             }
         }
         
