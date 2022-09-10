@@ -1,8 +1,9 @@
 class Solution {
 public:
+    
     int dp[1005][105][2];
     
-    int solve(int i,int buy,int n,vector<int>& p,int k)
+    int solve(int i,int n,vector<int>& p,int k,int buy)
     {
         if(i>=n || k==0)
         {
@@ -18,11 +19,11 @@ public:
         
         if(buy)
         {
-            ans=max(-p[i]+solve(i+1,0,n,p,k),solve(i+1,1,n,p,k));
+            ans=max(-p[i]+solve(i+1,n,p,k,0),solve(i+1,n,p,k,1));
         }
         else
         {
-            ans=max(p[i]+solve(i+1,1,n,p,k-1),solve(i+1,0,n,p,k));
+            ans=max(p[i]+solve(i+1,n,p,k-1,1),solve(i+1,n,p,k,0));
         }
         
         return dp[i][k][buy]=ans;
@@ -34,6 +35,6 @@ public:
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(0,1,n,p,k);
+        return solve(0,n,p,k,1);
     }
 };
