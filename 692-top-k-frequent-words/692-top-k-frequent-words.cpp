@@ -1,27 +1,29 @@
 class Solution {
 public:
-    vector<string> topKFrequent(vector<string>& w, int k) {
+    vector<string> topKFrequent(vector<string>& words, int k) {
         
-        int n=w.size();
+        unordered_map<string,int> mp;
         
-        map<string,int> mp;
-        
-        for(auto i:w)
+        for(auto x:words)
         {
-            mp[i]++;
+            mp[x]++;
         }
         
         vector<pair<int,string>> v;
         
-        for(auto i:mp)
+        for(auto x:mp)
         {
-            v.push_back({i.second,i.first});
+            v.push_back({x.second,x.first});
         }
         
-       // sort(v.rbegin(),v.rend());
-        
         sort(v.begin(),v.end(),[&](auto &a,auto &b){
-            return a.first>b.first || (a.first==b.first && a.second<b.second);
+            
+            if(a.first==b.first)
+            {
+                return a.second<b.second;
+            }
+            
+            return a.first>b.first;
         });
         
         vector<string> ans;
