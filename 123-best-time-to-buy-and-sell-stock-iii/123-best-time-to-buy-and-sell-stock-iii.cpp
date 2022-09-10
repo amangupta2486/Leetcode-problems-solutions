@@ -1,32 +1,32 @@
 class Solution {
 public:
-    int dp[100005][2][3];
     
-    int solve(int i,vector<int>& p,int buy,int k)
+    int dp[100005][3][2];
+    
+    int solve(int i,int n,vector<int>& p,int k,int buy)
     {
-        if(i==p.size() || k==0)
+        if(i>=n || k==0)
         {
             return 0;
         }
         
-        
-        if(dp[i][buy][k]!=-1)
+        if(dp[i][k][buy]!=-1)
         {
-            return dp[i][buy][k];
+            return dp[i][k][buy];
         }
         
         int ans=0;
         
         if(buy)
         {
-            ans=max(-p[i]+solve(i+1,p,0,k),solve(i+1,p,1,k));
+            ans=max(-p[i]+solve(i+1,n,p,k,0),solve(i+1,n,p,k,1));
         }
         else
         {
-            ans=max(p[i]+solve(i+1,p,1,k-1),solve(i+1,p,0,k));
+            ans=max(p[i]+solve(i+1,n,p,k-1,1),solve(i+1,n,p,k,0));
         }
         
-        return dp[i][buy][k]=ans;
+        return dp[i][k][buy]=ans;
     }
     
     int maxProfit(vector<int>& p) {
@@ -35,6 +35,6 @@ public:
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(0,p,1,2);
+        return solve(0,n,p,2,1);
     }
 };
