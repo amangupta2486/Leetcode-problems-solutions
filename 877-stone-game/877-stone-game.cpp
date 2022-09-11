@@ -3,7 +3,7 @@ public:
     
     int dp[505][505];
     
-    int solve(vector<int>& a,int i,int j)
+    int solve(int i,int j,vector<int>& p)
     {
         if(i>j)
         {
@@ -15,27 +15,28 @@ public:
             return dp[i][j];
         }
         
-        int l=a[i]+min({solve(a,i+2,j),solve(a,i,j-1)});
-        int r=a[j]+min({solve(a,i+1,j),solve(a,i,j-2)});
+        int l=p[i]+min(solve(i+1,j-1,p),solve(i+2,j,p));
+        int r=p[j]+min(solve(i+1,j-1,p),solve(i,j-2,p));
         
         return dp[i][j]=max(l,r);
     }
-    bool stoneGame(vector<int>& a) {
+    
+    bool stoneGame(vector<int>& p) {
         
-        int n=a.size();
+        int n=p.size();
         
-        int sum=0;
+        int s=0;
         
         memset(dp,-1,sizeof(dp));
         
         for(int i=0;i<n;i++)
         {
-            sum+=a[i];
+            s+=p[i];
         }
         
-        int alice=solve(a,0,n-1);
+        int alice=solve(0,n-1,p);
         
-        int bob=sum-alice;
+        int bob = s-alice;
         
         if(alice>bob)
         {
