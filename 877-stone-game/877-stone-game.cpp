@@ -15,8 +15,8 @@ public:
             return dp[i][j];
         }
         
-        int l=p[i]+min(solve(i+1,j-1,p),solve(i+2,j,p));
-        int r=p[j]+min(solve(i+1,j-1,p),solve(i,j-2,p));
+        int l=p[i]+max(solve(i+1,j-1,p),solve(i+2,j,p));
+        int r=p[j]+max(solve(i+1,j-1,p),solve(i,j-2,p));
         
         return dp[i][j]=max(l,r);
     }
