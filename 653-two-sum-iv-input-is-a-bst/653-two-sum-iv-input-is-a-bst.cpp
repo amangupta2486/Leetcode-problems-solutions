@@ -13,38 +13,34 @@ class Solution {
 public:
     
     map<int,int> mp;
-    vector<int> v;
     
-    void solve(TreeNode* root)
+    int ans=0;
+    
+    void solve(TreeNode* root, int k)
     {
         if(root==NULL)
         {
             return;
         }
         
-        solve(root->left);
-        v.push_back(root->val);
-        mp[root->val]++;
-        solve(root->right);
-    }
-    bool findTarget(TreeNode* root, int k) {
+        solve(root->left,k);
         
-        solve(root);
+        int x=root->val;
         
-        int n=v.size();
-        
-        for(int i=0;i<n;i++)
+        if(mp[k-x]>0)
         {
-            if(v[i]*2==k && mp[v[i]]<2)
-            {
-                continue;
-            }
-            if(mp[k-v[i]]>0)
-            {
-                return 1;
-            }
+            ans=1;
         }
         
-        return 0;
+        mp[x]++;
+        
+        solve(root->right,k);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        
+        solve(root,k);
+        
+        return ans;
     }
 };
