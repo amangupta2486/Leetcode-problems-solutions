@@ -1,33 +1,31 @@
 class Solution {
 public:
     vector<int> sumZero(int n) {
-        vector<int> ans;
+        
+        vector<int> v;
         
         if(n%2==0)
         {
-            int m=0,i=1;
-            while(m<n)
+            for(int i=1;i<=n/2;i++)
             {
-                ans.push_back(-i);
-                ans.push_back(i);
-                i++;
-                m+=2;
+                v.push_back(-i);
+                v.push_back(i);
             }
         }
         
         else
         {
-            int m=1,i=1;
-            ans.push_back(0);
-            while(m<n)
+            v.push_back(0);
+        
+            n=n-1;
+
+            for(int i=1;i<=n/2;i++)
             {
-                ans.push_back(-i);
-                ans.push_back(i);
-                i++;
-                m+=2;
+                v.push_back(-i);
+                v.push_back(i);
             }
         }
         
-        return ans;
+        return v;
     }
 };
