@@ -1,42 +1,32 @@
 class Solution {
 public:
-    int minCost(string a, vector<int>& t) {
+    int minCost(string s, vector<int>& t) {
         
-        int n=a.size();
+        int n=s.size();
         
-        vector<int> v;
-        int s=0;
-        int mx=0,ans=0;
+        int ans=0;
         
         for(int i=0;i<n-1;i++)
         {
-            if(a[i]==a[i+1])
+            priority_queue<int,vector<int>,greater<int>> p;
+            
+            if(s[i]==s[i+1])
             {
-                s+=t[i];
-                mx=max(mx,t[i]);
-            }
-            else
-            {
-                if(i-1>=0 && a[i]==a[i-1])
+                while(i+1<n && s[i]==s[i+1])
                 {
-                    s+=t[i];
-                    mx=max(mx,t[i]);
-                    s-=mx;
-                    ans+=s;
-                    mx=0;
-                }                
-                s=0;
+                    p.push(t[i]);
+                    i++;
+                }
+                
+                p.push(t[i]);
+            }
+            
+            while(p.size()>1)
+            {
+                ans+=p.top();
+                p.pop();
             }
         }
-        int i=n-1;
-        
-        if(i-1>=0 && a[i]==a[i-1])
-        {
-            s+=t[i];
-            mx=max(mx,t[i]);
-            s-=mx;
-            ans+=s;
-        }     
         
         return ans;
     }
