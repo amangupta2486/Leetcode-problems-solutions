@@ -3,7 +3,7 @@ public:
     
     int n,m;
     
-    int dp[200][200];
+    int dp[205][205];
     
     int solve(int i,int j,vector<vector<int>>& g)
     {
@@ -12,7 +12,7 @@ public:
             return g[i][j];
         }
         
-        if(i>=n || j>=m)
+        if(i>=n  || j>=m)
         {
             return 100000;
         }
@@ -22,7 +22,7 @@ public:
             return dp[i][j];
         }
         
-        return dp[i][j]=g[i][j]+min(solve(i+1,j,g),solve(i,j+1,g));
+        return dp[i][j] = g[i][j] + min(solve(i+1,j,g),solve(i,j+1,g));
     }
     
     int minPathSum(vector<vector<int>>& g) {
