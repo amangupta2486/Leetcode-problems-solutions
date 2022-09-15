@@ -1,108 +1,69 @@
 class Solution {
 public:
     
-    char ans;
     
-    bool check(vector<vector<char>> &g,char c)
+    bool check(vector<vector<char>> &g)
     {
-        int n=3;
+        for(int i=0;i<3;i++)
+        {
+            if(g[i][0]==g[i][1] && g[i][2]==g[i][1] && g[i][0]!='.')
+            {
+                return 1;
+            }
+        }
         
         for(int i=0;i<3;i++)
         {
-            int cnt=0;
-            for(int j=0;j<3;j++)
-            {
-                if(g[i][j]==c)
-                {
-                    cnt++;
-                }
-            }
-            
-            if(cnt==3)
+            if(g[0][i]==g[1][i] && g[2][i]==g[1][i] && g[0][i]!='.')
             {
                 return 1;
             }
         }
         
-        
-        for(int j=0;j<3;j++)
-        {
-            int cnt=0;
-            for(int i=0;i<3;i++)
-            {
-                if(g[i][j]==c)
-                {
-                    cnt++;
-                }
-            }
-            
-            if(cnt==3)
-            {
-                return 1;
-            }
-        }
-        
-        int cnt=0;
-        
-        for(int i=0,j=0;i<3&& j<3;i++,j++)
-        {
-            if(g[i][j]==c)
-            {
-                cnt++;
-            }
-        }
-        if(cnt==3)
+        if(g[0][0]!='.' && g[0][0]==g[1][1] && g[1][1]==g[2][2])
         {
             return 1;
         }
         
-        cnt=0;
-        
-        for(int i=2,j=0;i>=0&& j<3;i--,j++)
-        {
-            if(g[i][j]==c)
-            {
-                cnt++;
-            }
-        }
-        if(cnt==3)
+        if(g[0][2]!='.' &&  g[0][2]==g[1][1] && g[1][1]==g[2][0])
         {
             return 1;
         }
         
         return 0;
     }
+    
     string tictactoe(vector<vector<int>>& moves) {
         
         vector<vector<char>> g(3,vector<char>(3,'.'));
         
-        int n=moves.size();
+        int f=0;
         
-        int f=1;
-        
-        for(int i=0;i<n;i++)
+        for(auto x:moves)
         {
-            auto v=moves[i];
-            if(f)
+            if(f==0)
             {
-                g[v[0]][v[1]]='X';
-                if(check(g,'X'))
-                {
-                    return "A";
-                }
+                g[x[0]][x[1]]='X';
             }
             else
             {
-                g[v[0]][v[1]]='O';
-                if(check(g,'O'))
-                {
-                    return "B";
-                }
+                g[x[0]][x[1]]='O';
             }
+            
+            if(f==0 && check(g))
+            {
+                return "A";
+            }
+            
+            else if(f==1 && check(g))
+            {
+                return "B";
+            }
+            
             f^=1;
         }
         
-        if(n<9)
+        if(moves.size()<9)
         {
             return "Pending";
         }
