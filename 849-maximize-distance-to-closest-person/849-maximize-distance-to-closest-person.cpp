@@ -1,62 +1,31 @@
 class Solution {
 public:
-    int maxDistToClosest(vector<int>& s) {
+    int maxDistToClosest(vector<int>& a) {
         
-        int n=s.size();
+        int n=a.size();
         
-        int a1=0,a2=0,a3=0;
-        
-        for(int i=0;i<n;i++)
-        {
-            if(s[i]==0)
-            {
-                a1++;
-            }
-            else
-            {
-                break;
-            }
-        }
-        
-         for(int i=n-1;i>=0;i--)
-        {
-            if(s[i]==0)
-            {
-                a2++;
-            }
-            else
-            {
-                break;
-            }
-        }
-        
-        int ans=0;
+        vector<int> v;
         
         for(int i=0;i<n;i++)
         {
-            if(s[i]==0)
+            if(a[i]==1)
             {
-                a3++;
+                v.push_back(i);
             }
-            
-            else
-            {
-                ans=max(ans,a3);
-                a3=0;
-            }
-            
         }
-        
-        if(ans%2==0)
+       
+        int m=v.size();
+              
+        int ans=max(v[0]-0,n-v[m-1]-1);
+   
+        for(int i=0;i<m-1;i++)
         {
-            ans=ans/2;
+            int x= (v[i]+v[i+1])/2;
+            
+            //cout<<x-v[i]<<" "<<v[i+1]-x<<endl;
+            
+            ans=max({ans,min(x-v[i],v[i+1]-x)});
         }
-        else
-        {
-            ans=(ans/2)+1;
-        }
-        
-        ans=max({a1,a2,ans});
         
         return ans;
     }
