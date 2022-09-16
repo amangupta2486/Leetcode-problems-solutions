@@ -13,27 +13,29 @@ public:
         {
             s.push({val,val});
         }
+        
         else
         {
-            int mi=min(s.top().first,val);
+            auto p=s.top();
             
-            s.push({mi,val});
+            s.push({val,min(p.second,val)});
         }
     }
     
     void pop() {
         
         s.pop();
+        
     }
     
     int top() {
         
-        return s.top().second;
+        return s.top().first;
     }
     
     int getMin() {
         
-        return s.top().first;
+        return s.top().second;
     }
 };
 
