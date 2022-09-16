@@ -5,9 +5,9 @@ public:
         int n=g.size();
         int m=g[0].size();
         
-        int total=0;
+        int c=0;
         
-        queue<pair<int,int>> q;
+        queue<vector<int>> q;
         
         for(int i=0;i<n;i++)
         {
@@ -20,34 +20,35 @@ public:
                 
                 if(g[i][j]!=0)
                 {
-                    total++;
+                    c++;
                 }
             }
         }
         
-        int cnt=0,days=0;
+        int days=0;
+        int rot=0;
         
         int dx[4]={1,-1,0,0};
         int dy[4]={0,0,1,-1};
         
         while(!q.empty())
         {
-            int l=q.size();
+            auto l=q.size();
             
             while(l--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                int i=p.first;
-                int j=p.second;
+                int i=p[0];
+                int j=p[1];
                 
-                cnt++;
+                rot++;
                 
                 for(int k=0;k<4;k++)
                 {
-                    int x = i+dx[k];
-                    int y = j+dy[k];
+                    int x=i+dx[k];
+                    int y=j+dy[k];
                     
                     if(x>=0 && x<n && y>=0 && y<m && g[x][y]==1)
                     {
@@ -63,8 +64,8 @@ public:
             }
         }
         
-        //cout<<cnt<<" "<<total<<endl;
+       // cout<<c<<" "<<rot<<endl;
         
-        return cnt==total ? days : -1;
+        return c==rot ? days : -1;
     }
 };
