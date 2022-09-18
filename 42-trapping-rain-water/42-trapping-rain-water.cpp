@@ -4,29 +4,39 @@ public:
         
         int n=a.size();
         
-        vector<int> l(n,0),r(n,0);
-        
-        l[0]=a[0];
-        
-        for(int i=1;i<n;i++)
-        {
-            l[i]=max(l[i-1],a[i]);
-        }
-        
-        r[n-1]=a[n-1];
-        
-        for(int i=n-2;i>=0;i--)
-        {
-            r[i]=max(r[i+1],a[i]);
-        }
+        int lmax=0,rmax=0,i=0,j=n-1;
         
         int ans=0;
         
-        for(int i=0;i<n;i++)
+        while(i<=j)
         {
-            ans+=min(l[i],r[i])-a[i];
+            if(a[i]<=a[j])
+            {
+                if(a[i]>lmax)
+                {
+                    lmax=a[i];
+                }
+                else
+                {
+                    ans+=lmax-a[i];
+                }
+                i++;
+            }
+            else
+            {
+                if(a[j]>rmax)
+                {
+                    rmax=a[j];
+                }
+                else
+                {
+                    ans+=rmax-a[j];
+                }
+                j--;
+            }
         }
         
         return ans;
+        
     }
 };
