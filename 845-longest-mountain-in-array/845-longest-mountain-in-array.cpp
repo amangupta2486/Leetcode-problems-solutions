@@ -12,10 +12,10 @@ public:
         int ans=0;
         
         
-        for(int j=0;j<n-1;j++)
+        for(int i=0;i<n-1;i++)
         {
             int l=1;
-            int i=j;
+            //int i=j;
             
             if(a[i]<a[i+1])
             {
@@ -43,6 +43,8 @@ public:
                     i++;
                     l++;
                 }
+                
+                i=i-1;
                 
                 ans=max(ans,l);
             }
