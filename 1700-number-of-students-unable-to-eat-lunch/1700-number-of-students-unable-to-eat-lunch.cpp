@@ -5,7 +5,7 @@ public:
         int n=a.size();
         int m=b.size();
         
-        int t=10000;
+        int t=100;
         
         queue<int> q;
         
@@ -16,18 +16,31 @@ public:
         
         int i=0;
         
+        int p=n;
+        
         while(t>0 && !q.empty())
         {
-            if(q.front()==b[i])
+            int k=q.size();
+            p=k;
+            
+            while(k--)
             {
-                q.pop();
-                i++;
+                 if(q.front()==b[i])
+                {
+                    q.pop();
+                    i++;
+                }
+
+                else
+                {
+                    q.push(q.front());
+                    q.pop();
+                }
             }
             
-            else
+            if(p==q.size())
             {
-                q.push(q.front());
-                q.pop();
+                return p;
             }
             
             t--;
