@@ -1,27 +1,56 @@
 class Solution {
 public:
+    
+    int n,m;
+    
+    int dp[1005][1005];
+    
+    int ans=0;
+    
+    int solve(int i,int j,vector<int>& a, vector<int>& b)
+    {
+        if(i>=n || j>=m)
+        {
+            return 0;
+        }
+        
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        
+        solve(i+1,j,a,b);
+        solve(i,j+1,a,b);
+            
+        int common=0;
+        
+        if(a[i]==b[j])
+        {
+            common = 1+solve(i+1,j+1,a,b);    
+        }
+        
+        ans=max(ans,common);
+        
+        return dp[i][j]=common;
+    }
+    
     int findLength(vector<int>& a, vector<int>& b) {
         
-        int n=a.size();
-        int m=b.size();
+        n=a.size();
+        m=b.size();
         
-        int dp[n+1][m+1];
-        memset(dp,0,sizeof(dp));
+        memset(dp,-1,sizeof(dp));
         
-        int ans=0;
+        solve(0,0,a,b);
         
-        for(int i=n-1;i>=0;i--)
-        {
-            for(int j=m-1;j>=0;j--)
-            {
-                if(a[i]==b[j])
-                {
-                    dp[i][j]=1+dp[i+1][j+1];
-                }
-                
-                ans=max(ans,dp[i][j]);
-            }
-        }
+        // for(int i=0;i<n;i++)
+        // {
+        //     for(int j=0;j<m;j++)
+        //     {
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
         
         return ans;
     }
