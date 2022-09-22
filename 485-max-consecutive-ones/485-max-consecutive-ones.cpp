@@ -14,10 +14,13 @@ public:
             }
             else
             {
+                ans=max(ans,c);
                 c=0;
             }
-            ans=max(ans,c);
+            
         }
+
+        ans=max(ans,c);
         
         return ans;
     }
