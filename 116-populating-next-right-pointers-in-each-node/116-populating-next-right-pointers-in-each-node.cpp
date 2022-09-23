@@ -22,21 +22,41 @@ public:
         
         if(root==NULL)
         {
-            return NULL;
+            return root;
         }
         
-        if(root->right!=NULL)
+        queue<Node*> q;
+        
+        q.push(root);
+        
+        while(!q.empty())
         {
-            root->left->next=root->right;
+            int k=q.size();
+            Node* prev=NULL;
+            
+            while(k--)
+            {
+                auto p=q.front();
+                q.pop();
+                
+                if(prev!=NULL)
+                {
+                    prev->next=p;
+                }
+                
+                prev=p;
+                
+                if(p->left!=NULL)
+                {
+                    q.push(p->left);
+                }
+                
+                if(p->right!=NULL)
+                {
+                    q.push(p->right);
+                }
+            }
         }
-        
-        if(root->left!=NULL && root->next!=NULL)
-        {
-            root->right->next=root->next->left;
-        }
-        
-        connect(root->left);
-        connect(root->right);
         
         return root;
     }
