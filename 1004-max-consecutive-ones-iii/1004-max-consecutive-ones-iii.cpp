@@ -4,20 +4,20 @@ public:
         
         int n=a.size();
         
-        int ans=0,cnt=0,j=0;
+        int c=0,ans=0,j=0;
         
         for(int i=0;i<n;i++)
         {
             if(a[i]==0)
             {
-                cnt++;
+                c++;
             }
-        
-            while(cnt>k && j<n)
+            
+            while(c>k)
             {
                 if(a[j]==0)
                 {
-                    cnt--;
+                    c--;
                 }
                 j++;
             }
