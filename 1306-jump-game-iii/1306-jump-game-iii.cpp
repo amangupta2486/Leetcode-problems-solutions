@@ -1,50 +1,36 @@
 class Solution {
 public:
     
-    int as=0;
+    int ans=0;
     
-    int dp[100005];
     int vis[100005];
     
-    int solve(int i,int n,vector<int>& a)
+    void solve(int i,int n,vector<int> &a)
     {
+        if(i<0 || i>=n || vis[i])
+        {
+            return;
+        }
+        
         if(a[i]==0)
         {
-            return 1;
+            ans=1;
         }
         
-        //cout<<i<<" ";
+        vis[i]=1;
         
-        if(dp[i]!=-1)
-        {
-            return dp[i];
-        }
-        
-        int ans=0;
-        
-        if(i+a[i]<n && vis[i+a[i]]==0)
-        {
-            vis[i+a[i]]=1;
-            ans|=solve(i+a[i],n,a);
-            
-        }
-        
-        if(i-a[i]>=0 && vis[i-a[i]]==0)
-        {
-            vis[i-a[i]]=1;
-           ans|=solve(i-a[i],n,a);
-        }
-        
-        return dp[i]=ans;
+        solve(i+a[i],n,a);
+        solve(i-a[i],n,a);
     }
     
-    bool canReach(vector<int>& a, int st) {
+    bool canReach(vector<int>& a, int start) {
         
         int n=a.size();
         
-        memset(dp,-1,sizeof(dp));
-        memset(vis,0,sizeof(dp));
+        solve(start,n,a);
         
-        return solve(st,n,a);
+        memset(vis,0,sizeof(vis));
+        
+        return ans;
     }
 };
