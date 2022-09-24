@@ -11,43 +11,43 @@
  */
 class Solution {
 public:
-    unordered_map<long long,int> mp;
     
-    int ans=0;
+    unordered_map<long,long> mp;
     
-    void solve(TreeNode* root, int t,long long p)
+    long ans=0;
+    
+    void solve(TreeNode* root, long t,long s)
     {
         if(root==NULL)
         {
             return;
         }
         
-        p=p+root->val;
+        s+=root->val;
         
-        if(p==t)
+        if(s==t)
         {
             ans++;
         }
         
-        if(mp[p-t]>0)
+        if(mp[s-t]>0)
         {
-            ans+=mp[p-t];
+            ans+=mp[s-t];
         }
-
-        mp[p]++;
         
-        solve(root->left,t,p);
-        solve(root->right,t,p);
+        mp[s]++;
         
-        mp[p]--;
+        solve(root->left,t,s);
         
+        solve(root->right,t,s);
+        
+        mp[s]--;
     }
+    
     int pathSum(TreeNode* root, int t) {
         
-      long long p=0;
-
-      solve(root,t,p);
+        solve(root,t,0);
         
-      return ans;
+        return ans;
     }
 };
