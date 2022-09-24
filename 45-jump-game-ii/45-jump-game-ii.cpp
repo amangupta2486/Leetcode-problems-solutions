@@ -3,7 +3,7 @@ public:
     
     int dp[10005];
     
-    int solve(int i,int n,vector<int>& a)
+    int solve(int i,int n,vector<int> &a)
     {
         if(i>=n-1)
         {
@@ -15,9 +15,9 @@ public:
             return dp[i];
         }
         
-        int ans=100000;
+        int ans=10005;
         
-        for(int j=i;j<i+a[i] && j<n ;j++)
+        for(int j=i;j<i+a[i] && j<n;j++)
         {
             ans=min(ans,1+solve(j+1,n,a));
         }
