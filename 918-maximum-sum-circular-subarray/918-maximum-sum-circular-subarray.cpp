@@ -4,19 +4,19 @@ public:
         
         int n=a.size();
         
-        int currMax=a[0],currMin=a[0],total=a[0],Max=a[0],Min=a[0];
+        int curr_min=100000,s=0,mi=100000,curr_max=-100000,mx=-100000;
         
-        for(int i=1;i<n;i++)
+        for(int i=0;i<n;i++)
         {
-            currMin=min(a[i],currMin+a[i]);
-            currMax=max(a[i],currMax+a[i]);
+            curr_max=max(a[i],curr_max+a[i]);
+            curr_min=min(a[i],curr_min+a[i]);
+            mi=min(mi,curr_min);
             
-            Max=max(Max,currMax);
-            Min=min(Min,currMin);
+            mx=max(mx,curr_max);
             
-            total+=a[i];
+            s+=a[i];
         }
         
-        return Max>0 ? max(Max,total-Min) : Max;
+        return mx>0 ? max(s-mi,mx) : mx;
     }
 };
