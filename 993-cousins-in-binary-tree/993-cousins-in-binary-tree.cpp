@@ -12,67 +12,44 @@
 class Solution {
 public:
     
-    bool check(vector<int> &v,int x,int y)
+    TreeNode* pa;
+    TreeNode* pb;
+    
+    int a=0,b=0;
+    
+    void solve(TreeNode* root,int x,int y,int s,TreeNode* prev)
     {
-        bool check1=0,check2=0;
-        
-        for(auto i:v)
+        if(root==NULL)
         {
-            if(i==x)
-            {
-                check1=1;
-            }
-            if(i==y)
-            {
-                check2=1;
-            }
+            return ;
         }
         
-        return (check1 && check2);
+        if(root->val==x)
+        {
+            pa=prev;
+            a=s;
+        }
+        
+        if(root->val==y)
+        {
+            pb=prev;
+            b=s;
+        }
+        
+        solve(root->left,x,y,s+1,root);
+        solve(root->right,x,y,s+1,root);
         
     }
+    
     bool isCousins(TreeNode* root, int x, int y) {
         
-        queue<TreeNode*> q;
-        q.push(root);
+        solve(root,x,y,0,NULL);
         
-        while(!q.empty())
+        if(a==b && pa!=pb)
         {
-            vector<int> v;
-            v.clear();
-            int k=q.size();
-            
-            while(k--)
-            {
-                auto p=q.front();
-                q.pop();
-                
-                if(p->left!=NULL && p->right!=NULL)
-                {
-                    if((p->left->val==x && p->right->val==y)||(p->left->val==y && p->right->val==x))
-                    {
-                        return false;
-                    }
-                }
-                
-                v.push_back(p->val);
-                
-                if(p->left!=NULL)
-                {
-                    q.push(p->left);
-                }
-                if(p->right!=NULL)
-                {
-                    q.push(p->right);
-                }
-            }
-            
-            if(check(v,x,y))
-            {
-                return true;
-            }
+            return 1;
         }
         
-        return false;
+        return 0;
     }
 };
