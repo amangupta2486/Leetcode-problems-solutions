@@ -24,24 +24,25 @@ public:
         int l=solve(root->left);
         int r=solve(root->right);
         
-        int l_mx=0,r_mx=0;
+        int lmx=0,rmx=0;
         
-        if(root->left && root->left->val == root->val)
+        if(root->left!=NULL && root->left->val==root->val)
         {
-            l_mx=1+l;
-        }
-        if(root->right && root->right->val == root->val)
-        {
-            r_mx=1+r;
+            lmx=1+l;
         }
         
-        ans=max(ans,l_mx+r_mx);
+        if(root->right!=NULL && root->right->val==root->val)
+        {
+            rmx=1+r;
+        }
         
-        return max(l_mx,r_mx);
+        ans=max(ans,lmx+rmx);
+        
+        return max(lmx,rmx);
     }
+    
     int longestUnivaluePath(TreeNode* root) {
         
-        ans=0;
         solve(root);
         
         return ans;
