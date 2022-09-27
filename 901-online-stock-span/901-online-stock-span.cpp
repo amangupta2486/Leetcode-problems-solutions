@@ -2,16 +2,17 @@ class StockSpanner {
 public:
     
     stack<int> s;
+    
+    int v[100005];
+    
     int i=0;
-    vector<int> v;
     
     StockSpanner() {
         
+        memset(v,0,sizeof(v));
     }
     
     int next(int p) {
-        
-        int x=0;
         
         while(!s.empty() && v[s.top()]<=p)
         {
@@ -20,15 +21,18 @@ public:
         
         if(s.empty())
         {
-            x=i+1;
-        }
-        else
-        {
-            x=i-s.top();
+            s.push(i);
+            v[i]=p;
+            i++;
+            
+            return i;
         }
         
-        v.push_back(p);
+        v[i]=p;
+        int x=i-s.top();
+        
         s.push(i);
+        
         i++;
         
         return x;
