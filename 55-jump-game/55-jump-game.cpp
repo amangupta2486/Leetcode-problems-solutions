@@ -8,7 +8,7 @@ public:
         
         for(int i=n-2;i>=0;i--)
         {
-            if(a[i]+i>=l)
+            if(i+a[i]>=l)
             {
                 l=i;
             }
