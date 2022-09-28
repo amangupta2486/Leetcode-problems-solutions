@@ -1,40 +1,34 @@
 class Solution {
 public:
-    
-    map<int,int> mp;
-    
-    void solve(vector<int>& a)
-    {
+    vector<int> nextGreaterElement(vector<int>& a, vector<int>& b) {
+        
         int n=a.size();
+        int m=b.size();
         
         stack<int> s;
         
-        for(int i=n-1;i>=0;i--)
+        map<int,int> mp;
+        
+        for(int i=m-1;i>=0;i--)
         {
-            while(!s.empty() && s.top()<=a[i])
+            while(!s.empty() && s.top()<=b[i])
             {
                 s.pop();
             }
             
             if(s.empty())
             {
-                mp[a[i]]=-1;
+                mp[b[i]]=-1;
             }
-            
             else
             {
-                mp[a[i]]=s.top();
+                mp[b[i]]=s.top();
             }
             
-            s.push(a[i]);
+            //cout<<mp[b[i]]<<" ";
+            
+            s.push(b[i]);
         }
-    }
-    vector<int> nextGreaterElement(vector<int>& a, vector<int>& b) {
-        
-        int n=a.size();
-        int m=b.size();
-        
-        solve(b);
         
         vector<int> ans;
         
