@@ -11,11 +11,11 @@
 class Solution {
 public:
     
-     ListNode* reverse(ListNode* head)
+    ListNode* reverse(ListNode* head)
     {
         ListNode* prev=NULL;
         ListNode* curr=head;
-        ListNode* nxt;
+        ListNode* nxt=NULL;
         
         while(curr!=NULL)
         {
@@ -29,41 +29,48 @@ public:
         return prev;
     }
     
-    ListNode* addTwoNumbers(ListNode* p, ListNode* q) {
+    ListNode* addTwoNumbers(ListNode* a, ListNode* b) {
         
-        ListNode* l1=reverse(p);
-        ListNode* l2=reverse(q);
+        ListNode* l1=reverse(a);
+        ListNode* l2=reverse(b);
         
-        ListNode* a=new ListNode(0);
-        ListNode* b=a;
         int c=0;
+        
+        ListNode* p=new ListNode(0);
+        ListNode* q=p;
+        
         
         while(l1 || l2)
         {
-            int x=l1 ? l1->val:0;
-            int y=l2 ? l2->val:0;
+            int x=(l1!=NULL) ? l1->val : 0;
+            int y=(l2!=NULL) ? l2->val : 0;
             
-            int s=(x+y+c)%10;
+            int s=x+y+c;
             
-            c=(x+y+c)/10;
+            c=s/10;
+            s=s%10;
             
-            if(l1)
+            if(l1!=NULL)
             {
                 l1=l1->next;
             }
-            if(l2)
+            
+            if(l2!=NULL)
             {
                 l2=l2->next;
             }
             
-            a=a->next=new ListNode(s);
+            p=p->next=new ListNode(s);
         }
+        
         
         if(c)
         {
-            a=a->next=new ListNode(c);
+            p->next=new ListNode(c);
         }
         
-        return reverse(b->next);
+        ListNode* ans=reverse(q->next);
+        
+        return ans;
     }
 };
