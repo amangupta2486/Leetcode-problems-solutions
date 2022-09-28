@@ -2,9 +2,9 @@ class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temp) {
         
-        stack<int> s;
-        
         int n=temp.size();
+        
+        stack<int> s;
         
         vector<int> ans(n);
         
