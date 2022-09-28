@@ -4,38 +4,39 @@ public:
         
         int n=a.size();
         
-        for(int i=0;i<n;i++)
+        vector<int> b=a;
+        
+        for(auto i:b)
         {
-            a.push_back(a[i]);
+            a.push_back(i);
         }
         
-        int p;
         stack<int> s;
         
-        for(int i=2*n-1;i>=0;i--)
+        vector<int> ans(n);
+        
+        for(int i=(2*n)-1;i>=0;i--)
         {
-            p=a[i];
             while(!s.empty() && s.top()<=a[i])
             {
                 s.pop();
             }
             
-            if(s.empty())
-            {
-                a[i]=-1;
+            if(i<n)
+            {    
+                if(s.empty())
+                {
+                    ans[i]=-1;
+                }
+                else
+                {
+                    ans[i]=s.top();
+                }
             }
-            else
-            {
-                a[i]=s.top();
-            }
-            s.push(p);
+            
+            s.push(a[i]);
         }
         
-        while(n--)
-        {
-            a.pop_back();
-        }
-        
-        return a;
+        return ans;
     }
 };
