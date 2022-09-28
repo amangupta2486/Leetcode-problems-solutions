@@ -1,44 +1,64 @@
 class Solution {
 public:
-    int nextGreaterElement(int a) {
+    int nextGreaterElement(int n) {
         
-        string s=to_string(a);
+        vector<int> v;
         
-        int n=s.size();
-        
-        int i,f=0;
-        
-        for(i=n-2;i>=0;i--)
+        while(n>0)
         {
-            if(s[i]<s[i+1])
+            v.push_back(n%10);
+            
+            n=n/10;
+        }
+        
+        reverse(v.begin(),v.end());
+        
+        int i=v.size()-2;
+        int f=0;
+        
+        for(;i>=0;i--)
+        {
+            //cout<<v[i]<<" ";
+            if(v[i]<v[i+1])
             {
                 f=1;
                 break;
             }
         }
         
-        if(f)
+        
+        if(f==1)
         {
-            for(int j=n-1;j>i;j--)
+            //cout<<f<<endl;
+            
+            for(int j=v.size()-1;j>i;j--)
             {
-                if(s[j]>s[i])
+                if(v[j]>v[i])
                 {
-                    swap(s[j],s[i]);
+                    swap(v[j],v[i]);
                     break;
                 }
             }
             
-            sort(s.begin()+i+1,s.end());
+            sort(v.begin()+i+1,v.end());
             
-            long b=stol(s);
-            //cout<<b<<endl;
+            string s="";
             
-            if(b>INT_MAX)
+            for(auto i:v)
+            {
+                s+=i+'0';
+            }
+            
+            long a=stol(s);
+            
+            //cout<<a<<endl;
+            
+            if(a>INT_MAX)
             {
                 return -1;
             }
             
-            return b;
+            return a;
         }
         
         return -1;
