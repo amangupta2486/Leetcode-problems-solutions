@@ -4,9 +4,9 @@ public:
         
         int n=a.size();
         
-        deque<int> q;
-        
         vector<int> ans;
+        
+        deque<int> q;
         
         for(int i=0;i<k;i++)
         {
@@ -20,10 +20,9 @@ public:
         
         ans.push_back(a[q.front()]);
         
-        
         for(int i=k;i<n;i++)
         {
-            while(!q.empty() && q.front()<=i-k)
+            if(q.size()>0 && q.front()<=i-k)
             {
                 q.pop_front();
             }
@@ -35,7 +34,7 @@ public:
             
             q.push_back(i);
             
-            ans.push_back(a[q.front()]);    
+            ans.push_back(a[q.front()]);     
         }
         
         return ans;
