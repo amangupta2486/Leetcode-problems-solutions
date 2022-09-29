@@ -3,7 +3,7 @@ public:
     
     int dp[1005][1005];
     
-    int solve(string &s,int i,int j)
+    int solve(string &a,int i,int j)
     {
         if(i>j)
         {
@@ -19,18 +19,19 @@ public:
         {
             return dp[i][j];
         }
-        if(s[i]==s[j])
+        
+        if(a[i]==a[j])
         {
-            return dp[i][j]=2+solve(s,i+1,j-1);
+            return 2+solve(a,i+1,j-1);
         }
         
-        return dp[i][j]=max(solve(s,i+1,j),solve(s,i,j-1));
+        return dp[i][j]=max({solve(a,i,j-1),solve(a,i+1,j)});
     }
     
     int longestPalindromeSubseq(string s) {
         
         int n=s.size();
-
+        
         memset(dp,-1,sizeof(dp));
         
         return solve(s,0,n-1);
