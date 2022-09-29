@@ -1,39 +1,56 @@
 class Solution {
 public:
-    
-    int solve(string &s,int i,int j)
-    {
-        int n=s.size();
-        
-        while(i>=0 && j<n && s[i]==s[j])
-        {
-            i--;
-            j++;
-        }
-        
-        return j-i-1;
-    }
     string longestPalindrome(string s) {
         
         int n=s.size();
-        int ans=0,st=0,end=0;
+        
+        int dp[n][n];
+        memset(dp,0,sizeof(dp));
         
         for(int i=0;i<n;i++)
         {
-            int l=solve(s,i,i);
-            int r=0;
-            if(r<n-1)
-            r=solve(s,i,i+1);
-            
-            int len=max(l,r);
-            //cout<<len<<" ";
-            if(len>ans)
+            dp[i][i]=1;
+        }
+        
+        int len=1,start=0;
+        
+        for(int i=0;i<n-1;i++)
+        {
+            if(s[i]==s[i+1])
             {
-                st=i-((len-1)/2);
-                ans=len;
+                dp[i][i+1]=1;
+                start=i;
+                len=2;
             }
         }
         
-        return s.substr(st,ans);
+        for(int k=3;k<=n;k++)
+        {
+            for(int i=0;i<=n-k;i++)
+            {
+                int j=i+k-1;
+                
+                if(s[i]==s[j] && dp[i+1][j-1])
+                {
+                    dp[i][j]=1;
+                    
+                    if(k>len)
+                    {
+                         start=i;
+                         len=k;
+                    }
+                   
+                }
+            }
+        }
+        
+        string ans="";
+        
+        for(int i=start;i<start+len;i++)
+        {
+            ans+=s[i];
+        }
+        
+        return ans;
     }
 };
