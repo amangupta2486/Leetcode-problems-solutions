@@ -26,7 +26,7 @@ public:
         ListNode* p=new ListNode(0);
         ListNode* q=p;
         
-        while(l1!=NULL && l2!=NULL)
+        while(l1 && l2)
         {
             if(l1->val<=l2->val)
             {
@@ -36,18 +36,18 @@ public:
             }
             else
             {
-              p->next=l2;
-              p=p->next;
-              l2=l2->next;   
+                p->next=l2;
+                p=p->next;
+                l2=l2->next;
             }
         }
         
-        if(l1!=NULL)
+        if(l1)
         {
             p->next=l1;
         }
         
-        if(l2!=NULL)
+        if(l2)
         {
             p->next=l2;
         }
@@ -61,7 +61,7 @@ public:
         
         if(n==0)
         {
-            return NULL;
+            return 0;
         }
         
         ListNode* prev=lists[0];
