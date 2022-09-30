@@ -2,17 +2,17 @@ class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& g, int sr, int sc, int color) {
         
-        int n=g.size();
-        int m=g[0].size();
-        
         if(g[sr][sc]==color)
         {
             return g;
         }
         
-        int prev=g[sr][sc];
+        int n=g.size();
+        int m=g[0].size();
         
         queue<vector<int>> q;
+        
+        int col=g[sr][sc];
         
         g[sr][sc]=color;
         
@@ -23,7 +23,7 @@ public:
         
         while(!q.empty())
         {
-            int l=q.size();
+            auto l=q.size();
             
             while(l--)
             {
@@ -38,10 +38,9 @@ public:
                     int x=i+dx[k];
                     int y=j+dy[k];
                     
-                    if(x>=0 && x<n && y>=0 && y<m && g[x][y]==prev)
+                    if(x>=0 && x<n && y>=0 && y<m && g[x][y]==col)
                     {
                         g[x][y]=color;
-                        
                         q.push({x,y});
                     }
                 }
