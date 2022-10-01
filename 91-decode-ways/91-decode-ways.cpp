@@ -15,21 +15,20 @@ public:
             
             if(i<n-1)
             {
-                op2= (s[i]-'0')*10 + (s[i+1]-'0');
+                op2=(s[i]-'0' )*10 + s[i+1]-'0';
             }
             
-            if(op1)
+            if(op1>0)
             {
                 dp[i]=dp[i+1];
             }
             
-            if(op1!=0 && op2!=0 && op2<=26)
+            if(op1>0 && op2>0 && op2<27)
             {
-                //cout<<op2<<endl;
                 dp[i]+=dp[i+2];
             }
         }
         
-        return dp[0];
+        return  dp[0];
     }
 };
