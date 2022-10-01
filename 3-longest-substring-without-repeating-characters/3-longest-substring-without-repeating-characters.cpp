@@ -17,6 +17,7 @@ public:
             {
                 char l=s[j];
                 mp[l]--;
+                
                 j++;
             }
             
