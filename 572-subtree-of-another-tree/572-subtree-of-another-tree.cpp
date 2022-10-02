@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    bool solve(TreeNode* p, TreeNode* q)
+    bool check(TreeNode* p,TreeNode* q)
     {
         if(p==NULL && q==NULL)
         {
@@ -26,27 +26,29 @@ public:
         
         if(p->val==q->val)
         {
-            return solve(p->left,q->left) and solve(p->right,q->right);
+            return check(p->left,q->left) && check(p->right,q->right);
         }
         
         return 0;
     }
     
-    bool isSubtree(TreeNode* p, TreeNode* q) {
+    bool isSubtree(TreeNode* a, TreeNode* b) {
         
-        if(p==NULL && q==NULL)
+        if(a==NULL && b==NULL)
         {
             return 1;
         }
         
-        if(p==NULL || q==NULL)
+        if(a==NULL)
         {
             return 0;
         }
         
-        if(solve(p,q))
+        if(a->val==b->val && check(a,b))
+        {
             return 1;
+        }
         
-        return isSubtree(p->left,q) || isSubtree(p->right,q);
+        return isSubtree(a->left,b) || isSubtree(a->right,b);
     }
 };
