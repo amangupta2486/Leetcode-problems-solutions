@@ -10,21 +10,21 @@ public:
         {
             for(int j=0;j<i;j++)
             {
-                if(a[j]<a[i] && dp[i]<dp[j]+1)
+                if(a[i]>a[j] && dp[i]<dp[j]+1)
                 {
                     dp[i]=dp[j]+1;
                 }
+                
             }
         }
         
-        return *max_element(dp.begin(),dp.end());
+        int mx=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            mx=max(mx,dp[i]);
+        }
+        
+        return mx;
     }
 };
-/*
-Input
-[1,3,6,7,9,4,10,5,6]
-Output
-5
-Expected
-6
-*/
