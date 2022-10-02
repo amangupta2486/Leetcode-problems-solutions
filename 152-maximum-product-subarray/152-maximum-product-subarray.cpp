@@ -4,7 +4,7 @@ public:
         
         int n=a.size();
         
-        int b=a[0],c=a[0],mx=a[0];
+        int b=a[0],c=a[0],mx=a[0],mi=a[0];
         
         for(int i=1;i<n;i++)
         {
@@ -13,10 +13,11 @@ public:
                 swap(b,c);
             }
             
-            b = max(a[i],b*a[i]);
-            c = min(a[i],c*a[i]);
+            b=max(a[i],b*a[i]);
+            c=min(a[i],c*a[i]);
             
             mx=max(mx,b);
+            mi=min(mi,c);
         }
         
         return mx;
