@@ -6,26 +6,16 @@ public:
         
         map<int,int> mp;
         
-        for(auto i:a)
-        {
-            mp[i]++;
-        }
-        
-        vector<int>v;
-        
         for(int i=0;i<n;i++)
         {
-             if(a[i]*2==t && mp[a[i]]<2)
+            if(mp[t-a[i]]>0)
             {
-                continue;
+                return {mp[t-a[i]]-1,i};
             }
             
-            else if(mp[t-a[i]]>0)
-            {
-              v.push_back(i);
-            }
+            mp[a[i]]=i+1;
         }
         
-        return v;
+        return {};
     }
 };
