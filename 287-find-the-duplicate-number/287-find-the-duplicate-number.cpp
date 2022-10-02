@@ -4,15 +4,15 @@ public:
         
         int n=a.size();
         
+        map<int,int> mp;
+        
         for(int i=0;i<n;i++)
         {
-            if(a[abs(a[i])-1]>0)
+            mp[a[i]]++;
+            
+            if(mp[a[i]]>1)
             {
-                a[abs(a[i])-1]=-1*a[abs(a[i])-1];
-            }
-            else
-            {
-                return abs(a[i]);
+                return a[i];
             }
         }
         
