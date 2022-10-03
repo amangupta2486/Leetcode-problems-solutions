@@ -2,9 +2,9 @@ class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
         
-        vector<int> dp(amount+1,0);
-        
         int n=coins.size();
+        
+        vector<int> dp(amount+1,0);
         
         for(int i=1;i<=amount;i++)
         {
@@ -22,9 +22,8 @@ public:
             {
                 dp[i]=INT_MAX;
             }
-            else
-            {
-                dp[i]=1+mi;
+            else{
+                dp[i]=mi+1;
             }
         }
         
@@ -32,7 +31,7 @@ public:
         {
             return -1;
         }
-        
+            
         return dp[amount];
     }
 };
