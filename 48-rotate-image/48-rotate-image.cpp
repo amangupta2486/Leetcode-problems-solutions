@@ -7,7 +7,7 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            for(int j=i+1;j<m;j++)
+            for(int j=i;j<m;j++)
             {
                 swap(g[i][j],g[j][i]);
             }
@@ -17,9 +17,8 @@ public:
         {
             for(int j=0;j<m/2;j++)
             {
-                swap(g[i][j],g[i][n-j-1]);
+                swap(g[i][j],g[i][m-j-1]);
             }
         }
-        
     }
 };
