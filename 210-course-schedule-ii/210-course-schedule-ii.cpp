@@ -4,46 +4,47 @@ public:
         
         vector<int> v[n];
         
-        vector<int> d(n,0);
+        vector<int> in(n,0);
         
         for(auto x:p)
         {
+            v[x[0]].push_back(x[1]);
             v[x[1]].push_back(x[0]);
-            d[x[0]]++;
+            in[x[0]]++;
         }
         
         queue<int> q;
         
         for(int i=0;i<n;i++)
         {
-            if(d[i]==0)
+            if(in[i]==0)
             {
                 q.push(i);
             }
         }
         
-        int c=0;
+        int cnt=0;
         
-        vector<int> ans;
+        vector<int> ans,b;
         
         while(!q.empty())
         {
-            int k=q.size();
+            int l=q.size();
             
-            while(k--)
+            while(l--)
             {
-                auto r=q.front();
+                auto p=q.front();
                 q.pop();
                 
-                ans.push_back(r);
+                ans.push_back(p);
                 
-                c++;
+                cnt++;
                 
-                for(auto x:v[r])
+                for(auto x:v[p])
                 {
-                    d[x]--;
+                    in[x]--;
                     
-                    if(d[x]==0)
+                    if(in[x]==0)
                     {
                         q.push(x);
                     }
@@ -51,11 +52,6 @@ public:
             }
         }
         
-        if(c==n)
-        {
-            return ans;
-        }
-        
-        return {};
+        return cnt==n ? ans : b;
     }
 };
