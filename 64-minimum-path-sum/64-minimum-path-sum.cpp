@@ -12,9 +12,9 @@ public:
             return g[i][j];
         }
         
-        if(i>=n  || j>=m)
+        if(i>=n || j>=m)
         {
-            return 100000;
+            return 10000;
         }
         
         if(dp[i][j]!=-1)
@@ -22,7 +22,7 @@ public:
             return dp[i][j];
         }
         
-        return dp[i][j] = g[i][j] + min(solve(i+1,j,g),solve(i,j+1,g));
+        return dp[i][j]=g[i][j]+min(solve(i+1,j,g),solve(i,j+1,g));
     }
     
     int minPathSum(vector<vector<int>>& g) {
