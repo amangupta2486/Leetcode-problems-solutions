@@ -4,7 +4,7 @@ public:
         
         int n=a.size();
         
-        vector<int> dp(n+2,0);
+        vector<int> dp(n,0);
         
         dp[0]=a[0];
         
