@@ -1,20 +1,20 @@
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& a) {
+    vector<vector<int>> threeSum(vector<int>& arr) {
         
-        int n=a.size();
+        int len=arr.size();
         
-        sort(a.begin(),a.end());
+        sort(arr.begin(),arr.end());
         
         vector<vector<int>> ans;
         
-        for(int i=0;i<n-2;i++)
+        for(int i=0;i<len-2;i++)
         {
-            int j=i+1,k=n-1;
+            int j=i+1,k=len-1;
             
             while(j<k)
             {
-                int s=a[i]+a[j]+a[k];
+                int s=arr[i]+arr[j]+arr[k];
                 
                 if(s<0)
                 {
@@ -28,17 +28,17 @@ public:
                 
                 else
                 {
-                    ans.push_back({a[i],a[j],a[k]});
+                    int x=arr[j];
+                    int y=arr[k];
                     
-                    int x=a[j];
-                    int y=a[k];
+                    ans.push_back({arr[i],x,y});
                     
-                    while(j+1<k && a[j+1]==x)
+                    while(j+1<k && arr[j+1]==x)
                     {
                         j++;
                     }
                     
-                    while(j<k-1 && a[k-1]==y)
+                    while(k-1>j && arr[k-1]==y)
                     {
                         k--;
                     }
@@ -48,7 +48,7 @@ public:
                 }
             }
             
-            while(i+1<n && a[i]==a[i+1])
+            while(i+1<len && arr[i]==arr[i+1])
             {
                 i++;
             }
@@ -57,3 +57,5 @@ public:
         return ans;
     }
 };
+
+// -4 -1 -1 0 1 2
