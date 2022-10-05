@@ -4,23 +4,23 @@ public:
         
         int n=a.size();
         
-        unordered_set<int> s;
+        set<int> s;
         
-        for(auto i:a)
+        for(auto x:a)
         {
-            s.insert(i);
+            s.insert(x);
         }
         
         int ans=0;
         
         for(int i=0;i<n;i++)
         {
-            if(s.count(a[i]-1)==0)
+            if(s.find(a[i]-1)==s.end())
             {
-                int j=a[i];
                 int l=1;
+                int j=a[i];
                 
-                while(s.count(j+1)>0)
+                while(s.find(j+1)!=s.end())
                 {
                     j++;
                     l++;
