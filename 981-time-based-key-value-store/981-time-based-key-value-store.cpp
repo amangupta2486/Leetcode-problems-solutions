@@ -12,17 +12,16 @@ public:
         mp[key].push_back({timestamp,value});
     }
     
-    string get(string key, int timestamp) {
+    string get(string key, int t){
         
-        int n=mp[key].size();
-        
-        int i=0,j=n-1;
+        int i=0;
+        int j=mp[key].size()-1;
         
         while(i<=j)
         {
             int m=(i+j)/2;
             
-            if(mp[key][m].first>timestamp)
+            if(mp[key][m].first>t)
             {
                 j=m-1;
             }
