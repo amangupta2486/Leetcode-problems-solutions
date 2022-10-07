@@ -1,31 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> ans;
-    map<int,int> mp;
     
-    void solve(vector<int>& a,vector<int> v,int n)
+    set<vector<int>> s;
+    
+    void solve(vector<int>& a,int i,int n)
     {
-        if(v.size()==n)
+        if(i==n)
         {
-           ans.push_back(v);            
-           return;
+            s.insert(a);
+            return;
         }
         
-        for(auto j:mp)
+        for(int j=i;j<n;j++)
         {
-            int num=j.first;
-            int c=j.second;
-            
-            if(c==0)
-            {
-                continue;
-            }
-            
-            v.push_back(num);
-            mp[num]--;
-            solve(a,v,n);
-            mp[num]++;
-            v.pop_back();
+            swap(a[i],a[j]);
+            solve(a,i+1,n);
+            swap(a[i],a[j]);
         }
     }
     
@@ -33,13 +23,14 @@ public:
         
         int n=a.size();
         
-        for(auto i:a)
-        {
-            mp[i]++;
-        }
-        vector<int> v;
+        solve(a,0,n);
         
-        solve(a,v,n);
+        vector<vector<int>> ans;
+        
+        for(auto x:s)
+        {
+            ans.push_back(x);
+        }
         
         return ans;
     }
