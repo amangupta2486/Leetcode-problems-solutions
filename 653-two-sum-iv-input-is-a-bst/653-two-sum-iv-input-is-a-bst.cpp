@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    map<int,int> mp;
+    unordered_map<int,int> mp;
     
     int ans=0;
     
@@ -25,14 +25,12 @@ public:
         
         solve(root->left,k);
         
-        int x=root->val;
-        
-        if(mp[k-x]>0)
+        if(mp.find(k-root->val)!=mp.end())
         {
             ans=1;
         }
         
-        mp[x]++;
+        mp[root->val]=1;
         
         solve(root->right,k);
     }
