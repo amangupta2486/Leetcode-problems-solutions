@@ -3,7 +3,7 @@ public:
     
      vector<vector<string>> ans;
     
-     bool check(string s)
+     bool check(string &s)
      {
          int n=s.size();
          int i=0;
@@ -23,7 +23,7 @@ public:
          return 1;
      }
      
-     void solve(int i,int n,string s, vector<string> v)
+     void solve(int i,int n,string &s, vector<string> v)
      {
          if(i==n)
          {
