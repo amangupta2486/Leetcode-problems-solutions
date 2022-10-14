@@ -10,14 +10,17 @@
  */
 class Solution {
 public:
+
     ListNode* deleteMiddle(ListNode* head) {
         
+        ListNode* slow=head;
+        ListNode* fast=head;
         
-        if(head==NULL || head->next==NULL)
+        
+        if(head->next==NULL)
+        {
             return NULL;
-        
-        ListNode* slow = head;
-        ListNode* fast = head;
+        }
         
         while(fast->next && fast->next->next)
         {
@@ -26,27 +29,25 @@ public:
         }
         
         if(fast->next)
-            slow=slow->next;
-        
-        fast=head;
-        //ListNode* p = head;
-        while(fast->next!=slow)
         {
-            fast=fast->next;
+            if(slow==head)
+            {
+                head->next=NULL;
+                
+                return head;
+            }
+
+            slow=slow->next;
+            slow->val=slow->next->val;
+            slow->next=slow->next->next;
         }
         
-        fast->next=fast->next->next;
+        else
+        {
+            slow->val=slow->next->val;
+            slow->next=slow->next->next;
+        }
         
         return head;
     }
 };
-
-/*
-Input
-[7,5,5,6,3,6,7,3,4,8,10,10,7,1,1,7,5,3,4,9,9,4,9,7,4]
-Output
-[7,5,5,6,3,6,3,4,8,10,10,7,1,1,7,5,3,4,9,9,4,9,7,4]
-Expected
-[7,5,5,6,3,6,7,3,4,8,10,10,1,1,7,5,3,4,9,9,4,9,7,4]
-
-*/
