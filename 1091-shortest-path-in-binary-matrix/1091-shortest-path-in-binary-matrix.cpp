@@ -2,20 +2,20 @@ class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& g) {
         
+        int n=g.size();
+        int m=g[0].size();
+        
         if(g[0][0]==1)
         {
             return -1;
         }
-        
-        int n=g.size();
-        int m=g[0].size();
         
         queue<vector<int>> q;
         
         q.push({0,0,1});
         
         int dx[8]={1,1,1,-1,-1,-1,0,0};
-        int dy[8]={1,0,-1,1,0,-1,1,-1};
+        int dy[8]={-1,0,1,-1,0,1,-1,1};
         
         while(!q.empty())
         {
@@ -46,7 +46,6 @@ public:
                         q.push({x,y,c+1});
                     }
                 }
-                
             }
         }
         
