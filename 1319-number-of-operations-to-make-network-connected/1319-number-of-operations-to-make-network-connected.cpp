@@ -1,45 +1,45 @@
 class Solution {
 public:
     
-    void dfs(int i,vector<int> &vis,vector<int> adj[])
+    int vis[100005];
+    
+    void dfs(int i,vector<int> v[])
     {
-        
         vis[i]=1;
         
-        for(auto j:adj[i])
+        for(auto x:v[i])
         {
-            if(!vis[j])
+            if(!vis[x])
             {
-                dfs(j,vis,adj);
+                dfs(x,v);
             }
         }
     }
     
-    int makeConnected(int n, vector<vector<int>>& connections) {
+    int makeConnected(int n, vector<vector<int>>& con) {
         
-        int m=connections.size();
+        int m=con.size();
         
         if(m<n-1)
         {
             return -1;
         }
         
-        vector<int> adj[n];
+        vector<int> v[n];
         
-        for(auto i:connections)
+        for(auto x:con)
         {
-            adj[i[0]].push_back(i[1]);
-            adj[i[1]].push_back(i[0]);
+            v[x[0]].push_back(x[1]);
+            v[x[1]].push_back(x[0]);
         }
         
         int cc=0;
-        vector<int> vis(n,0);
         
         for(int i=0;i<n;i++)
         {
             if(!vis[i])
             {
-                dfs(i,vis,adj);
+                dfs(i,v);
                 cc++;
             }
         }
