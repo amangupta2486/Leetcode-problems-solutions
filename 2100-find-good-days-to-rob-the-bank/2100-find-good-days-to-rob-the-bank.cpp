@@ -1,11 +1,10 @@
 class Solution {
 public:
-    vector<int> goodDaysToRobBank(vector<int>& a, int time) {
+    vector<int> goodDaysToRobBank(vector<int>& a, int t) {
         
         int n=a.size();
-                
-        vector<int> l(n,0);
-        vector<int> r(n,0);
+        
+        vector<int> l(n+1,0),r(n+1,0);
         
         for(int i=1;i<n;i++)
         {
@@ -25,23 +24,9 @@ public:
         
         vector<int> ans;
         
-//         for(int i=0;i<n;i++)
-//         {
-//             cout<<l[i]<<" ";
-//         }
-        
-//         cout<<endl;
-        
-//         for(int i=0;i<n;i++)
-//         {
-//             cout<<r[i]<<" ";
-//         }
-        
-//         cout<<endl;
-        
-        for(int i=time;i<n-time;i++)
+        for(int i=0;i<n;i++)
         {
-            if(l[i]>=time && r[i]>=time)
+            if(l[i]>=t && r[i]>=t)
             {
                 ans.push_back(i);
             }
