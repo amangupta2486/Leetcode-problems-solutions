@@ -1,17 +1,23 @@
 class Solution {
 public:
-    int maximalNetworkRank(int n, vector<vector<int>>& r) {
+    int maximalNetworkRank(int n, vector<vector<int>>& roads) {
+        
+        if(roads.size()<=1)
+        {
+            return roads.size();
+        }
         
         vector<int> d(n,0);
         
         vector<int> v[n];
         
-        for(auto x:r)
+        for(auto x:roads)
         {
-            d[x[0]]++;d[x[1]]++;
-            
             v[x[0]].push_back(x[1]);
             v[x[1]].push_back(x[0]);
+            
+            d[x[0]]++;
+            d[x[1]]++;
         }
         
         int ans=0;
@@ -22,19 +28,21 @@ public:
             {
                 if(i!=j)
                 {
-                    int s=d[i]+d[j];
+                    int f=0;
                     
                     for(auto x:v[i])
                     {
                         if(x==j)
                         {
-                            s--;
+                            f=1;
+                            break;
                         }
                     }
                     
-                    ans=max(ans,s);
+                    ans=max(ans,d[i]+d[j]-f);
                 }
             }
+            
         }
         
         return ans;
