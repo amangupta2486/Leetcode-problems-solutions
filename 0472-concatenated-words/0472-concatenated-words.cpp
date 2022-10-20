@@ -25,11 +25,11 @@ public:
             
             if(mp.find(t)!=mp.end() && solve(j+1,s,c+1))
             {
-                return dp[i]=1;
+                return 1;
             }
         }
         
-        return dp[i]=0;
+        return 0;
     }
     
     vector<string> findAllConcatenatedWordsInADict(vector<string>& w) {
