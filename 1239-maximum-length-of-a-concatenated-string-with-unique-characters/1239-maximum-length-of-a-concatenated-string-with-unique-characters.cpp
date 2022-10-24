@@ -1,82 +1,62 @@
 class Solution {
 public:
+    int n;
     
     int ans=0;
     
-    bool check(string s)
+    bool check(string &s)
     {
-        vector<int> a(26,0);
+        int n=s.size();
+        
+        set<char> uq;
         
         for(auto x:s)
         {
-            if(a[x-'a']>0)
-            {
-                return 1;
-            }
-            
-            a[x-'a']++;
+            uq.insert(x);
         }
         
-        return 0;
+        return n==uq.size() ? 1 :0;
     }
     
-    void solve(int i,vector<string>& a,vector<int> &v,int l)
+    void solve(int i,vector<string>& a,set<char> s)
     {
-        if(i==a.size())
+        if(i==n)
         {
-            ans=max(ans,l);
+            int m=s.size();
+            ans=max(ans,m);
+            
             return;
         }
         
         int f=1;
         
-        int m=a[i].size();
-        
-        int d=check(a[i]);
-        
-        if(d==1)
+        for(auto x:a[i])
         {
-            f=0;
-        }
-        
-        if(d==0)
-        {    
-            for(int j=0;j<m;j++)
+            if(s.find(x)!=s.end())
             {
-                if(v[a[i][j]-'a']==1)
-                {
-                    f=0;
-                    break;
-                }
+                f=0;
+                break;
             }
         }
         
-        if(f==1)
+        solve(i+1,a,s);
+        
+        if(f==1 && check(a[i]))
         {
-            for(int j=0;j<m;j++)
+            for(auto x:a[i])
             {
-                v[a[i][j]-'a']=1;
+                s.insert(x);
             }
-            
-            solve(i+1,a,v,l+m);
-            
-            for(int j=0;j<m;j++)
-            {
-                v[a[i][j]-'a']=0;
-            }
+            solve(i+1,a,s);
         }
-        
-        solve(i+1,a,v,l);
-        
     }
     
     int maxLength(vector<string>& a) {
         
-        vector<int> v(26,0);
+        n=a.size();
+        set<char> s;
         
-        int n=a.size();
-        
-        solve(0,a,v,0);
+        solve(0,a,s);
         
         return ans;
     }
