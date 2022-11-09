@@ -1,9 +1,11 @@
 class Solution {
 public:
     
+    int n;
+    
     int dp[1005][1005];
     
-    int solve(string &s,int i,int j)
+    int solve(int i,int j,string &s)
     {
         if(i>j)
         {
@@ -22,18 +24,18 @@ public:
         
         if(s[i]==s[j])
         {
-            return dp[i][j]=2+solve(s,i+1,j-1);
+            return 2+solve(i+1,j-1,s);
         }
         
-        return dp[i][j]=max(solve(s,i,j-1),solve(s,i+1,j));
+        return dp[i][j]=max(solve(i+1,j,s),solve(i,j-1,s));
     }
-        
+    
     int longestPalindromeSubseq(string s) {
         
-        int n=s.size();
+        n=s.size();
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(s,0,n-1);
+        return solve(0,n-1,s);
     }
 };
