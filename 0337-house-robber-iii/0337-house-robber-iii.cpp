@@ -26,18 +26,18 @@ public:
             return mp[root];
         }
         
-        int val=0;
+        int l=0,r=0;
         
         if(root->left!=NULL)
         {
-            val+=rob(root->left->left) + rob(root->left->right);
+            l=rob(root->left->left) + rob(root->left->right);
         }
         
         if(root->right!=NULL)
         {
-            val+=rob(root->right->left) + rob(root->right->right);
+            r=rob(root->right->left) + rob(root->right->right);
         }
         
-        return mp[root]=max(root->val+val,rob(root->left)+rob(root->right));
+        return mp[root]=max(root->val+l+r,rob(root->left)+rob(root->right));
     }
 };
