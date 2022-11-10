@@ -1,35 +1,36 @@
 class Solution {
 public:
     
+    int n,m;
     int dp[1005][1005];
     
-    int solve(string &a, string &b,int i,int j)
+    int solve(int i,int j,string &a, string &b)
     {
-        if(i==0 || j==0)
+        if(i==n || j==m)
         {
             return 0;
         }
         
         if(dp[i][j]!=-1)
         {
-            return dp[i][j];
+            return dp[i][j]; 
         }
         
-        if(a[i-1]==b[j-1])
+        if(a[i]==b[j])
         {
-            return dp[i][j]=1+solve(a,b,i-1,j-1);
+            return 1+solve(i+1,j+1,a,b);
         }
         
-        return dp[i][j]=max(solve(a,b,i-1,j),solve(a,b,i,j-1));
+        return dp[i][j]=max(solve(i+1,j,a,b),solve(i,j+1,a,b));
     }
     
     int longestCommonSubsequence(string a, string b) {
         
-        int n=a.size();
-        int m=b.size();
+        n=a.size();
+        m=b.size();
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(a,b,n,m);
+        return solve(0,0,a,b);
     }
 };
