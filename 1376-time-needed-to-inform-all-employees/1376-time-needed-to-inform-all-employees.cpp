@@ -1,41 +1,42 @@
 class Solution {
 public:
-    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+    int numOfMinutes(int n, int h, vector<int>& man, vector<int>& inf) {
         
         vector<int> v[n];
         
         for(int i=0;i<n;i++)
         {
-            if(manager[i]!=-1)
+            if(man[i]!=-1)
             {
-                v[manager[i]].push_back(i);
+                v[man[i]].push_back(i);
             }
         }
         
         queue<vector<int>> q;
         
-        q.push({headID,0});
+        q.push({h,0});
         
         int ans=0;
         
         while(!q.empty())
         {
-            int k=q.size();
+            int l=q.size();
             
-            while(k--)
+            while(l--)
             {
                 auto p=q.front();
                 q.pop();
                 
-                int r=p[0];
+                int head=p[0];
                 int c=p[1];
                 
                 ans=max(ans,c);
                 
-                for(auto x:v[r])
+                for(auto emp:v[head])
                 {
-                    q.push({x,c+informTime[r]});
+                    q.push({emp,c+inf[head]});
                 }
+                
             }
         }
         
