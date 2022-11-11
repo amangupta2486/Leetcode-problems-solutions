@@ -7,9 +7,9 @@ public:
             return {0};
         }
         
-        vector<int> v[n];
-        
         vector<int> d(n,0);
+        
+        vector<int> v[n];
         
         for(auto x:edges)
         {
@@ -35,16 +35,14 @@ public:
         while(!q.empty())
         {
             int l=q.size();
-            
             ans.clear();
             
             while(l--)
             {
                 auto p=q.front();
+                q.pop();
                 
                 ans.push_back(p);
-                
-                q.pop();
                 
                 for(auto x:v[p])
                 {
