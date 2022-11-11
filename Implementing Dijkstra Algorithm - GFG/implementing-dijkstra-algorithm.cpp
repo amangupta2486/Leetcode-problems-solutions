@@ -1,8 +1,8 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include<bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution
 {
 	public:
@@ -12,41 +12,51 @@ class Solution
     {
         int n=V;
         
-        vector<int> key(n,100000);
+        priority_queue<int,vector<int>,greater<int>> q;
         
-        key[S]=0;
+        q.push(S);
         
-        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> q;
+        vector<int> s(n,1000005);
         
-        q.push({0,S});
+        s[S]=0;
         
         while(!q.empty())
         {
-            auto r=q.top();
+            int i=q.top();
             q.pop();
             
-            int u=r[1];
             
-            //cout<<u<<" ";
-            for(auto j:adj[u])
+            for(auto x:adj[i])
             {
-                int v=j[0];
-                int w=j[1];
-               // cout<<v<<" "<<w<<endl;
-                if(key[u]+w<key[v])
+                int j=x[0];
+                int w=x[1];
+                
+               // cout<<j<<" "<<w<<endl;
+                
+                if(w+s[i]<s[j])
                 {
-                    key[v]=key[u]+w;
-                    q.push({key[v],v});
+                    s[j]=w+s[i];
+                    q.push(j);
                 }
             }
         }
         
-        return key;
+        return s;
+        
+        // int mx=0;
+        
+        // for(int i=0;i<n;i++)
+        // {
+        //     //cout<<s[i]<<" ";
+        //     mx=max(mx,s[i]);
+        // }
+        
+        // return mx;
     }
 };
 
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 
 int main()
@@ -83,4 +93,5 @@ int main()
     return 0;
 }
 
-  // } Driver Code Ends
+
+// } Driver Code Ends
