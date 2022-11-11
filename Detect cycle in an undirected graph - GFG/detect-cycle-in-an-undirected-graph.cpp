@@ -1,15 +1,13 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    int vis[100005];
-    int ans=0;
     
-    void dfs(int i,int p,vector<int> adj[])
+    bool dfs(int i,int p,vector<int> adj[],int *vis)
     {
         vis[i]=1;
         
@@ -17,35 +15,41 @@ class Solution {
         {
             if(!vis[j])
             {
-                dfs(j,i,adj);
+                if(dfs(j,i,adj,vis))
+                {
+                    return 1;
+                }
             }
             
-            else if(j!=p)
+            else
             {
-                ans=1;
+                if(p!=j)
+                return 1;
             }
         }
         
+        return 0;
     }
+    
     bool isCycle(int V, vector<int> adj[]) {
-        
-        memset(vis,0,sizeof(vis));
         
         int n=V;
         
-        for(int i=0;i<n;i++)
-        {
-            if(!vis[i])
-            {
-                dfs(i,-1,adj);
+        int vis[n];
+        memset(vis,0,sizeof(vis));
+        
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){
+                if(dfs(i,-1,adj,vis))
+                return 1;
             }
         }
         
-        return ans;
+        return 0;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main() {
     int tc;
     cin >> tc;
@@ -67,4 +71,5 @@ int main() {
             cout << "0\n";
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
