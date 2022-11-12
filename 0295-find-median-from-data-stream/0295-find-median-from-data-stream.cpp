@@ -24,27 +24,13 @@ public:
                 int n=pq.size();
                 int m=pq1.size();
                 
-                while(pq1.size()>pq.size())
+                if(pq1.size()>pq.size())
                 {
                     auto t=pq1.top();
                     pq1.pop();
 
                     pq.push(t);
                 }
-                
-//                 if(pq.size()>pq1.size())
-//                 {
-//                     pq1.push(num);
-//                 }
-
-//                 else
-//                 {
-//                     auto t=pq1.top();
-//                     pq1.pop();
-
-//                     pq.push(t);
-//                     pq1.push(num);
-//                 }
             }
             else
             {
@@ -53,7 +39,7 @@ public:
                 int n=pq.size();
                 int m=pq1.size();
                 
-                 while(pq1.size()<pq.size())
+                 if(pq1.size()<pq.size())
                 {
                     auto t=pq.top();
                     pq.pop();
