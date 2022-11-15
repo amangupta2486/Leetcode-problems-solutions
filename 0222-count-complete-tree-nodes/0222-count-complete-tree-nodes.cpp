@@ -12,26 +12,49 @@
 class Solution {
 public:
     
-    int ans=0;
-    
-    void solve(TreeNode* root)
+    int lheight(TreeNode* root)
     {
-        if(root==NULL)
+        int l=1;
+        
+        while(root)
         {
-            return;
+            root=root->left;
+            l++;
         }
         
-        solve(root->left);
+        return l;
+    }
+    
+    int rheight(TreeNode* root)
+    {
+        int r=1;
         
-        ans++;
+        while(root)
+        {
+            root=root->right;
+            r++;
+        }
         
-        solve(root->right);
+        return r;
     }
     
     int countNodes(TreeNode* root) {
+     
+        if(root==NULL)
+        {
+            return 0;
+        }
         
-        solve(root);
+        int l=lheight(root->left);
+        int h=rheight(root->right);
         
-        return ans;
+        //cout<<l<<" "<<h<<endl;
+        
+        if(l==h)
+        {
+            return (1<<l)-1;
+        }
+        
+        return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
