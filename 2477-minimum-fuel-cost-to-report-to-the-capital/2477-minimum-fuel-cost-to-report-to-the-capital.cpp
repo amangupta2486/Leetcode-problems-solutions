@@ -1,3 +1,4 @@
+
 class Solution {
 public:
     long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
@@ -9,8 +10,7 @@ public:
         
         vector<int> v[n+1];
         
-        for(auto x:roads)
-        {
+        for(auto x:roads){
             v[x[0]].push_back(x[1]);
             v[x[1]].push_back(x[0]);
             
@@ -20,10 +20,8 @@ public:
         
         queue<int> q;
         
-        for(int i=1;i<n+1;i++)
-        {
-            if(degree[i]==1)   
-            {
+        for(int i=1;i<n+1;i++){
+            if(degree[i]==1)   {
                 q.push(i);
             }
         }
@@ -34,30 +32,23 @@ public:
         {
             int l=q.size();
             
-            while(l--)
-            {
+            while(l--){
                 auto city=q.front();
                 q.pop();
                 
-                if(city==0)
-                {
+                if(city==0){
                     break;
                 }
                 
-                if(city!=0)
-                {
-                    ans+=people[city]/seats;
-                
-                    if(people[city]%seats)
-                    {
-                        ans++;
-                    }
+                ans+=people[city]/seats;
+
+                if(people[city]%seats){
+                    ans++;
                 }
                 
                 degree[city]=0;
                 
-                for(auto x:v[city])
-                {
+                for(auto x:v[city]){
                     people[x]+=people[city];
                     degree[x]--;
                     
@@ -68,7 +59,6 @@ public:
                 }
             }
         }
-        
         
         return ans;
     }
