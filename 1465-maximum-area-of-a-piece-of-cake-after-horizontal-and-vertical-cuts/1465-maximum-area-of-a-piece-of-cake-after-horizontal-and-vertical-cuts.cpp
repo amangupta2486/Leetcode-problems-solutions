@@ -1,32 +1,35 @@
 class Solution {
 public:
-    int maxArea(int h, int w, vector<int>& x, vector<int>& y) {
+    int maxArea(int x, int y, vector<int>& h, vector<int>& v) {
         
-        x.push_back(0);
-        x.push_back(h);
+        h.push_back(0);
+        h.push_back(x);
         
-        y.push_back(0);
-        y.push_back(w);
+        v.push_back(0);
+        v.push_back(y);
+
+        sort(h.begin(),h.end());
+        sort(v.begin(),v.end());
         
-        sort(x.begin(),x.end());
-        sort(y.begin(),y.end());
+        int n=h.size();
+        int m=v.size();
         
-        long long l=0,b=0;
+        long long l=0,r=0;
         
-        for(int i=0;i<x.size()-1;i++)
+        for(int i=0;i<n-1;i++)
         {
-            l=max(l,(x[i+1]-x[i])*1ll);
+            l=max(l,(h[i+1]-h[i])*1ll);
         }
         
-        for(int i=0;i<y.size()-1;i++)
+        for(int i=0;i<m-1;i++)
         {
-            b=max(b,(y[i+1]-y[i])*1ll);
+            r=max(r,(v[i+1]-v[i])*1ll);
         }
         
-        long long ans=l*b*1ll;
+        int mod=1e9 +7;
         
-        int mod=1e9+7;
+        long long ans=(l*r)%mod;
         
-        return ans%mod;
+        return ans;
     }
 };
