@@ -1,8 +1,7 @@
 # Longest Bitonic subsequence
-## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given an array of positive integers. Find&nbsp;the maximum length of Bitonic subsequence.&nbsp;<br>
-A subsequence of array&nbsp;is called Bitonic if it is first increasing, then decreasing.</span><br>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an array of positive integers. Find&nbsp;the maximum length of Bitonic subsequence.&nbsp;<br>
+A subsequence of array&nbsp;is called Bitonic if it is first strictly increasing, then strictly decreasing.</span><br>
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
@@ -34,7 +33,6 @@ You don't need to read or print anything. Your task is to complete the function&
 &nbsp;</p>
 
 <p><span style="font-size:18px"><strong>Constraints:</strong><br>
-1 ≤&nbsp;length of array ≤&nbsp;200<br>
+1 ≤&nbsp;length of array ≤ 1000<br>
 1 ≤&nbsp;arr[i] ≤&nbsp;1000000</span></p>
- <p></p>
-            </div>
+</div>
