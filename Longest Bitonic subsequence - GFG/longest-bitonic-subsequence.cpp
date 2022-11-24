@@ -1,50 +1,60 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include<bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution{
 	public:
 	int LongestBitonicSequence(vector<int> a)
 	{
-	   int n=a.size();
-	   
-	   vector<int> lis(n,1),dis(n,1);
-	   
-	   for(int i=0;i<n;i++)
-	   {
-	       for(int j=0;j<i;j++)
-	       {
-	           if(a[j]<a[i] && lis[i]<lis[j]+1)
-	           {
-	             lis[i]=lis[j]+1;   
-	           }
-	       }
-	   }
-	   
-	   for(int i=n-1;i>=0;i--)
-	   {
-	       for(int j=n-1;j>i;j--)
-	       {
-	           if(a[j]<a[i] && dis[i]<dis[j]+1)
-	           {
-	             dis[i]=dis[j]+1;   
-	           }
-	       }
-	   }
-	   
-	   int ans=0;
-	   
-	   for(int i=0;i<n;i++)
-	   {
-	       ans=max(ans,lis[i]+dis[i]-1);
-	   }
-	   
-	   return ans;
+	    int n=a.size();
+	    
+	    vector<int> l(n,1),r(n,1);
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        for(int j=0;j<i;j++)
+	        {
+	            if(a[i]>a[j] && l[i]<l[j]+1)
+	            {
+	                l[i]=l[j]+1;
+	            }
+	        }
+	    }
+	    
+	    for(int i=n-1;i>=0;i--)
+	    {
+	        for(int j=n-1;j>i;j--)
+	        {
+	            if(a[i]>a[j] && r[i]<r[j]+1)
+	            {
+	                r[i]=r[j]+1;
+	            }
+	        }
+	    }
+	    
+	    int ans=0;
+	    
+	   // for(int i=0;i<n;i++)
+	   // cout<<l[i]<<" ";
+	    
+	   // cout<<endl;
+	    
+	   // for(int i=0;i<n;i++)
+	   // cout<<r[i]<<" ";
+	    
+	   // cout<<endl;
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        ans=max(ans,l[i]+r[i]-1);
+	    }
+	    
+	    return ans;
 	}
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main(){
 	int tc;
 	cin >> tc;
@@ -59,4 +69,5 @@ int main(){
 		cout << ans <<"\n";
 	}
 	return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
