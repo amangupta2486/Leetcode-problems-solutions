@@ -1,45 +1,39 @@
 class Solution {
 public:
-    vector<vector<int>> findWinners(vector<vector<int>>& a) {
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
         
-        map<int,int> w,l;
+        map<int,int> w;
+        map<int,int> l;
         
-        
-        for(auto x:a)
+        for(auto x:matches)
         {
             w[x[0]]++;
             l[x[1]]++;
         }
         
-        vector<vector<int>> ans;
+        vector<int> b,a;
+        unordered_set<int> s;
         
-        vector<int> p,q;
-        
-        for(auto i:w)
+        for(auto x:l)
         {
-            int x=i.first;
-            int c=i.second;
-            
-            if(l[x]==0)
+            if(x.second==1)
             {
-              p.push_back(x);   
+                b.push_back(x.first);
+            }
+            
+            s.insert(x.first);
+        }
+        
+        for(auto x:w)
+        {
+            int wi=x.first;
+            
+            if(s.find(wi)==s.end())
+            {
+                a.push_back(wi);
             }
         }
         
-        for(auto i:l)
-        {
-            int x=i.first;
-            int c=i.second;
-            
-            if(c==1)
-            {
-              q.push_back(x);   
-            }
-        }
-        
-        ans.push_back(p);
-        ans.push_back(q);
-        
-        return ans;
+        return {a,b};
     }
 };
