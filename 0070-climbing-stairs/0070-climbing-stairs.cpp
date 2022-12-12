@@ -5,6 +5,8 @@ public:
         vector<int> dp(n+2,0);
         
         dp[1]=1;
+        
+        if(n>1)
         dp[2]=2;
         
         for(int i=3;i<=n;i++)
