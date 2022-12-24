@@ -1,9 +1,10 @@
 class Solution {
 public:
     
-    unordered_set<int> s;
+    int n;
     
-    int dp[400];
+    unordered_set<int> s;
+    int dp[366];
     
     int solve(int i,vector<int>& d, vector<int>& c)
     {
@@ -20,14 +21,20 @@ public:
         int ans=0;
         
         if(s.find(i)!=s.end())
-        ans=min({c[0]+solve(i+1,d,c),c[1] + solve(i+7,d,c),c[2] + solve(i+30,d,c)});
-        
+        {
+            ans=min({c[0]+solve(i+1,d,c),c[1]+solve(i+7,d,c),c[2]+solve(i+30,d,c)});
+        }
         else
-        ans=solve(i+1,d,c);
+        {
+            ans=solve(i+1,d,c);
+        }
         
         return dp[i]=ans;
     }
+    
     int mincostTickets(vector<int>& d, vector<int>& c) {
+        
+        n=d.size();
         
         for(auto x:d)
         {
@@ -36,6 +43,6 @@ public:
         
         memset(dp,-1,sizeof(dp));
         
-        return solve(1,d,c);    
+        return solve(1,d,c);
     }
 };
