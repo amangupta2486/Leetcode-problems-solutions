@@ -1,8 +1,8 @@
 class Solution {
 public:
     
-    int dx[8]={1,-1,0,0,1,1,-1,-1};
-    int dy[8]={0,0,1,-1,1,-1,1,-1};
+    int dx[8]={1,1,1,-1,-1,-1,0,0};
+    int dy[8]={-1,0,1,1,0,-1,-1,1};
     
     int shortestPathBinaryMatrix(vector<vector<int>>& g) {
         
@@ -27,25 +27,24 @@ public:
                 auto p=q.front();
                 q.pop();
                 
-                int x=p[0];
-                int y=p[1];
+                int i=p[0];
+                int j=p[1];
                 int c=p[2];
                 
-                if(x==n-1 && y==m-1)
+                if(i==n-1 && j==m-1)
                 {
                     return c;
                 }
                 
                 for(int k=0;k<8;k++)
                 {
-                    int i=x+dx[k];
-                    int j=y+dy[k];
+                    int x=i+dx[k];
+                    int y=j+dy[k];
                     
-                    if(i>=0 && j>=0 && i<n && j<m && g[i][j]==0)
+                    if(x>=0 && y>=0 && x<n && y<m && !g[x][y])
                     {
-                        g[i][j]=1;
-                        
-                        q.push({i,j,c+1});
+                        g[x][y]=1;
+                        q.push({x,y,c+1});
                     }
                 }
             }
