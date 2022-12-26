@@ -1,42 +1,39 @@
 class Solution {
 public:
-    int furthestBuilding(vector<int>& a, int b, int l) {
+    int furthestBuilding(vector<int>& h, int b, int l) {
         
-        int n=a.size();
-        
-        int ans=0;
+        int n=h.size();
         
         priority_queue<int,vector<int>,greater<int>> pq;
         
+        int ans=0,f=0;
         int i=0;
         
-        for(;i<n-1;i++)
+        for(i=0;i<n-1;i++)
         {
-            int x=a[i+1]-a[i];
+            int d=h[i+1]-h[i];
             
-            if(x>0)
+            if(d>0)
             {
-                pq.push(x);
+                pq.push(d);
                 
                 if(pq.size()>l)
                 {
                     int p=pq.top();
                     pq.pop();
-                
-                    b-=p;
                     
+                    if(b-p>=0)
+                    {
+                        b-=p;
+                        ans=i;
+                    }
+                    else
+                    {
+                        f=1;
+                        break;
+                    }
                 }
             }
-            
-             if(b<0)
-            {
-                break;
-            }
-        }
-        
-        if(i==n)
-        {
-            return n-1;
         }
         
         return i;
