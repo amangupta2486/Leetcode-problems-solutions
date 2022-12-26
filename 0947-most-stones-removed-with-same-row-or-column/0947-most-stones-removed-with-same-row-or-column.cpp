@@ -1,34 +1,35 @@
 class Solution {
 public:
-    
     int vis[10005];
     
-    void dfs(int j,vector<vector<int>>& s)
+    void dfs(int i,vector<vector<int>>& st)
     {
-        vis[j]=1;
+        vis[i]=1;
         
-        for(int i=0;i<s.size();i++)
+        for(int j=0;j<st.size();j++)
         {
-            if(!vis[i])
+            if(!vis[j])
             {
-                if(s[i][0]==s[j][0] || s[i][1]==s[j][1])
+                if(st[i][0]==st[j][0] || st[i][1]==st[j][1])
                 {
-                    dfs(i,s);
+                    dfs(j,st);
                 }
             }
         }
     }
     
-    int removeStones(vector<vector<int>>& s) {
+    int removeStones(vector<vector<int>>& st) {
         
-        int n=s.size();
+        int n=st.size();
+        memset(vis,0,sizeof(vis));
+        
         int cc=0;
         
         for(int i=0;i<n;i++)
         {
             if(!vis[i])
             {
-                dfs(i,s);
+                dfs(i,st);
                 cc++;
             }
         }
