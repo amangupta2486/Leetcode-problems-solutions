@@ -1,11 +1,12 @@
 class Solution {
 public:
     
+    int n;
     int dp[10005];
     
-    int solve(int i,int n,vector<int>& a)
+    int solve(int i,vector<int> &a)
     {
-        if(i==n-1)
+        if(i>=n-1)
         {
             return 0;
         }
@@ -15,11 +16,11 @@ public:
             return dp[i];
         }
         
-        int ans=100000;
+        int ans=n;
         
-        for(int j=i+1;j<=i+a[i] && j<n;j++)
+        for(int j=i;j<a[i]+i && j<n;j++)
         {
-            ans=min(ans,1+solve(j,n,a));
+            ans=min(ans,1+solve(j+1,a));
         }
         
         return dp[i]=ans;
@@ -27,10 +28,8 @@ public:
     
     int jump(vector<int>& a) {
         
-        int n=a.size();
-        
+        n=a.size();
         memset(dp,-1,sizeof(dp));
-        
-        return solve(0,n,a);
+        return solve(0,a);
     }
 };
