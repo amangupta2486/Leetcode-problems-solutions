@@ -1,44 +1,43 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution{
 public:
-    int *findTwoElement(int *arr, int n) {
+    int *findTwoElement(int *a, int n) {
         // code here
         
-        int* ans;
+        int* b=new int[2];
         
         for(int i=0;i<n;i++)
         {
-            int idx=abs(arr[i])-1;
+            int idx=abs(a[i])-1;
             
-            if(arr[idx]>0)
+            if(a[idx]>0)
             {
-                arr[idx]=-1*arr[idx];
+                a[idx]=-a[idx];
             }
             else
             {
-                ans[0]=abs(arr[i]);
+                b[0]=abs(a[i]);
             }
         }
         
         for(int i=0;i<n;i++)
         {
-            if(arr[i]>0)
+            if(a[i]>0)
             {
-                ans[1]=i+1;
-                break;
+                b[1]=i+1;
             }
         }
         
-        return ans;
+        return b;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main() {
     int t;
@@ -55,4 +54,5 @@ int main() {
         cout << ans[0] << " " << ans[1] << "\n";
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
