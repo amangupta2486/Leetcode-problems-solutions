@@ -27,10 +27,6 @@ public:
         
         while(i<n || !pq.empty())
         {
-            if(pq.empty() && s<q[i][0])
-            {
-                s=q[i][0];
-            }
             
             while(i<n && q[i][0]<=s)
             {
@@ -50,12 +46,10 @@ public:
                 //pq.erase(pq.begin());
             }
             
-            // else
-            // {
-            //     s+=q[i][1];
-            //     ans.push_back(q[i][2]);
-            //     i++;
-            // }
+            else
+            {
+                s=q[i][0];
+            }
         }
         
         return ans;
