@@ -1,16 +1,16 @@
 class Solution {
 public:
     
+    int vis[100005];
     vector<vector<int>> ans;
     
-    int vis[20];
-    
-    void dfs(int i,vector<vector<int>>& g,vector<int> v)
+    void dfs(int i,int n,vector<int> v,vector<vector<int>>& g)
     {
-        if(i==g.size()-1)
+        if(i==n-1)
         {
             v.push_back(i);
             ans.push_back(v);
+            return;
         }
         
         vis[i]=1;
@@ -18,22 +18,18 @@ public:
         
         for(auto j:g[i])
         {
-            if(!vis[j])
-            {
-                dfs(j,g,v);
-            }
+            dfs(j,n,v,g);
         }
-        
-        vis[i]=0;
     }
     
-    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& g) {
-      
-      memset(vis,0,sizeof(vis));
-      
-      vector<int> v;
-      dfs(0,g,v);
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         
-      return ans;
+        memset(vis,0,sizeof(vis));
+        int n=graph.size();
+        vector<int> v;
+        
+        dfs(0,n,v,graph);
+        
+        return ans;
     }
 };
