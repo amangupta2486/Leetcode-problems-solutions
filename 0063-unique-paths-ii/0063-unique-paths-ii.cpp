@@ -14,13 +14,13 @@ public:
         {
             return 1;
         }
-    
+        
         if(dp[i][j]!=-1)
         {
             return dp[i][j];
         }
         
-        return dp[i][j]=solve(i+1,j,n,m,g) + solve(i,j+1,n,m,g);
+        return dp[i][j]=solve(i+1,j,n,m,g)+solve(i,j+1,n,m,g);
     }
     
     int uniquePathsWithObstacles(vector<vector<int>>& g) {
