@@ -22,7 +22,6 @@ public:
         solve(root->left);
         solve(root->right);
         
-        
         TreeNode* temp=root->left;
         root->left=root->right;
         root->right=temp;
