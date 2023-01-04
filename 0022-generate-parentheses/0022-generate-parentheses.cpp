@@ -1,6 +1,5 @@
 class Solution {
 public:
-    
     vector<string> ans;
     
     void solve(string s,int i,int j)
@@ -24,6 +23,7 @@ public:
         
         solve(s+'(',i-1,j);
         solve(s+')',i,j-1);
+        
     }
     
     vector<string> generateParenthesis(int n) {
@@ -33,4 +33,3 @@ public:
         return ans;
     }
 };
-
