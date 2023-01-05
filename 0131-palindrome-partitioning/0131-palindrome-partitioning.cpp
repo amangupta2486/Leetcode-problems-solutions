@@ -1,11 +1,12 @@
 class Solution {
 public:
-    
-    vector<vector<string>> ans;
+     vector<vector<string>> ans;
     
     bool check(string &s)
     {
-        int i=0,j=s.size()-1;
+        int n=s.size();
+        int i=0;
+        int j=n-1;
         
         while(i<j)
         {
@@ -20,7 +21,7 @@ public:
         return 1;
     }
     
-    void solve(int i,int n,string s,vector<string> v)
+    void solve(int i,int n,string s,vector<string> &v)
     {
         if(i==n)
         {
