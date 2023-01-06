@@ -1,50 +1,66 @@
 class Solution {
 public:
-    
-    long long ans=0;
-    
-    int dfs(int i,int prev,vector<int> v[], int s,vector<int> &vis)
-    {
-        vis[i]=1;
+    long long minimumFuelCost(vector<vector<int>>& r, int s) {
         
-        long long cnt=1;
+        int n=r.size()+1;
+        vector<int> d(n,0),p(n,1);
+        p[0]=1;
+        vector<int> v[n];
         
-        for(auto j:v[i])
-        {
-            if(!vis[j])
-            {
-                cnt+=dfs(j,i,v,s,vis);
-            }
-        }
-        
-        if(i!=0)
-        {
-            ans+=cnt/s;
-        
-            if(cnt%s)
-            {
-                ans++;
-            }
-        }
-        
-        
-        return cnt;
-    }
-    
-    long long minimumFuelCost(vector<vector<int>>& roads, int seats) {
-        
-        int n=roads.size();
-        
-        vector<int> v[n+1];
-        vector<int> vis(n+1,0);
-        
-        for(auto x:roads)
-        {
+        for(auto x:r)
+        {   
             v[x[0]].push_back(x[1]);
             v[x[1]].push_back(x[0]);
+            d[x[0]]++;
+            d[x[1]]++;
         }
         
-        dfs(0,0,v,seats,vis);
+        queue<int> q;
+        
+        for(int i=1;i<n;i++)
+        {
+            if(d[i]==1)
+            {
+                q.push(i);
+            }
+        }
+        
+        long long ans=0;
+        
+        while(!q.empty())
+        {
+            int l=q.size();
+            
+            while(l--)
+            {
+                auto t=q.front();
+                q.pop();
+                
+                if(t!=0)
+                {
+                    //cout<<t<<" ";
+                    ans+=p[t]/s;
+                    
+                    if(p[t]%s)
+                        ans++;
+                }
+                
+                for(auto x:v[t])
+                {
+                    if(x!=0)
+                    {
+                         d[x]--;
+                        p[x]+=p[t];
+
+                        if(d[x]==1)
+                        {
+                            q.push(x);
+                        }
+                    }
+                   
+                }
+            }
+        }
         
         return ans;
     }
