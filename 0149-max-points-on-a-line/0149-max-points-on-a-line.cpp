@@ -6,10 +6,10 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            int same=1;
+            int same=0;
             map<double,int> mp;
             
-            for(int j=i+1;j<n;j++)
+            for(int j=0;j<n;j++)
             {
                 if(p[j][1]==p[i][1] && p[j][0]==p[i][0])
                 {
