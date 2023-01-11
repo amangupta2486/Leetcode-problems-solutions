@@ -1,31 +1,42 @@
 class Solution {
 public:
-    
-    vector<vector<vector<int>>> t;
-    
     int vis[100005];
+    set<vector<int>> s;
     
-    void dfs(int i,vector<int> v[],int n,vector<vector<int>> &p,vector<bool>& hasApple)
+     void dfs(int i,int pr,vector<int> v[],vector<bool>& has,vector<vector<int>> &p)
     {
+        
+        if(has[i])
+        {
+            for(auto x:p)
+            {
+                s.insert(x);
+            }
+        }
+        
         vis[i]=1;
         
-        if(hasApple[i])
-        {
-            t.push_back(p);
-        }
+        if(i!=0)
+        p.push_back({pr,i});
         
         for(auto j:v[i])
         {
             if(!vis[j])
             {
+                //cout<<i<<" "<<j<<endl;
                 p.push_back({i,j});
-                dfs(j,v,n,p,hasApple);
+                dfs(j,i,v,has,p);
                 p.pop_back();
             }
         }
+            
+        if(i!=0)
+        p.pop_back();
     }
     
-    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+    int minTime(int n, vector<vector<int>>& edges, vector<bool>& has) {
+        
+         memset(vis,0,sizeof(vis));
         
         vector<int> v[n];
         
@@ -35,22 +46,9 @@ public:
             v[x[1]].push_back(x[0]);
         }
         
-        int ans=0;
-        memset(vis,0,sizeof(vis));
-        
         vector<vector<int>> p;
         
-        dfs(0,v,n,p,hasApple);
-        
-        set<vector<int>> s;
-        
-        for(auto i:t)
-        {
-            for(auto j:i)
-            {
-                s.insert(j);
-            }
-        }
+        dfs(0,0,v,has,p);
         
         return s.size()*2;
     }
